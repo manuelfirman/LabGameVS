@@ -5,12 +5,21 @@ void Game::iniciarVariables()
 {
     _ventana = NULL;
     _DT = 0.f;
-
+    _tamanioCuadro = 50.f;
 }
 
 void Game::iniciarOpcionesGraficas()
 {
     _opcionesGraficas.cargarDesdeArchivo("config/config_grafica.ini");
+}
+
+void Game::iniciarDatosEstado()
+{
+    _datosEstado.ventana = _ventana;
+    _datosEstado.opcionesGraficas = &_opcionesGraficas;
+    _datosEstado.teclasSoportadas = &_teclasSoportadas;
+    _datosEstado.estado = &_estado;
+    _datosEstado.tamanioCuadro = _tamanioCuadro;
 }
 
 void Game::iniciarVentana()
@@ -26,7 +35,7 @@ void Game::iniciarVentana()
 
 void Game::iniciarEstados()
 {
-    _estado.push(new EstadoMenuPrincipal(_ventana, _opcionesGraficas, &_teclasSoportadas, &_estado)); // necesita pasarse direcciones al puntero
+    _estado.push(new EstadoMenuPrincipal(&_datosEstado));
 }
 
 void Game::iniciarTeclas()
@@ -55,6 +64,7 @@ Game::Game()
     this->iniciarOpcionesGraficas();
     this->iniciarVentana();
     this->iniciarTeclas();
+    this->iniciarDatosEstado();
     this->iniciarEstados();
 }
 

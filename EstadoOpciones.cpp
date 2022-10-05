@@ -78,8 +78,8 @@ void EstadoOpciones::iniciarTexto()
 
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-EstadoOpciones::EstadoOpciones(sf::RenderWindow* ventana, OpcionesGraficas& opcionesGraficas, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado)
-	: EstadoBase(ventana, teclasSoportadas, estado), _opcionesGraficas(opcionesGraficas)
+EstadoOpciones::EstadoOpciones(DatosEstado* datos_estado)
+    : EstadoBase(datos_estado)
 {
     iniciarVariables();
     iniciarFondo();
@@ -126,9 +126,9 @@ void EstadoOpciones::actualizarGUI(const float& DT)
     if (_boton["APLICAR"]->getClick())
     {
     
-        _opcionesGraficas._resolucion = _modoVideo[_listasDesplegables["RESOLUCION"]->getIDelementoAtivo()];
+        _datosEstado->opcionesGraficas->_resolucion = _modoVideo[_listasDesplegables["RESOLUCION"]->getIDelementoAtivo()];
 
-        _ventana->create(_opcionesGraficas._resolucion, _opcionesGraficas._titulo, sf::Style::Default);
+        _ventana->create(_datosEstado->opcionesGraficas->_resolucion, _datosEstado->opcionesGraficas->_titulo, sf::Style::Default);
     }
         
 

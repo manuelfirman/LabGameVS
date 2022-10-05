@@ -2,6 +2,8 @@
 #define TILEMAP_H
 #include "Tile.h"
 
+class Tile;
+
 class TileMap
 {
 	private:

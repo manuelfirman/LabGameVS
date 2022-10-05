@@ -7,6 +7,7 @@
 class Game {
 private: // Atributos
 	OpcionesGraficas _opcionesGraficas;
+	DatosEstado _datosEstado;
 	sf::RenderWindow* _ventana; // memoria dinamica
 	sf::Event sfEvento;
 
@@ -16,12 +17,15 @@ private: // Atributos
 	std::stack<EstadoBase*> _estado;
 	std::map<std::string, int> _teclasSoportadas;
 
+	float _tamanioCuadro;
+
 private: // Metodos
 	void iniciarVariables();
 	void iniciarOpcionesGraficas();
 	void iniciarVentana();
-	void iniciarEstados();
 	void iniciarTeclas();
+	void iniciarDatosEstado();
+	void iniciarEstados();
 
 public:
 	Game();

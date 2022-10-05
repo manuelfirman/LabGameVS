@@ -24,7 +24,7 @@ private: // Metodos
     void iniciarBotones();
 
 public:
-    EstadoEditor(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado);
+    EstadoEditor(DatosEstado* datos_estado);
     ~EstadoEditor();
 
     void actualizarBotones();

@@ -9,7 +9,6 @@
 class EstadoMenuPrincipal : public EstadoBase
 {
 private: // Atributos
-    OpcionesGraficas& _opcionesGraficas;
     sf::Texture _texturaFondoMenu;
     sf::RectangleShape _fondoMenu;
     sf::Font _fuenteMenu;
@@ -25,7 +24,7 @@ private: // Metodos
     void iniciarBotones();
 
 public:
-    EstadoMenuPrincipal(sf::RenderWindow* ventana, OpcionesGraficas& opcionesGraficas, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado);
+    EstadoMenuPrincipal(DatosEstado* datos_estado);
     ~EstadoMenuPrincipal();
 
     void actualizarBotones();

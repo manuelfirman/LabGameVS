@@ -25,7 +25,7 @@ private: // Metodos
     void iniciarJugadores();
 
 public:
-    EstadoJuego(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado);
+    EstadoJuego(DatosEstado* datos_estado);
     ~EstadoJuego();
 
 

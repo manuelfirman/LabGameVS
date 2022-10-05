@@ -47,7 +47,8 @@ void EstadoEditor::iniciarBotones()
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-EstadoEditor::EstadoEditor(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado) : EstadoBase(ventana, teclasSoportadas, estado)
+EstadoEditor::EstadoEditor(DatosEstado* datos_estado) 
+    : EstadoBase(datos_estado)
 {
     this->iniciarVariables();
     this->iniciarKeybinds();

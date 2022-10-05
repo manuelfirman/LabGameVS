@@ -46,8 +46,8 @@ void EstadoJuego::iniciarJugadores()
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-EstadoJuego::EstadoJuego(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado) 
-    : EstadoBase(ventana, teclasSoportadas, estado)
+EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
+    : EstadoBase(datos_estado)
 {
     this->iniciarKeybinds();
     this->iniciarFuentes();

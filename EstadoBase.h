@@ -3,6 +3,24 @@
 #include "OpcionesGraficas.h"
 #include "Jugador.h"
 
+class OpcionesGraficas;
+class Jugador;
+class EstadoBase;
+
+
+class DatosEstado
+{
+    public:
+        DatosEstado(){};
+
+        float tamanioCuadro;
+        sf::RenderWindow* ventana;
+        OpcionesGraficas* opcionesGraficas;
+        std::map<std::string, int>* teclasSoportadas;
+        std::stack<EstadoBase*>* estado;
+};
+
+
 class EstadoBase
 {
 private:
@@ -11,10 +29,13 @@ private:
 protected: // Atributos
     std::stack<EstadoBase*>* _estado; // Pila de punteros que apuntan a pila de punteros EstadoBase (Para no hacer una copia)
     sf::RenderWindow* _ventana;
+    DatosEstado* _datosEstado;
     std::map<std::string, int>* _teclasSoportadas;
     std::map<std::string, int> _keybinds;
     std::map<std::string, sf::Texture> _texturas;
         
+    float _tamanioCuadro;
+
     bool _salir;
     bool _pausa;
 
@@ -31,7 +52,7 @@ protected: // Metodos
     virtual void iniciarKeybinds() = 0;
 
 public:
-    EstadoBase(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado);
+    EstadoBase(DatosEstado* datos_estado);
     virtual ~EstadoBase();
 
     // Accesorios

@@ -4,10 +4,10 @@
 #include "EstadoBase.h"
 #include "Gui.h"
 
+
 class EstadoOpciones : public EstadoBase
 {
     private: // Atributos
-        OpcionesGraficas& _opcionesGraficas;
         sf::Texture _texturaFondoOpciones;
         sf::RectangleShape _fondoOpciones;
         sf::Font _fuenteOpciones;
@@ -30,7 +30,7 @@ class EstadoOpciones : public EstadoBase
         void iniciarTexto();
 	
 	public:
-		EstadoOpciones(sf::RenderWindow* ventana, OpcionesGraficas& opcionesGraficas, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado);
+		EstadoOpciones(DatosEstado* datos_estado);
 		virtual ~EstadoOpciones();
         void actualizarGUI(const float& DT);
         void renderizarGUI(sf::RenderTarget& target);

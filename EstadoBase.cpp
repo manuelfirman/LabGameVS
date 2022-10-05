@@ -1,16 +1,17 @@
 #include "stdafx.h" // precompilado
 #include "EstadoBase.h"
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-EstadoBase::EstadoBase(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado)
+EstadoBase::EstadoBase(DatosEstado* datos_estado)
 {
-    _ventana = ventana;
+    _datosEstado = datos_estado;
+    _ventana = datos_estado->ventana;
     _salir = false;
     _pausa = false;
-    _estado = estado;
-    _teclasSoportadas = teclasSoportadas;
+    _estado = datos_estado->estado;
+    _teclasSoportadas = datos_estado->teclasSoportadas;
     _ppsTeclas = 0.f;
     _ppsTeclasMax = 10.f;
-
+    _tamanioCuadro = datos_estado->tamanioCuadro;
 }
 
 EstadoBase::~EstadoBase()
