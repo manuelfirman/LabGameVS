@@ -14,6 +14,8 @@ class EstadoOpciones : public EstadoBase
 
         std::map<std::string, gui::Boton*> _boton;
 
+        gui::ListaDesplegable* _lista;
+
     private: // Metodos
         void iniciarVariables();
         void iniciarKeybinds();

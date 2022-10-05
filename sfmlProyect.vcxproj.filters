@@ -48,9 +48,6 @@
     <ClCompile Include="EstadoMenuPrincipal.cpp">
       <Filter>Estados</Filter>
     </ClCompile>
-    <ClCompile Include="Gui.cpp">
-      <Filter>Accesorios</Filter>
-    </ClCompile>
     <ClCompile Include="EstadoEditor.cpp">
       <Filter>Estados</Filter>
     </ClCompile>
@@ -78,6 +75,9 @@
     <ClCompile Include="EstadoOpciones.cpp">
       <Filter>Estados</Filter>
     </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -91,9 +91,6 @@
     </ClInclude>
     <ClInclude Include="EstadoMenuPrincipal.h">
       <Filter>Estados</Filter>
-    </ClInclude>
-    <ClInclude Include="Gui.h">
-      <Filter>Accesorios</Filter>
     </ClInclude>
     <ClInclude Include="EstadoEditor.h">
       <Filter>Estados</Filter>
@@ -121,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="EstadoOpciones.h">
       <Filter>Estados</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

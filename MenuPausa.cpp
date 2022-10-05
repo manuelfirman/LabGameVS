@@ -1,5 +1,6 @@
 #include "MenuPausa.h"
 
+/// --------------------------------- CONSTRUCTOR / DESTRUCTOR ----------------------------------------
 MenuPausa::MenuPausa(sf::RenderWindow& ventana, sf::Font& fuente)
 	: _fuentePausa(fuente)
 {
@@ -26,6 +27,7 @@ MenuPausa::~MenuPausa()
 	}
 }
 
+/// --------------------------------- METODOS ----------------------------------------
 std::map<std::string, gui::Boton*>& MenuPausa::getBoton()
 {
 	return _botones;
@@ -49,6 +51,8 @@ void MenuPausa::agregarBoton(const std::string key, float y, const std::string t
 	_botones[key] = new gui::Boton(x, y, ancho, alto, texto, 20, _fuentePausa, colorInactivo, colorHover, colorActivo, colorTexto);
 }
 
+/// --------------------------------- ACTUALIZAR ----------------------------------------
+
 void MenuPausa::actualizar(const sf::Vector2f& posMouse)
 {
 	for (auto& i : _botones)
@@ -57,6 +61,7 @@ void MenuPausa::actualizar(const sf::Vector2f& posMouse)
 	}
 }
 
+/// --------------------------------- RENDERIZAR ----------------------------------------
 void MenuPausa::renderizar(sf::RenderTarget& target)
 {
 	target.draw(_fondo);

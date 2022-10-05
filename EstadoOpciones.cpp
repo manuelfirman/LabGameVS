@@ -51,6 +51,9 @@ void EstadoOpciones::iniciarBotones()
 
     _boton["ESTADO_SALIR"] = new gui::Boton(posX, 640, 200.f, 50.f, "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTexto);
 
+    std::string li[] = {"123", "456", "321", "654", "555"};
+    _lista = new gui::ListaDesplegable(100.f, 100.f, 200.f, 50.f, _fuenteBoton, li, 5);
+
 
 }
 
@@ -72,6 +75,8 @@ EstadoOpciones::~EstadoOpciones()
     for (it = _boton.begin(); it != _boton.end(); ++it) {
         delete it->second;
     }
+
+    delete _lista;
 }
 
 
@@ -101,6 +106,7 @@ void EstadoOpciones::actualizar(const float& DT)
     actualizarInput(DT);
     actualizarBotones();
 
+    _lista->actualizar(posMouseVista, DT);
 }
 
 /// --------------------- RENDERIZAR --------------------------
@@ -109,6 +115,7 @@ void EstadoOpciones::renderBotones(sf::RenderTarget& target)
     for (auto& botones : _boton) {
         botones.second->renderizar(target);
     }
+
 }
 
 
@@ -120,4 +127,6 @@ void EstadoOpciones::renderizar(sf::RenderTarget* target)
     target->draw(_fondoOpciones);
 
     renderBotones(*target);
+
+    _lista->renderizar(*target);
 }

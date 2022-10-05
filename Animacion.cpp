@@ -1,5 +1,6 @@
 #include "Animacion.h"
 
+/// --------------------------------- CONSTRUCTOR / DESTRUCTOR ----------------------------------------
 Animacion::Animacion(sf::Sprite& sprite, sf::Texture& textura)
     : _spriteCA(sprite), _texturaCA(textura), _ultimaAnimacion(NULL), _animacionPrioritaria(NULL)
 {
@@ -13,6 +14,8 @@ Animacion::~Animacion()
     }
 }
 
+/// --------------------------------- METODOS ----------------------------------------
+
 const bool& Animacion::isDone(const std::string key)
 {
     return _animaciones[key]->isDone();
@@ -24,7 +27,7 @@ void Animacion::agregarAnimacion(const std::string key, float tiempoAnimacion, i
 }
 
 
-
+/// --------------------------------- PLAY SOBRECARGADO (con y sin modificadores de velocidad)----------------------------------------
 const bool& Animacion::play(const std::string key, const float& DT, const bool prioridad)
 {
     if (_animacionPrioritaria)
@@ -72,6 +75,7 @@ const bool& Animacion::play(const std::string key, const float& DT, const bool p
 
     return _animaciones[key]->isDone();
 }
+
 
 const bool& Animacion::play(const std::string key, const float& DT, const float& modificador, const float& modificador_max, const bool prioridad)
 {

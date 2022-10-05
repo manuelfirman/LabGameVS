@@ -1,18 +1,3 @@
-﻿  Animacion.cpp
-  Gui.cpp
-  Entidades.cpp
-  EstadoBase.cpp
-  EstadoEditor.cpp
-  EstadoJuego.cpp
-  EstadoMenuPrincipal.cpp
-  EstadoOpciones.cpp
-  Game.cpp
-  Hitbox.cpp
-  Jugador.cpp
-  main.cpp
-  MenuPausa.cpp
-  Movimiento.cpp
-  Tile.cpp
-  Generando código...
-C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\Movimiento.cpp(56): warning C4715: 'Movimiento::getEstadoMov': no todas las rutas de acceso de control devuelven un valor
+﻿  Gui.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\Gui.cpp(73): warning C4172: devolución de dirección de la variable local o temporal
   sfmlProyect.vcxproj -> C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\x64\Debug\sfmlProyect.exe

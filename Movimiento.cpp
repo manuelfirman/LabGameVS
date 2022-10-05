@@ -1,5 +1,5 @@
 #include "Movimiento.h"
-
+/// --------------------------------- CONSTRUCTOR / DESTRUCTOR ----------------------------------------
 Movimiento::Movimiento(sf::Sprite& sprite, float velocidadMaxima, float aceleracion, float desaceleracion)
     : _sprite(sprite)
 {
@@ -13,6 +13,8 @@ Movimiento::~Movimiento()
     //dtor
 }
 
+
+/// --------------------------------- METODOS ----------------------------------------
 const float& Movimiento::getVelocidadMax() const
 {
     return _velocidadMax;
@@ -28,27 +30,27 @@ const bool Movimiento::getEstadoMov(const int estado) const
     switch (estado) {
     case QUIETO:
         if (_velocidad.x == 0.f && _velocidad.y == 0.f) return true;
-        else return false;
+        return false;
         break;
     case MOVIENDO:
         if (_velocidad.x != 0.f || _velocidad.y != 0.f) return true;
-        else return false;
+        return false;
         break;
     case MOV_IZQUIERDA:
         if (_velocidad.x < 0.f) return true;
-        else return false;
+        return false;
         break;
     case MOV_DERECHA:
         if (_velocidad.x > 0.f) return true;
-        else return false;
+        return false;
         break;
     case MOV_ABAJO:
         if (_velocidad.y > 0.f) return true;
-        else return false;
+        return false;
         break;
     case MOV_ARRIBA:
         if (_velocidad.y < 0.f) return true;
-        else return false;
+        return false;
         break;
     }
 
@@ -62,6 +64,7 @@ void Movimiento::mover(const float dir_x, const float dir_y, const float& DT)
 
 }
 
+/// --------------------------------- ACTUALIZAR ----------------------------------------
 void Movimiento::actualizar(const float& DT)
 {
     /// Limite velocidad maxima Derecha
