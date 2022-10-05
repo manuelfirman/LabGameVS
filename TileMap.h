@@ -17,7 +17,7 @@ class TileMap
 		virtual ~TileMap();
 
 		void agregarTile(const unsigned x, const unsigned y, const unsigned z);
-		void removerTile();
+		void removerTile(const unsigned x, const unsigned y, const unsigned z);
 
 		void actualizar();
 		void renderizar(sf::RenderTarget& target);

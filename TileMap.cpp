@@ -9,22 +9,17 @@ TileMap::TileMap(float tamanioCuadro, unsigned ancho, unsigned alto)
 	_tamanioMax.y = alto;
 	_capas = 1;
 
-	_mapa.resize(_tamanioMax.x); // revisar resize
+	_mapa.resize(_tamanioMax.x, std::vector<std::vector<Tile*>>()); // revisar resize
 
-	// pushea Tiles vacios
-	for (size_t x = 0; x < _tamanioMax.x; x++) 
+	for (size_t x = 0; x < _tamanioMax.x; x++) // pushea Tiles vacios
 	{
-		_mapa.push_back(std::vector<std::vector<Tile*>>());
-		
 		for (size_t y = 0; y < _tamanioMax.x; y++)
 		{
-			_mapa[x].resize(_tamanioMax.y);
-			_mapa[x].push_back(std::vector<Tile*>()); 
-			
+			_mapa[x].resize(_tamanioMax.y, std::vector<Tile*>());
+		
 			for (size_t z = 0; z < _capas; z++)
 			{
-				_mapa[x][y].resize(_capas);
-				_mapa[x][y].push_back(nullptr); //reserva
+				_mapa[x][y].resize(_capas, NULL);
 			}
 		}
 			
@@ -64,8 +59,23 @@ void TileMap::agregarTile(const unsigned x, const unsigned y, const unsigned z)
 	}
 }
 
-void TileMap::removerTile()
+void TileMap::removerTile(const unsigned x, const unsigned y, const unsigned z)
 {
+	// Quita un tile en la posicion del mouse si la matriz del mapa lo permite
+	if ((x < _tamanioMax.x) && (x >= 0) &&
+		(y < _tamanioMax.y) && (x >= 0) &&
+		(z <= _capas) && (z >= 0))
+	{
+		if (_mapa[x][y][z] != NULL)
+		{
+			// se puede quitar el tile
+			delete _mapa[x][y][z];
+			_mapa[x][y][z] = NULL;
+
+			std::cout << "DEBUG: TILE REMOVIDO" << std::endl;
+		}
+	}
+
 }
 
 void TileMap::actualizar()

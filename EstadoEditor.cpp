@@ -104,6 +104,10 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
     {
         _tileMap->agregarTile(posMouseCuadro.x, posMouseCuadro.y, 0);
     }
+    else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && getPpsTeclas())
+    {
+        _tileMap->removerTile(posMouseCuadro.x, posMouseCuadro.y, 0);
+    }
 }
 
 void EstadoEditor::actualizarBotones()
