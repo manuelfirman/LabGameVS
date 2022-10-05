@@ -1,3 +1,4 @@
+#include "stdafx.h" // precompilado
 #include "EstadoBase.h"
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 EstadoBase::EstadoBase(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado)

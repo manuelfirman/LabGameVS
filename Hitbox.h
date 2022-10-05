@@ -1,16 +1,5 @@
 #ifndef HITBOX_H
 #define HITBOX_H
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-
-#include <ctime>
-#include <cstdlib>
-#include <iostream>
-
-#include <fstream>
 
 class Hitbox
 {

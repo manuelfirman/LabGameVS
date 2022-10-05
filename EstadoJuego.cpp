@@ -1,3 +1,4 @@
+#include "stdafx.h" // precompilado
 #include "EstadoJuego.h"
 /// --------------------- INICIALIZACIONES --------------------------
 void EstadoJuego::iniciarFuentes()

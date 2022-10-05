@@ -12,22 +12,27 @@ class EstadoOpciones : public EstadoBase
         sf::Font _fuenteOpciones;
         sf::Font _fuenteBoton;
 
+        sf::Text _textoOpciones;
+        std::vector<sf::VideoMode> _modoVideo;
+
         std::map<std::string, gui::Boton*> _boton;
 
-        gui::ListaDesplegable* _lista;
+        std::map<std::string, gui::ListaDesplegable*> _listasDesplegables;
+
 
     private: // Metodos
         void iniciarVariables();
         void iniciarKeybinds();
         void iniciarFondo();
         void iniciarFuentes();
-        void iniciarBotones();
+        void iniciarGUI();
+        void iniciarTexto();
 	
 	public:
 		EstadoOpciones(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado);
 		virtual ~EstadoOpciones();
-        void actualizarBotones();
-        void renderBotones(sf::RenderTarget& target);
+        void actualizarGUI(const float& DT);
+        void renderizarGUI(sf::RenderTarget& target);
 
 
         void actualizarInput(const float& DT);

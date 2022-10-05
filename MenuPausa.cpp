@@ -1,3 +1,4 @@
+#include "stdafx.h" // precompilado
 #include "MenuPausa.h"
 
 /// --------------------------------- CONSTRUCTOR / DESTRUCTOR ----------------------------------------
@@ -46,9 +47,11 @@ void MenuPausa::agregarBoton(const std::string key, float y, const std::string t
 	sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
 	sf::Color colorActivo = sf::Color(189, 236, 182, 155);
 	sf::Color colorHover = sf::Color(208, 208, 208, 155);
-	sf::Color colorTexto = sf::Color(sf::Color::Black);
+	sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
+	sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
+	sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
 
-	_botones[key] = new gui::Boton(x, y, ancho, alto, texto, 20, _fuentePausa, colorInactivo, colorHover, colorActivo, colorTexto);
+	_botones[key] = new gui::Boton(x, y, ancho, alto, texto, 20, _fuentePausa, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 }
 
 /// --------------------------------- ACTUALIZAR ----------------------------------------

@@ -1,5 +1,6 @@
+#include "stdafx.h" // precompilado
 #include "EstadoMenuPrincipal.h"
-#include <sstream>
+
 /// --------------------- INICIALIZACIONES --------------------------
 void EstadoMenuPrincipal::iniciarVariables()
 {
@@ -45,17 +46,19 @@ void EstadoMenuPrincipal::iniciarBotones()
     sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
     sf::Color colorActivo = sf::Color(189, 236, 182, 155);
     sf::Color colorHover = sf::Color(208, 208, 208, 155);
-    sf::Color colorTexto = sf::Color(sf::Color::Black);
+    sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
+    sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
+    sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
 
-    _boton["ESTADO_JUEGO"] = new gui::Boton(posX, 400.f, 200.f, 50.f, "NUEVO JUEGO", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTexto);
+    _boton["ESTADO_JUEGO"] = new gui::Boton(posX, 400.f, 200.f, 50.f, "NUEVO JUEGO", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_CARGAR"] = new gui::Boton(posX, 480.f, 200.f, 50.f, "CARGAR PARTIDA", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTexto);
+    _boton["ESTADO_CARGAR"] = new gui::Boton(posX, 480.f, 200.f, 50.f, "CARGAR PARTIDA", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_OPCIONES"] = new gui::Boton(posX, 560.f, 200.f, 50.f, "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTexto);
+    _boton["ESTADO_OPCIONES"] = new gui::Boton(posX, 560.f, 200.f, 50.f, "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_SALIR"] = new gui::Boton(posX, 640.f, 200.f, 50.f, "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTexto);
+    _boton["ESTADO_SALIR"] = new gui::Boton(posX, 640.f, 200.f, 50.f, "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_EDITOR"] = new gui::Boton(posX, 800.f, 200.f, 50.f, "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTexto);
+    _boton["ESTADO_EDITOR"] = new gui::Boton(posX, 800.f, 200.f, 50.f, "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------

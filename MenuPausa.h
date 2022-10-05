@@ -1,16 +1,6 @@
 #ifndef MENUPAUSA_H
 #define MENUPAUSA_H
 
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-
-#include <stack>
-#include <map>
-#include <vector>
-
 #include "Gui.h"
 
 

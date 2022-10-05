@@ -1,19 +1,5 @@
 #ifndef MOVIMIENTO_H
 #define MOVIMIENTO_H
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-
-#include <vector>
-#include <stack>
-#include <map>
-#include <ctime>
-#include <cstdlib>
-#include <iostream>
-
-#include <fstream>
 
 enum estado_movimiento { QUIETO = 0, MOVIENDO, MOV_IZQUIERDA, MOV_DERECHA, MOV_ABAJO, MOV_ARRIBA };
 

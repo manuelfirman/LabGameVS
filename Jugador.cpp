@@ -1,3 +1,4 @@
+#include "stdafx.h" // precompilado
 #include "Jugador.h"
 /// --------------------- INICIALIZACIONES --------------------------
 void Jugador::iniciarVariables()

@@ -1,3 +1,4 @@
+#include "stdafx.h" // precompilado
 #include "Entidades.h"
 /// --------------------- INICIALIZACIONES --------------------------
 void Entidades::iniciarVariables()

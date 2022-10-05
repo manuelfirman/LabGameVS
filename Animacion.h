@@ -1,14 +1,6 @@
 #ifndef ANIMACION_H
 #define ANIMACION_H
 
-#include <SFML/Graphics.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/Audio.hpp>
-
-#include <iostream>
-#include <map>
-
 class Animacion // Componente Animacion
 {
 private:

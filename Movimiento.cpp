@@ -1,3 +1,4 @@
+#include "stdafx.h" // precompilado
 #include "Movimiento.h"
 /// --------------------------------- CONSTRUCTOR / DESTRUCTOR ----------------------------------------
 Movimiento::Movimiento(sf::Sprite& sprite, float velocidadMaxima, float aceleracion, float desaceleracion)

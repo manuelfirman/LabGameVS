@@ -1,5 +1,6 @@
+#include "stdafx.h" // precompilado
 #include "EstadoEditor.h"
-#include <sstream>
+
 /// --------------------- INICIALIZACIONES --------------------------
 void EstadoEditor::iniciarVariables()
 {

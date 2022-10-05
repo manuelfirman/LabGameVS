@@ -1,3 +1,4 @@
+#include "stdafx.h" // precompilado
 #include "Animacion.h"
 
 /// --------------------------------- CONSTRUCTOR / DESTRUCTOR ----------------------------------------

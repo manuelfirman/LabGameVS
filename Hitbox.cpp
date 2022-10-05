@@ -1,3 +1,4 @@
+#include "stdafx.h" // precompilado
 #include "Hitbox.h"
 
 Hitbox::Hitbox(sf::Sprite& sprite, float x, float y, float ancho, float alto)
