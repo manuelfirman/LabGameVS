@@ -11,10 +11,13 @@ class TileMap
 		unsigned _tamanioCuadroU;
 		unsigned _capas;
 		sf::Vector2u _tamanioMax;
-		std::vector<std::vector<std::vector<Tile> > > _mapa;
+		std::vector<std::vector<std::vector<Tile*> > > _mapa;
 	public:
-		TileMap();
+		TileMap(float tamanioCuadro, unsigned ancho, unsigned alto);
 		virtual ~TileMap();
+
+		void agregarTile(const unsigned x, const unsigned y, const unsigned z);
+		void removerTile();
 
 		void actualizar();
 		void renderizar(sf::RenderTarget& target);

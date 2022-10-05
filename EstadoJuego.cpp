@@ -45,6 +45,11 @@ void EstadoJuego::iniciarJugadores()
     player = new Jugador(0, 0, _texturas["PLANTILLA_JUGADOR"]);
 }
 
+void EstadoJuego::iniciarTileMap()
+{
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 10, 10);
+}
+
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     : EstadoBase(datos_estado)
@@ -55,12 +60,14 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarMenuPausa();
 
     this->iniciarJugadores();
+    this->iniciarTileMap();
 }
 
 EstadoJuego::~EstadoJuego()
 {
     delete player;
     delete _menuPausa;
+    delete _tileMap;
 }
 
 

@@ -1,12 +1,12 @@
 #include "stdafx.h" // precompilado
 #include "TileMap.h"
 
-TileMap::TileMap()
+TileMap::TileMap(float tamanioCuadro, unsigned ancho, unsigned alto)
 {
-	_tamanioCuadroF = 100.f;
+	_tamanioCuadroF = tamanioCuadro;
 	_tamanioCuadroU = static_cast<unsigned>(_tamanioCuadroF);
-	_tamanioMax.x = 10;
-	_tamanioMax.y = 10;
+	_tamanioMax.x = ancho;
+	_tamanioMax.y = alto;
 	_capas = 1;
 
 	_mapa.resize(_tamanioMax.x); // revisar resize
@@ -14,17 +14,17 @@ TileMap::TileMap()
 	// pushea Tiles vacios
 	for (size_t x = 0; x < _tamanioMax.x; x++) 
 	{
-		_mapa.push_back(std::vector<std::vector<Tile>>());
+		_mapa.push_back(std::vector<std::vector<Tile*>>());
 		
 		for (size_t y = 0; y < _tamanioMax.x; y++)
 		{
 			_mapa[x].resize(_tamanioMax.y);
-			_mapa[x].push_back(std::vector<Tile>()); 
+			_mapa[x].push_back(std::vector<Tile*>()); 
 			
 			for (size_t z = 0; z < _capas; z++)
 			{
 				_mapa[x][y].resize(_capas);
-				_mapa[x][y].push_back(Tile(x * _tamanioCuadroF, y * _tamanioCuadroF, _tamanioCuadroF));
+				_mapa[x][y].push_back(nullptr); //reserva
 			}
 		}
 			
@@ -33,6 +33,38 @@ TileMap::TileMap()
 }
 
 TileMap::~TileMap()
+{
+	for (size_t x = 0; x < _tamanioMax.x; x++)
+	{
+		for (size_t y = 0; y < _tamanioMax.x; y++)
+		{
+			for (size_t z = 0; z < _capas; z++)
+			{
+				delete _mapa[x][y][z];
+			}
+		}
+
+
+	}
+}
+
+void TileMap::agregarTile(const unsigned x, const unsigned y, const unsigned z)
+{
+	// Agrega un tile en la posicion del mouse si la matriz del mapa lo permite
+	if ((x < _tamanioMax.x) && (x >= 0) && 
+		(y < _tamanioMax.y) && (x >= 0) && 
+		(z <= _capas) && (z >= 0))
+	{
+		if (_mapa[x][y][z] == NULL)
+		{
+			// se puede agregar tile
+			_mapa[x][y][z] = new Tile(x * _tamanioCuadroF, y * _tamanioCuadroF, _tamanioCuadroF);
+			std::cout << "DEBUG: TILE AGREGADO" << std::endl;
+		}
+	}
+}
+
+void TileMap::removerTile()
 {
 }
 
@@ -47,9 +79,10 @@ void TileMap::renderizar(sf::RenderTarget& target)
 	{
 		for(auto &y : x) // x es una matriz
 		{
-			for (auto& z : y) // for para las capas - pasa por Y y nos da el tile
+			for (auto* z : y) // for para las capas - pasa por Y y nos da el tile
 			{
-				z.renderizar(target);
+				if(z != nullptr) // no renderiza vacios
+					z->renderizar(target);
 			}
 		}
 	}

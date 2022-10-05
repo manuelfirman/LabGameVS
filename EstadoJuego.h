@@ -14,7 +14,7 @@ private: // Atributos
 
     Jugador* player;
 
-    TileMap mapa;
+    TileMap* _tileMap;
 
 
 private: // Metodos
@@ -23,6 +23,7 @@ private: // Metodos
     void iniciarTexturas();
     void iniciarMenuPausa();
     void iniciarJugadores();
+    void iniciarTileMap();
 
 public:
     EstadoJuego(DatosEstado* datos_estado);

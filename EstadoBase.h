@@ -47,6 +47,7 @@ protected: // Atributos
     sf::Vector2i posMousePantalla;
     sf::Vector2i posMouseVentana;
     sf::Vector2f posMouseVista;
+    sf::Vector2u posMouseCuadro;
 
 protected: // Metodos
     virtual void iniciarKeybinds() = 0;

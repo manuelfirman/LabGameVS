@@ -56,6 +56,9 @@ void EstadoBase::actualizarPosicionMouse()
     posMousePantalla = sf::Mouse::getPosition();
     posMouseVentana = sf::Mouse::getPosition(*_ventana);
     posMouseVista = _ventana->mapPixelToCoords(sf::Mouse::getPosition(*_ventana));
+    
+    // Posiciona en cuadricula (por eso casteo estatico de unsigned)
+    posMouseCuadro = sf::Vector2u(static_cast<unsigned>(posMouseVista.x) / static_cast<unsigned>(_tamanioCuadro), static_cast<unsigned>(posMouseVista.y) / static_cast<unsigned>(_tamanioCuadro));
 }
 
 void EstadoBase::actualizarPpsTeclas(const float& DT)

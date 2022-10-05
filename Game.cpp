@@ -5,7 +5,7 @@ void Game::iniciarVariables()
 {
     _ventana = NULL;
     _DT = 0.f;
-    _tamanioCuadro = 50.f;
+    _tamanioCuadro = 100.f;
 }
 
 void Game::iniciarOpcionesGraficas()

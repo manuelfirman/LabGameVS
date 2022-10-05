@@ -46,6 +46,19 @@ void EstadoEditor::iniciarBotones()
 
 }
 
+void EstadoEditor::iniciarGUI()
+{
+    rectSelector.setSize(sf::Vector2f(_datosEstado->tamanioCuadro, _datosEstado->tamanioCuadro));
+    rectSelector.setFillColor(sf::Color::Transparent);
+    rectSelector.setOutlineThickness(1.f);
+    rectSelector.setOutlineColor(sf::Color::Green);
+}
+
+void EstadoEditor::iniciarTileMap()
+{
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 10, 10);
+}
+
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 EstadoEditor::EstadoEditor(DatosEstado* datos_estado) 
     : EstadoBase(datos_estado)
@@ -56,6 +69,8 @@ EstadoEditor::EstadoEditor(DatosEstado* datos_estado)
     this->iniciarFuentes();
     this->iniciarMenuPausa();
     this->iniciarBotones();
+    this->iniciarGUI();
+    this->iniciarTileMap();
 
 }
 
@@ -67,16 +82,11 @@ EstadoEditor::~EstadoEditor()
     }
 
     delete _menuPausa;
+    delete _tileMap;
 }
 
 
 /// --------------------- ACTUALIZACIONES --------------------------
-void EstadoEditor::actualizarBotonesMenuPausa()
-{
-    if (_menuPausa->getClick("SALIR"))
-        finEstado();
-}
-
 void EstadoEditor::actualizarInput(const float& DT)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("CLOSE"))) && getPpsTeclas())
@@ -84,6 +94,15 @@ void EstadoEditor::actualizarInput(const float& DT)
         if (!_pausa) pausarEstado();
         else reanudarEstado();
         //(_pausa) ? pausarEstado() : reanudarEstado();
+    }
+}
+
+void EstadoEditor::actualizarInputEditor(const float& DT)
+{
+    // agregando un tile cuando clickeo
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && getPpsTeclas())
+    {
+        _tileMap->agregarTile(posMouseCuadro.x, posMouseCuadro.y, 0);
     }
 }
 
@@ -95,18 +114,31 @@ void EstadoEditor::actualizarBotones()
 
 }
 
+void EstadoEditor::actualizarGUI()
+{
+    rectSelector.setPosition(posMouseCuadro.x * _datosEstado->tamanioCuadro, posMouseCuadro.y * _datosEstado->tamanioCuadro);
+}
+
+void EstadoEditor::actualizarBotonesMenuPausa()
+{
+    if (_menuPausa->getClick("SALIR"))
+        finEstado();
+}
+
+// ACTUALIZAR ESTADO EDITOR
 void EstadoEditor::actualizar(const float& DT)
 {
     actualizarPosicionMouse();
     actualizarPpsTeclas(DT);
     actualizarInput(DT);
 
-    if (!_pausa)
+    if (!_pausa) // No pausa
     {
+        actualizarGUI();
         actualizarBotones();
-
+        actualizarInputEditor(DT);
     }
-    else
+    else // pausa
     {
         _menuPausa->actualizar(posMouseVista);
         actualizarBotonesMenuPausa();
@@ -123,6 +155,10 @@ void EstadoEditor::renderBotones(sf::RenderTarget& target)
     }
 }
 
+void EstadoEditor::renderizarGUI(sf::RenderTarget& target)
+{
+    target.draw(rectSelector);
+}
 
 void EstadoEditor::renderizar(sf::RenderTarget* target)
 {
@@ -130,8 +166,9 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
         target = _ventana;
 
     renderBotones(*target);
+    renderizarGUI(*target);
 
-    _mapa.renderizar(*target);
+    _tileMap->renderizar(*target);
 
     if (_pausa)
     {
