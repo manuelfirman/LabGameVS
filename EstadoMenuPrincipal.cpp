@@ -62,7 +62,8 @@ void EstadoMenuPrincipal::iniciarBotones()
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-EstadoMenuPrincipal::EstadoMenuPrincipal(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado) : EstadoBase(ventana, teclasSoportadas, estado)
+EstadoMenuPrincipal::EstadoMenuPrincipal(sf::RenderWindow* ventana, OpcionesGraficas& opcionesGraficas, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado) 
+    : EstadoBase(ventana, teclasSoportadas, estado), _opcionesGraficas(opcionesGraficas)
 {
     this->iniciarVariables();
     this->iniciarKeybinds();
@@ -94,16 +95,16 @@ void EstadoMenuPrincipal::actualizarBotones()
         botones.second->actualizar(posMouseVista);
     }
 
-    if (_boton["ESTADO_JUEGO"]->getClick())
+    if (_boton["ESTADO_JUEGO"]->getClick() && getPpsTeclas())
         _estado->push(new EstadoJuego(_ventana, _teclasSoportadas, _estado)); // pasa 3 punteros
 
-    if (_boton["ESTADO_OPCIONES"]->getClick())
-        _estado->push(new EstadoOpciones(_ventana, _teclasSoportadas, _estado));
+    if (_boton["ESTADO_OPCIONES"]->getClick() && getPpsTeclas())
+        _estado->push(new EstadoOpciones(_ventana, _opcionesGraficas, _teclasSoportadas, _estado));
 
-    if (_boton["ESTADO_EDITOR"]->getClick())
+    if (_boton["ESTADO_EDITOR"]->getClick() && getPpsTeclas())
         _estado->push(new EstadoEditor(_ventana, _teclasSoportadas, _estado));
 
-    if (_boton["ESTADO_SALIR"]->getClick())
+    if (_boton["ESTADO_SALIR"]->getClick() && getPpsTeclas())
         finEstado();
 
 }
@@ -111,6 +112,7 @@ void EstadoMenuPrincipal::actualizarBotones()
 void EstadoMenuPrincipal::actualizar(const float& DT)
 {
     actualizarPosicionMouse();
+    actualizarPpsTeclas(DT);
     actualizarInput(DT);
     actualizarBotones();
 

@@ -5,13 +5,17 @@
 class TileMap
 {
 	private:
-		unsigned _capas;
+		float _tamanioCuadroF;
 		unsigned _tamanioCuadroU;
+		unsigned _capas;
 		sf::Vector2u _tamanioMax;
 		std::vector<std::vector<std::vector<Tile> > > _mapa;
 	public:
 		TileMap();
 		virtual ~TileMap();
+
+		void actualizar();
+		void renderizar(sf::RenderTarget& target);
 };
 
 #endif

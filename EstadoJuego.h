@@ -3,6 +3,7 @@
 #include "EstadoBase.h"
 #include "MenuPausa.h"
 #include "Jugador.h"
+#include "TileMap.h"
 
 
 class EstadoJuego : public EstadoBase
@@ -12,6 +13,8 @@ private: // Atributos
     sf::Font _fuenteJuego;
 
     Jugador* player;
+
+    TileMap mapa;
 
 
 private: // Metodos

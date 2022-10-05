@@ -29,14 +29,20 @@ void EstadoEditor::iniciarFondo()
 
 void EstadoEditor::iniciarFuentes()
 {
-    if (!_fuenteBoton.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
+    if (!_fuente.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
         std::cout << "ERROR:CargarFuente_EditorEstado_Botones" << std::endl;
     }
 }
 
+void EstadoEditor::iniciarMenuPausa()
+{
+    _menuPausa = new MenuPausa(*_ventana, _fuente);
+
+    _menuPausa->agregarBoton("SALIR", 800.f, "SALIR");
+}
+
 void EstadoEditor::iniciarBotones()
 {
-
 
 }
 
@@ -47,6 +53,7 @@ EstadoEditor::EstadoEditor(sf::RenderWindow* ventana, std::map<std::string, int>
     this->iniciarKeybinds();
     this->iniciarFondo();
     this->iniciarFuentes();
+    this->iniciarMenuPausa();
     this->iniciarBotones();
 
 }
@@ -57,15 +64,26 @@ EstadoEditor::~EstadoEditor()
     for (it = _boton.begin(); it != _boton.end(); ++it) {
         delete it->second;
     }
+
+    delete _menuPausa;
 }
 
 
 /// --------------------- ACTUALIZACIONES --------------------------
+void EstadoEditor::actualizarBotonesMenuPausa()
+{
+    if (_menuPausa->getClick("SALIR"))
+        finEstado();
+}
+
 void EstadoEditor::actualizarInput(const float& DT)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("CLOSE"))))
-        finEstado();
-
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("CLOSE"))) && getPpsTeclas())
+    {
+        if (!_pausa) pausarEstado();
+        else reanudarEstado();
+        //(_pausa) ? pausarEstado() : reanudarEstado();
+    }
 }
 
 void EstadoEditor::actualizarBotones()
@@ -79,8 +97,19 @@ void EstadoEditor::actualizarBotones()
 void EstadoEditor::actualizar(const float& DT)
 {
     actualizarPosicionMouse();
+    actualizarPpsTeclas(DT);
     actualizarInput(DT);
-    actualizarBotones();
+
+    if (!_pausa)
+    {
+        actualizarBotones();
+
+    }
+    else
+    {
+        _menuPausa->actualizar(posMouseVista);
+        actualizarBotonesMenuPausa();
+    }
 
 }
 
@@ -101,14 +130,21 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
 
     renderBotones(*target);
 
+    _mapa.renderizar(*target);
+
+    if (_pausa)
+    {
+        _menuPausa->renderizar(*target);
+    }
+
     /// VER POSICION MOUSE AL LADO DE LA FLECHA (QUITAR DESPUES)
-//    sf::Text textoMouse;
-//    textoMouse.setPosition(posMouseVista.x, posMouseVista.y - 50);
-//    textoMouse.setFont(_fuenteBoton);
-//    textoMouse.setCharacterSize(12);
-//    std::stringstream ss;
-//    ss << posMouseVista.x << " " << posMouseVista.y;
-//    textoMouse.setString(ss.str());
-//
-//    target->draw(textoMouse);
+    sf::Text textoMouse;
+    textoMouse.setPosition(posMouseVista.x, posMouseVista.y - 50);
+    textoMouse.setFont(_fuente);
+    textoMouse.setCharacterSize(12);
+    std::stringstream ss;
+    ss << posMouseVista.x << " " << posMouseVista.y;
+    textoMouse.setString(ss.str());
+
+    target->draw(textoMouse);
 }

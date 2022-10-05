@@ -78,8 +78,8 @@ void EstadoOpciones::iniciarTexto()
 
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-EstadoOpciones::EstadoOpciones(sf::RenderWindow* ventana, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado)
-	: EstadoBase(ventana, teclasSoportadas, estado)
+EstadoOpciones::EstadoOpciones(sf::RenderWindow* ventana, OpcionesGraficas& opcionesGraficas, std::map<std::string, int>* teclasSoportadas, std::stack<EstadoBase*>* estado)
+	: EstadoBase(ventana, teclasSoportadas, estado), _opcionesGraficas(opcionesGraficas)
 {
     iniciarVariables();
     iniciarFondo();
@@ -125,14 +125,17 @@ void EstadoOpciones::actualizarGUI(const float& DT)
     
     if (_boton["APLICAR"]->getClick())
     {
-        // TEST - BORRAR DESPUES
-        _ventana->create(_modoVideo[_listasDesplegables["RESOLUCION"]->getIDelementoAtivo()], "test", sf::Style::Default);
+    
+        _opcionesGraficas._resolucion = _modoVideo[_listasDesplegables["RESOLUCION"]->getIDelementoAtivo()];
+
+        _ventana->create(_opcionesGraficas._resolucion, _opcionesGraficas._titulo, sf::Style::Default);
     }
         
 
 
     // LISTAS DESPLEGABLES --------------------------
-    for (auto& listas : _listasDesplegables) {
+    for (auto& listas : _listasDesplegables)
+    {
         listas.second->actualizar(posMouseVista, DT);
     }
 }

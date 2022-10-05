@@ -1,6 +1,7 @@
 #ifndef ESTADOBASE_H
 #define ESTADOBASE_H
-#include "Entidades.h"
+#include "OpcionesGraficas.h"
+#include "Jugador.h"
 
 class EstadoBase
 {
@@ -9,7 +10,6 @@ private:
 
 protected: // Atributos
     std::stack<EstadoBase*>* _estado; // Pila de punteros que apuntan a pila de punteros EstadoBase (Para no hacer una copia)
-
     sf::RenderWindow* _ventana;
     std::map<std::string, int>* _teclasSoportadas;
     std::map<std::string, int> _keybinds;

@@ -127,6 +127,8 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
     if (!target)
         target = _ventana;
 
+    //mapa.renderizar(*target);
+
 
     player->renderizar(*target);
 

@@ -2,6 +2,7 @@
 #define HEADER_H
 // Core
 #include <iostream>
+#include <string>
 #include <vector>
 #include <stack>
 #include <map>

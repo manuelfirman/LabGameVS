@@ -60,5 +60,5 @@ void EstadoBase::actualizarPosicionMouse()
 void EstadoBase::actualizarPpsTeclas(const float& DT)
 {
     if(_ppsTeclas < _ppsTeclasMax)
-        _ppsTeclas += 100.f * DT;
+        _ppsTeclas += 50.f * DT;
 }

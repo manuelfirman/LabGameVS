@@ -6,12 +6,9 @@
 
 class Game {
 private: // Atributos
-
+	OpcionesGraficas _opcionesGraficas;
 	sf::RenderWindow* _ventana; // memoria dinamica
 	sf::Event sfEvento;
-	std::vector<sf::VideoMode> _modosDeVideo;
-	sf::ContextSettings _configVentana;
-	bool _fullscreen;
 
 	sf::Clock relojDt;
 	float _DT;
@@ -21,6 +18,7 @@ private: // Atributos
 
 private: // Metodos
 	void iniciarVariables();
+	void iniciarOpcionesGraficas();
 	void iniciarVentana();
 	void iniciarEstados();
 	void iniciarTeclas();

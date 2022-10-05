@@ -5,49 +5,28 @@ void Game::iniciarVariables()
 {
     _ventana = NULL;
     _DT = 0.f;
-    _fullscreen = false;
 
+}
+
+void Game::iniciarOpcionesGraficas()
+{
+    _opcionesGraficas.cargarDesdeArchivo("config/config_grafica.ini");
 }
 
 void Game::iniciarVentana()
 {
-    std::ifstream archivo("config/config_ventana.ini");
-    _modosDeVideo = sf::VideoMode::getFullscreenModes();
-
-    std::string titulo = "vacio";
-    sf::VideoMode limite_ventana = sf::VideoMode::getDesktopMode();
-    unsigned limite_framerate = 120;
-    bool sinc_vertical = false;
-    bool fullscreen = false;
-    unsigned nivel_antialiasing = 0;
-
-    if (archivo.is_open()) {
-        std::getline(archivo, titulo);
-        archivo >> limite_ventana.width >> limite_ventana.height;
-        archivo >> limite_framerate;
-        archivo >> fullscreen;
-        archivo >> sinc_vertical;
-        archivo >> nivel_antialiasing;
-    }
-
-    archivo.close();
-
-    _fullscreen = fullscreen;
-    _configVentana.antialiasingLevel = nivel_antialiasing;
-
-    if (fullscreen)
-        _ventana = new sf::RenderWindow(limite_ventana, titulo, sf::Style::Fullscreen, _configVentana);
+    if (_opcionesGraficas._fullscreen)
+        _ventana = new sf::RenderWindow(_opcionesGraficas._resolucion, _opcionesGraficas._titulo, sf::Style::Fullscreen, _opcionesGraficas._opcionesContexto);
     else
-        _ventana = new sf::RenderWindow(limite_ventana, titulo, sf::Style::Titlebar | sf::Style::Close, _configVentana);
+        _ventana = new sf::RenderWindow(_opcionesGraficas._resolucion, _opcionesGraficas._titulo, sf::Style::Titlebar | sf::Style::Close, _opcionesGraficas._opcionesContexto);
 
-
-    _ventana->setFramerateLimit(limite_framerate);
-    _ventana->setVerticalSyncEnabled(sinc_vertical);
+    _ventana->setFramerateLimit(_opcionesGraficas._limiteFramerate);
+    _ventana->setVerticalSyncEnabled(_opcionesGraficas._sincVertical);
 }
 
 void Game::iniciarEstados()
 {
-    _estado.push(new EstadoMenuPrincipal(_ventana, &_teclasSoportadas, &_estado)); // necesita pasarse direcciones al puntero
+    _estado.push(new EstadoMenuPrincipal(_ventana, _opcionesGraficas, &_teclasSoportadas, &_estado)); // necesita pasarse direcciones al puntero
 }
 
 void Game::iniciarTeclas()
@@ -73,6 +52,7 @@ void Game::iniciarTeclas()
 Game::Game()
 {
     this->iniciarVariables();
+    this->iniciarOpcionesGraficas();
     this->iniciarVentana();
     this->iniciarTeclas();
     this->iniciarEstados();

@@ -78,14 +78,17 @@
     <ClCompile Include="EstadoOpciones.cpp">
       <Filter>Estados</Filter>
     </ClCompile>
-    <ClCompile Include="Gui.cpp">
-      <Filter>GUI</Filter>
-    </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Archivos de encabezado</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcionesGraficas.cpp">
+      <Filter>Archivos de recursos</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Archivos de recursos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -128,14 +131,17 @@
     <ClInclude Include="EstadoOpciones.h">
       <Filter>Estados</Filter>
     </ClInclude>
-    <ClInclude Include="Gui.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="OpcionesGraficas.h">
+      <Filter>Archivos de recursos</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>Archivos de recursos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
