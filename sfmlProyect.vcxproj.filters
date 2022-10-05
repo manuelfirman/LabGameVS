@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Archivos de origen">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Archivos de encabezado">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Archivos de recursos">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Estados">
+      <UniqueIdentifier>{dc5ee6e3-30d9-4f21-9a3d-42ff016f373a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Componentes">
+      <UniqueIdentifier>{9475c805-71e8-45c1-8987-a4fe41680f0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Accesorios">
+      <UniqueIdentifier>{a0bdbd33-0d77-46c4-bd41-eb3bd4d597ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entidades">
+      <UniqueIdentifier>{dd32afd5-5ef9-45dc-9072-f2771af6832e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tile">
+      <UniqueIdentifier>{76af1e10-95ef-4b81-b102-f5f48e6c5db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{288a7fb7-3c08-4081-943b-94ebb447e438}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoBase.cpp">
+      <Filter>Estados</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoJuego.cpp">
+      <Filter>Estados</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoMenuPrincipal.cpp">
+      <Filter>Estados</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Accesorios</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoEditor.cpp">
+      <Filter>Estados</Filter>
+    </ClCompile>
+    <ClCompile Include="Entidades.cpp">
+      <Filter>Entidades</Filter>
+    </ClCompile>
+    <ClCompile Include="Jugador.cpp">
+      <Filter>Entidades</Filter>
+    </ClCompile>
+    <ClCompile Include="Animacion.cpp">
+      <Filter>Componentes</Filter>
+    </ClCompile>
+    <ClCompile Include="Movimiento.cpp">
+      <Filter>Componentes</Filter>
+    </ClCompile>
+    <ClCompile Include="Hitbox.cpp">
+      <Filter>Componentes</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuPausa.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoOpciones.cpp">
+      <Filter>Estados</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoBase.h">
+      <Filter>Estados</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoJuego.h">
+      <Filter>Estados</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoMenuPrincipal.h">
+      <Filter>Estados</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>Accesorios</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoEditor.h">
+      <Filter>Estados</Filter>
+    </ClInclude>
+    <ClInclude Include="Entidades.h">
+      <Filter>Entidades</Filter>
+    </ClInclude>
+    <ClInclude Include="Jugador.h">
+      <Filter>Entidades</Filter>
+    </ClInclude>
+    <ClInclude Include="Animacion.h">
+      <Filter>Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="Movimiento.h">
+      <Filter>Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="Hitbox.h">
+      <Filter>Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuPausa.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoOpciones.h">
+      <Filter>Estados</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
