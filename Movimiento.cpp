@@ -121,7 +121,7 @@ void Movimiento::actualizar(const float& DT)
     }
 
 
-    /// Movimiento
+    /// Movimiento usando la velocidad
     _sprite.move(_velocidad * DT);
 
 }

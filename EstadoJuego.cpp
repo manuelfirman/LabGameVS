@@ -1,12 +1,22 @@
 #include "stdafx.h" // precompilado
 #include "EstadoJuego.h"
 /// --------------------- INICIALIZACIONES --------------------------
+void EstadoJuego::iniciarVistaCam()
+{
+
+    // TODO: hacer static cast
+
+    _vistaCam.setSize(sf::Vector2f(_datosEstado->opcionesGraficas->_resolucion.width, _datosEstado->opcionesGraficas->_resolucion.height));
+
+    _vistaCam.setCenter(sf::Vector2f(_datosEstado->opcionesGraficas->_resolucion.width / 2.f, _datosEstado->opcionesGraficas->_resolucion.height / 2.f));
+}
+
 void EstadoJuego::iniciarFuentes()
 {
     if (!_fuenteJuego.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
         std::cout << "ERROR:CargarFuente_MenuPrincipal" << std::endl;
     }
- /*   if (!_fuenteBoton.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
+    /*if (!_fuenteBoton.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
         std::cout << "ERROR:CargarFuente_MenuPrincipal_Botones" << std::endl;
     }*/
 }
@@ -47,13 +57,17 @@ void EstadoJuego::iniciarJugadores()
 
 void EstadoJuego::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 10, 10, "recursos/img/mapa/grass/floortileset.png");
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 15, 20, "recursos/img/mapa/grass/floortileset.png");
+
+    // cargando mapa desde archivo
+    _tileMap->cargarDesdeArchivo("text.slmp");
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     : EstadoBase(datos_estado)
 {
+    this->iniciarVistaCam();
     this->iniciarKeybinds();
     this->iniciarFuentes();
     this->iniciarTexturas();
@@ -70,6 +84,13 @@ EstadoJuego::~EstadoJuego()
     delete _tileMap;
 }
 
+/// --------------------- ACTUALIZACIONES --------------------------
+
+void EstadoJuego::actualizarVistaCam(const float& DT)
+{
+    // seteando camara con jugador en el centro
+    _vistaCam.setCenter(player->getPosicionSprite());
+}
 
 void EstadoJuego::actualizarInput(const float& DT)
 {
@@ -82,7 +103,6 @@ void EstadoJuego::actualizarInput(const float& DT)
 
 }
 
-/// --------------------- ACTUALIZACIONES --------------------------
 void EstadoJuego::actualizarInputJugador(const float& DT)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_IZQUIERDA"))))
@@ -109,12 +129,14 @@ void EstadoJuego::actualizarBotonesPausa()
 
 void EstadoJuego::actualizar(const float& DT)
 {
-    actualizarPosicionMouse();
+    actualizarPosicionMouse(&_vistaCam);
     actualizarPpsTeclas(DT);
     actualizarInput(DT);
 
     if (!_pausa) // actualizar sin pausa
     {
+        actualizarVistaCam(DT);
+
         actualizarInputJugador(DT);
 
         player->actualizar(DT);
@@ -134,12 +156,15 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
     if (!target)
         target = _ventana;
 
-    //mapa.renderizar(*target);
-
+    // render tileMap con vistaCam seteada
+    target->setView(_vistaCam);
+    _tileMap->renderizar(*target);
 
     player->renderizar(*target);
 
-    if (_pausa) { // renderizar menu pausa
+    if (_pausa) { 
+        // renderizar menu pausa con vistaCam por default
+        target->setView(_ventana->getDefaultView());
         _menuPausa->renderizar(*target);
     }
 

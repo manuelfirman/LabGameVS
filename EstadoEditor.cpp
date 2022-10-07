@@ -91,6 +91,7 @@ void EstadoEditor::iniciarGUI()
 void EstadoEditor::iniciarTileMap()
 {
     _tileMap = new TileMap(_datosEstado->tamanioCuadro, 15, 20, "recursos/img/mapa/grass/floortileset.png");
+    _tileMap->cargarDesdeArchivo("text.slmp");
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
@@ -137,20 +138,20 @@ void EstadoEditor::actualizarInput(const float& DT)
 void EstadoEditor::actualizarInputEditor(const float& DT)
 {
     // Mover vista
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_ARRIBA"))) && getPpsTeclas())
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_ARRIBA")))) //TODO: agregar ppsTeclas
     {
         _vista.move(0.f, -_velocidadCamara * DT);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_ABAJO"))) && getPpsTeclas())
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_ABAJO"))))
     {
         _vista.move(0.f, _velocidadCamara * DT);
     }
     
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_DERECHA"))) && getPpsTeclas())
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_DERECHA"))))
     {
         _vista.move(_velocidadCamara * DT, 0.f);
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_IZQUIERDA"))) && getPpsTeclas())
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_IZQUIERDA"))))
     {
         _vista.move(-_velocidadCamara * DT, 0.f);
     }
@@ -270,13 +271,21 @@ void EstadoEditor::renderBotones(sf::RenderTarget& target)
 
 void EstadoEditor::renderizarGUI(sf::RenderTarget& target)
 {
-    if(!_selectorTexturas->getActivo())
+    if (!_selectorTexturas->getActivo())
+    {
+        // dibujar tilea partir de textura con vista seteada
+        target.setView(_vista);
         target.draw(_rectSelector);
+    }
 
+    // render selector de texturas y barra lateral con vista por default
+    target.setView(_ventana->getDefaultView());
     _selectorTexturas->renderizar(target);
-    target.draw(_textoCursor);
-
     target.draw(_barraLateral);
+    
+    // dibujar texto mouse con vista seteada
+    target.setView(_vista);
+    target.draw(_textoCursor);
 }
 
 void EstadoEditor::renderizar(sf::RenderTarget* target)
@@ -284,16 +293,22 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
     if (!target)
         target = _ventana;
 
+    // render tile map con la vista seteada
     target->setView(_vista);
     _tileMap->renderizar(*target);
   
+    // render botones con vista por default
     target->setView(_ventana->getDefaultView());
     renderBotones(*target);
-    renderizarGUI(*target);
+
+
+    renderizarGUI(*target); // vista dentro del metodo
 
 
     if (_pausa)
     {
+        // render menu con vista por default
+        target->setView(_ventana->getDefaultView());
         _menuPausa->renderizar(*target);
     }
 

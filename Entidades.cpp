@@ -45,6 +45,11 @@ void Entidades::crearComponenteAnimacion(sf::Texture& textura)
     _animacion = new Animacion(_sprite, textura);
 }
 
+const sf::Vector2f& Entidades::getPosicionSprite() const
+{
+    return _sprite.getPosition();
+}
+
 
 void Entidades::setPosicion(const float x, const float y)
 {

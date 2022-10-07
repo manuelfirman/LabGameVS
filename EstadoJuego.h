@@ -5,10 +5,22 @@
 #include "Jugador.h"
 #include "TileMap.h"
 
+class EstadoBase;
+class MenuPausa;
+class Jugador;
+class TileMap;
+
+class sf::View;
+class sf::Font;
+class sf::RenderTexture;
 
 class EstadoJuego : public EstadoBase
 {
 private: // Atributos
+    sf::View _vistaCam;
+    sf::RenderTexture _renderTextura;
+    sf::Sprite _renderSprite;
+
     MenuPausa* _menuPausa;
     sf::Font _fuenteJuego;
 
@@ -18,6 +30,7 @@ private: // Atributos
 
 
 private: // Metodos
+    void iniciarVistaCam();
     void iniciarFuentes();
     void iniciarKeybinds();
     void iniciarTexturas();
@@ -30,6 +43,7 @@ public:
     ~EstadoJuego();
 
 
+    void actualizarVistaCam(const float& DT);
     void actualizarInput(const float& DT);
     void actualizarInputJugador(const float& DT);
     void actualizarBotonesPausa();

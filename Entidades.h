@@ -32,8 +32,13 @@ public:
     void crearComponenteMovimiento(float velocidadMaxima, float aceleracion, float desaceleracion);
     void crearComponenteAnimacion(sf::Texture& textura);
 
-    /// Overriders
+    // Accesorios
+    virtual const sf::Vector2f& getPosicionSprite() const;
+
+    // Modificadores
     virtual void setPosicion(const float x, const float y);
+
+    /// Funciones (Overriders)
     virtual void mover(const float x, const float y, const float& DT);
 
     virtual void actualizar(const float& DT);
