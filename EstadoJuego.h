@@ -18,8 +18,9 @@ class EstadoJuego : public EstadoBase
 {
 private: // Atributos
     sf::View _vistaCam;
-    sf::RenderTexture _renderTextura;
-    sf::Sprite _renderSprite;
+    // Para no renderizar todo de una vez en ventana (Dividirla en fragmentos)
+    sf::RenderTexture _renderTextura; // Lienzo
+    sf::Sprite _renderSprite; // Contenedor de lienzos
 
     MenuPausa* _menuPausa;
     sf::Font _fuenteJuego;
@@ -30,6 +31,7 @@ private: // Atributos
 
 
 private: // Metodos
+    void renderizadoDiferido();
     void iniciarVistaCam();
     void iniciarFuentes();
     void iniciarKeybinds();

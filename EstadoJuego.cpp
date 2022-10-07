@@ -1,5 +1,14 @@
 #include "stdafx.h" // precompilado
 #include "EstadoJuego.h"
+void EstadoJuego::renderizadoDiferido()
+{
+    // Creando lienzo
+    _renderTextura.create(_datosEstado->opcionesGraficas->_resolucion.width, _datosEstado->opcionesGraficas->_resolucion.height);
+
+    _renderSprite.setTexture(_renderTextura.getTexture());
+    _renderSprite.setTextureRect(sf::IntRect(0, 0, _datosEstado->opcionesGraficas->_resolucion.width, _datosEstado->opcionesGraficas->_resolucion.height));
+    
+}
 /// --------------------- INICIALIZACIONES --------------------------
 void EstadoJuego::iniciarVistaCam()
 {
@@ -67,6 +76,7 @@ void EstadoJuego::iniciarTileMap()
 EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     : EstadoBase(datos_estado)
 {
+    this->renderizadoDiferido();
     this->iniciarVistaCam();
     this->iniciarKeybinds();
     this->iniciarFuentes();
@@ -156,16 +166,24 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
     if (!target)
         target = _ventana;
 
-    // render tileMap con vistaCam seteada
-    target->setView(_vistaCam);
-    _tileMap->renderizar(*target);
+    _renderTextura.clear(); // limpia el frame anterior
 
-    player->renderizar(*target);
+    // TODO SE RENDERIZA A TRAVES DEL LIENZO
+    _renderTextura.setView(_vistaCam); // con la vista seteada
+    _tileMap->renderizar(_renderTextura);
+
+    player->renderizar(_renderTextura);
 
     if (_pausa) { 
-        // renderizar menu pausa con vistaCam por default
-        target->setView(_ventana->getDefaultView());
-        _menuPausa->renderizar(*target);
+        // renderizar MENU PAUSA con vistaCam por default
+        _renderTextura.setView(_renderTextura.getDefaultView());
+        _menuPausa->renderizar(_renderTextura);
     }
+
+    _renderTextura.display(); // actualiza el contenido
+    
+    // RENDERIZADO FINAL (la ventana dibuja el sprite del lienzo, que contiene el renderizado de lo demas)
+    _renderSprite.setTexture(_renderTextura.getTexture());
+    target->draw(_renderSprite);
 
 }
