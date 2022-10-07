@@ -1,17 +1,23 @@
 #ifndef TILE_H
 #define TILE_H
 
+enum TipoTile{DEFAULT = 0, DAMAGING};
+
 class Tile
 {
 	private:
 
 	protected:
 		sf::RectangleShape _tile;
+		bool _colision;
+		short _tipo;
 
 	public:
 		Tile();
-		Tile(float x, float y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect rect_textura);
+		Tile(unsigned cuadro_x, unsigned cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision = false, short tipo = TipoTile::DEFAULT);
 		~Tile();
+
+		const std::string getTileString() const;
 
 		void actualizar();
 		void renderizar(sf::RenderTarget& target);

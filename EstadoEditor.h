@@ -24,6 +24,9 @@ class EstadoEditor : public EstadoBase
 
         gui::SelectorTexturas* _selectorTexturas;
 
+        bool _colision;
+        short _tipo;
+
     private: // Metodos
         void iniciarVariables();
         void iniciarKeybinds();

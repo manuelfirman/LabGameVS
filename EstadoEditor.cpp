@@ -5,6 +5,9 @@
 void EstadoEditor::iniciarVariables()
 {
     _rectTextura = sf::IntRect(0, 0, static_cast<int>(_datosEstado->tamanioCuadro), static_cast<int>(_datosEstado->tamanioCuadro));
+
+    _colision = false;
+    _tipo = TipoTile::DEFAULT;
 }
 
 void EstadoEditor::iniciarKeybinds()
@@ -51,6 +54,8 @@ void EstadoEditor::iniciarMenuPausa()
     _menuPausa->agregarBoton("SALIR", 800.f, "SALIR");
 
     _menuPausa->agregarBoton("GUARDAR", 600.f, "GUARDAR");
+
+    _menuPausa->agregarBoton("CARGAR", 400.f, "CARGAR");
 }
 
 void EstadoEditor::iniciarBotones()
@@ -77,11 +82,11 @@ void EstadoEditor::iniciarGUI()
 
 void EstadoEditor::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 10, 10, "recursos/img/mapa/grass/floortileset.png");
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 15, 20, "recursos/img/mapa/grass/floortileset.png");
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-EstadoEditor::EstadoEditor(DatosEstado* datos_estado) 
+EstadoEditor::EstadoEditor(DatosEstado* datos_estado)
     : EstadoBase(datos_estado)
 {
     this->iniciarVariables();
@@ -125,11 +130,11 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
     // agregando un tile cuando clickeo
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && getPpsTeclas())
     {
-        if (!_barraLateral.getGlobalBounds().contains(sf::Vector2f(posMouseVentana))) 
+        if (!_barraLateral.getGlobalBounds().contains(sf::Vector2f(posMouseVentana)))
         {
             if (!_selectorTexturas->getActivo()) // Si no esta activo, agrega tile
             {
-                _tileMap->agregarTile(posMouseCuadro.x, posMouseCuadro.y, 0, _rectTextura);
+                _tileMap->agregarTile(posMouseCuadro.x, posMouseCuadro.y, 0, _rectTextura, _colision, _tipo);
             }
             else
             {
@@ -146,6 +151,21 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
                 _tileMap->removerTile(posMouseCuadro.x, posMouseCuadro.y, 0);
             }
         }
+    }
+
+    // Colision
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("COLISION"))) && getPpsTeclas())
+    {
+        _colision = !_colision;
+    }// Tipo
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("INCREMENTAR_TIPO"))) && getPpsTeclas())
+    {
+        ++_tipo; // TODO: validar que no se pase
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("DISMINUIR_TIPO"))) && getPpsTeclas())
+    {
+        if (_tipo > 0)
+            --_tipo;
     }
 }
 
@@ -169,18 +189,24 @@ void EstadoEditor::actualizarGUI(const float& DT)
 
     _textoCursor.setPosition(posMouseVista.x, posMouseVista.y - 50);
     std::stringstream ss;
-    ss << posMouseVista.x << " " << posMouseVista.y << "\n" << posMouseCuadro.x << " " << posMouseCuadro.y << "\n" << _rectTextura.left << " " << _rectTextura.top;
-    _textoCursor.setString(ss.str());
+    ss << posMouseVista.x << " " << posMouseVista.y << "\n"
+        << posMouseCuadro.x << " " << posMouseCuadro.y << "\n"
+        << _rectTextura.left << " " << _rectTextura.top << "\n"
+        << "Colision: " << _colision << "\n" << "Tipo: " << _tipo;
 
+    _textoCursor.setString(ss.str());
 }
 
 void EstadoEditor::actualizarBotonesMenuPausa()
 {
-    if (_menuPausa->getClick("SALIR"))
-        finEstado();
+    if (_menuPausa->getClick("CARGAR"))
+        _tileMap->cargarDesdeArchivo("text.slmp");
 
     if (_menuPausa->getClick("GUARDAR"))
         _tileMap->guardarEnArchivo("text.slmp");
+
+    if (_menuPausa->getClick("SALIR"))
+        finEstado();
 }
 
 // ACTUALIZAR ESTADO EDITOR

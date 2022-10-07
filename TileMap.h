@@ -15,6 +15,8 @@ class TileMap
 		std::string _archivoTextura;
 		sf::Texture _texturaTile;
 
+		void limpiar();
+
 	public:
 		TileMap(float tamanioCuadro, unsigned ancho, unsigned alto, std::string archivo_textura);
 		virtual ~TileMap();
@@ -23,7 +25,7 @@ class TileMap
 		const sf::Texture* getTexturaTile() const;
 
 		// Metodos
-		void agregarTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& rect_textura);
+		void agregarTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo);
 		void removerTile(const unsigned x, const unsigned y, const unsigned z);
 
 		void guardarEnArchivo(const std::string nombre_archivo);
