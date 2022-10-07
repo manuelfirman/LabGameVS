@@ -24,7 +24,7 @@ class MenuPausa
 
 		const bool getClick(const std::string key);
 		void agregarBoton(const std::string clave, float y, const std::string texto);
-		void actualizar(const sf::Vector2f& posMouse);
+		void actualizar(const sf::Vector2i& posMouseVentana);
 		void renderizar(sf::RenderTarget& target);
 };
 

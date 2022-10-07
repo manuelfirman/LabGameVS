@@ -51,7 +51,7 @@ namespace gui
            
 
             // Metodos
-            void actualizar(sf::Vector2f posMouse);
+            void actualizar(const sf::Vector2i& posMouseVentana);
             void renderizar(sf::RenderTarget& target);
     };
 
@@ -77,7 +77,7 @@ namespace gui
             const bool getPpsTeclas();
             void actualizarPpsTeclas(const float& DT);
 
-            void actualizar(const sf::Vector2f& posMouse, const float& DT);
+            void actualizar(const sf::Vector2i& posMouseVentana, const float& DT);
             void renderizar(sf::RenderTarget& target);
     };
 

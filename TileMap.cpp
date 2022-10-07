@@ -149,6 +149,7 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 
 	if (archivoIn.is_open())
 	{
+		// Inicializar para no tener basura
 		sf::Vector2u tamanio;
 		unsigned tamanioCuadro = 0;
 		unsigned capas = 0;

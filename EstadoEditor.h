@@ -6,9 +6,16 @@
 #include "MenuPausa.h"
 #include "TileMap.h"
 
+class EstadoBase;
+class Gui;
+class MenuPausa;
+class TileMap;
+
 class EstadoEditor : public EstadoBase
 {
     private: // Atributos
+        sf::View _vista;
+
         sf::Font _fuente;
         sf::Text _textoCursor;
         MenuPausa* _menuPausa;
@@ -24,11 +31,13 @@ class EstadoEditor : public EstadoBase
 
         gui::SelectorTexturas* _selectorTexturas;
 
+        float _velocidadCamara;
         bool _colision;
         short _tipo;
 
     private: // Metodos
         void iniciarVariables();
+        void iniciarVista();
         void iniciarKeybinds();
         void iniciarFondo();
         void iniciarFuentes();

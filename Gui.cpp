@@ -107,10 +107,11 @@ const int& gui::Boton::getID() const
 }
 
 /// --------------------------------- ACTUALIZAR ----------------------------------------
-void gui::Boton::actualizar(sf::Vector2f posMouse)
+void gui::Boton::actualizar(const sf::Vector2i& posMouseVentana)
 {
     _estado = estado_boton::INACTIVO;
-    if (_boton.getGlobalBounds().contains(posMouse)) {
+
+    if (_boton.getGlobalBounds().contains(static_cast<sf::Vector2f>(posMouseVentana))) {
         _estado = estado_boton::HOVER;
 
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -220,11 +221,11 @@ void gui::ListaDesplegable::actualizarPpsTeclas(const float& DT)
 
 
 /// --------------------------------- ACTUALIZAR ----------------------------------------
-void gui::ListaDesplegable::actualizar(const sf::Vector2f& posMouse, const float& DT)
+void gui::ListaDesplegable::actualizar(const sf::Vector2i& posMouseVentana, const float& DT)
 {
     actualizarPpsTeclas(DT);
 
-    _elementoActivo->actualizar(posMouse);
+    _elementoActivo->actualizar(posMouseVentana);
 
     // MOSTRAR Y OCULTAR LISTA
     if (_elementoActivo->getClick() && getPpsTeclas()) // si clickean boton principal
@@ -240,7 +241,7 @@ void gui::ListaDesplegable::actualizar(const sf::Vector2f& posMouse, const float
     {
         for (auto& i : _lista)
         {
-            i->actualizar(posMouse);
+            i->actualizar(posMouseVentana);
 
             if (i->getClick() && getPpsTeclas())
             {
@@ -347,7 +348,7 @@ void gui::SelectorTexturas::actualizarPpsTeclas(const float& DT)
 void gui::SelectorTexturas::actualizar(const sf::Vector2i& posMouseVentana, const float& DT)
 {
     actualizarPpsTeclas(DT);
-    _botonEsconder->actualizar(static_cast<sf::Vector2f>(posMouseVentana));
+    _botonEsconder->actualizar(posMouseVentana);
 
     if (_botonEsconder->getClick() && getPpsTeclas())
     {

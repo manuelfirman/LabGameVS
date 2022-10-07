@@ -66,7 +66,7 @@ public:
     void reanudarEstado();
 
     // Funciones
-    virtual void actualizarPosicionMouse();
+    virtual void actualizarPosicionMouse(sf::View* vista = NULL);
     virtual void actualizarPpsTeclas(const float& DT);
 
     // virtuales puras

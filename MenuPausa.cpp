@@ -56,11 +56,11 @@ void MenuPausa::agregarBoton(const std::string key, float y, const std::string t
 
 /// --------------------------------- ACTUALIZAR ----------------------------------------
 
-void MenuPausa::actualizar(const sf::Vector2f& posMouse)
+void MenuPausa::actualizar(const sf::Vector2i& posMouseVentana)
 {
 	for (auto& i : _botones)
 	{
-		i.second->actualizar(posMouse);
+		i.second->actualizar(posMouseVentana);
 	}
 }
 

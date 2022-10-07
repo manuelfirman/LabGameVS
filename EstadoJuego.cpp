@@ -121,7 +121,7 @@ void EstadoJuego::actualizar(const float& DT)
     }
     else // actualizar con pausa
     {
-        _menuPausa->actualizar(posMouseVista);
+        _menuPausa->actualizar(posMouseVentana);
         actualizarBotonesPausa();
     }
 

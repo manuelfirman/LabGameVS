@@ -8,6 +8,14 @@ void EstadoEditor::iniciarVariables()
 
     _colision = false;
     _tipo = TipoTile::DEFAULT;
+
+    _velocidadCamara = 100.f;
+}
+
+void EstadoEditor::iniciarVista()
+{
+    _vista.setSize(sf::Vector2f(_datosEstado->opcionesGraficas->_resolucion.width, _datosEstado->opcionesGraficas->_resolucion.height));
+    _vista.setCenter(_datosEstado->opcionesGraficas->_resolucion.width / 2.f, _datosEstado->opcionesGraficas->_resolucion.height / 2.f);
 }
 
 void EstadoEditor::iniciarKeybinds()
@@ -90,6 +98,7 @@ EstadoEditor::EstadoEditor(DatosEstado* datos_estado)
     : EstadoBase(datos_estado)
 {
     this->iniciarVariables();
+    this->iniciarVista();
     this->iniciarKeybinds();
     this->iniciarFondo();
     this->iniciarFuentes();
@@ -127,6 +136,26 @@ void EstadoEditor::actualizarInput(const float& DT)
 
 void EstadoEditor::actualizarInputEditor(const float& DT)
 {
+    // Mover vista
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_ARRIBA"))) && getPpsTeclas())
+    {
+        _vista.move(0.f, -_velocidadCamara * DT);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_ABAJO"))) && getPpsTeclas())
+    {
+        _vista.move(0.f, _velocidadCamara * DT);
+    }
+    
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_DERECHA"))) && getPpsTeclas())
+    {
+        _vista.move(_velocidadCamara * DT, 0.f);
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_IZQUIERDA"))) && getPpsTeclas())
+    {
+        _vista.move(-_velocidadCamara * DT, 0.f);
+    }
+
+
     // agregando un tile cuando clickeo
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && getPpsTeclas())
     {
@@ -172,7 +201,7 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
 void EstadoEditor::actualizarBotones()
 {
     for (auto& botones : _boton) {
-        botones.second->actualizar(posMouseVista);
+        botones.second->actualizar(posMouseVentana);
     }
 
 }
@@ -212,7 +241,7 @@ void EstadoEditor::actualizarBotonesMenuPausa()
 // ACTUALIZAR ESTADO EDITOR
 void EstadoEditor::actualizar(const float& DT)
 {
-    actualizarPosicionMouse();
+    actualizarPosicionMouse(&_vista);
     actualizarPpsTeclas(DT);
     actualizarInput(DT);
 
@@ -224,7 +253,7 @@ void EstadoEditor::actualizar(const float& DT)
     }
     else // pausa
     {
-        _menuPausa->actualizar(posMouseVista);
+        _menuPausa->actualizar(posMouseVentana);
         actualizarBotonesMenuPausa();
     }
 
@@ -255,8 +284,10 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
     if (!target)
         target = _ventana;
 
+    target->setView(_vista);
     _tileMap->renderizar(*target);
   
+    target->setView(_ventana->getDefaultView());
     renderBotones(*target);
     renderizarGUI(*target);
 
