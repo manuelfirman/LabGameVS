@@ -10,7 +10,7 @@ class Tile
 
 	public:
 		Tile();
-		Tile(float x, float y, float tamanioCuadroF);
+		Tile(float x, float y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect rect_textura);
 		~Tile();
 
 		void actualizar();

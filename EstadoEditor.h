@@ -9,23 +9,31 @@
 class EstadoEditor : public EstadoBase
 {
     private: // Atributos
-        MenuPausa* _menuPausa;
         sf::Font _fuente;
+        sf::Text _textoCursor;
+        MenuPausa* _menuPausa;
+        
         std::map<std::string, gui::Boton*> _boton;
 
         TileMap* _tileMap;
 
-        sf::RectangleShape rectSelector;
+        sf::RectangleShape _barraLateral;
+
+        sf::IntRect _rectTextura;
+        sf::RectangleShape _rectSelector;
+
+        gui::SelectorTexturas* _selectorTexturas;
 
     private: // Metodos
         void iniciarVariables();
         void iniciarKeybinds();
         void iniciarFondo();
         void iniciarFuentes();
+        void iniciarTexto();
         void iniciarMenuPausa();
         void iniciarBotones();
-        void iniciarGUI();
         void iniciarTileMap();
+        void iniciarGUI();
 
     public:
         EstadoEditor(DatosEstado* datos_estado);
@@ -34,7 +42,7 @@ class EstadoEditor : public EstadoBase
         void actualizarInput(const float& DT);
         void actualizarInputEditor(const float& DT);
         void actualizarBotones();
-        void actualizarGUI();
+        void actualizarGUI(const float& DT);
         void actualizarBotonesMenuPausa();
         void actualizar(const float& DT);
 

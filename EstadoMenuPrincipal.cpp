@@ -42,23 +42,23 @@ void EstadoMenuPrincipal::iniciarFuentes()
 
 void EstadoMenuPrincipal::iniciarBotones()
 {
-    float posX = _ventana->getSize().x / 2.f - 100;
-    sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
-    sf::Color colorActivo = sf::Color(189, 236, 182, 155);
-    sf::Color colorHover = sf::Color(208, 208, 208, 155);
-    sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
-    sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
-    sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
+    //float posX = _ventana->getSize().x / 2.f - 100;
+    sf::Color colorInactivo = sf::Color(70, 70, 70, 0);
+    sf::Color colorActivo = sf::Color(250, 250, 250, 0);
+    sf::Color colorHover = sf::Color(20, 20, 20, 0);
+    sf::Color colorTextoInactivo = sf::Color(30, 30, 30, 220);
+    sf::Color colorTextoHover = sf::Color(150, 150, 150, 255);
+    sf::Color colorTextoActivo = sf::Color(20, 20, 20, 220);
 
-    _boton["ESTADO_JUEGO"] = new gui::Boton(posX, 400.f, 200.f, 50.f, "NUEVO JUEGO", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_JUEGO"] = new gui::Boton(300.f, 400.f, 200.f, 50.f, "NUEVO JUEGO", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_CARGAR"] = new gui::Boton(posX, 480.f, 200.f, 50.f, "CARGAR PARTIDA", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_CARGAR"] = new gui::Boton(300.f, 480.f, 200.f, 50.f, "CARGAR PARTIDA", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_OPCIONES"] = new gui::Boton(posX, 560.f, 200.f, 50.f, "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_OPCIONES"] = new gui::Boton(300.f, 560.f, 200.f, 50.f, "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_SALIR"] = new gui::Boton(posX, 640.f, 200.f, 50.f, "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_SALIR"] = new gui::Boton(300.f, 640.f, 200.f, 50.f, "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_EDITOR"] = new gui::Boton(posX, 800.f, 200.f, 50.f, "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_EDITOR"] = new gui::Boton(300.f, 800.f, 200.f, 50.f, "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------

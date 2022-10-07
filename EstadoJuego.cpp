@@ -47,7 +47,7 @@ void EstadoJuego::iniciarJugadores()
 
 void EstadoJuego::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 10, 10);
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 10, 10, "recursos/img/mapa/grass/floortileset.png");
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------

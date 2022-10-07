@@ -37,8 +37,11 @@ gui::Boton::Boton(float posX, float posY, float ancho, float alto, std::string t
     _boton.setOutlineColor(colorExteriorInactivo);
 
     _texto.setPosition(
+        _boton.getPosition().x + (_boton.getGlobalBounds().width / 2.f) - _texto.getGlobalBounds().width / 2.f, _boton.getPosition().y);
+    
+   /* _texto.setPosition(
         _boton.getPosition().x + (_boton.getGlobalBounds().width / 2.f) - _texto.getGlobalBounds().width / 2.f,
-        _boton.getPosition().y + (_boton.getGlobalBounds().height / 2.f) - _texto.getGlobalBounds().height);
+        _boton.getPosition().y + (_boton.getGlobalBounds().height / 2.f) - _texto.getGlobalBounds().height);*/
 }
 
 gui::Boton::~Boton()
@@ -150,7 +153,7 @@ void gui::Boton::renderizar(sf::RenderTarget& target)
 
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                                                                          DESPLEGABLE
+//                                                                LISTAS DESPLEGABLES
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /// --------------------------------- CONSTRUCTOR/DESTRUCTOR ----------------------------------------
@@ -262,4 +265,130 @@ void gui::ListaDesplegable::renderizar(sf::RenderTarget& target)
             i->renderizar(target);
         }
     }
+}
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                                                                    SELECTOR DE TEXTURAS
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/// --------------------------------- CONSTRUCTOR/DESTRUCTOR ----------------------------------------
+gui::SelectorTexturas::SelectorTexturas(float x, float y, float ancho, float alto, float tamanioCuadro, const sf::Texture* plantilla_textura, sf::Font& fuente, std::string texto)
+    : _ppsTeclasMax(1.f), _ppsTeclas(0.f)
+{
+    _tamanioCuadro = tamanioCuadro;
+    _activo = false;
+    _esconder = false;
+    float offset = 100.f;
+
+    _limites.setSize(sf::Vector2f(ancho, alto));
+    _limites.setPosition(x + offset, y);
+    _limites.setFillColor(sf::Color(50, 50, 50, 100));
+    _limites.setOutlineThickness(1.f);
+    _limites.setOutlineColor(sf::Color(255, 255, 255, 200));
+
+  _sheet.setTexture(*plantilla_textura);
+  _sheet.setPosition(x + offset, y);
+
+  if (_sheet.getGlobalBounds().width > _limites.getGlobalBounds().width)
+  {
+    _sheet.setTextureRect(sf::IntRect(0, 0, _limites.getGlobalBounds().width, _limites.getGlobalBounds().height));
+  }
+
+  if (_sheet.getGlobalBounds().height > _limites.getGlobalBounds().height)
+  {
+    _sheet.setTextureRect(sf::IntRect(0, 0, _limites.getGlobalBounds().width, _limites.getGlobalBounds().height));
+  }
+
+  _selector.setPosition(x + offset, y);
+  _selector.setSize(sf::Vector2f(tamanioCuadro, tamanioCuadro));
+  _selector.setFillColor(sf::Color::Transparent);
+  _selector.setOutlineThickness(1.f);
+  _selector.setOutlineColor(sf::Color::Red);
+
+  _rectTextura.width = static_cast<int>(tamanioCuadro);
+  _rectTextura.height = static_cast<int>(tamanioCuadro);
+
+  _botonEsconder = new gui::Boton(x, y, 50.f, 50.f, texto, 20, fuente, sf::Color(255, 255, 255,200), sf::Color(255, 255, 255, 250), sf::Color(255, 255, 255, 50), sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 250), sf::Color(20, 20, 20, 50));
+}
+
+gui::SelectorTexturas::~SelectorTexturas()
+{
+    delete _botonEsconder;
+}
+
+const bool& gui::SelectorTexturas::getActivo() const
+{
+    return _activo;
+}
+
+const sf::IntRect& gui::SelectorTexturas::getRectTextura() const
+{
+    return _rectTextura;
+}
+
+const bool gui::SelectorTexturas::getPpsTeclas()
+{
+    if (_ppsTeclas >= _ppsTeclasMax)
+    {
+        _ppsTeclas = 0.f;
+        return true;
+    }
+    return false;
+}
+
+void gui::SelectorTexturas::actualizarPpsTeclas(const float& DT)
+{
+    if (_ppsTeclas < _ppsTeclasMax)
+        _ppsTeclas += 10.f * DT;
+}
+
+void gui::SelectorTexturas::actualizar(const sf::Vector2i& posMouseVentana, const float& DT)
+{
+    actualizarPpsTeclas(DT);
+    _botonEsconder->actualizar(static_cast<sf::Vector2f>(posMouseVentana));
+
+    if (_botonEsconder->getClick() && getPpsTeclas())
+    {
+        if(_esconder)
+            _esconder = false;
+        else
+            _esconder = true;
+    }
+
+    if (!_esconder) 
+    {
+        if(_limites.getGlobalBounds().contains(static_cast<sf::Vector2f>(posMouseVentana)))
+            _activo = true;
+        else
+            _activo = false;
+
+
+        if (_activo)
+        {
+            _posMouseCuadro.x = (posMouseVentana.x - static_cast<int>(_limites.getPosition().x)) / static_cast<unsigned>(_tamanioCuadro);
+            _posMouseCuadro.y = (posMouseVentana.y - static_cast<int>(_limites.getPosition().y)) / static_cast<unsigned>(_tamanioCuadro);
+            _selector.setPosition(_limites.getPosition().x + _posMouseCuadro.x * _tamanioCuadro, _limites.getPosition().y + _posMouseCuadro.y * _tamanioCuadro);
+
+            _rectTextura.left = static_cast<int>(_selector.getPosition().x - _limites.getPosition().x);
+            _rectTextura.top = static_cast<int>(_selector.getPosition().y - _limites.getPosition().y);
+        }
+    }
+
+
+}
+
+void gui::SelectorTexturas::renderizar(sf::RenderTarget& target)
+{
+    if (!_esconder)
+    {
+        target.draw(_limites);
+        target.draw(_sheet);
+
+        if(_activo)
+            target.draw(_selector);
+    }
+
+    _botonEsconder->renderizar(target);
 }

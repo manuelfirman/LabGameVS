@@ -81,5 +81,39 @@ namespace gui
             void renderizar(sf::RenderTarget& target);
     };
 
+
+    class SelectorTexturas
+    {
+        private:
+            float _ppsTeclas;
+            const float _ppsTeclasMax;
+            
+            float _tamanioCuadro;
+            bool _activo;
+            bool _esconder;
+            gui::Boton* _botonEsconder;
+            sf::RectangleShape _limites;
+            sf::Sprite _sheet;
+            sf::RectangleShape _selector;
+            sf::Vector2u _posMouseCuadro;
+            sf::IntRect _rectTextura;
+
+
+
+        public:
+            SelectorTexturas(float x, float y, float ancho, float alto, float sizeCuadro, const sf::Texture* plantilla_textura, sf::Font& fuente, std::string texto);
+            ~SelectorTexturas();
+
+            // Accesorios
+            const bool& getActivo() const;
+            const sf::IntRect& getRectTextura() const;
+
+            const bool getPpsTeclas();
+            void actualizarPpsTeclas(const float& DT);
+
+            void actualizar(const sf::Vector2i& posMouseVentana, const float& DT);
+            void renderizar(sf::RenderTarget& target);
+    };
+
 }
 #endif // BOTON_H
