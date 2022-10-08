@@ -66,7 +66,7 @@ void EstadoJuego::iniciarJugadores()
 
 void EstadoJuego::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 15, 20, "recursos/img/mapa/grass/floortileset.png");
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 10, 10, "recursos/img/mapa/grass/floortileset.png");
 
     // cargando mapa desde archivo
     _tileMap->cargarDesdeArchivo("text.slmp");
@@ -99,7 +99,7 @@ EstadoJuego::~EstadoJuego()
 void EstadoJuego::actualizarVistaCam(const float& DT)
 {
     // seteando camara con jugador en el centro
-    _vistaCam.setCenter(player->getPosicionSprite());
+    _vistaCam.setCenter(std::floor(player->getPosicionSprite().x), std::floor(player->getPosicionSprite().y)); // floor para estabilizar el float en pixels 
 }
 
 void EstadoJuego::actualizarInput(const float& DT)
@@ -137,6 +137,12 @@ void EstadoJuego::actualizarBotonesPausa()
         finEstado();
 }
 
+void EstadoJuego::actualizarTileMap(const float& DT)
+{
+    _tileMap->actualizar();
+    _tileMap->checkColision(player);
+}
+
 void EstadoJuego::actualizar(const float& DT)
 {
     actualizarPosicionMouse(&_vistaCam);
@@ -150,6 +156,8 @@ void EstadoJuego::actualizar(const float& DT)
         actualizarInputJugador(DT);
 
         player->actualizar(DT);
+
+        actualizarTileMap(DT);
     }
     else // actualizar con pausa
     {

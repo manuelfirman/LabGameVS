@@ -30,6 +30,8 @@ private: // Atributos
     TileMap* _tileMap;
 
 
+
+
 private: // Metodos
     void renderizadoDiferido();
     void iniciarVistaCam();
@@ -49,6 +51,7 @@ public:
     void actualizarInput(const float& DT);
     void actualizarInputJugador(const float& DT);
     void actualizarBotonesPausa();
+    void actualizarTileMap(const float& DT);
     void actualizar(const float& DT);
     void renderizar(sf::RenderTarget* target = NULL);
 };

@@ -26,6 +26,16 @@ Tile::~Tile()
 {
 }
 
+const bool& Tile::getColision() const
+{
+	return _colision;
+}
+
+const sf::Vector2f& Tile::getPosicionTile() const
+{
+	return _tile.getPosition();
+}
+
 const std::string Tile::getTileString() const
 {
 	std::stringstream ss;

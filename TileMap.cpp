@@ -3,9 +3,9 @@
 
 void TileMap::limpiar()
 {
-	for (size_t x = 0; x < _tamanioMax.x; x++)
+	for (size_t x = 0; x < _tamanioMaxCuadros.x; x++)
 	{
-		for (size_t y = 0; y < _tamanioMax.x; y++)
+		for (size_t y = 0; y < _tamanioMaxCuadros.x; y++)
 		{
 			for (size_t z = 0; z < _capas; z++)
 			{
@@ -25,18 +25,20 @@ TileMap::TileMap(float tamanioCuadro, unsigned ancho, unsigned alto, std::string
 {
 	_tamanioCuadroF = tamanioCuadro;
 	_tamanioCuadroU = static_cast<unsigned>(_tamanioCuadroF);
-	_tamanioMax.x = ancho;
-	_tamanioMax.y = alto;
+	_tamanioMaxCuadros.x = ancho;
+	_tamanioMaxCuadros.y = alto;
+	_tamanioMaxMundo.x = static_cast<float>(ancho) * tamanioCuadro;
+	_tamanioMaxMundo.y = static_cast<float>(alto) * tamanioCuadro;
 	_capas = 1;
 	_archivoTextura = archivo_textura;
 
-	_mapa.resize(_tamanioMax.x, std::vector<std::vector<Tile*>>());
+	_mapa.resize(_tamanioMaxCuadros.x, std::vector<std::vector<Tile*>>());
 
-	for (size_t x = 0; x < _tamanioMax.x; x++) // pushea Tiles vacios
+	for (size_t x = 0; x < _tamanioMaxCuadros.x; x++) // pushea Tiles vacios
 	{
-		for (size_t y = 0; y < _tamanioMax.x; y++)
+		for (size_t y = 0; y < _tamanioMaxCuadros.x; y++)
 		{
-			_mapa[x].resize(_tamanioMax.y, std::vector<Tile*>());
+			_mapa[x].resize(_tamanioMaxCuadros.y, std::vector<Tile*>());
 		
 			for (size_t z = 0; z < _capas; z++)
 			{
@@ -47,6 +49,11 @@ TileMap::TileMap(float tamanioCuadro, unsigned ancho, unsigned alto, std::string
 	
 	if (!_texturaTile.loadFromFile(archivo_textura))
 		std::cout << "ERROR:TILEMAP::NO SE PUDO CARGAR PLANTILLA TEXTURA::" << archivo_textura << "\n";
+
+	_cajaColisiones.setSize(sf::Vector2f(tamanioCuadro, tamanioCuadro));
+	_cajaColisiones.setFillColor(sf::Color(255, 0, 0, 50));
+	_cajaColisiones.setOutlineColor(sf::Color::Red);
+	_cajaColisiones.setOutlineThickness(1.f);
 }
 
 TileMap::~TileMap()
@@ -62,8 +69,8 @@ const sf::Texture* TileMap::getTexturaTile() const
 void TileMap::agregarTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo)
 {
 	// Agrega un tile en la posicion del mouse si la matriz del mapa lo permite
-	if ((x < _tamanioMax.x) && (x >= 0) && 
-		(y < _tamanioMax.y) && (x >= 0) &&
+	if ((x < _tamanioMaxCuadros.x) && (x >= 0) && 
+		(y < _tamanioMaxCuadros.y) && (x >= 0) &&
 		(z <= _capas) && (z >= 0))
 	{
 		if (_mapa[x][y][z] == NULL)
@@ -78,8 +85,8 @@ void TileMap::agregarTile(const unsigned x, const unsigned y, const unsigned z, 
 void TileMap::removerTile(const unsigned x, const unsigned y, const unsigned z)
 {
 	// Quita un tile en la posicion del mouse si la matriz del mapa lo permite
-	if ((x < _tamanioMax.x) && (x >= 0) &&
-		(y < _tamanioMax.y) && (x >= 0) &&
+	if ((x < _tamanioMaxCuadros.x) && (x >= 0) &&
+		(y < _tamanioMaxCuadros.y) && (x >= 0) &&
 		(z <= _capas) && (z >= 0))
 	{
 		if (_mapa[x][y][z] != NULL)
@@ -116,14 +123,14 @@ void TileMap::guardarEnArchivo(const std::string nombre_archivo)
 	archivoOut.open(nombre_archivo);
 	if (archivoOut.is_open())
 	{
-		archivoOut << _tamanioMax.x << " " << _tamanioMax.y << "\n"
+		archivoOut << _tamanioMaxCuadros.x << " " << _tamanioMaxCuadros.y << "\n"
 				<< _tamanioCuadroU << "\n"
 				<< _capas << "\n"
 				<< _archivoTextura << "\n";
 
-		for (size_t x = 0; x < _tamanioMax.x; x++)
+		for (size_t x = 0; x < _tamanioMaxCuadros.x; x++)
 		{
-			for (size_t y = 0; y < _tamanioMax.x; y++)
+			for (size_t y = 0; y < _tamanioMaxCuadros.x; y++)
 			{
 				for (size_t z = 0; z < _capas; z++)
 				{
@@ -168,19 +175,19 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 		// Tiles
 		_tamanioCuadroF = static_cast<float>(tamanioCuadro);
 		_tamanioCuadroU = tamanioCuadro;
-		_tamanioMax.x = tamanio.x;
-		_tamanioMax.y = tamanio.y;
+		_tamanioMaxCuadros.x = tamanio.x;
+		_tamanioMaxCuadros.y = tamanio.y;
 		_capas = capas;
 		_archivoTextura = archivoTextura;
 
 		limpiar();
 
-		_mapa.resize(_tamanioMax.x, std::vector<std::vector<Tile*> >());
-		for (size_t x = 0; x < _tamanioMax.x; x++)
+		_mapa.resize(_tamanioMaxCuadros.x, std::vector<std::vector<Tile*> >());
+		for (size_t x = 0; x < _tamanioMaxCuadros.x; x++)
 		{
-			for (size_t y = 0; y < _tamanioMax.x; y++)
+			for (size_t y = 0; y < _tamanioMaxCuadros.x; y++)
 			{
-				_mapa[x].resize(_tamanioMax.y, std::vector<Tile*>());
+				_mapa[x].resize(_tamanioMaxCuadros.y, std::vector<Tile*>());
 
 				for (size_t z = 0; z < _capas; z++)
 				{
@@ -213,12 +220,29 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 	archivoIn.close();
 }
 
+void TileMap::checkColision(Entidades* entidad)
+{
+	// LIMITES MAPA
+		// Laterales
+	if(entidad->getPosicionSprite().x < 0.f)
+		entidad->setPosicion(0.f, entidad->getPosicionSprite().y);
+	else if(entidad->getPosicionSprite().x > _tamanioMaxMundo.x)
+		entidad->setPosicion(_tamanioMaxMundo.x, entidad->getPosicionSprite().y);
+		// Superior / Inferior
+	if(entidad->getPosicionSprite().y < 0.f)
+		entidad->setPosicion(entidad->getPosicionSprite().x, 0.f);
+	else if(entidad->getPosicionSprite().y > _tamanioMaxMundo.y)
+		entidad->setPosicion(entidad->getPosicionSprite().x, _tamanioMaxMundo.y);
+
+	
+}
+
 void TileMap::actualizar()
 {
 
 }
 
-void TileMap::renderizar(sf::RenderTarget& target)
+void TileMap::renderizar(sf::RenderTarget& target, Entidades* entidad)
 {
 
 	for (auto& x : _mapa)
@@ -227,8 +251,17 @@ void TileMap::renderizar(sf::RenderTarget& target)
 		{
 			for (auto* z : y) // for para las capas - pasa por Y y nos da el tile
 			{
-				if(z != nullptr) // no renderiza vacios
+				// no renderiza vacios
+				if (z != nullptr)
+				{
 					z->renderizar(target);
+				
+					if (z->getColision())
+					{
+						_cajaColisiones.setPosition(z->getPosicionTile());
+						target.draw(_cajaColisiones);
+					}
+				}
 			}
 		}
 	}
