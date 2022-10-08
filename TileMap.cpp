@@ -9,8 +9,12 @@ void TileMap::limpiar()
 		{
 			for (int z = 0; z < _Capas; z++)
 			{
-				delete _mapa[x][y][z]; // borra el anterior
-				_mapa[x][y][z] = NULL; // habilita de nuevo
+				for(int C = 0; C < _mapa[x][y][z].size(); C++)
+				{
+					delete _mapa[x][y][z][C]; // borra el anterior
+					_mapa[x][y][z][C] = NULL; // habilita de nuevo
+				}
+				_mapa[x][y][z].clear();
 			}
 			_mapa[x][y].clear();
 		}
@@ -24,7 +28,7 @@ void TileMap::limpiar()
 TileMap::TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_textura)
 {
 	_tamanioCuadroF = tamanioCuadro;
-	_tamanioCuadroI = static_cast<unsigned>(_tamanioCuadroF);
+	_tamanioCuadroI = static_cast<int>(_tamanioCuadroF);
 	_tamanioMaxCuadros.x = ancho;
 	_tamanioMaxCuadros.y = alto;
 	_tamanioMaxMundo.x = static_cast<float>(ancho) * tamanioCuadro;
@@ -38,17 +42,17 @@ TileMap::TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_t
 	_hastaY = 0;
 	_capa = 0;
 
-	_mapa.resize(_tamanioMaxCuadros.x, std::vector<std::vector<Tile*>>());
-
-	for (size_t x = 0; x < _tamanioMaxCuadros.x; x++) // pushea Tiles vacios
+	_mapa.resize(_tamanioMaxCuadros.x, std::vector<std::vector<std::vector<Tile*> > >());
+	for (int x = 0; x < _tamanioMaxCuadros.x; x++)
 	{
-		for (size_t y = 0; y < _tamanioMaxCuadros.x; y++)
+		for (int y = 0; y < _tamanioMaxCuadros.y; y++)
 		{
-			_mapa[x].resize(_tamanioMaxCuadros.y, std::vector<Tile*>());
+			_mapa[x].resize(_tamanioMaxCuadros.y, std::vector<std::vector<Tile*> >());
 		
-			for (size_t z = 0; z < _Capas; z++)
+			for (int z = 0; z < _Capas; z++)
 			{
-				_mapa[x][y].resize(_Capas, NULL);
+				_mapa[x][y].resize(_Capas, std::vector<Tile*>());
+				
 			}
 		}
 	}
@@ -79,12 +83,12 @@ void TileMap::agregarTile(const int x, const int y, const int z, const sf::IntRe
 		(y < _tamanioMaxCuadros.y) && (x >= 0) &&
 		(z <= _Capas) && (z >= 0))
 	{
-		if (_mapa[x][y][z] == NULL)
-		{
+		//if (_mapa[x][y][z] == NULL)
+		//{
 			// se puede agregar tile
-			_mapa[x][y][z] = new Tile(x, y, _tamanioCuadroF, _texturaTile, rect_textura, colision, tipo);
+			_mapa[x][y][z].push_back (new Tile(x, y, _tamanioCuadroF, _texturaTile, rect_textura, colision, tipo));
 			std::cout << "DEBUG: TILE AGREGADO" << std::endl;
-		}
+		//}
 	}
 }
 
@@ -95,11 +99,11 @@ void TileMap::removerTile(const int x, const int y, const int z)
 		(y < _tamanioMaxCuadros.y) && (x >= 0) &&
 		(z <= _Capas) && (z >= 0))
 	{
-		if (_mapa[x][y][z] != NULL)
+		if (!_mapa[x][y][z].empty())
 		{
 			// se puede quitar el tile
-			delete _mapa[x][y][z];
-			_mapa[x][y][z] = NULL;
+			delete _mapa[x][y][z][_mapa[x][y][z].size() - 1];
+			_mapa[x][y][z].pop_back();
 
 			std::cout << "DEBUG: TILE REMOVIDO" << std::endl;
 		}
@@ -136,12 +140,18 @@ void TileMap::guardarEnArchivo(const std::string nombre_archivo)
 
 		for (int x = 0; x < _tamanioMaxCuadros.x; x++)
 		{
-			for (int y = 0; y < _tamanioMaxCuadros.x; y++)
+			for (int y = 0; y < _tamanioMaxCuadros.y; y++)
 			{
 				for (int z = 0; z < _Capas; z++)
 				{
-					if(_mapa[x][y][z]) // si no apunta a null
-					archivoOut << x << " " << y << " " << z << " " << _mapa[x][y][z]->getTileString() << " "; // NO GUARDAR EL ULTIMO ESPACIO
+					if(!_mapa[x][y][z].empty()) // si no esta vacio
+					{
+						for (int C = 0; C < _mapa[x][y][z].size(); C++)
+						{
+							archivoOut << x << " " << y << " " << z << " " << _mapa[x][y][z][C]->getTileString() << " "; // NO GUARDAR EL ULTIMO ESPACIO
+
+						}
+					}
 				}
 			}
 		}
@@ -188,16 +198,16 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 
 		limpiar();
 
-		_mapa.resize(_tamanioMaxCuadros.x, std::vector<std::vector<Tile*> >());
+		_mapa.resize(_tamanioMaxCuadros.x, std::vector< std::vector< std::vector<Tile*> > >());
 		for (int x = 0; x < _tamanioMaxCuadros.x; x++)
 		{
-			for (int y = 0; y < _tamanioMaxCuadros.x; y++)
+			for (int y = 0; y < _tamanioMaxCuadros.y; y++)
 			{
-				_mapa[x].resize(_tamanioMaxCuadros.y, std::vector<Tile*>());
+				_mapa[x].resize(_tamanioMaxCuadros.y, std::vector< std::vector<Tile*> >());
 
 				for (int z = 0; z < _Capas; z++)
 				{
-					_mapa[x][y].resize(_Capas, NULL);
+					_mapa[x][y].resize(_Capas, std::vector<Tile*>());
 				}
 			}
 		}
@@ -209,13 +219,13 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 		// Carga todos los tiles
 		while (archivoIn >> x >> y >> z >> trX >> trY >> colision >> tipo)
 		{
-			_mapa[x][y][z] = new Tile(
+			_mapa[x][y][z].push_back(new Tile(
 				x, y, 
 				_tamanioCuadroF, 
 				_texturaTile, 
 				sf::IntRect(trX, trY, _tamanioCuadroI, _tamanioCuadroI), 
 				colision, 
-				tipo);
+				tipo));
 		}
 	}
 	else
@@ -278,17 +288,20 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 		_hastaY = 0;
 	else if (_hastaY > _tamanioMaxCuadros.y)
 		_hastaY = _tamanioMaxCuadros.y;
+
+
 	for (int x = _desdeX; x < _hastaX; x++)
 	{
 		for (int y = _desdeY; y < _hastaY; y++)
 		{
-			
+			for(int C = 0; _mapa[x][y][_capa].size(); C++)
+			{
 				sf::FloatRect limitesJugador = entidad->getLimites();
-				sf::FloatRect limitesMuros = _mapa[x][y][_capa]->getLimites();
+				sf::FloatRect limitesMuros = _mapa[x][y][_capa][C]->getLimites();
 				sf::FloatRect limitesPosSiguiente = entidad->getLimitesPosSiguiente(DT);
 
-				if (this->_mapa[x][y][_capa]->getColision() &&
-					this->_mapa[x][y][_capa]->interseccion(limitesPosSiguiente)
+				if (this->_mapa[x][y][_capa][C]->getColision() &&
+					this->_mapa[x][y][_capa][C]->interseccion(limitesPosSiguiente)
 					)
 				{
 					//Bottom collision
@@ -334,7 +347,7 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 						entidad->detenerX();
 						entidad->setPosicion(limitesMuros.left + limitesMuros.width, limitesJugador.top);
 					}
-				
+				}
 			}
 		}
 	}
@@ -352,28 +365,28 @@ void TileMap::renderizar(sf::RenderTarget& target, Entidades* entidad)
 	{
 		_capa = 0;
 
-		_desdeX = entidad->getCuadroActual(_tamanioCuadroI).x - 15;
+		_desdeX = entidad->getCuadroActual(_tamanioCuadroI).x - 4;
 		if (_desdeX < 0)
 			_desdeX = 0;
 		else if (_desdeX > _tamanioMaxCuadros.x)
 			_desdeX = _tamanioMaxCuadros.x;
 
-		_hastaX = entidad->getCuadroActual(_tamanioCuadroI).x + 16;
+		_hastaX = entidad->getCuadroActual(_tamanioCuadroI).x + 5;
 		if (_hastaX < 0)
 			_hastaX = 0;
 		else if (_hastaX > _tamanioMaxCuadros.x)
 			_hastaX = _tamanioMaxCuadros.x;
 
-		_desdeY = entidad->getCuadroActual(_tamanioCuadroI).y - 8;
+		_desdeY = entidad->getCuadroActual(_tamanioCuadroI).y - 3;
 		if (_desdeY < 0)
 			_desdeY = 0;
-		else if (_desdeY > _tamanioMaxCuadros.x)
+		else if (_desdeY > _tamanioMaxCuadros.y)
 			_desdeY = _tamanioMaxCuadros.y;
 
-		_hastaY = entidad->getCuadroActual(_tamanioCuadroI).y + 9;
+		_hastaY = entidad->getCuadroActual(_tamanioCuadroI).y + 5;
 		if (_hastaY < 0)
 			_hastaY = 0;
-		else if (_hastaY > _tamanioMaxCuadros.x)
+		else if (_hastaY > _tamanioMaxCuadros.y)
 			_hastaY = _tamanioMaxCuadros.y;
 
 		//std::cout << _desdeX << " " << _hastaX << "\n";
@@ -383,11 +396,15 @@ void TileMap::renderizar(sf::RenderTarget& target, Entidades* entidad)
 		{
 			for (int y = _desdeY; y < _hastaY; y++)
 			{
-				_mapa[x][y][_capa]->renderizar(target);
-				if (_mapa[x][y][_capa]->getColision())
+				for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
 				{
-					_cajaColisiones.setPosition(_mapa[x][y][_capa]->getPosicionTile());
-					target.draw(_cajaColisiones);
+					_mapa[x][y][_capa][C]->renderizar(target);
+					
+					if (_mapa[x][y][_capa][C]->getColision())
+					{
+						_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
+						target.draw(_cajaColisiones);
+					}
 				}
 			}
 		}
@@ -396,20 +413,20 @@ void TileMap::renderizar(sf::RenderTarget& target, Entidades* entidad)
 	{
 		for (auto& x : _mapa)
 		{
-			for(auto &y : x) // x es una matriz
+			for(auto& y : x) // x es una matriz
 			{
-				for (auto* z : y) // for para las capas - pasa por Y y nos da el tile
+				for (auto& z : y) // for para las capas - pasa por Y y nos da el tile
 				{
-					// no renderiza vacios
-					if (z != nullptr)
+					for (auto* C : z) 
 					{
-						z->renderizar(target);
+						C->renderizar(target);
 					
-						if (z->getColision())
+						if (C->getColision())
 						{
-							_cajaColisiones.setPosition(z->getPosicionTile());
+							_cajaColisiones.setPosition(C->getPosicionTile());
 							target.draw(_cajaColisiones);
 						}
+						
 					}
 				}
 			}

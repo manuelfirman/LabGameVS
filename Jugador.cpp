@@ -55,38 +55,41 @@ void Jugador::actualizarAtaque(const float& DT)
         _atacando = true;
     }
 
-    if (_atacando) {
-        if (_movimiento->getEstadoMov(QUIETO))
-        {
-            if (_animacion->play("ATAQUE_X", DT, true)) 
-                _atacando = false;
-        }
-        else if (_movimiento->getEstadoMov(MOV_DERECHA) || _movimiento->getEstadoMov(MOV_ARRIBA))
-        {
-            _sprite.setOrigin(_sprite.getGlobalBounds().width, 0.f);
-            _sprite.setScale(-1.f, 1.f);
-            if(_animacion->play("ATAQUE_X", DT, true))
-                _atacando = false;
-        }
-        else if (_movimiento->getEstadoMov(MOV_IZQUIERDA) || _movimiento->getEstadoMov(MOV_ARRIBA))
-        {
-            _sprite.setOrigin(0.f, 0.f);
-            _sprite.setScale(1.f, 1.f);
-            if(_animacion->play("ATAQUE_X", DT, true))
-                _atacando = false;
-        }
-        else if (_movimiento->getEstadoMov(MOV_ABAJO))
-        {
-            if(_animacion->play("ATAQUE_ABAJO", DT, true))
-                _atacando = false;
-        }
-        else if (_movimiento->getEstadoMov(MOV_ARRIBA))
-        {
-            if(_animacion->play("ATAQUE_ARRIBA", DT, true))
-                _atacando = false;
-        }
+       
 
-    }
+
+    //if (_atacando) {
+    //    if (_movimiento->getEstadoMov(QUIETO))
+    //    {
+    //        if (_animacion->play("ATAQUE_X", DT, true)) 
+    //            _atacando = false;
+    //    }
+    //    else if (_movimiento->getEstadoMov(MOV_DERECHA) || _movimiento->getEstadoMov(MOV_ARRIBA))
+    //    {
+    //        _sprite.setOrigin(_sprite.getGlobalBounds().width, 0.f);
+    //        _sprite.setScale(-1.f, 1.f);
+    //        if(_animacion->play("ATAQUE_X", DT, true))
+    //            _atacando = false;
+    //    }
+    //    else if (_movimiento->getEstadoMov(MOV_IZQUIERDA) || _movimiento->getEstadoMov(MOV_ARRIBA))
+    //    {
+    //        _sprite.setOrigin(0.f, 0.f);
+    //        _sprite.setScale(1.f, 1.f);
+    //        if(_animacion->play("ATAQUE_X", DT, true))
+    //            _atacando = false;
+    //    }
+    //    else if (_movimiento->getEstadoMov(MOV_ABAJO))
+    //    {
+    //        if(_animacion->play("ATAQUE_ABAJO", DT, true))
+    //            _atacando = false;
+    //    }
+    //    else if (_movimiento->getEstadoMov(MOV_ARRIBA))
+    //    {
+    //        if(_animacion->play("ATAQUE_ARRIBA", DT, true))
+    //            _atacando = false;
+    //    }
+
+    //}
 
     //    if(_atacando){
     //        if(_movimiento->getEstadoMov(MOV_ARRIBA)){
@@ -112,6 +115,23 @@ void Jugador::actualizarAtaque(const float& DT)
 void Jugador::actualizarAnimacion(const float& DT)
 {
    // PELADO
+    if (_atacando)
+    {
+        if (_sprite.getScale().x > 0.f)
+        {
+            _sprite.setOrigin(0.f, 0.f);
+        }
+        else
+        {
+            _sprite.setOrigin(_sprite.getGlobalBounds().width, 0.f);
+        }
+        
+        
+        if (_animacion->play("ATAQUE_X", DT, true))
+            _atacando = false;
+    }
+
+
    if (_movimiento->getEstadoMov(QUIETO))
         _animacion->play("QUIETO", DT);
    else if (_movimiento->getEstadoMov(MOV_DERECHA))

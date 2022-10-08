@@ -13,7 +13,7 @@ class TileMap
 		int _tamanioCuadroI;
 		int _Capas;
 		sf::Vector2i _tamanioMaxCuadros;
-		std::vector<std::vector<std::vector<Tile*> > > _mapa;
+		std::vector <std::vector < std::vector < std::vector <Tile*> > > > _mapa; // si, son 4 xD
 		std::string _archivoTextura;
 		sf::Texture _texturaTile;
 

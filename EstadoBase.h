@@ -19,11 +19,11 @@ class DatosEstado
 
         DatosEstado()
         {
-           /* tamanioCuadro = 0;
+            tamanioCuadro = 0;
             ventana = NULL;
             opcionesGraficas = NULL;
             teclasSoportadas = NULL;
-            estado = NULL;*/
+            estado = NULL;
         };
 };
 

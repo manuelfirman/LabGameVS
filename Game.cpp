@@ -104,17 +104,21 @@ void Game::actualizar()
 {
     actualizarEventosSFML();
 
-    /// actualizar si la pila no esta vacia y la ventana esta en foco ( && _ventana->hasFocus() )
+    /// actualizar si la pila no esta vacia y la ventana esta en foco
     if (!_estado.empty()) {
-        _estado.top()->actualizar(_DT);
-
-        if (_estado.top()->getSalir())
+        if (_ventana->hasFocus())
         {
-            _estado.top()->finEstado();
-            delete _estado.top(); // libera memoria
-            _estado.pop(); // saca puntero
+            _estado.top()->actualizar(_DT);
+
+            if (_estado.top()->getSalir())
+            {
+                _estado.top()->finEstado();
+                delete _estado.top(); // libera memoria
+                _estado.pop(); // saca puntero
+            }
         }
-    } /// si la pila esta vacia, cierra ventana
+    } 
+    /// si la pila esta vacia, cierra ventana
     else {
         finAplicacion();
         _ventana->close();
