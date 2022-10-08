@@ -15,6 +15,7 @@ private: // Metodos
 protected: // Atributos
     sf::Sprite _sprite;
 
+
     Movimiento* _movimiento;
     Animacion* _animacion;
     Hitbox* _hitbox;
@@ -34,12 +35,17 @@ public:
 
     // Getters
     virtual const sf::Vector2f& getPosicionSprite() const;
-    const sf::FloatRect& getLimites() const;
+    virtual const sf::Vector2u getCuadroActual(const unsigned tamanioCuadroU) const;
+    virtual const sf::FloatRect& getLimites() const;
+    virtual const sf::FloatRect& getLimitesPosSiguiente(const float& DT) const;
 
     // Setters
     virtual void setPosicion(const float x, const float y);
 
     /// Funciones (Overriders)
+    void detenerXY();
+    void detenerX();
+    void detenerY();
     virtual void mover(const float x, const float y, const float& DT);
 
     virtual void actualizar(const float& DT) = 0;

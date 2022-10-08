@@ -140,7 +140,7 @@ void EstadoJuego::actualizarBotonesPausa()
 void EstadoJuego::actualizarTileMap(const float& DT)
 {
     _tileMap->actualizar();
-    _tileMap->checkColision(player);
+    _tileMap->checkColision(player, DT);
 }
 
 void EstadoJuego::actualizar(const float& DT)
@@ -178,7 +178,7 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
 
     // TODO SE RENDERIZA A TRAVES DEL LIENZO
     _renderTextura.setView(_vistaCam); // con la vista seteada
-    _tileMap->renderizar(_renderTextura);
+    _tileMap->renderizar(_renderTextura, player);
 
     player->renderizar(_renderTextura);
 

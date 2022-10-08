@@ -21,6 +21,9 @@ public:
 
     const bool getEstadoMov(const int estado) const;
 
+    void detenerXY();
+    void detenerX();
+    void detenerY();
     void mover(const float dir_x, const float dir_y, const float& DT);
     void actualizar(const float& DT);
 

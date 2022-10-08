@@ -9,6 +9,11 @@ Hitbox::Hitbox(sf::Sprite& sprite, float x, float y, float ancho, float alto)
     _hitbox.setFillColor(sf::Color::Transparent);
     _hitbox.setOutlineThickness(1.f);
     _hitbox.setOutlineColor(sf::Color::Green);
+
+    _posicionSiguiente.left = 0.f;
+    _posicionSiguiente.top = 0.f;
+    _posicionSiguiente.width = ancho;
+    _posicionSiguiente.height = alto;
 }
 
 Hitbox::~Hitbox()
@@ -36,6 +41,13 @@ const sf::Vector2f& Hitbox::getPosicion() const
 const sf::FloatRect& Hitbox::getLimites() const
 {
     return _sprite.getGlobalBounds();
+}
+
+const sf::FloatRect& Hitbox::getPosicionSiguiente(const sf::Vector2f& velocidad)
+{
+    _posicionSiguiente.left = _hitbox.getPosition().x + velocidad.x; // posicion actual + donde queda luego de mover el siguiente frame
+    _posicionSiguiente.top = _hitbox.getPosition().y + velocidad.y;
+    return _posicionSiguiente;
 }
 
 

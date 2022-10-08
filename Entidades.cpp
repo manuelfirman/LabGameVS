@@ -54,12 +54,30 @@ const sf::Vector2f& Entidades::getPosicionSprite() const
     return _sprite.getPosition();
 }
 
+const sf::Vector2u Entidades::getCuadroActual(const unsigned tamanioCuadroU) const
+{
+    if(_hitbox)
+        return sf::Vector2u(static_cast<unsigned>(_hitbox->getPosicion().x) / tamanioCuadroU, static_cast<unsigned>(_hitbox->getPosicion().y) / tamanioCuadroU);
+        
+    return sf::Vector2u(static_cast<unsigned>(_sprite.getPosition().x) / tamanioCuadroU, static_cast<unsigned>(_sprite.getPosition().y) / tamanioCuadroU);
+
+}
+
 const sf::FloatRect& Entidades::getLimites() const
 {
     if(_hitbox)
         return _hitbox->getLimites();
     
     return _sprite.getGlobalBounds();
+}
+
+const sf::FloatRect& Entidades::getLimitesPosSiguiente(const float& DT) const
+{
+    if (_hitbox && _movimiento)
+    {
+        return _hitbox->getPosicionSiguiente(_movimiento->getVelocidad() * DT);
+    }
+    return sf::FloatRect();
 }
 
 // 
@@ -69,6 +87,24 @@ void Entidades::setPosicion(const float x, const float y)
         _hitbox->setPosicion(x, y);
     else
         _sprite.setPosition(x, y);
+}
+
+void Entidades::detenerXY()
+{
+    if(_movimiento)
+        _movimiento->detenerXY();
+}
+
+void Entidades::detenerX()
+{
+    if (_movimiento)
+        _movimiento->detenerX();
+}
+
+void Entidades::detenerY()
+{
+    if (_movimiento)
+        _movimiento->detenerY();
 }
 
 void Entidades::mover(const float dir_x, const float dir_y, const float& DT)

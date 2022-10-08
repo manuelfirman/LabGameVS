@@ -6,6 +6,7 @@ class Hitbox
 private:
     sf::Sprite& _sprite;
     sf::RectangleShape _hitbox;
+    sf::FloatRect _posicionSiguiente;
     float _offsetX;
     float _offsetY;
 
@@ -20,6 +21,7 @@ public:
     // Getters
     const sf::Vector2f& getPosicion() const;
     const sf::FloatRect& getLimites() const;
+    const sf::FloatRect& getPosicionSiguiente(const sf::Vector2f& velocidad);
 
     bool interseccion(const sf::FloatRect& frect);
     void actualizar();

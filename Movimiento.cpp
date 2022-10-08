@@ -58,6 +58,25 @@ const bool Movimiento::getEstadoMov(const int estado) const
 
 }
 
+void Movimiento::detenerXY()
+{
+    // detiene en X e Y
+    _velocidad.x = 0.f;
+    _velocidad.y = 0.f;
+}
+
+void Movimiento::detenerX()
+{
+    // detiene en X
+    _velocidad.x = 0.f;
+}
+
+void Movimiento::detenerY()
+{
+    // detiene en Y
+    _velocidad.y = 0.f;
+}
+
 void Movimiento::mover(const float dir_x, const float dir_y, const float& DT)
 {
     _velocidad.x += _aceleracion * dir_x; /// aceleracion x

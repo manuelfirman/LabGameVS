@@ -19,7 +19,8 @@ class Tile
 
 		const bool& getColision() const;
 		const sf::Vector2f& getPosicionTile() const;
-
+		const sf::FloatRect getLimites() const;
+		const bool interseccion(const sf::FloatRect limites) const;
 		const std::string getTileString() const;
 
 		void actualizar();

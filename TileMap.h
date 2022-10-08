@@ -11,7 +11,7 @@ class TileMap
 	private:
 		float _tamanioCuadroF;
 		unsigned _tamanioCuadroU;
-		unsigned _capas;
+		unsigned _Capas;
 		sf::Vector2u _tamanioMaxCuadros;
 		std::vector<std::vector<std::vector<Tile*> > > _mapa;
 		std::string _archivoTextura;
@@ -20,6 +20,13 @@ class TileMap
 		sf::Vector2f _tamanioMaxMundo;
 
 		sf::RectangleShape _cajaColisiones;
+
+		// Eliminacion de tiles
+		int _desdeX;
+		int _hastaX;
+		int _desdeY;
+		int _hastaY;
+		int _capa;
 
 	private:
 		void limpiar();
@@ -38,7 +45,7 @@ class TileMap
 		void guardarEnArchivo(const std::string nombre_archivo);
 		void cargarDesdeArchivo(const std::string nombre_archivo);
 
-		void checkColision(Entidades* entidad);
+		void checkColision(Entidades* entidad, const float& DT);
 		
 		// Actualizar - Renderizar
 		void actualizar();

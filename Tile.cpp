@@ -36,6 +36,16 @@ const sf::Vector2f& Tile::getPosicionTile() const
 	return _tile.getPosition();
 }
 
+const sf::FloatRect Tile::getLimites() const
+{
+	return _tile.getGlobalBounds();
+}
+
+const bool Tile::interseccion(const sf::FloatRect limites) const
+{
+	return _tile.getGlobalBounds().intersects(limites);
+}
+
 const std::string Tile::getTileString() const
 {
 	std::stringstream ss;
