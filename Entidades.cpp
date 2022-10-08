@@ -54,16 +54,16 @@ const sf::Vector2f& Entidades::getPosicionSprite() const
     return _sprite.getPosition();
 }
 
-const sf::Vector2u Entidades::getCuadroActual(const unsigned tamanioCuadroU) const
+const sf::Vector2i Entidades::getCuadroActual(const int tamanioCuadro) const
 {
     if(_hitbox)
-        return sf::Vector2u(static_cast<unsigned>(_hitbox->getPosicion().x) / tamanioCuadroU, static_cast<unsigned>(_hitbox->getPosicion().y) / tamanioCuadroU);
+        return sf::Vector2i(static_cast<int>(_hitbox->getPosicion().x) / tamanioCuadro, static_cast<int>(_hitbox->getPosicion().y) / tamanioCuadro);
         
-    return sf::Vector2u(static_cast<unsigned>(_sprite.getPosition().x) / tamanioCuadroU, static_cast<unsigned>(_sprite.getPosition().y) / tamanioCuadroU);
+    return sf::Vector2i(static_cast<int>(_sprite.getPosition().x) / tamanioCuadro, static_cast<int>(_sprite.getPosition().y) / tamanioCuadro);
 
 }
 
-const sf::FloatRect& Entidades::getLimites() const
+const sf::FloatRect Entidades::getLimites() const
 {
     return _hitbox->getLimites();
 }
@@ -108,8 +108,8 @@ void Entidades::mover(const float dir_x, const float dir_y, const float& DT)
 {
     if (this->_movimiento) {
         // Recibe direcciones (x y)
-        _movimiento->mover(dir_x, dir_y, DT); // setea velocidad
     }
+        _movimiento->mover(dir_x, dir_y, DT); // setea velocidad
 }
 
 

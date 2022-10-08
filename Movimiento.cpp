@@ -54,8 +54,6 @@ const bool Movimiento::getEstadoMov(const int estado) const
         return false;
         break;
     }
-
-
 }
 
 void Movimiento::detenerXY()
@@ -79,9 +77,8 @@ void Movimiento::detenerY()
 
 void Movimiento::mover(const float dir_x, const float dir_y, const float& DT)
 {
-    _velocidad.x += _aceleracion * dir_x; /// aceleracion x
-    _velocidad.y += _aceleracion * dir_y; /// aceleracion y
-
+    _velocidad.x += _aceleracion * dir_x * DT; /// aceleracion x
+    _velocidad.y += _aceleracion * dir_y * DT; /// aceleracion y
 }
 
 /// --------------------------------- ACTUALIZAR ----------------------------------------
@@ -93,7 +90,7 @@ void Movimiento::actualizar(const float& DT)
             _velocidad.x = _velocidadMax;
         }
         /// Desaceleracion Derecha
-        _velocidad.x -= _desaceleracion;
+        _velocidad.x -= _desaceleracion * DT;
 
         if (_velocidad.x < 0.f) {
             _velocidad.x = 0.f; // Detener
@@ -106,7 +103,7 @@ void Movimiento::actualizar(const float& DT)
             _velocidad.x = -_velocidadMax;
         }
         /// Desaceleracion Izquierda
-        _velocidad.x += _desaceleracion;
+        _velocidad.x += _desaceleracion * DT;
 
         if (_velocidad.x > 0.f) {
             _velocidad.x = 0.f; // Detener
@@ -119,7 +116,7 @@ void Movimiento::actualizar(const float& DT)
             _velocidad.y = _velocidadMax;
         }
         /// Desaceleracion hacia abajo
-        _velocidad.y -= _desaceleracion;
+        _velocidad.y -= _desaceleracion * DT;
 
         if (_velocidad.y < 0.f) {
             _velocidad.y = 0.f; // Detener
@@ -132,7 +129,7 @@ void Movimiento::actualizar(const float& DT)
             _velocidad.y = -_velocidadMax;
         }
         // Desaceleracion hacia arriba
-        _velocidad.y += _desaceleracion;
+        _velocidad.y += _desaceleracion * DT;
 
         if (_velocidad.y > 0.f) {
             _velocidad.y = 0.f;

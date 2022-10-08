@@ -12,12 +12,9 @@ void EstadoJuego::renderizadoDiferido()
 /// --------------------- INICIALIZACIONES --------------------------
 void EstadoJuego::iniciarVistaCam()
 {
+    _vistaCam.setSize(static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width), static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height));
 
-    // TODO: hacer static cast
-
-    _vistaCam.setSize(sf::Vector2f(_datosEstado->opcionesGraficas->_resolucion.width, _datosEstado->opcionesGraficas->_resolucion.height));
-
-    _vistaCam.setCenter(sf::Vector2f(_datosEstado->opcionesGraficas->_resolucion.width / 2.f, _datosEstado->opcionesGraficas->_resolucion.height / 2.f));
+    _vistaCam.setCenter(_datosEstado->opcionesGraficas->_resolucion.width / 2.f, _datosEstado->opcionesGraficas->_resolucion.height / 2.f);
 }
 
 void EstadoJuego::iniciarFuentes()
@@ -83,8 +80,8 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarTexturas();
     this->iniciarMenuPausa();
 
-    this->iniciarJugadores();
     this->iniciarTileMap();
+    this->iniciarJugadores();
 }
 
 EstadoJuego::~EstadoJuego()

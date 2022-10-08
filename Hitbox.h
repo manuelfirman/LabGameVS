@@ -20,7 +20,7 @@ public:
 
     // Getters
     const sf::Vector2f& getPosicion() const;
-    const sf::FloatRect& getLimites() const;
+    const sf::FloatRect getLimites() const;
     const sf::FloatRect& getPosicionSiguiente(const sf::Vector2f& velocidad);
 
     bool interseccion(const sf::FloatRect& frect);

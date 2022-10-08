@@ -7,7 +7,7 @@ Tile::Tile()
 	_tipo = 0;
 }
 
-Tile::Tile(unsigned cuadro_x, unsigned cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision, short tipo)
+Tile::Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision, short tipo)
 {
 	_tile.setSize(sf::Vector2f(tamanioCuadroF, tamanioCuadroF));
 	_tile.setFillColor(sf::Color::White);

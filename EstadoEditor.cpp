@@ -14,7 +14,7 @@ void EstadoEditor::iniciarVariables()
 
 void EstadoEditor::iniciarVista()
 {
-    _vista.setSize(sf::Vector2f(_datosEstado->opcionesGraficas->_resolucion.width, _datosEstado->opcionesGraficas->_resolucion.height));
+    _vista.setSize(sf::Vector2f(static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width), static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height)));
     _vista.setCenter(_datosEstado->opcionesGraficas->_resolucion.width / 2.f, _datosEstado->opcionesGraficas->_resolucion.height / 2.f);
 }
 

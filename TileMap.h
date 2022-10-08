@@ -10,8 +10,8 @@ class TileMap
 {
 	private:
 		float _tamanioCuadroF;
-		unsigned _tamanioCuadroU;
-		unsigned _Capas;
+		int _tamanioCuadroI;
+		int _Capas;
 		sf::Vector2i _tamanioMaxCuadros;
 		std::vector<std::vector<std::vector<Tile*> > > _mapa;
 		std::string _archivoTextura;
@@ -39,8 +39,8 @@ class TileMap
 		const sf::Texture* getTexturaTile() const;
 
 		// Metodos
-		void agregarTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo);
-		void removerTile(const unsigned x, const unsigned y, const unsigned z);
+		void agregarTile(const int x, const int y, const int z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo);
+		void removerTile(const int x, const int y, const int z);
 
 		void guardarEnArchivo(const std::string nombre_archivo);
 		void cargarDesdeArchivo(const std::string nombre_archivo);

@@ -3,11 +3,11 @@
 
 void TileMap::limpiar()
 {
-	for (size_t x = 0; x < _tamanioMaxCuadros.x; x++)
+	for (int x = 0; x < _tamanioMaxCuadros.x; x++)
 	{
-		for (size_t y = 0; y < _tamanioMaxCuadros.x; y++)
+		for (int y = 0; y < _tamanioMaxCuadros.x; y++)
 		{
-			for (size_t z = 0; z < _Capas; z++)
+			for (int z = 0; z < _Capas; z++)
 			{
 				delete _mapa[x][y][z]; // borra el anterior
 				_mapa[x][y][z] = NULL; // habilita de nuevo
@@ -24,7 +24,7 @@ void TileMap::limpiar()
 TileMap::TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_textura)
 {
 	_tamanioCuadroF = tamanioCuadro;
-	_tamanioCuadroU = static_cast<unsigned>(_tamanioCuadroF);
+	_tamanioCuadroI = static_cast<unsigned>(_tamanioCuadroF);
 	_tamanioMaxCuadros.x = ancho;
 	_tamanioMaxCuadros.y = alto;
 	_tamanioMaxMundo.x = static_cast<float>(ancho) * tamanioCuadro;
@@ -59,7 +59,7 @@ TileMap::TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_t
 	_cajaColisiones.setSize(sf::Vector2f(tamanioCuadro, tamanioCuadro));
 	_cajaColisiones.setFillColor(sf::Color(255, 0, 0, 50));
 	_cajaColisiones.setOutlineColor(sf::Color::Red);
-	_cajaColisiones.setOutlineThickness(-1.f);
+	_cajaColisiones.setOutlineThickness(1.f);
 }
 
 TileMap::~TileMap()
@@ -72,7 +72,7 @@ const sf::Texture* TileMap::getTexturaTile() const
 	return &_texturaTile;
 }
 
-void TileMap::agregarTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo)
+void TileMap::agregarTile(const int x, const int y, const int z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo)
 {
 	// Agrega un tile en la posicion del mouse si la matriz del mapa lo permite
 	if ((x < _tamanioMaxCuadros.x) && (x >= 0) && 
@@ -88,7 +88,7 @@ void TileMap::agregarTile(const unsigned x, const unsigned y, const unsigned z, 
 	}
 }
 
-void TileMap::removerTile(const unsigned x, const unsigned y, const unsigned z)
+void TileMap::removerTile(const int x, const int y, const int z)
 {
 	// Quita un tile en la posicion del mouse si la matriz del mapa lo permite
 	if ((x < _tamanioMaxCuadros.x) && (x >= 0) &&
@@ -130,15 +130,15 @@ void TileMap::guardarEnArchivo(const std::string nombre_archivo)
 	if (archivoOut.is_open())
 	{
 		archivoOut << _tamanioMaxCuadros.x << " " << _tamanioMaxCuadros.y << "\n"
-				<< _tamanioCuadroU << "\n"
+				<< _tamanioCuadroI << "\n"
 				<< _Capas << "\n"
 				<< _archivoTextura << "\n";
 
-		for (size_t x = 0; x < _tamanioMaxCuadros.x; x++)
+		for (int x = 0; x < _tamanioMaxCuadros.x; x++)
 		{
-			for (size_t y = 0; y < _tamanioMaxCuadros.x; y++)
+			for (int y = 0; y < _tamanioMaxCuadros.x; y++)
 			{
-				for (size_t z = 0; z < _Capas; z++)
+				for (int z = 0; z < _Capas; z++)
 				{
 					if(_mapa[x][y][z]) // si no apunta a null
 					archivoOut << x << " " << y << " " << z << " " << _mapa[x][y][z]->getTileString() << " "; // NO GUARDAR EL ULTIMO ESPACIO
@@ -164,14 +164,14 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 	{
 		// Inicializar para no tener basura
 		sf::Vector2u tamanio;
-		unsigned tamanioCuadro = 0;
-		unsigned capas = 0;
+		int tamanioCuadro = 0;
+		int capas = 0;
 		std::string archivoTextura = "";
-		unsigned x = 0;
-		unsigned y = 0;
-		unsigned z = 0;
-		unsigned trX = 0;
-		unsigned trY = 0;
+		int x = 0;
+		int y = 0;
+		int z = 0;
+		int trX = 0;
+		int trY = 0;
 		bool colision = false;
 		short tipo = 0;
 
@@ -180,7 +180,7 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 		
 		// Tiles
 		_tamanioCuadroF = static_cast<float>(tamanioCuadro);
-		_tamanioCuadroU = tamanioCuadro;
+		_tamanioCuadroI = tamanioCuadro;
 		_tamanioMaxCuadros.x = tamanio.x;
 		_tamanioMaxCuadros.y = tamanio.y;
 		_Capas = capas;
@@ -189,13 +189,13 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 		limpiar();
 
 		_mapa.resize(_tamanioMaxCuadros.x, std::vector<std::vector<Tile*> >());
-		for (size_t x = 0; x < _tamanioMaxCuadros.x; x++)
+		for (int x = 0; x < _tamanioMaxCuadros.x; x++)
 		{
-			for (size_t y = 0; y < _tamanioMaxCuadros.x; y++)
+			for (int y = 0; y < _tamanioMaxCuadros.x; y++)
 			{
 				_mapa[x].resize(_tamanioMaxCuadros.y, std::vector<Tile*>());
 
-				for (size_t z = 0; z < _Capas; z++)
+				for (int z = 0; z < _Capas; z++)
 				{
 					_mapa[x][y].resize(_Capas, NULL);
 				}
@@ -213,7 +213,7 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 				x, y, 
 				_tamanioCuadroF, 
 				_texturaTile, 
-				sf::IntRect(trX, trY, _tamanioCuadroU, _tamanioCuadroU), 
+				sf::IntRect(trX, trY, _tamanioCuadroI, _tamanioCuadroI), 
 				colision, 
 				tipo);
 		}
@@ -252,94 +252,92 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 		entidad->detenerY();
 	}
 
-	// TILES
+
 	_capa = 0;
 
-	_desdeX = entidad->getCuadroActual(_tamanioCuadroU).x - 1;
+	_desdeX = entidad->getCuadroActual(_tamanioCuadroI).x - 1;
 	if (_desdeX < 0)
 		_desdeX = 0;
 	else if (_desdeX > _tamanioMaxCuadros.x)
 		_desdeX = _tamanioMaxCuadros.x;
 
-	_hastaX = entidad->getCuadroActual(_tamanioCuadroU).x + 2;
+	_hastaX = entidad->getCuadroActual(_tamanioCuadroI).x + 3;
 	if (_hastaX < 0)
 		_hastaX = 0;
 	else if (_hastaX > _tamanioMaxCuadros.x)
 		_hastaX = _tamanioMaxCuadros.x;
 
-	_desdeY = entidad->getCuadroActual(_tamanioCuadroU).y - 1;
+	_desdeY = entidad->getCuadroActual(_tamanioCuadroI).y - 1;
 	if (_desdeY < 0)
 		_desdeY = 0;
-	else if (_desdeY > _tamanioMaxCuadros.x)
+	else if (_desdeY > _tamanioMaxCuadros.y)
 		_desdeY = _tamanioMaxCuadros.y;
 
-	_hastaY = entidad->getCuadroActual(_tamanioCuadroU).y + 2;
+	_hastaY = entidad->getCuadroActual(_tamanioCuadroI).y + 3;
 	if (_hastaY < 0)
 		_hastaY = 0;
-	else if (_hastaY > _tamanioMaxCuadros.x)
+	else if (_hastaY > _tamanioMaxCuadros.y)
 		_hastaY = _tamanioMaxCuadros.y;
-
-
-	//
-	for (size_t x = _desdeX; x < _hastaX; x++)
+	for (int x = _desdeX; x < _hastaX; x++)
 	{
-		for (size_t y = _desdeY; y < _hastaY; y++)
+		for (int y = _desdeY; y < _hastaY; y++)
 		{
-			sf::FloatRect limitesJugador = entidad->getLimites();
-			sf::FloatRect limitesPared = _mapa[x][y][_capa]->getLimites();
-			sf::FloatRect limitesPosSiguiente = entidad->getLimitesPosSiguiente(DT);
+			
+				sf::FloatRect limitesJugador = entidad->getLimites();
+				sf::FloatRect limitesMuros = _mapa[x][y][_capa]->getLimites();
+				sf::FloatRect limitesPosSiguiente = entidad->getLimitesPosSiguiente(DT);
 
-			if (_mapa[x][y][_capa]->getColision() &&
-				_mapa[x][y][_capa]->interseccion(limitesPosSiguiente))
-			{
-				// derecha
-				if (limitesJugador.left < limitesPared.left
-					&& limitesJugador.left + limitesJugador.width < limitesPared.left + limitesPared.width
-					&& limitesJugador.top < limitesPared.top + limitesPared.height
-					&& limitesJugador.top + limitesJugador.height > limitesPared.top
+				if (this->_mapa[x][y][_capa]->getColision() &&
+					this->_mapa[x][y][_capa]->interseccion(limitesPosSiguiente)
 					)
 				{
-					entidad->detenerX();
-					entidad->setPosicion(limitesPared.left - limitesJugador.width, limitesJugador.top);
-				}
-				// izquierda
-				else if (limitesJugador.left > limitesPared.left
-					&& limitesJugador.left + limitesJugador.width > limitesPared.left + limitesPared.width
-					&& limitesJugador.top < limitesPared.top + limitesPared.height
-					&& limitesJugador.top + limitesJugador.height > limitesPared.top
-					)
-				{
-					entidad->detenerX();
-					entidad->setPosicion(limitesPared.left + limitesPared.width, limitesJugador.top);
-				}
-
-
-				// Colision arriba
-				if (limitesJugador.top > limitesPared.top &&
-					limitesJugador.top + limitesJugador.height > limitesPared.top + limitesPared.height &&
-					limitesJugador.left < limitesPared.left + limitesPared.width &&
-					limitesJugador.left + limitesJugador.width > limitesPared.left)
-				{
-					entidad->detenerY();
-					entidad->setPosicion(limitesJugador.left, limitesPared.top + limitesJugador.height);
-				}
-				// Colision abajo
-				else if (limitesJugador.top < limitesPared.top &&
-						limitesJugador.top + limitesJugador.height < limitesPared.top + limitesPared.height &&
-						limitesJugador.left < limitesPared.left + limitesPared.width &&
-						limitesJugador.left + limitesJugador.width > limitesPared.left)
-				{
+					//Bottom collision
+					if (limitesJugador.top < limitesMuros.top
+						&& limitesJugador.top + limitesJugador.height < limitesMuros.top + limitesMuros.height
+						&& limitesJugador.left < limitesMuros.left + limitesMuros.width
+						&& limitesJugador.left + limitesJugador.width > limitesMuros.left
+						)
+					{
 						entidad->detenerY();
-						entidad->setPosicion(limitesJugador.left, limitesPared.top - limitesJugador.height);
-				}
-				
-				
+						entidad->setPosicion(limitesJugador.left, limitesMuros.top - limitesJugador.height);
+					}
 
+					//Top collision
+					else if (limitesJugador.top > limitesMuros.top
+						&& limitesJugador.top + limitesJugador.height > limitesMuros.top + limitesMuros.height
+						&& limitesJugador.left < limitesMuros.left + limitesMuros.width
+						&& limitesJugador.left + limitesJugador.width > limitesMuros.left
+						)
+					{
+						entidad->detenerY();
+						entidad->setPosicion(limitesJugador.left, limitesMuros.top + limitesMuros.height);
+					}
 
+					//Right collision
+					if (limitesJugador.left < limitesMuros.left
+						&& limitesJugador.left + limitesJugador.width < limitesMuros.left + limitesMuros.width
+						&& limitesJugador.top < limitesMuros.top + limitesMuros.height
+						&& limitesJugador.top + limitesJugador.height > limitesMuros.top
+						)
+					{
+						entidad->detenerX();
+						entidad->setPosicion(limitesMuros.left - limitesJugador.width, limitesJugador.top);
+					}
+
+					//Left collision
+					else if (limitesJugador.left > limitesMuros.left
+						&& limitesJugador.left + limitesJugador.width > limitesMuros.left + limitesMuros.width
+						&& limitesJugador.top < limitesMuros.top + limitesMuros.height
+						&& limitesJugador.top + limitesJugador.height > limitesMuros.top
+						)
+					{
+						entidad->detenerX();
+						entidad->setPosicion(limitesMuros.left + limitesMuros.width, limitesJugador.top);
+					}
+				
 			}
 		}
 	}
-	
 }
 
 void TileMap::actualizar()
@@ -354,25 +352,25 @@ void TileMap::renderizar(sf::RenderTarget& target, Entidades* entidad)
 	{
 		_capa = 0;
 
-		_desdeX = entidad->getCuadroActual(_tamanioCuadroU).x - 5;
+		_desdeX = entidad->getCuadroActual(_tamanioCuadroI).x - 15;
 		if (_desdeX < 0)
 			_desdeX = 0;
 		else if (_desdeX > _tamanioMaxCuadros.x)
 			_desdeX = _tamanioMaxCuadros.x;
 
-		_hastaX = entidad->getCuadroActual(_tamanioCuadroU).x + 8;
+		_hastaX = entidad->getCuadroActual(_tamanioCuadroI).x + 16;
 		if (_hastaX < 0)
 			_hastaX = 0;
 		else if (_hastaX > _tamanioMaxCuadros.x)
 			_hastaX = _tamanioMaxCuadros.x;
 
-		_desdeY = entidad->getCuadroActual(_tamanioCuadroU).y - 5;
+		_desdeY = entidad->getCuadroActual(_tamanioCuadroI).y - 8;
 		if (_desdeY < 0)
 			_desdeY = 0;
 		else if (_desdeY > _tamanioMaxCuadros.x)
 			_desdeY = _tamanioMaxCuadros.y;
 
-		_hastaY = entidad->getCuadroActual(_tamanioCuadroU).y + 8;
+		_hastaY = entidad->getCuadroActual(_tamanioCuadroI).y + 9;
 		if (_hastaY < 0)
 			_hastaY = 0;
 		else if (_hastaY > _tamanioMaxCuadros.x)
