@@ -104,3 +104,10 @@ void Jugador::actualizar(const float& DT)
 
     _hitbox->actualizar();
 }
+
+void Jugador::renderizar(sf::RenderTarget& target)
+{
+    target.draw(_sprite);
+
+    _hitbox->renderizar(target);
+}

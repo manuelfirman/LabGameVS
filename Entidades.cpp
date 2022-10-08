@@ -45,15 +45,30 @@ void Entidades::crearComponenteAnimacion(sf::Texture& textura)
     _animacion = new Animacion(_sprite, textura);
 }
 
+// GETTERS
 const sf::Vector2f& Entidades::getPosicionSprite() const
 {
+    if(_hitbox)
+        return _hitbox->getPosicion();
+
     return _sprite.getPosition();
 }
 
+const sf::FloatRect& Entidades::getLimites() const
+{
+    if(_hitbox)
+        return _hitbox->getLimites();
+    
+    return _sprite.getGlobalBounds();
+}
 
+// 
 void Entidades::setPosicion(const float x, const float y)
 {
-    _sprite.setPosition(x, y);
+    if (_hitbox)
+        _hitbox->setPosicion(x, y);
+    else
+        _sprite.setPosition(x, y);
 }
 
 void Entidades::mover(const float dir_x, const float dir_y, const float& DT)
@@ -75,9 +90,6 @@ void Entidades::actualizar(const float& DT)
 /// --------------------- RENDERIZAR --------------------------
 void Entidades::renderizar(sf::RenderTarget& target)
 {
-    target.draw(_sprite);
 
-    if (_hitbox) {
-        _hitbox->renderizar(target);
-    }
+
 }

@@ -226,13 +226,13 @@ void TileMap::checkColision(Entidades* entidad)
 		// Laterales
 	if(entidad->getPosicionSprite().x < 0.f)
 		entidad->setPosicion(0.f, entidad->getPosicionSprite().y);
-	else if(entidad->getPosicionSprite().x > _tamanioMaxMundo.x)
-		entidad->setPosicion(_tamanioMaxMundo.x, entidad->getPosicionSprite().y);
+	else if(entidad->getPosicionSprite().x + entidad->getLimites().width > _tamanioMaxMundo.x)
+		entidad->setPosicion(_tamanioMaxMundo.x - entidad->getLimites().width, entidad->getPosicionSprite().y);
 		// Superior / Inferior
 	if(entidad->getPosicionSprite().y < 0.f)
 		entidad->setPosicion(entidad->getPosicionSprite().x, 0.f);
-	else if(entidad->getPosicionSprite().y > _tamanioMaxMundo.y)
-		entidad->setPosicion(entidad->getPosicionSprite().x, _tamanioMaxMundo.y);
+	else if(entidad->getPosicionSprite().y + entidad->getLimites().height > _tamanioMaxMundo.y)
+		entidad->setPosicion(entidad->getPosicionSprite().x, _tamanioMaxMundo.y - entidad->getLimites().height);
 
 	
 }

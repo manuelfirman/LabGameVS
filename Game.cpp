@@ -104,7 +104,7 @@ void Game::actualizar()
 {
     actualizarEventosSFML();
 
-    /// actualizar si la pila no esta vacia
+    /// actualizar si la pila no esta vacia y la ventana esta en foco ( && _ventana->hasFocus() )
     if (!_estado.empty()) {
         _estado.top()->actualizar(_DT);
 

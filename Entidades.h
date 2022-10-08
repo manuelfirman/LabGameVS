@@ -32,17 +32,18 @@ public:
     void crearComponenteMovimiento(float velocidadMaxima, float aceleracion, float desaceleracion);
     void crearComponenteAnimacion(sf::Texture& textura);
 
-    // Accesorios
+    // Getters
     virtual const sf::Vector2f& getPosicionSprite() const;
+    const sf::FloatRect& getLimites() const;
 
-    // Modificadores
+    // Setters
     virtual void setPosicion(const float x, const float y);
 
     /// Funciones (Overriders)
     virtual void mover(const float x, const float y, const float& DT);
 
-    virtual void actualizar(const float& DT);
-    virtual void renderizar(sf::RenderTarget& target);
+    virtual void actualizar(const float& DT) = 0;
+    virtual void renderizar(sf::RenderTarget& target) = 0;
 };
 
 #endif // ENTIDADES_H

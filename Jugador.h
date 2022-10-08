@@ -20,6 +20,7 @@ public:
     void actualizarAtaque(const float& DT);
     void actualizarAnimacion(const float& DT);
     void actualizar(const float& DT);
+    void renderizar(sf::RenderTarget& target);
 };
 
 #endif // JUGADOR_H

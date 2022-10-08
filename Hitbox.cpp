@@ -16,7 +16,30 @@ Hitbox::~Hitbox()
     //dtor
 }
 
-bool Hitbox::checkInterseccion(const sf::FloatRect& frect)
+void Hitbox::setPosicion(const sf::Vector2f& posicion)
+{
+    _hitbox.setPosition(posicion);
+    _sprite.setPosition(posicion.x - _offsetX, posicion.y - _offsetY);
+}
+
+void Hitbox::setPosicion(const float x, const float y)
+{
+    _hitbox.setPosition(x, y);
+    _sprite.setPosition(x - _offsetX, y - _offsetY);
+}
+
+const sf::Vector2f& Hitbox::getPosicion() const
+{
+    return _hitbox.getPosition();
+}
+
+const sf::FloatRect& Hitbox::getLimites() const
+{
+    return _sprite.getGlobalBounds();
+}
+
+
+bool Hitbox::interseccion(const sf::FloatRect& frect)
 {
     return _hitbox.getGlobalBounds().intersects(frect);
 }

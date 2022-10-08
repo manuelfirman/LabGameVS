@@ -13,7 +13,15 @@ public:
     Hitbox(sf::Sprite& _sprite, float x, float y, float ancho, float alto);
     virtual ~Hitbox();
 
-    bool checkInterseccion(const sf::FloatRect& frect);
+    // Setters
+    void setPosicion(const sf::Vector2f& posicion);
+    void setPosicion(const float x, const float y);
+
+    // Getters
+    const sf::Vector2f& getPosicion() const;
+    const sf::FloatRect& getLimites() const;
+
+    bool interseccion(const sf::FloatRect& frect);
     void actualizar();
     void renderizar(sf::RenderTarget& target);
 
