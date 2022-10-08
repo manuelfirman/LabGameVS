@@ -65,10 +65,7 @@ const sf::Vector2u Entidades::getCuadroActual(const unsigned tamanioCuadroU) con
 
 const sf::FloatRect& Entidades::getLimites() const
 {
-    if(_hitbox)
-        return _hitbox->getLimites();
-    
-    return _sprite.getGlobalBounds();
+    return _hitbox->getLimites();
 }
 
 const sf::FloatRect& Entidades::getLimitesPosSiguiente(const float& DT) const

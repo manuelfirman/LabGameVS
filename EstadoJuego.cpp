@@ -155,9 +155,10 @@ void EstadoJuego::actualizar(const float& DT)
 
         actualizarInputJugador(DT);
 
+        actualizarTileMap(DT);
+
         player->actualizar(DT);
 
-        actualizarTileMap(DT);
     }
     else // actualizar con pausa
     {

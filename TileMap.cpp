@@ -21,7 +21,7 @@ void TileMap::limpiar()
 	//std::cout << _mapa.size() << "\n";
 }
 
-TileMap::TileMap(float tamanioCuadro, unsigned ancho, unsigned alto, std::string archivo_textura)
+TileMap::TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_textura)
 {
 	_tamanioCuadroF = tamanioCuadro;
 	_tamanioCuadroU = static_cast<unsigned>(_tamanioCuadroF);
@@ -59,7 +59,7 @@ TileMap::TileMap(float tamanioCuadro, unsigned ancho, unsigned alto, std::string
 	_cajaColisiones.setSize(sf::Vector2f(tamanioCuadro, tamanioCuadro));
 	_cajaColisiones.setFillColor(sf::Color(255, 0, 0, 50));
 	_cajaColisiones.setOutlineColor(sf::Color::Red);
-	_cajaColisiones.setOutlineThickness(1.f);
+	_cajaColisiones.setOutlineThickness(-1.f);
 }
 
 TileMap::~TileMap()
@@ -292,6 +292,27 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 			if (_mapa[x][y][_capa]->getColision() &&
 				_mapa[x][y][_capa]->interseccion(limitesPosSiguiente))
 			{
+				// derecha
+				if (limitesJugador.left < limitesPared.left
+					&& limitesJugador.left + limitesJugador.width < limitesPared.left + limitesPared.width
+					&& limitesJugador.top < limitesPared.top + limitesPared.height
+					&& limitesJugador.top + limitesJugador.height > limitesPared.top
+					)
+				{
+					entidad->detenerX();
+					entidad->setPosicion(limitesPared.left - limitesJugador.width, limitesJugador.top);
+				}
+				// izquierda
+				else if (limitesJugador.left > limitesPared.left
+					&& limitesJugador.left + limitesJugador.width > limitesPared.left + limitesPared.width
+					&& limitesJugador.top < limitesPared.top + limitesPared.height
+					&& limitesJugador.top + limitesJugador.height > limitesPared.top
+					)
+				{
+					entidad->detenerX();
+					entidad->setPosicion(limitesPared.left + limitesPared.width, limitesJugador.top);
+				}
+
 
 				// Colision arriba
 				if (limitesJugador.top > limitesPared.top &&
@@ -300,7 +321,7 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 					limitesJugador.left + limitesJugador.width > limitesPared.left)
 				{
 					entidad->detenerY();
-					entidad->setPosicion(limitesJugador.left, limitesPared.top - limitesJugador.height);
+					entidad->setPosicion(limitesJugador.left, limitesPared.top + limitesJugador.height);
 				}
 				// Colision abajo
 				else if (limitesJugador.top < limitesPared.top &&
@@ -309,7 +330,7 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 						limitesJugador.left + limitesJugador.width > limitesPared.left)
 				{
 						entidad->detenerY();
-						entidad->setPosicion(limitesJugador.left, limitesPared.top + limitesJugador.height);
+						entidad->setPosicion(limitesJugador.left, limitesPared.top - limitesJugador.height);
 				}
 				
 				
@@ -360,9 +381,9 @@ void TileMap::renderizar(sf::RenderTarget& target, Entidades* entidad)
 		//std::cout << _desdeX << " " << _hastaX << "\n";
 		//std::cout << _desdeY << " " << _hastaY << "\n";
 
-		for (size_t x = _desdeX; x < _hastaX; x++)
+		for (int x = _desdeX; x < _hastaX; x++)
 		{
-			for (size_t y = _desdeY; y < _hastaY; y++)
+			for (int y = _desdeY; y < _hastaY; y++)
 			{
 				_mapa[x][y][_capa]->renderizar(target);
 				if (_mapa[x][y][_capa]->getColision())

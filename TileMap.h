@@ -12,7 +12,7 @@ class TileMap
 		float _tamanioCuadroF;
 		unsigned _tamanioCuadroU;
 		unsigned _Capas;
-		sf::Vector2u _tamanioMaxCuadros;
+		sf::Vector2i _tamanioMaxCuadros;
 		std::vector<std::vector<std::vector<Tile*> > > _mapa;
 		std::string _archivoTextura;
 		sf::Texture _texturaTile;
@@ -32,7 +32,7 @@ class TileMap
 		void limpiar();
 
 	public:
-		TileMap(float tamanioCuadro, unsigned ancho, unsigned alto, std::string archivo_textura);
+		TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_textura);
 		virtual ~TileMap();
 
 		// Accesorios
