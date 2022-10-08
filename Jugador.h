@@ -3,6 +3,8 @@
 
 #include "Entidades.h"
 
+class Entidades;
+
 class Jugador : public Entidades
 {
 private: // Atributos

@@ -5,6 +5,11 @@
 #include "Movimiento.h"
 #include "Animacion.h"
 
+class Hitbox;
+class Movimiento;
+class Animacion;
+
+
 class Entidades
 {
 private: // Metodos
@@ -37,7 +42,7 @@ public:
     virtual const sf::Vector2f& getPosicionSprite() const;
     virtual const sf::Vector2i getCuadroActual(const int tamanioCuadro) const;
     virtual const sf::FloatRect getLimites() const;
-    virtual const sf::FloatRect& getLimitesPosSiguiente(const float& DT) const;
+    virtual const sf::FloatRect getLimitesPosSiguiente(const float& DT) const;
 
     // Setters
     virtual void setPosicion(const float x, const float y);

@@ -53,6 +53,9 @@ const bool Movimiento::getEstadoMov(const int estado) const
         if (_velocidad.y < 0.f) return true;
         return false;
         break;
+    default:
+        return false;
+        break;
     }
 }
 

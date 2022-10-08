@@ -68,13 +68,13 @@ const sf::FloatRect Entidades::getLimites() const
     return _hitbox->getLimites();
 }
 
-const sf::FloatRect& Entidades::getLimitesPosSiguiente(const float& DT) const
+const sf::FloatRect Entidades::getLimitesPosSiguiente(const float& DT) const
 {
     if (_hitbox && _movimiento)
     {
         return _hitbox->getPosicionSiguiente(_movimiento->getVelocidad() * DT);
     }
-    return sf::FloatRect();
+    return sf::FloatRect(-1.f, -1.f, -1.f, -1.f); // para no retornar basura
 }
 
 // 

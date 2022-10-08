@@ -189,7 +189,7 @@ gui::ListaDesplegable::~ListaDesplegable()
 {
     delete _elementoActivo;
 
-    for (size_t i = 0; i < _lista.size(); i++)
+    for (int i = 0; i < _lista.size(); i++)
     {
         delete _lista[i];
     }
@@ -294,12 +294,12 @@ gui::SelectorTexturas::SelectorTexturas(float x, float y, float ancho, float alt
 
   if (_sheet.getGlobalBounds().width > _limites.getGlobalBounds().width)
   {
-    _sheet.setTextureRect(sf::IntRect(0, 0, _limites.getGlobalBounds().width, _limites.getGlobalBounds().height));
+    _sheet.setTextureRect(sf::IntRect(0, 0, static_cast<int>(_limites.getGlobalBounds().width), static_cast<int>(_limites.getGlobalBounds().height)));
   }
 
   if (_sheet.getGlobalBounds().height > _limites.getGlobalBounds().height)
   {
-    _sheet.setTextureRect(sf::IntRect(0, 0, _limites.getGlobalBounds().width, _limites.getGlobalBounds().height));
+    _sheet.setTextureRect(sf::IntRect(0, 0, static_cast<int>(_limites.getGlobalBounds().width), static_cast<int>(_limites.getGlobalBounds().height)));
   }
 
   _selector.setPosition(x + offset, y);
@@ -368,16 +368,14 @@ void gui::SelectorTexturas::actualizar(const sf::Vector2i& posMouseVentana, cons
 
         if (_activo)
         {
-            _posMouseCuadro.x = (posMouseVentana.x - static_cast<int>(_limites.getPosition().x)) / static_cast<unsigned>(_tamanioCuadro);
-            _posMouseCuadro.y = (posMouseVentana.y - static_cast<int>(_limites.getPosition().y)) / static_cast<unsigned>(_tamanioCuadro);
+            _posMouseCuadro.x = (posMouseVentana.x - static_cast<int>(_limites.getPosition().x)) / static_cast<int>(_tamanioCuadro);
+            _posMouseCuadro.y = (posMouseVentana.y - static_cast<int>(_limites.getPosition().y)) / static_cast<int>(_tamanioCuadro);
             _selector.setPosition(_limites.getPosition().x + _posMouseCuadro.x * _tamanioCuadro, _limites.getPosition().y + _posMouseCuadro.y * _tamanioCuadro);
 
             _rectTextura.left = static_cast<int>(_selector.getPosition().x - _limites.getPosition().x);
             _rectTextura.top = static_cast<int>(_selector.getPosition().y - _limites.getPosition().y);
         }
     }
-
-
 }
 
 void gui::SelectorTexturas::renderizar(sf::RenderTarget& target)

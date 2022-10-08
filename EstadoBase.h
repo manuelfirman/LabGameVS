@@ -11,13 +11,20 @@ class EstadoBase;
 class DatosEstado
 {
     public:
-        DatosEstado(){};
-
         float tamanioCuadro;
         sf::RenderWindow* ventana;
         OpcionesGraficas* opcionesGraficas;
         std::map<std::string, int>* teclasSoportadas;
         std::stack<EstadoBase*>* estado;
+
+        DatosEstado()
+        {
+           /* tamanioCuadro = 0;
+            ventana = NULL;
+            opcionesGraficas = NULL;
+            teclasSoportadas = NULL;
+            estado = NULL;*/
+        };
 };
 
 

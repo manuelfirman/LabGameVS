@@ -232,24 +232,24 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 		// Laterales
 	if (entidad->getPosicionSprite().x < 0.f)
 	{
+		//entidad->detenerX();
 		entidad->setPosicion(0.f, entidad->getPosicionSprite().y);
-		entidad->detenerX();
 	}
 	else if (entidad->getPosicionSprite().x + entidad->getLimites().width > _tamanioMaxMundo.x)
 	{
+		//entidad->detenerX();
 		entidad->setPosicion(_tamanioMaxMundo.x - entidad->getLimites().width, entidad->getPosicionSprite().y);
-		entidad->detenerX();
 	}
 		// Superior / Inferior
 	if (entidad->getPosicionSprite().y < 0.f)
 	{
-		entidad->setPosicion(entidad->getPosicionSprite().x, 0.f);
 		entidad->detenerY();
+		entidad->setPosicion(entidad->getPosicionSprite().x, 0.f);
 	}
 	else if (entidad->getPosicionSprite().y + entidad->getLimites().height > _tamanioMaxMundo.y)
 	{
-		entidad->setPosicion(entidad->getPosicionSprite().x, _tamanioMaxMundo.y - entidad->getLimites().height);
 		entidad->detenerY();
+		entidad->setPosicion(entidad->getPosicionSprite().x, _tamanioMaxMundo.y - entidad->getLimites().height);
 	}
 
 
