@@ -90,6 +90,9 @@
     <ClCompile Include="Gui.cpp">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
+    <ClCompile Include="Atributos.cpp">
+      <Filter>Componentes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="Gui.h">
       <Filter>Archivos de recursos</Filter>
+    </ClInclude>
+    <ClInclude Include="Atributos.h">
+      <Filter>Componentes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

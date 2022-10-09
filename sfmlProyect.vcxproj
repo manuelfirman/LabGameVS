@@ -145,12 +145,13 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-newtwork.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\External\SFML\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animacion.cpp" />
+    <ClCompile Include="Atributos.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="Entidades.cpp" />
     <ClCompile Include="EstadoBase.cpp" />
@@ -174,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animacion.h" />
+    <ClInclude Include="Atributos.h" />
     <ClInclude Include="Gui.h" />
     <ClInclude Include="Entidades.h" />
     <ClInclude Include="EstadoBase.h" />

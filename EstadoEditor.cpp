@@ -86,12 +86,12 @@ void EstadoEditor::iniciarGUI()
     _rectSelector.setTexture(_tileMap->getTexturaTile());
     _rectSelector.setTextureRect(_rectTextura);
 
-    _selectorTexturas = new gui::SelectorTexturas(20.f, 20.f, 500.f, 500.f, _datosEstado->tamanioCuadro, _tileMap->getTexturaTile(), _fuente, "TS");
+    _selectorTexturas = new gui::SelectorTexturas(20.f, 20.f, 1024.f, 1024.f, _datosEstado->tamanioCuadro, _tileMap->getTexturaTile(), _fuente, "TS");
 }
 
 void EstadoEditor::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 100, 100, "recursos/img/mapa/grass/floortileset.png");
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 32, 32, "recursos/img/mapa/terrenos/terreno_01.png");
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
