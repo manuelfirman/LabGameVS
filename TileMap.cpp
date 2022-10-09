@@ -52,7 +52,6 @@ TileMap::TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_t
 			for (int z = 0; z < _Capas; z++)
 			{
 				_mapa[x][y].resize(_Capas, std::vector<Tile*>());
-				
 			}
 		}
 	}
@@ -231,7 +230,6 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 		if (!_texturaTile.loadFromFile(_archivoTextura))
 			std::cout << "ERROR:TILEMAP::NO SE PUDO CARGAR PLANTILLA TEXTURA::" << _archivoTextura << "\n";
 
-		
 		// Carga todos los tiles
 		while (archivoIn >> x >> y >> z >> trX >> trY >> colision >> tipo)
 		{
@@ -409,7 +407,8 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 		for (int y = _desdeY; y < _hastaY; y++)
 		{
 			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
-			{
+			{	
+				// Orden de renderizado
 				if (_mapa[x][y][_capa][C]->getTipoTile() == TipoTile::TOP)
 				{
 					_pilaRenderDiferida.push(_mapa[x][y][_capa][C]);
@@ -418,8 +417,8 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 				{
 					_mapa[x][y][_capa][C]->renderizar(target);
 				}
-				/*if(_mapa[x][y][_capa][C])*/
-					
+
+				// Colision con tiles
 				if (_mapa[x][y][_capa][C]->getColision())
 				{
 					_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
@@ -428,36 +427,6 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 			}
 		}
 	}
-
-	//std::cout << _desdeX << " " << _hastaX << "\n";
-	//std::cout << _desdeY << " " << _hastaY << "\n";
-	
-	//else //(if (entidad))// si no hay una entidad que renderizar
-	//{
-	//	for (auto& x : _mapa)
-	//	{
-	//		for(auto& y : x) // x es una matriz
-	//		{
-	//			for (auto& z : y) // for para las capas - pasa por Y y nos da el tile
-	//			{
-	//				for (auto* C : z) 
-	//				{
-	//					C->renderizar(target);
-	//				
-	//					if (C->getColision())
-	//					{
-	//						_cajaColisiones.setPosition(C->getPosicionTile());
-	//						target.draw(_cajaColisiones);
-	//					}
-	//					
-	//				}
-	//			}
-	//		}
-	//	}
-	//	 //No se renderiza nada que no este dentro de la ventana (cuadricula _mapa)
-
-	//}
-
 }
 
 void TileMap::renderizacionDiferida(sf::RenderTarget& target)

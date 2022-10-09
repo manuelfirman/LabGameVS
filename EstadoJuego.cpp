@@ -63,7 +63,7 @@ void EstadoJuego::iniciarJugadores()
 
 void EstadoJuego::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 10, 10, "recursos/img/mapa/grass/floortileset.png");
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 100, 100, "recursos/img/mapa/grass/floortileset.png");
 
     // cargando mapa desde archivo
     _tileMap->cargarDesdeArchivo("text.slmp");

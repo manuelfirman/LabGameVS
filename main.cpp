@@ -5,6 +5,5 @@ int main()
 {
     Game game;
     game.gameloop();
-    system("pause");
     return 0;
 }

@@ -19,16 +19,13 @@ class EstadoEditor : public EstadoBase
         sf::Font _fuente;
         sf::Text _textoCursor;
         MenuPausa* _menuPausa;
-        
         std::map<std::string, gui::Boton*> _boton;
 
         TileMap* _tileMap;
 
         sf::RectangleShape _barraLateral;
-
         sf::IntRect _rectTextura;
         sf::RectangleShape _rectSelector;
-
         gui::SelectorTexturas* _selectorTexturas;
 
         float _velocidadCamara;

@@ -10,17 +10,18 @@ class TileMap
 {
 	private:
 		float _tamanioCuadroF;
+		sf::Vector2i _tamanioMaxCuadros;
+		sf::Vector2f _tamanioMaxMundo;
 		int _tamanioCuadroI;
 		int _Capas;
-		sf::Vector2i _tamanioMaxCuadros;
-		std::vector <std::vector < std::vector < std::vector <Tile*> > > > _mapa; // si, son 4 xD
 		std::stack<Tile*> _pilaRenderDiferida;
+
+		// (x , y , capas , pila de capas)
+		std::vector <std::vector < std::vector < std::vector <Tile*> > > > _mapa; // si, son 4 xD
+		sf::RectangleShape _cajaColisiones;
+		
 		std::string _archivoTextura;
 		sf::Texture _texturaTile;
-
-		sf::Vector2f _tamanioMaxMundo;
-
-		sf::RectangleShape _cajaColisiones;
 
 		// Eliminacion de tiles
 		int _desdeX;
