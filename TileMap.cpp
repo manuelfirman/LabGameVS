@@ -403,8 +403,6 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 	else if (_hastaY > _tamanioMaxCuadros.y)
 		_hastaY = _tamanioMaxCuadros.y;
 
-	//std::cout << _desdeX << " " << _hastaX << "\n";
-	//std::cout << _desdeY << " " << _hastaY << "\n";
 
 	for (int x = _desdeX; x < _hastaX; x++)
 	{
@@ -412,7 +410,15 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 		{
 			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{
-				_mapa[x][y][_capa][C]->renderizar(target);
+				if (_mapa[x][y][_capa][C]->getTipoTile() == TipoTile::TOP)
+				{
+					_pilaRenderDiferida.push(_mapa[x][y][_capa][C]);
+				}
+				else
+				{
+					_mapa[x][y][_capa][C]->renderizar(target);
+				}
+				/*if(_mapa[x][y][_capa][C])*/
 					
 				if (_mapa[x][y][_capa][C]->getColision())
 				{
@@ -422,6 +428,9 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 			}
 		}
 	}
+
+	//std::cout << _desdeX << " " << _hastaX << "\n";
+	//std::cout << _desdeY << " " << _hastaY << "\n";
 	
 	//else //(if (entidad))// si no hay una entidad que renderizar
 	//{
@@ -449,4 +458,13 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 
 	//}
 
+}
+
+void TileMap::renderizacionDiferida(sf::RenderTarget& target)
+{
+	while (!_pilaRenderDiferida.empty())
+	{
+		_pilaRenderDiferida.top()->renderizar(target); // renderiza y lo saca de la pila
+		_pilaRenderDiferida.pop();
+	}
 }

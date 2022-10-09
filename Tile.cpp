@@ -4,7 +4,7 @@
 Tile::Tile()
 {
 	_colision = false;
-	_tipo = 0;
+	_tipoTile = 0;
 }
 
 Tile::Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision, short tipo)
@@ -18,12 +18,17 @@ Tile::Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textur
 	_tile.setTextureRect(rect_textura);
 
 	_colision = colision;
-	_tipo = tipo;
+	_tipoTile = tipo;
 
 }
 
 Tile::~Tile()
 {
+}
+
+const short& Tile::getTipoTile() const
+{
+	return _tipoTile;
 }
 
 const bool& Tile::getColision() const
@@ -50,7 +55,7 @@ const std::string Tile::getTileString() const
 {
 	std::stringstream ss;
 
-	ss << _tile.getTextureRect().left << " " << _tile.getTextureRect().top << " " << _colision << " " << _tipo;
+	ss << _tile.getTextureRect().left << " " << _tile.getTextureRect().top << " " << _colision << " " << _tipoTile;
 
 	return ss.str();
 }

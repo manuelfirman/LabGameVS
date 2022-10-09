@@ -14,6 +14,7 @@ class TileMap
 		int _Capas;
 		sf::Vector2i _tamanioMaxCuadros;
 		std::vector <std::vector < std::vector < std::vector <Tile*> > > > _mapa; // si, son 4 xD
+		std::stack<Tile*> _pilaRenderDiferida;
 		std::string _archivoTextura;
 		sf::Texture _texturaTile;
 
@@ -51,6 +52,7 @@ class TileMap
 		// Actualizar - Renderizar
 		void actualizar();
 		void renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro);
+		void renderizacionDiferida(sf::RenderTarget& target);
 
 };
 

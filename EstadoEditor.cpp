@@ -7,7 +7,7 @@ void EstadoEditor::iniciarVariables()
     _rectTextura = sf::IntRect(0, 0, static_cast<int>(_datosEstado->tamanioCuadro), static_cast<int>(_datosEstado->tamanioCuadro));
 
     _colision = false;
-    _tipo = TipoTile::DEFAULT;
+    _tipo = TipoTile::SUELO;
     _capa = 0;
 
     _velocidadCamara = 100.f;
@@ -298,6 +298,7 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
     // render tile map con la vista seteada
     target->setView(_vista);
     _tileMap->renderizar(*target, posMouseCuadro);
+    _tileMap->renderizacionDiferida(*target);
   
     // render botones con vista por default
     target->setView(_ventana->getDefaultView());

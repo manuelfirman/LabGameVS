@@ -1,7 +1,7 @@
 #ifndef TILE_H
 #define TILE_H
 
-enum TipoTile{DEFAULT = 0, DAMAGING};
+enum TipoTile{ SUELO = 0, PARED, TOP };
 
 class Tile
 {
@@ -10,13 +10,15 @@ class Tile
 	protected:
 		sf::RectangleShape _tile;
 		bool _colision;
-		short _tipo;
+		short _tipoTile;
 
 	public:
 		Tile();
-		Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision = false, short tipo = TipoTile::DEFAULT);
+		Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision = false, short tipo = TipoTile::SUELO);
 		~Tile();
 
+		// Getters
+		const short& getTipoTile() const;
 		const bool& getColision() const;
 		const sf::Vector2f& getPosicionTile() const;
 		const sf::FloatRect getLimites() const;

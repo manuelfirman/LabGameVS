@@ -180,6 +180,8 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
 
     player->renderizar(_renderTextura);
 
+    _tileMap->renderizacionDiferida(_renderTextura);
+
     if (_pausa) { 
         // renderizar MENU PAUSA con vistaCam por default
         _renderTextura.setView(_renderTextura.getDefaultView());
