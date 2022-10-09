@@ -4,10 +4,12 @@
 #include "Hitbox.h"
 #include "Movimiento.h"
 #include "Animacion.h"
+#include "Atributos.h"
 
 class Hitbox;
 class Movimiento;
 class Animacion;
+class Atributos;
 
 
 class Entidades
@@ -15,16 +17,13 @@ class Entidades
 private: // Metodos
     void iniciarVariables();
 
-
-
 protected: // Atributos
     sf::Sprite _sprite;
-
 
     Movimiento* _movimiento;
     Animacion* _animacion;
     Hitbox* _hitbox;
-
+    Atributos* _atributos;
 
 
 public:
@@ -37,6 +36,7 @@ public:
     void crearHitbox(sf::Sprite& sprite, float x, float y, float ancho, float alto);
     void crearComponenteMovimiento(float velocidadMaxima, float aceleracion, float desaceleracion);
     void crearComponenteAnimacion(sf::Texture& textura);
+    void crearComponenteAtributos();
 
     // Getters
     virtual const sf::Vector2f& getPosicionSprite() const;

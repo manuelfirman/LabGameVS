@@ -6,6 +6,7 @@ void Entidades::iniciarVariables()
     _movimiento = NULL;
     _animacion = NULL;
     _hitbox = NULL;
+    _atributos = NULL;
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
@@ -16,10 +17,11 @@ Entidades::Entidades()
 }
 
 Entidades::~Entidades()
-{
+{ //TODO: se podrian meter los componentes en un array
     delete _movimiento;
     delete _animacion;
     delete _hitbox;
+    delete _atributos;
 }
 
 
@@ -43,6 +45,11 @@ void Entidades::crearComponenteMovimiento(float velocidadMaxima, float aceleraci
 void Entidades::crearComponenteAnimacion(sf::Texture& textura)
 {
     _animacion = new Animacion(_sprite, textura);
+}
+
+void Entidades::crearComponenteAtributos()
+{
+    _atributos = new Atributos();
 }
 
 // GETTERS
