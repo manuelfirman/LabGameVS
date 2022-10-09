@@ -146,7 +146,7 @@ void TileMap::guardarEnArchivo(const std::string nombre_archivo)
 				{
 					if(!_mapa[x][y][z].empty()) // si no esta vacio
 					{
-						for (int C = 0; C < _mapa[x][y][z].size(); C++)
+						for (size_t C = 0; C < _mapa[x][y][z].size(); C++)
 						{
 							archivoOut << x << " " << y << " " << z << " " << _mapa[x][y][z][C]->getTileString() << " "; // NO GUARDAR EL ULTIMO ESPACIO
 
@@ -294,7 +294,7 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 	{
 		for (int y = _desdeY; y < _hastaY; y++)
 		{
-			for(int C = 0; _mapa[x][y][_capa].size(); C++)
+			for(int C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{
 				sf::FloatRect limitesJugador = entidad->getLimites();
 				sf::FloatRect limitesMuros = _mapa[x][y][_capa][C]->getLimites();
@@ -434,9 +434,5 @@ void TileMap::renderizar(sf::RenderTarget& target, Entidades* entidad)
 		 //No se renderiza nada que no este dentro de la ventana (cuadricula _mapa)
 
 	}
-
-
-
-
 
 }
