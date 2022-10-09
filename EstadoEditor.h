@@ -34,6 +34,7 @@ class EstadoEditor : public EstadoBase
         float _velocidadCamara;
         bool _colision;
         short _tipo;
+        int _capa;
 
     private: // Metodos
         void iniciarVariables();

@@ -35,21 +35,22 @@ class TileMap
 		TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_textura);
 		virtual ~TileMap();
 
-		// Accesorios
+		// Getters
 		const sf::Texture* getTexturaTile() const;
+		const int getTilesPorCuadro(const int x,const int y,const int capa) const;
 
 		// Metodos
 		void agregarTile(const int x, const int y, const int z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo);
 		void removerTile(const int x, const int y, const int z);
+		void checkColision(Entidades* entidad, const float& DT);
 
+		//Archivos
 		void guardarEnArchivo(const std::string nombre_archivo);
 		void cargarDesdeArchivo(const std::string nombre_archivo);
-
-		void checkColision(Entidades* entidad, const float& DT);
 		
 		// Actualizar - Renderizar
 		void actualizar();
-		void renderizar(sf::RenderTarget& target, Entidades* entidad = NULL);
+		void renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro);
 
 };
 

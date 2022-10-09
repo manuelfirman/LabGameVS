@@ -176,7 +176,7 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
 
     // TODO SE RENDERIZA A TRAVES DEL LIENZO
     _renderTextura.setView(_vistaCam); // con la vista seteada
-    _tileMap->renderizar(_renderTextura, player);
+    _tileMap->renderizar(_renderTextura, player->getCuadroActual(static_cast<int>(_datosEstado->tamanioCuadro)));
 
     player->renderizar(_renderTextura);
 

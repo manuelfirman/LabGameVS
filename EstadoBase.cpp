@@ -62,7 +62,7 @@ void EstadoBase::actualizarPosicionMouse(sf::View* vista)
     posMouseVista = _ventana->mapPixelToCoords(sf::Mouse::getPosition(*_ventana));
     
     // Posiciona en cuadricula (por eso casteo estatico de unsigned)
-    posMouseCuadro = sf::Vector2u(static_cast<unsigned>(posMouseVista.x) / static_cast<unsigned>(_tamanioCuadro), static_cast<unsigned>(posMouseVista.y) / static_cast<unsigned>(_tamanioCuadro));
+    posMouseCuadro = sf::Vector2i(static_cast<int>(posMouseVista.x) / static_cast<int>(_tamanioCuadro), static_cast<int>(posMouseVista.y) / static_cast<int>(_tamanioCuadro));
 
     _ventana->setView(_ventana->getDefaultView());
 }

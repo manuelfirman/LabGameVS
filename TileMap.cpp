@@ -76,6 +76,22 @@ const sf::Texture* TileMap::getTexturaTile() const
 	return &_texturaTile;
 }
 
+const int TileMap::getTilesPorCuadro(const int x, const int y, const int capa) const
+{
+	if (x >= 0 && x < _mapa.size())
+	{
+		if (y >= 0 && y < _mapa[x].size())
+		{
+			if (capa >= 0 && capa < _mapa[x][y].size())
+			{
+				return _mapa[x][y][capa].size();
+			}
+		}
+	}
+	
+	return -1;
+}
+
 void TileMap::agregarTile(const int x, const int y, const int z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo)
 {
 	// Agrega un tile en la posicion del mouse si la matriz del mapa lo permite
@@ -358,81 +374,79 @@ void TileMap::actualizar()
 
 }
 
-void TileMap::renderizar(sf::RenderTarget& target, Entidades* entidad)
+void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro) // se puede enviar cualquier posicion (player, vista, etc)
 {
 	// TILES
-	if (entidad)
+	_capa = 0;
+
+	_desdeX = posicionCuadro.x - 4;
+	if (_desdeX < 0)
+		_desdeX = 0;
+	else if (_desdeX > _tamanioMaxCuadros.x)
+		_desdeX = _tamanioMaxCuadros.x;
+
+	_hastaX = posicionCuadro.x + 5;
+	if (_hastaX < 0)
+		_hastaX = 0;
+	else if (_hastaX > _tamanioMaxCuadros.x)
+		_hastaX = _tamanioMaxCuadros.x;
+
+	_desdeY = posicionCuadro.y - 3;
+	if (_desdeY < 0)
+		_desdeY = 0;
+	else if (_desdeY > _tamanioMaxCuadros.y)
+		_desdeY = _tamanioMaxCuadros.y;
+
+	_hastaY = posicionCuadro.y + 5;
+	if (_hastaY < 0)
+		_hastaY = 0;
+	else if (_hastaY > _tamanioMaxCuadros.y)
+		_hastaY = _tamanioMaxCuadros.y;
+
+	//std::cout << _desdeX << " " << _hastaX << "\n";
+	//std::cout << _desdeY << " " << _hastaY << "\n";
+
+	for (int x = _desdeX; x < _hastaX; x++)
 	{
-		_capa = 0;
-
-		_desdeX = entidad->getCuadroActual(_tamanioCuadroI).x - 4;
-		if (_desdeX < 0)
-			_desdeX = 0;
-		else if (_desdeX > _tamanioMaxCuadros.x)
-			_desdeX = _tamanioMaxCuadros.x;
-
-		_hastaX = entidad->getCuadroActual(_tamanioCuadroI).x + 5;
-		if (_hastaX < 0)
-			_hastaX = 0;
-		else if (_hastaX > _tamanioMaxCuadros.x)
-			_hastaX = _tamanioMaxCuadros.x;
-
-		_desdeY = entidad->getCuadroActual(_tamanioCuadroI).y - 3;
-		if (_desdeY < 0)
-			_desdeY = 0;
-		else if (_desdeY > _tamanioMaxCuadros.y)
-			_desdeY = _tamanioMaxCuadros.y;
-
-		_hastaY = entidad->getCuadroActual(_tamanioCuadroI).y + 5;
-		if (_hastaY < 0)
-			_hastaY = 0;
-		else if (_hastaY > _tamanioMaxCuadros.y)
-			_hastaY = _tamanioMaxCuadros.y;
-
-		//std::cout << _desdeX << " " << _hastaX << "\n";
-		//std::cout << _desdeY << " " << _hastaY << "\n";
-
-		for (int x = _desdeX; x < _hastaX; x++)
+		for (int y = _desdeY; y < _hastaY; y++)
 		{
-			for (int y = _desdeY; y < _hastaY; y++)
+			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{
-				for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
-				{
-					_mapa[x][y][_capa][C]->renderizar(target);
+				_mapa[x][y][_capa][C]->renderizar(target);
 					
-					if (_mapa[x][y][_capa][C]->getColision())
-					{
-						_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
-						target.draw(_cajaColisiones);
-					}
+				if (_mapa[x][y][_capa][C]->getColision())
+				{
+					_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
+					target.draw(_cajaColisiones);
 				}
 			}
 		}
 	}
-	else
-	{
-		for (auto& x : _mapa)
-		{
-			for(auto& y : x) // x es una matriz
-			{
-				for (auto& z : y) // for para las capas - pasa por Y y nos da el tile
-				{
-					for (auto* C : z) 
-					{
-						C->renderizar(target);
-					
-						if (C->getColision())
-						{
-							_cajaColisiones.setPosition(C->getPosicionTile());
-							target.draw(_cajaColisiones);
-						}
-						
-					}
-				}
-			}
-		}
-		 //No se renderiza nada que no este dentro de la ventana (cuadricula _mapa)
+	
+	//else //(if (entidad))// si no hay una entidad que renderizar
+	//{
+	//	for (auto& x : _mapa)
+	//	{
+	//		for(auto& y : x) // x es una matriz
+	//		{
+	//			for (auto& z : y) // for para las capas - pasa por Y y nos da el tile
+	//			{
+	//				for (auto* C : z) 
+	//				{
+	//					C->renderizar(target);
+	//				
+	//					if (C->getColision())
+	//					{
+	//						_cajaColisiones.setPosition(C->getPosicionTile());
+	//						target.draw(_cajaColisiones);
+	//					}
+	//					
+	//				}
+	//			}
+	//		}
+	//	}
+	//	 //No se renderiza nada que no este dentro de la ventana (cuadricula _mapa)
 
-	}
+	//}
 
 }

@@ -8,6 +8,7 @@ void EstadoEditor::iniciarVariables()
 
     _colision = false;
     _tipo = TipoTile::DEFAULT;
+    _capa = 0;
 
     _velocidadCamara = 100.f;
 }
@@ -221,7 +222,9 @@ void EstadoEditor::actualizarGUI(const float& DT)
     ss << posMouseVista.x << " " << posMouseVista.y << "\n"
         << posMouseCuadro.x << " " << posMouseCuadro.y << "\n"
         << _rectTextura.left << " " << _rectTextura.top << "\n"
-        << "Colision: " << _colision << "\n" << "Tipo: " << _tipo;
+        << "Colision: " << _colision << "\n" 
+        << "Tipo: " << _tipo << "\n"
+        << "Tiles: " << _tileMap->getTilesPorCuadro(posMouseCuadro.x, posMouseCuadro.y, _capa);
 
     _textoCursor.setString(ss.str());
 }
@@ -294,7 +297,7 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
 
     // render tile map con la vista seteada
     target->setView(_vista);
-    _tileMap->renderizar(*target);
+    _tileMap->renderizar(*target, posMouseCuadro);
   
     // render botones con vista por default
     target->setView(_ventana->getDefaultView());
