@@ -83,7 +83,7 @@ const int TileMap::getTilesPorCuadro(const int x, const int y, const int capa) c
 		{
 			if (capa >= 0 && capa < _mapa[x][y].size())
 			{
-				return _mapa[x][y][capa].size();
+				return static_cast<int>(_mapa[x][y][capa].size());
 			}
 		}
 	}
@@ -161,7 +161,7 @@ void TileMap::guardarEnArchivo(const std::string nombre_archivo)
 				{
 					if(!_mapa[x][y][z].empty()) // si no esta vacio
 					{
-						for (size_t C = 0; C < _mapa[x][y][z].size(); C++)
+						for (int C = 0; C < _mapa[x][y][z].size(); C++)
 						{
 							archivoOut << x << " " << y << " " << z << " " << _mapa[x][y][z][C]->getTileString() << " "; // NO GUARDAR EL ULTIMO ESPACIO
 

@@ -36,7 +36,7 @@ public:
     void crearHitbox(sf::Sprite& sprite, float x, float y, float ancho, float alto);
     void crearComponenteMovimiento(float velocidadMaxima, float aceleracion, float desaceleracion);
     void crearComponenteAnimacion(sf::Texture& textura);
-    void crearComponenteAtributos();
+    void crearComponenteAtributos(const int nivel);
 
     // Getters
     virtual const sf::Vector2f& getPosicionSprite() const;

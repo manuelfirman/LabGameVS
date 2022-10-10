@@ -23,6 +23,8 @@ Jugador::Jugador(float x, float y, sf::Texture& textura)
     crearHitbox(_sprite, 18.f, 17.f, 28.f, 44.f);
     crearComponenteMovimiento(300.f, 1400.f, 1000.f); // Movimiento
     crearComponenteAnimacion(textura);
+    crearComponenteAtributos(1);
+
     _animacion->agregarAnimacion("QUIETO", 10.f, 1, 10, 1, 10, 64, 64); // key - Velocidad animacion - inicioX - inicioY - framesX - framesY
     _animacion->agregarAnimacion("CAMINAR_ABAJO", 3.f, 1, 10, 8, 10, 64, 64);
     _animacion->agregarAnimacion("CAMINAR_ARRIBA", 3.f, 1, 8, 8, 8, 64, 64);
@@ -188,6 +190,12 @@ void Jugador::actualizarAnimacion(const float& DT)
 
 void Jugador::actualizar(const float& DT)
 {
+    //_atributos->actualizar();
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+        _atributos->subirExp(20);
+
+    std::cout << _atributos->debug() << "\n";
+
     _movimiento->actualizar(DT);
 
     actualizarAtaque(DT);

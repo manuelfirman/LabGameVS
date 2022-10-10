@@ -47,9 +47,9 @@ void Entidades::crearComponenteAnimacion(sf::Texture& textura)
     _animacion = new Animacion(_sprite, textura);
 }
 
-void Entidades::crearComponenteAtributos()
+void Entidades::crearComponenteAtributos(const int nivel)
 {
-    _atributos = new Atributos();
+    _atributos = new Atributos(nivel);
 }
 
 // GETTERS

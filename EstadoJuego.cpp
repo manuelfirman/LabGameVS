@@ -43,7 +43,7 @@ void EstadoJuego::iniciarKeybinds()
 
 void EstadoJuego::iniciarTexturas()
 {
-    sf::Texture aux;
+    //sf::Texture aux;
 
     if (!_texturas["PLANTILLA_JUGADOR"].loadFromFile("recursos/img/personaje/1.png")) {
         std::cout << "ERROR: EstadoJuego_iniciarTexturas_CargaTexturaPersonaje" << std::endl;
@@ -63,7 +63,7 @@ void EstadoJuego::iniciarJugadores()
 
 void EstadoJuego::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 100, 100, "recursos/img/mapa/grass/floortileset.png");
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 100, 100, "recursos/img/mapa/terrenos/terreno_01.png");
 
     // cargando mapa desde archivo
     _tileMap->cargarDesdeArchivo("text.slmp");

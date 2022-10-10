@@ -8,37 +8,41 @@ class Atributos
 
 	public:
 		// Atributos
-		int vitalidad; // checkear su usar int / unsigned para atributos y sistema de leveo
-		int fuerza;
-		int agilidad;
-		int destreza;
-		int inteligencia;
+		int _vitalidad; // checkear su usar int / unsigned para atributos y sistema de leveo
+		int _fuerza;
+		int _agilidad;
+		int _destreza;
+		int _inteligencia;
 
 		// Sistema de niveles y experiencia
-		int nivel;
-		int experiencia;
-		int expSiguienteNivel;
-		int puntosAtributo;
+		unsigned _nivel;
+		unsigned _experiencia;
+		unsigned _expSiguienteNivel;
+		unsigned _puntosAtributo;
 
 		// Estadisticas
-		int hp;
-		int hpMax;
-		int dmgMin;
-		int dmgMax;
-		int defensa;
-		int punteria;
-		int suerte;
+		int _hp;
+		int _hpMax;
+		int _dmgMin;
+		int _dmgMax;
+		int _defensa;
+		int _punteria;
+		int _suerte;
 
 
 		// Metodos
 		Atributos(int nivel);
 		virtual ~Atributos();
 
-		void actualizarEstadisticas();
+		void actualizarEstadisticas(const bool reset);
 
-		void levelUp();
+		void subirExp(const unsigned experincia);
+
+		void actualizarNivel();
 
 		void actualizar();
+
+		std::string debug() const;
 
 };
 
