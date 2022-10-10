@@ -58,7 +58,12 @@ void EstadoJuego::iniciarMenuPausa()
 
 void EstadoJuego::iniciarJugadores()
 {
-    player = new Jugador(0, 0, _texturas["PLANTILLA_JUGADOR"]);
+    _jugador = new Jugador(0, 0, _texturas["PLANTILLA_JUGADOR"]);
+}
+
+void EstadoJuego::iniciarGUIJugador()
+{
+    _GUIJugador = new GUIJugador(_jugador);
 }
 
 void EstadoJuego::iniciarTileMap()
@@ -82,11 +87,13 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
 
     this->iniciarTileMap();
     this->iniciarJugadores();
+    this->iniciarGUIJugador();
 }
 
 EstadoJuego::~EstadoJuego()
 {
-    delete player;
+    delete _jugador;
+    delete _GUIJugador;
     delete _menuPausa;
     delete _tileMap;
 }
@@ -96,7 +103,7 @@ EstadoJuego::~EstadoJuego()
 void EstadoJuego::actualizarVistaCam(const float& DT)
 {
     // seteando camara con jugador en el centro
-    _vistaCam.setCenter(std::floor(player->getPosicionSprite().x), std::floor(player->getPosicionSprite().y)); // floor para estabilizar el float en pixels 
+    _vistaCam.setCenter(std::floor(_jugador->getPosicionSprite().x), std::floor(_jugador->getPosicionSprite().y)); // floor para estabilizar el float en pixels 
 }
 
 void EstadoJuego::actualizarInput(const float& DT)
@@ -112,17 +119,22 @@ void EstadoJuego::actualizarInput(const float& DT)
 
 void EstadoJuego::actualizarInputJugador(const float& DT)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_IZQUIERDA"))))
-        player->mover(-1.f, 0.f, DT);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_IZQUIERDA")))) {
+        _jugador->mover(-1.f, 0.f, DT);
+        _jugador->perderHP(1);
+    }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_DERECHA"))))
-        player->mover(1.f, 0.f, DT);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_DERECHA")))) {
+
+        _jugador->mover(1.f, 0.f, DT);
+        _jugador->ganarHP(1);
+    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_ARRIBA"))))
-        player->mover(0.f, -1.f, DT);
+        _jugador->mover(0.f, -1.f, DT);
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_ABAJO"))))
-        player->mover(0.f, 1.f, DT);
+        _jugador->mover(0.f, 1.f, DT);
 
    
 
@@ -137,7 +149,7 @@ void EstadoJuego::actualizarBotonesPausa()
 void EstadoJuego::actualizarTileMap(const float& DT)
 {
     _tileMap->actualizar();
-    _tileMap->checkColision(player, DT);
+    _tileMap->checkColision(_jugador, DT);
 }
 
 void EstadoJuego::actualizar(const float& DT)
@@ -154,7 +166,9 @@ void EstadoJuego::actualizar(const float& DT)
 
         actualizarTileMap(DT);
 
-        player->actualizar(DT);
+        _jugador->actualizar(DT);
+
+        _GUIJugador->actualizar(DT);
 
     }
     else // actualizar con pausa
@@ -176,22 +190,22 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
 
     // TODO SE RENDERIZA A TRAVES DEL LIENZO
     _renderTextura.setView(_vistaCam); // con la vista seteada
-    _tileMap->renderizar(_renderTextura, player->getCuadroActual(static_cast<int>(_datosEstado->tamanioCuadro)));
-
-    player->renderizar(_renderTextura);
-
+    _tileMap->renderizar(_renderTextura, _jugador->getCuadroActual(static_cast<int>(_datosEstado->tamanioCuadro)));
+    _jugador->renderizar(_renderTextura);
     _tileMap->renderizacionDiferida(_renderTextura);
 
+    _renderTextura.setView(_renderTextura.getDefaultView()); // vista por default
+    _GUIJugador->renderizar(_renderTextura);
+
     if (_pausa) { 
-        // renderizar MENU PAUSA con vistaCam por default
-        _renderTextura.setView(_renderTextura.getDefaultView());
+        //_renderTextura.setView(_renderTextura.getDefaultView()); // vista por default
         _menuPausa->renderizar(_renderTextura);
     }
 
     _renderTextura.display(); // actualiza el contenido
     
+    //_renderSprite.setTexture(_renderTextura.getTexture());
     // RENDERIZADO FINAL (la ventana dibuja el sprite del lienzo, que contiene el renderizado de lo demas)
-    _renderSprite.setTexture(_renderTextura.getTexture());
     target->draw(_renderSprite);
 
 }

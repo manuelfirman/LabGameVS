@@ -281,7 +281,7 @@ gui::SelectorTexturas::SelectorTexturas(float x, float y, float ancho, float alt
     _tamanioCuadro = tamanioCuadro;
     _activo = false;
     _esconder = false;
-    float offset = 100.f;
+    float offset = tamanioCuadro;
 
     _limites.setSize(sf::Vector2f(ancho, alto));
     _limites.setPosition(x + offset, y);

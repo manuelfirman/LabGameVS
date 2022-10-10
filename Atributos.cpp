@@ -12,16 +12,58 @@ Atributos::Atributos(int nivel)
 
 	// Sistema de leveo
 	_nivel = nivel;
-	_experiencia = 0;
-	_expSiguienteNivel = static_cast<unsigned>((50/3) * (pow(_nivel, 3) - 6 * pow(_nivel, 2) + (_nivel * 17) - 12));
+	_experiencia = static_cast<unsigned>((50 / 3) * (pow(_nivel +1, 3) - 6 * pow(_nivel +1, 2) + ((_nivel+1 * 17)) - 12));;
+	_expSiguienteNivel = 0;
 	_puntosAtributo = 0;
 
+	actualizarNivel();
 	actualizarEstadisticas(true);
 }
 
 Atributos::~Atributos()
 {
 }
+
+
+
+const int Atributos::getHP()
+{
+	return _hp;
+}
+
+const int Atributos::getHPMax()
+{
+	return _hpMax;
+}
+
+void Atributos::perderVida(const int hp)
+{
+	_hp -= hp;
+
+	if (_hp <= 0) _hp = 0;
+}
+
+void Atributos::ganarVida(const int hp)
+{
+	_hp += hp;
+
+	if (_hp >= _hpMax) _hp = _hpMax;
+}
+
+void Atributos::perderExperiencia(const int experiencia)
+{
+	_experiencia += experiencia;
+
+	if (_experiencia <  0) _experiencia = 0;
+}
+
+void Atributos::ganarExperiencia(const int experiencia)
+{
+	_experiencia += experiencia;
+
+	if (_experiencia < 0) actualizarNivel();
+}
+
 
 void Atributos::actualizarEstadisticas(const bool reset)
 {
@@ -39,11 +81,7 @@ void Atributos::actualizarEstadisticas(const bool reset)
 	}
 }
 
-void Atributos::subirExp(const unsigned experiencia)
-{
-	_experiencia += experiencia;
-	actualizarNivel();
-}
+
 
 void Atributos::actualizarNivel()
 {

@@ -23,7 +23,7 @@ Jugador::Jugador(float x, float y, sf::Texture& textura)
     crearHitbox(_sprite, 18.f, 17.f, 28.f, 44.f);
     crearComponenteMovimiento(300.f, 1400.f, 1000.f); // Movimiento
     crearComponenteAnimacion(textura);
-    crearComponenteAtributos(1);
+    crearComponenteAtributos(0);
 
     _animacion->agregarAnimacion("QUIETO", 10.f, 1, 10, 1, 10, 64, 64); // key - Velocidad animacion - inicioX - inicioY - framesX - framesY
     _animacion->agregarAnimacion("CAMINAR_ABAJO", 3.f, 1, 10, 8, 10, 64, 64);
@@ -49,6 +49,31 @@ Jugador::Jugador(float x, float y, sf::Texture& textura)
 Jugador::~Jugador()
 {
     //dtor
+}
+
+Atributos* Jugador::getAtributos()
+{
+    return _atributos;
+}
+
+void Jugador::ganarHP(const int hp)
+{
+    _atributos->ganarVida(hp);
+}
+
+void Jugador::perderHP(const int hp)
+{
+    _atributos->perderVida(hp);
+}
+
+void Jugador::ganarExperiencia(const int experiencia)
+{
+    _atributos->ganarExperiencia(experiencia);
+}
+
+void Jugador::perdeExperiencia(const int experiencia)
+{
+    _atributos->perderExperiencia(experiencia);
 }
 
 void Jugador::actualizarAtaque(const float& DT)
@@ -192,7 +217,7 @@ void Jugador::actualizar(const float& DT)
 {
     //_atributos->actualizar();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-        _atributos->subirExp(20);
+        _atributos->ganarExperiencia(20);
 
     std::cout << _atributos->debug() << "\n";
 

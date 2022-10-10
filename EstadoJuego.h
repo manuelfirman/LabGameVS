@@ -3,12 +3,15 @@
 #include "EstadoBase.h"
 #include "MenuPausa.h"
 #include "Jugador.h"
+#include "GUIJugador.h"
 #include "TileMap.h"
+
 
 class EstadoBase;
 class MenuPausa;
 class Jugador;
 class TileMap;
+class GUIJugador;
 
 class sf::View;
 class sf::Font;
@@ -25,7 +28,8 @@ private: // Atributos
     MenuPausa* _menuPausa;
     sf::Font _fuenteJuego;
 
-    Jugador* player;
+    Jugador* _jugador;
+    GUIJugador* _GUIJugador;
 
     TileMap* _tileMap;
 
@@ -40,6 +44,7 @@ private: // Metodos
     void iniciarTexturas();
     void iniciarMenuPausa();
     void iniciarJugadores();
+    void iniciarGUIJugador();
     void iniciarTileMap();
 
 public:

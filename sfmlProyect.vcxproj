@@ -160,6 +160,7 @@
     <ClCompile Include="EstadoMenuPrincipal.cpp" />
     <ClCompile Include="EstadoOpciones.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GUIJugador.cpp" />
     <ClCompile Include="Hitbox.cpp" />
     <ClCompile Include="Jugador.cpp" />
     <ClCompile Include="main.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="EstadoMenuPrincipal.h" />
     <ClInclude Include="EstadoOpciones.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GUIJugador.h" />
     <ClInclude Include="Hitbox.h" />
     <ClInclude Include="Jugador.h" />
     <ClInclude Include="MenuPausa.h" />
