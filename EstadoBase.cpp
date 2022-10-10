@@ -19,6 +19,16 @@ EstadoBase::~EstadoBase()
     //dtor
 }
 
+const float EstadoBase::porcentajeApixelsX(const float porcentaje)
+{
+    return std::floor(static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width) * (porcentaje/100.f));
+}
+
+const float EstadoBase::porcentajeApixelsY(const float porcentaje)
+{
+    return std::floor(static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height) * (porcentaje/100.f));
+}
+
 
 /// --------------------- FUNCIONES ---------------------
 void EstadoBase::finEstado()

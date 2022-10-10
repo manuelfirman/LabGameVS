@@ -63,6 +63,9 @@ public:
     EstadoBase(DatosEstado* datos_estado);
     virtual ~EstadoBase();
 
+    const float porcentajeApixelsX(const float porcentaje);
+    const float porcentajeApixelsY(const float porcentaje);
+
     // Accesorios
     const bool& getSalir() const;
     const bool getPpsTeclas();
