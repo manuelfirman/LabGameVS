@@ -77,11 +77,11 @@ const sf::Texture* TileMap::getTexturaTile() const
 
 const int TileMap::getTilesPorCuadro(const int x, const int y, const int capa) const
 {
-	if (x >= 0 && x < _mapa.size())
+	if (x >= 0 && x < static_cast<int>(_mapa.size()))
 	{
-		if (y >= 0 && y < _mapa[x].size())
+		if (y >= 0 && y < static_cast<int>(_mapa[x].size()))
 		{
-			if (capa >= 0 && capa < _mapa[x][y].size())
+			if (capa >= 0 && capa < static_cast<int>(_mapa[x][y].size()))
 			{
 				return static_cast<int>(_mapa[x][y][capa].size());
 			}

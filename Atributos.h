@@ -23,10 +23,10 @@ class Atributos
 		int _inteligencia;
 
 		// Sistema de niveles y experiencia
-		unsigned _nivel;
-		unsigned _experiencia;
-		unsigned _expSiguienteNivel;
-		unsigned _puntosAtributo;
+		int _nivel;
+		int _experiencia;
+		int _expSiguienteNivel;
+		int _puntosAtributo;
 
 
 
@@ -38,6 +38,9 @@ class Atributos
 		// getters
 		const int getHP();
 		const int getHPMax();
+		const int getExp();
+		const int getExpSiguienteNivel();
+		const int getNivel();
 
 		// setters
 		void perderVida(const int hp);

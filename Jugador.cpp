@@ -219,7 +219,8 @@ void Jugador::actualizar(const float& DT)
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
         _atributos->ganarExperiencia(20);
 
-    std::cout << _atributos->debug() << "\n";
+    //std::cout << _atributos->debug() << "\n";
+
 
     _movimiento->actualizar(DT);
 
