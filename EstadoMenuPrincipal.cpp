@@ -54,11 +54,11 @@ void EstadoMenuPrincipal::iniciarBotones()
 
     _boton["ESTADO_CARGAR"] = new gui::Boton(p2pX(15.6f), p2pY(44.4f), p2pX(10.4f), p2pY(4.5f), "CARGAR PARTIDA", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_OPCIONES"] = new gui::Boton(p2pX(15.6f), p2pY(51.85), p2pX(10.4f), p2pY(4.5f), "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_OPCIONES"] = new gui::Boton(p2pX(15.6f), p2pY(51.8f), p2pX(10.4f), p2pY(4.5f), "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
     _boton["ESTADO_SALIR"] = new gui::Boton(p2pX(15.6f), p2pY(59.25), p2pX(10.4f), p2pY(4.5f), "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_EDITOR"] = new gui::Boton(p2pX(15.6f), p2pY(74.07), p2pX(10.4f), p2pY(4.5f), "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_EDITOR"] = new gui::Boton(p2pX(15.6f), p2pY(74.f), p2pX(10.4f), p2pY(4.5f), "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
