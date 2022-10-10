@@ -5,6 +5,10 @@ enum estado_boton { INACTIVO = 0, HOVER, ACTIVO };
 
 namespace gui
 {
+    const float p2pX(const float porcentaje, const sf::VideoMode& modo_video);
+    const float p2pY(const float porcentaje, const sf::VideoMode& modo_video);
+    const unsigned calcTamCaracter(const sf::VideoMode& modo_video);
+
 
     // BOTON
     class Boton

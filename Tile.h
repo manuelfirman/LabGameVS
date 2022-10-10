@@ -1,7 +1,7 @@
 #ifndef TILE_H
 #define TILE_H
 
-enum TipoTile{ SUELO = 0, PARED, TOP };
+enum tipo_tile{ SUELO = 0, PARED, TOP };
 
 class Tile
 {
@@ -14,7 +14,7 @@ class Tile
 
 	public:
 		Tile();
-		Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision = false, short tipo = TipoTile::SUELO);
+		Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision = false, short tipo = tipo_tile::SUELO);
 		~Tile();
 
 		// Getters

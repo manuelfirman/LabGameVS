@@ -409,7 +409,7 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{	
 				// Orden de renderizado
-				if (_mapa[x][y][_capa][C]->getTipoTile() == TipoTile::TOP)
+				if (_mapa[x][y][_capa][C]->getTipoTile() == tipo_tile::TOP)
 				{
 					_pilaRenderDiferida.push(_mapa[x][y][_capa][C]);
 				}

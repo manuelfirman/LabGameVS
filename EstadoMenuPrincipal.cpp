@@ -42,6 +42,7 @@ void EstadoMenuPrincipal::iniciarFuentes()
 
 void EstadoMenuPrincipal::iniciarBotones()
 {
+    const sf::VideoMode& modo_video = _datosEstado->opcionesGraficas->_resolucion;
     //float posX = _ventana->getSize().x / 2.f - 100;
     sf::Color colorInactivo = sf::Color(70, 70, 70, 50);
     sf::Color colorActivo = sf::Color(250, 250, 250, 0);
@@ -50,15 +51,15 @@ void EstadoMenuPrincipal::iniciarBotones()
     sf::Color colorTextoHover = sf::Color(150, 150, 150, 255);
     sf::Color colorTextoActivo = sf::Color(20, 20, 20, 220);
 
-    _boton["ESTADO_JUEGO"] = new gui::Boton(p2pX(15.6f), p2pY(37.f), p2pX(10.4f), p2pY(4.5f), "NUEVO JUEGO", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_JUEGO"] = new gui::Boton(gui::p2pX(15.6f, modo_video), gui::p2pY(37.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "NUEVO JUEGO", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_CARGAR"] = new gui::Boton(p2pX(15.6f), p2pY(44.4f), p2pX(10.4f), p2pY(4.5f), "CARGAR PARTIDA", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_CARGAR"] = new gui::Boton(gui::p2pX(15.6f, modo_video), gui::p2pY(44.4f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "CARGAR PARTIDA", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_OPCIONES"] = new gui::Boton(p2pX(15.6f), p2pY(51.8f), p2pX(10.4f), p2pY(4.5f), "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_OPCIONES"] = new gui::Boton(gui::p2pX(15.6f, modo_video), gui::p2pY(51.8f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "OPCIONES", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_SALIR"] = new gui::Boton(p2pX(15.6f), p2pY(59.25), p2pX(10.4f), p2pY(4.5f), "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_SALIR"] = new gui::Boton(gui::p2pX(15.6f, modo_video), gui::p2pY(59.2f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "SALIR", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_EDITOR"] = new gui::Boton(p2pX(15.6f), p2pY(74.f), p2pX(10.4f), p2pY(4.5f), "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_EDITOR"] = new gui::Boton(gui::p2pX(15.6f, modo_video), gui::p2pY(74.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "EDITOR", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------

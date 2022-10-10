@@ -63,9 +63,6 @@ public:
     EstadoBase(DatosEstado* datos_estado);
     virtual ~EstadoBase();
 
-    const float p2pX(const float porcentaje);
-    const float p2pY(const float porcentaje);
-
     // Accesorios
     const bool& getSalir() const;
     const bool getPpsTeclas();

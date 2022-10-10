@@ -7,7 +7,7 @@ void EstadoEditor::iniciarVariables()
     _rectTextura = sf::IntRect(0, 0, static_cast<int>(_datosEstado->tamanioCuadro), static_cast<int>(_datosEstado->tamanioCuadro));
 
     _colision = false;
-    _tipo = TipoTile::SUELO;
+    _tipo = tipo_tile::SUELO;
     _capa = 0;
 
     _velocidadCamara = 100.f;

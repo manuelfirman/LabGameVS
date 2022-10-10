@@ -42,6 +42,7 @@ void EstadoOpciones::iniciarFuentes()
 
 void EstadoOpciones::iniciarGUI()
 {
+    const sf::VideoMode& modo_video = _datosEstado->opcionesGraficas->_resolucion;
     //float posX = _ventana->getSize().x / 2.f - 100;
     sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
     sf::Color colorActivo = sf::Color(189, 236, 182, 155);
@@ -51,9 +52,9 @@ void EstadoOpciones::iniciarGUI()
     sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
   
 
-    _boton["VOLVER"] = new gui::Boton(100.f, 900.f, 200.f, 50.f, "VOLVER", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["VOLVER"] = new gui::Boton(gui::p2pX(5.2f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "VOLVER", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["APLICAR"] = new gui::Boton(400.f, 900.f, 200.f, 50.f, "APLICAR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["APLICAR"] = new gui::Boton(gui::p2pX(20.8f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "APLICAR", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
 
     std::vector<std::string> modos_str;
@@ -62,7 +63,7 @@ void EstadoOpciones::iniciarGUI()
         modos_str.push_back(std::to_string(modos.width) + 'x' + std::to_string(modos.height));
     }
 
-    _listasDesplegables["RESOLUCION"] = new gui::ListaDesplegable(800.f, 400.f, 200.f, 50.f, _fuenteBoton, modos_str.data(), int(modos_str.size()));
+    _listasDesplegables["RESOLUCION"] = new gui::ListaDesplegable(gui::p2pX(41.6f, modo_video), gui::p2pY(37.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), _fuenteBoton, modos_str.data(), int(modos_str.size()));
 
 
 }
