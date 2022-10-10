@@ -43,22 +43,22 @@ void EstadoMenuPrincipal::iniciarFuentes()
 void EstadoMenuPrincipal::iniciarBotones()
 {
     //float posX = _ventana->getSize().x / 2.f - 100;
-    sf::Color colorInactivo = sf::Color(70, 70, 70, 0);
+    sf::Color colorInactivo = sf::Color(70, 70, 70, 50);
     sf::Color colorActivo = sf::Color(250, 250, 250, 0);
     sf::Color colorHover = sf::Color(20, 20, 20, 0);
     sf::Color colorTextoInactivo = sf::Color(30, 30, 30, 220);
     sf::Color colorTextoHover = sf::Color(150, 150, 150, 255);
     sf::Color colorTextoActivo = sf::Color(20, 20, 20, 220);
 
-    _boton["ESTADO_JUEGO"] = new gui::Boton(300.f, 400.f, 200.f, 50.f, "NUEVO JUEGO", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_JUEGO"] = new gui::Boton(p2pX(15.6f), p2pY(37.f), p2pX(10.4f), p2pY(4.5f), "NUEVO JUEGO", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_CARGAR"] = new gui::Boton(300.f, 480.f, 200.f, 50.f, "CARGAR PARTIDA", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_CARGAR"] = new gui::Boton(p2pX(15.6f), p2pY(44.4f), p2pX(10.4f), p2pY(4.5f), "CARGAR PARTIDA", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_OPCIONES"] = new gui::Boton(300.f, 560.f, 200.f, 50.f, "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_OPCIONES"] = new gui::Boton(p2pX(15.6f), p2pY(51.85), p2pX(10.4f), p2pY(4.5f), "OPCIONES", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_SALIR"] = new gui::Boton(300.f, 640.f, 200.f, 50.f, "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_SALIR"] = new gui::Boton(p2pX(15.6f), p2pY(59.25), p2pX(10.4f), p2pY(4.5f), "SALIR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["ESTADO_EDITOR"] = new gui::Boton(300.f, 800.f, 200.f, 50.f, "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_EDITOR"] = new gui::Boton(p2pX(15.6f), p2pY(74.07), p2pX(10.4f), p2pY(4.5f), "EDITOR", 20, _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
@@ -136,16 +136,4 @@ void EstadoMenuPrincipal::renderizar(sf::RenderTarget* target)
     target->draw(_fondoMenu);
 
     renderBotones(*target);
-
-
-    /// VER POSICION MOUSE AL LADO DE LA FLECHA (QUITAR DESPUES)
-//    sf::Text textoMouse;
-//    textoMouse.setPosition(posMouseVista.x, posMouseVista.y - 50);
-//    textoMouse.setFont(_fuenteBoton);
-//    textoMouse.setCharacterSize(12);
-//    std::stringstream ss;
-//    ss << posMouseVista.x << " " << posMouseVista.y;
-//    textoMouse.setString(ss.str());
-//
-//    target->draw(textoMouse);
 }
