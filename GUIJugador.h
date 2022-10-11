@@ -2,6 +2,7 @@
 #define GUIJUGADOR_H
 
 #include "Jugador.h"
+#include "Gui.h"
 
 class Jugador;
 class sf::RectangleShape;
@@ -11,6 +12,7 @@ class GUIJugador
 	private:
 		Jugador* _jugador;
 
+		sf::VideoMode& _modoVideo;
 		sf::Font _fuenteGUI;
 
 		// BARRA DE EXPERIENCIA
@@ -43,7 +45,7 @@ class GUIJugador
 
 
 	public:
-		GUIJugador(Jugador* jugador);
+		GUIJugador(Jugador* jugador, sf::VideoMode& modo_video);
 		virtual ~GUIJugador();
 
 		void actualizarBarraExp();

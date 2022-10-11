@@ -19,16 +19,14 @@ void EstadoOpciones::iniciarKeybinds()
             _keybinds[accion] = _teclasSoportadas->at(tecla);
         }
     }
+
+    archivo.close();
 }
 
-void EstadoOpciones::iniciarFondo()
-{
-    if (!_texturaFondoOpciones.loadFromFile("recursos/img/fondos/fondo_menu.jpg"))
-        std::cout << "ERROR:iniciarFondo_EstadoMenuPrincipal_CargarTexturaMenu" << std::endl;
+//void EstadoOpciones::iniciarFondo()
+//{
 
-    _fondoOpciones.setSize(sf::Vector2f(static_cast<float>(_ventana->getSize().x), static_cast<float>(_ventana->getSize().y)));
-    _fondoOpciones.setTexture(&_texturaFondoOpciones);
-}
+//}
 
 void EstadoOpciones::iniciarFuentes()
 {
@@ -43,6 +41,14 @@ void EstadoOpciones::iniciarFuentes()
 void EstadoOpciones::iniciarGUI()
 {
     const sf::VideoMode& modo_video = _datosEstado->opcionesGraficas->_resolucion;
+
+    if (!_texturaFondoOpciones.loadFromFile("recursos/img/fondos/fondo_menu.jpg"))
+        std::cout << "ERROR:iniciarFondo_EstadoMenuPrincipal_CargarTexturaMenu" << std::endl;
+
+    _fondoOpciones.setSize(sf::Vector2f(static_cast<float>(modo_video.width), static_cast<float>(modo_video.height)));
+    _fondoOpciones.setTexture(&_texturaFondoOpciones);
+
+
     //float posX = _ventana->getSize().x / 2.f - 100;
     sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
     sf::Color colorActivo = sf::Color(189, 236, 182, 155);
@@ -65,16 +71,30 @@ void EstadoOpciones::iniciarGUI()
 
     _listasDesplegables["RESOLUCION"] = new gui::ListaDesplegable(gui::p2pX(41.6f, modo_video), gui::p2pY(37.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), _fuenteBoton, modos_str.data(), int(modos_str.size()));
 
+    // Texto
+    _textoOpciones.setFont(_fuenteOpciones);
+    _textoOpciones.setPosition(sf::Vector2f(gui::p2pX(5.2f, modo_video), gui::p2pY(9.2f, modo_video)));
+    _textoOpciones.setCharacterSize(gui::calcTamCaracter(modo_video));
+    _textoOpciones.setFillColor(sf::Color(255, 255, 255, 200));
+    _textoOpciones.setString("Resolucion \nFullscreen \nVsync \nAntialiasing");
 
 }
 
-void EstadoOpciones::iniciarTexto()
+void EstadoOpciones::resetGUI()
 {
-    _textoOpciones.setFont(_fuenteOpciones);
-    _textoOpciones.setPosition(sf::Vector2f(100.f, 100.f));
-    _textoOpciones.setCharacterSize(30);
-    _textoOpciones.setFillColor(sf::Color(255,255,255,200));
-    _textoOpciones.setString("Resolucion \nFullscreen \nVsync \nAntialiasing");
+    auto botones = _boton.begin(); // delete Botones
+    for (botones = _boton.begin(); botones != _boton.end(); ++botones) {
+        delete botones->second;
+    }
+    _boton.clear();
+
+    auto listas = _listasDesplegables.begin(); // delete Lista
+    for (listas = _listasDesplegables.begin(); listas != _listasDesplegables.end(); ++listas) {
+        delete listas->second;
+    }
+    _listasDesplegables.clear();
+
+    this->iniciarGUI();
 }
 
 
@@ -83,11 +103,9 @@ EstadoOpciones::EstadoOpciones(DatosEstado* datos_estado)
     : EstadoBase(datos_estado)
 {
     iniciarVariables();
-    iniciarFondo();
     iniciarFuentes();
     iniciarKeybinds();
     iniciarGUI();
-    iniciarTexto();
 }
 
 EstadoOpciones::~EstadoOpciones()
@@ -130,6 +148,8 @@ void EstadoOpciones::actualizarGUI(const float& DT)
         _datosEstado->opcionesGraficas->_resolucion = _modoVideo[_listasDesplegables["RESOLUCION"]->getIDelementoAtivo()];
 
         _ventana->create(_datosEstado->opcionesGraficas->_resolucion, _datosEstado->opcionesGraficas->_titulo, sf::Style::Default);
+
+        this->resetGUI();
     }
         
 

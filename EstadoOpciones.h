@@ -24,10 +24,10 @@ class EstadoOpciones : public EstadoBase
     private: // Metodos
         void iniciarVariables();
         void iniciarKeybinds();
-        void iniciarFondo();
+
         void iniciarFuentes();
         void iniciarGUI();
-        void iniciarTexto();
+        void resetGUI();
 	
 	public:
 		EstadoOpciones(DatosEstado* datos_estado);

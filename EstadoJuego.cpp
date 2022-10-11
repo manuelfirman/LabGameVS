@@ -39,6 +39,8 @@ void EstadoJuego::iniciarKeybinds()
             _keybinds[accion] = _teclasSoportadas->at(tecla);
         }
     }
+
+    archivo.close();
 }
 
 void EstadoJuego::iniciarTexturas()
@@ -52,8 +54,8 @@ void EstadoJuego::iniciarTexturas()
 
 void EstadoJuego::iniciarMenuPausa()
 {
-    _menuPausa = new MenuPausa(*_ventana, _fuenteJuego);
-    _menuPausa->agregarBoton("SALIR", 500.f, "SALIR");
+    _menuPausa = new MenuPausa(_datosEstado->opcionesGraficas->_resolucion, _fuenteJuego);
+    _menuPausa->agregarBoton("SALIR", gui::p2pY(46.3f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(10.4f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "SALIR");
 }
 
 void EstadoJuego::iniciarJugadores()
@@ -63,7 +65,7 @@ void EstadoJuego::iniciarJugadores()
 
 void EstadoJuego::iniciarGUIJugador()
 {
-    _GUIJugador = new GUIJugador(_jugador);
+    _GUIJugador = new GUIJugador(_jugador, _datosEstado->opcionesGraficas->_resolucion);
 }
 
 void EstadoJuego::iniciarTileMap()
@@ -102,8 +104,13 @@ EstadoJuego::~EstadoJuego()
 
 void EstadoJuego::actualizarVistaCam(const float& DT)
 {
-    // seteando camara con jugador en el centro
-    _vistaCam.setCenter(std::floor(_jugador->getPosicionSprite().x), std::floor(_jugador->getPosicionSprite().y)); // floor para estabilizar el float en pixels 
+    // Jugador centrado
+    //_vistaCam.setCenter(std::floor(_jugador->getPosicionSprite().x), std::floor(_jugador->getPosicionSprite().y)); // floor para estabilizar el float en pixels 
+
+    // Jugador centrado + movimiento de mouse
+    _vistaCam.setCenter(
+        std::floor(_jugador->getPosicionSprite().x + (static_cast<float>(posMouseVentana.x)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width / 2) / 5.f)),
+        std::floor(_jugador->getPosicionSprite().y + (static_cast<float>(posMouseVentana.y)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height / 2) / 5.f))); // floor para estabilizar el float en pixels 
 }
 
 void EstadoJuego::actualizarInput(const float& DT)

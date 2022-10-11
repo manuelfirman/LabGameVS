@@ -19,16 +19,10 @@ void EstadoMenuPrincipal::iniciarKeybinds()
             _keybinds[accion] = _teclasSoportadas->at(tecla);
         }
     }
+
+    archivo.close();
 }
 
-void EstadoMenuPrincipal::iniciarFondo()
-{
-    if (!_texturaFondoMenu.loadFromFile("recursos/img/fondos/fondo_menu.jpg"))
-        std::cout << "ERROR:iniciarFondo_EstadoMenuPrincipal_CargarTexturaMenu" << std::endl;
-
-    _fondoMenu.setSize(sf::Vector2f(static_cast<float>(_ventana->getSize().x), static_cast<float>(_ventana->getSize().y)));
-    _fondoMenu.setTexture(&_texturaFondoMenu);
-}
 
 void EstadoMenuPrincipal::iniciarFuentes()
 {
@@ -40,9 +34,16 @@ void EstadoMenuPrincipal::iniciarFuentes()
     }
 }
 
-void EstadoMenuPrincipal::iniciarBotones()
+void EstadoMenuPrincipal::iniciarGUI()
 {
     const sf::VideoMode& modo_video = _datosEstado->opcionesGraficas->_resolucion;
+
+    if (!_texturaFondoMenu.loadFromFile("recursos/img/fondos/fondo_menu.jpg"))
+        std::cout << "ERROR:iniciarFondo_EstadoMenuPrincipal_CargarTexturaMenu" << std::endl;
+
+    _fondoMenu.setSize(sf::Vector2f(static_cast<float>(modo_video.width), static_cast<float>(modo_video.height)));
+    _fondoMenu.setTexture(&_texturaFondoMenu);
+
     //float posX = _ventana->getSize().x / 2.f - 100;
     sf::Color colorInactivo = sf::Color(70, 70, 70, 50);
     sf::Color colorActivo = sf::Color(250, 250, 250, 0);
@@ -62,15 +63,25 @@ void EstadoMenuPrincipal::iniciarBotones()
     _boton["ESTADO_EDITOR"] = new gui::Boton(gui::p2pX(15.6f, modo_video), gui::p2pY(74.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "EDITOR", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 }
 
+void EstadoMenuPrincipal::resetGUI()
+{
+    auto it = _boton.begin();
+    for (it = _boton.begin(); it != _boton.end(); ++it) {
+        delete it->second;
+    }
+    _boton.clear();
+    this->iniciarGUI();
+}
+
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 EstadoMenuPrincipal::EstadoMenuPrincipal(DatosEstado* datos_estado)
     : EstadoBase(datos_estado)
 {
     this->iniciarVariables();
     this->iniciarKeybinds();
-    this->iniciarFondo();
     this->iniciarFuentes();
-    this->iniciarBotones();
+    this->iniciarGUI();
+    this->resetGUI();
 
 }
 

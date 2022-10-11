@@ -2,22 +2,23 @@
 #include "MenuPausa.h"
 
 /// --------------------------------- CONSTRUCTOR / DESTRUCTOR ----------------------------------------
-MenuPausa::MenuPausa(sf::RenderWindow& ventana, sf::Font& fuente)
+MenuPausa::MenuPausa(sf::VideoMode& modo_video, sf::Font& fuente)
 	: _fuentePausa(fuente)
 {
-	_fondo.setSize(sf::Vector2f(static_cast<float>(ventana.getSize().x), static_cast<float>(ventana.getSize().y)));
+	_fondo.setSize(sf::Vector2f(static_cast<float>(modo_video.width), static_cast<float>(modo_video.height)));
 	_fondo.setFillColor(sf::Color(20,20,20,100));
 
-	_contenedor.setSize(sf::Vector2f(static_cast<float>(ventana.getSize().x) / 4.f, static_cast<float>(ventana.getSize().y) - 100.f));
+	_contenedor.setSize(sf::Vector2f(static_cast<float>(modo_video.width) / 4.f, static_cast<float>(modo_video.height) - gui::p2pY(9.2f, modo_video)));
 	_contenedor.setFillColor(sf::Color(20, 20, 20, 200));
 
-	_contenedor.setPosition(static_cast<float>(ventana.getSize().x) / 2.f - _contenedor.getSize().x / 2.f, 30.f);
+	_contenedor.setPosition(static_cast<float>(modo_video.width) / 2.f - _contenedor.getSize().x / 2.f, gui::p2pY(2.8f, modo_video));
 
 	_textoPausa.setFont(fuente);
 	_textoPausa.setFillColor(sf::Color(255,255,255,200));
-	_textoPausa.setCharacterSize(30);
+	_textoPausa.setCharacterSize(gui::calcTamCaracter(modo_video));
 	_textoPausa.setString("PAUSA");
-	_textoPausa.setPosition(_contenedor.getPosition().x + _contenedor.getSize().x / 2.f - _textoPausa.getGlobalBounds().width / 2.f, _contenedor.getPosition().y);
+	_textoPausa.setPosition(_contenedor.getPosition().x + _contenedor.getSize().x / 2.f - _textoPausa.getGlobalBounds().width / 2.f,
+							_contenedor.getPosition().y + gui::p2pY(4.f, modo_video));
 }
 
 MenuPausa::~MenuPausa()
@@ -39,10 +40,8 @@ const bool MenuPausa::getClick(const std::string key)
 	return _botones[key]->getClick();
 }
 
-void MenuPausa::agregarBoton(const std::string key, float y, const std::string texto)
+void MenuPausa::agregarBoton(const std::string key, const float y, const float ancho, const float alto, const unsigned tamCaracter, const std::string texto)
 {
-	float ancho = 200.f;
-	float alto = 50.f;
 	float x = _contenedor.getPosition().x + _contenedor.getSize().x / 2.f - ancho / 2.f;
 	sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
 	sf::Color colorActivo = sf::Color(189, 236, 182, 155);
@@ -51,7 +50,7 @@ void MenuPausa::agregarBoton(const std::string key, float y, const std::string t
 	sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
 	sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
 
-	_botones[key] = new gui::Boton(x, y, ancho, alto, texto, 20, _fuentePausa, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+	_botones[key] = new gui::Boton(x, y, ancho, alto, texto, tamCaracter, _fuentePausa, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 }
 
 /// --------------------------------- ACTUALIZAR ----------------------------------------

@@ -372,7 +372,7 @@ void TileMap::actualizar()
 
 }
 
-void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro) // se puede enviar cualquier posicion (player, vista, etc)
+void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro, const bool mostrar_hitbox) // se puede enviar cualquier posicion (player, vista, etc)
 {
 	// TILES
 	_capa = 0;
@@ -419,10 +419,13 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 				}
 
 				// Colision con tiles
-				if (_mapa[x][y][_capa][C]->getColision())
+				if (mostrar_hitbox)
 				{
-					_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
-					target.draw(_cajaColisiones);
+					if (_mapa[x][y][_capa][C]->getColision())
+					{
+						_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
+						target.draw(_cajaColisiones);
+					}
 				}
 			}
 		}

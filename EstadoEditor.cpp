@@ -31,6 +31,8 @@ void EstadoEditor::iniciarKeybinds()
             _keybinds[accion] = _teclasSoportadas->at(tecla);
         }
     }
+
+    archivo.close();
 }
 
 void EstadoEditor::iniciarFondo()
@@ -58,13 +60,13 @@ void EstadoEditor::iniciarTexto()
 
 void EstadoEditor::iniciarMenuPausa()
 {
-    _menuPausa = new MenuPausa(*_ventana, _fuente);
+    _menuPausa = new MenuPausa(_datosEstado->opcionesGraficas->_resolucion, _fuente);
 
-    _menuPausa->agregarBoton("SALIR", 800.f, "SALIR");
+    _menuPausa->agregarBoton("SALIR", gui::p2pY(74.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(10.4f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "SALIR");
 
-    _menuPausa->agregarBoton("GUARDAR", 600.f, "GUARDAR");
+    _menuPausa->agregarBoton("GUARDAR", gui::p2pY(55.5f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(10.4f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "GUARDAR");
 
-    _menuPausa->agregarBoton("CARGAR", 400.f, "CARGAR");
+    _menuPausa->agregarBoton("CARGAR", gui::p2pY(37.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(10.4f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "CARGAR");
 }
 
 void EstadoEditor::iniciarBotones()
@@ -297,7 +299,7 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
 
     // render tile map con la vista seteada
     target->setView(_vista);
-    _tileMap->renderizar(*target, posMouseCuadro);
+    _tileMap->renderizar(*target, posMouseCuadro, true);
     _tileMap->renderizacionDiferida(*target);
   
     // render botones con vista por default

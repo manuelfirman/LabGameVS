@@ -52,7 +52,7 @@ class TileMap
 		
 		// Actualizar - Renderizar
 		void actualizar();
-		void renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro);
+		void renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro, const bool mostrar_hitbox = false);
 		void renderizacionDiferida(sf::RenderTarget& target);
 
 };

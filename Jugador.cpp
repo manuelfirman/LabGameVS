@@ -221,7 +221,6 @@ void Jugador::actualizar(const float& DT)
 
     //std::cout << _atributos->debug() << "\n";
 
-
     _movimiento->actualizar(DT);
 
     actualizarAtaque(DT);
@@ -231,9 +230,10 @@ void Jugador::actualizar(const float& DT)
     _hitbox->actualizar();
 }
 
-void Jugador::renderizar(sf::RenderTarget& target)
+void Jugador::renderizar(sf::RenderTarget& target, const bool mostrar_hitbox)
 {
     target.draw(_sprite);
 
-    _hitbox->renderizar(target);
+    if(mostrar_hitbox)
+        _hitbox->renderizar(target);
 }

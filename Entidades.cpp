@@ -128,7 +128,7 @@ void Entidades::actualizar(const float& DT)
 }
 
 /// --------------------- RENDERIZAR --------------------------
-void Entidades::renderizar(sf::RenderTarget& target)
+void Entidades::renderizar(sf::RenderTarget& target, const bool mostrar_hitbox)
 {
 
 

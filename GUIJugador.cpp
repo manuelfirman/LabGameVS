@@ -8,30 +8,30 @@ void GUIJugador::iniciarFuente()
 
 void GUIJugador::iniciarBarraNivel()
 {
-	float ancho = 45.f;
-	float alto = 30.f;
-	float x = 40.f;
-	float y = 15.f;
+	float ancho = gui::p2pX(2.3f, _modoVideo);
+	float alto = gui::p2pY(2.7f, _modoVideo);
+	float x = gui::p2pX(2.f, _modoVideo);
+	float y = gui::p2pY(1.4f, _modoVideo);
 
 	_textoNivel.setFont(_fuenteGUI);
-	_textoNivel.setCharacterSize(18);
+	_textoNivel.setCharacterSize(gui::calcTamCaracter(_modoVideo, 160));
 	_barraNivel.setSize(sf::Vector2f(ancho, alto));
 	_barraNivel.setFillColor(sf::Color(50, 50, 50, 200));
 	_barraNivel.setPosition(x, y);
-	_textoNivel.setPosition(_barraNivel.getPosition().x + 10.f, _barraNivel.getPosition().y + 5.f);
+	_textoNivel.setPosition(_barraNivel.getPosition().x + gui::p2pX(0.2f, _modoVideo), _barraNivel.getPosition().y + gui::p2pY(0.5f, _modoVideo));
 }
 
 void GUIJugador::iniciarBarraHP()
 {
-	float ancho = 300.f;
-	float alto = 20.f;
-	float x = 20.f;
-	float y = 60.f;
+	float ancho = gui::p2pX(16.f, _modoVideo);
+	float alto = gui::p2pY(2.5f, _modoVideo);;
+	float x = gui::p2pX(1.f, _modoVideo);
+	float y = gui::p2pY(5.5f, _modoVideo);;
 
 	_TamMaxBarraVida = ancho;
 
 	_textoVida.setFont(_fuenteGUI);
-	_textoVida.setCharacterSize(18);
+	_textoVida.setCharacterSize(gui::calcTamCaracter(_modoVideo));
 	_barraVidaOut.setSize(sf::Vector2f(ancho, alto));
 	_barraVidaOut.setFillColor(sf::Color(50, 50, 50, 200));
 	_barraVidaOut.setPosition(x, y);
@@ -44,15 +44,15 @@ void GUIJugador::iniciarBarraHP()
 
 void GUIJugador::iniciarBarraExp()
 {
-	float ancho = 300.f;
-	float alto = 10.f;
-	float x = 20.f;
-	float y = 90.f;
+	float ancho = gui::p2pX(16.f, _modoVideo);
+	float alto = gui::p2pY(1.5f, _modoVideo);
+	float x = gui::p2pX(1.f, _modoVideo);
+	float y = gui::p2pY(9.f, _modoVideo);;
 
 	_TamMaxBarraExp = ancho;
 
 	_textoExp.setFont(_fuenteGUI);
-	_textoExp.setCharacterSize(15);
+	_textoExp.setCharacterSize(gui::calcTamCaracter(_modoVideo, 200));
 	_barraExpOut.setSize(sf::Vector2f(ancho, alto));
 	_barraExpOut.setFillColor(sf::Color(50, 50, 50, 200));
 	_barraExpOut.setPosition(x, y);
@@ -62,7 +62,8 @@ void GUIJugador::iniciarBarraExp()
 	
 }
 
-GUIJugador::GUIJugador(Jugador* jugador)
+GUIJugador::GUIJugador(Jugador* jugador, sf::VideoMode& modo_video)
+	: _modoVideo(modo_video)
 {
 	_jugador = jugador;
 	
@@ -87,7 +88,7 @@ void GUIJugador::actualizarBarraExp()
 	_stringExp = std::to_string(_jugador->getAtributos()->getExp()) + " / " + std::to_string(_jugador->getAtributos()->getExpSiguienteNivel());
 	_textoExp.setString(_stringExp);
 	
-	_textoExp.setPosition(_barraExpIn.getPosition().x + 5.f, _barraExpIn.getPosition().y + 0.5f);
+	_textoExp.setPosition(_barraExpIn.getPosition().x + gui::p2pX(0.25f, _modoVideo), _barraExpIn.getPosition().y + gui::p2pX(0.03f, _modoVideo));
 }
 
 void GUIJugador::actualizarBarraHP()
@@ -100,7 +101,7 @@ void GUIJugador::actualizarBarraHP()
 	_stringVida = std::to_string(_jugador->getAtributos()->getHP()) + " / " + std::to_string(_jugador->getAtributos()->getHPMax());
 	_textoVida.setString(_stringVida);
 
-	_textoVida.setPosition(_barraVidaIn.getPosition().x + 10.f, _barraVidaIn.getPosition().y + 2.f);
+	_textoVida.setPosition(_barraVidaIn.getPosition().x + gui::p2pX(0.5f, _modoVideo), _barraVidaIn.getPosition().y + gui::p2pX(0.01f, _modoVideo));
 }
 
 void GUIJugador::actualizarBarraNivel()

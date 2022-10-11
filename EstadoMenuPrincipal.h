@@ -19,9 +19,9 @@ private: // Atributos
 private: // Metodos
     void iniciarVariables();
     void iniciarKeybinds();
-    void iniciarFondo();
     void iniciarFuentes();
-    void iniciarBotones();
+    void iniciarGUI();
+    void resetGUI();
 
 public:
     EstadoMenuPrincipal(DatosEstado* datos_estado);

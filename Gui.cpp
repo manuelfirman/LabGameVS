@@ -12,9 +12,9 @@ const float gui::p2pY(const float porcentaje, const sf::VideoMode& modo_video)
     return std::floor(static_cast<float>(modo_video.height) * (porcentaje / 100.f));
 }
 
-const unsigned gui::calcTamCaracter(const sf::VideoMode& modo_video)
+const unsigned gui::calcTamCaracter(const sf::VideoMode& modo_video, const unsigned modificador)
 {   // Calcula tamaño de caracter relativo a la resolucion actual
-    return static_cast<unsigned>((modo_video.width + modo_video.height) / 150);
+    return static_cast<unsigned>((modo_video.width + modo_video.height) / modificador);
 }
 
 

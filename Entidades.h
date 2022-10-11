@@ -54,7 +54,7 @@ public:
     virtual void mover(const float x, const float y, const float& DT);
 
     virtual void actualizar(const float& DT) = 0;
-    virtual void renderizar(sf::RenderTarget& target) = 0;
+    virtual void renderizar(sf::RenderTarget& target, const bool mostrar_hitbox = false) = 0;
 };
 
 #endif // ENTIDADES_H
