@@ -377,25 +377,25 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 	// TILES
 	_capa = 0;
 
-	_desdeX = posicionCuadro.x - 4;
+	_desdeX = posicionCuadro.x - 15;
 	if (_desdeX < 0)
 		_desdeX = 0;
 	else if (_desdeX > _tamanioMaxCuadros.x)
 		_desdeX = _tamanioMaxCuadros.x;
 
-	_hastaX = posicionCuadro.x + 5;
+	_hastaX = posicionCuadro.x + 15;
 	if (_hastaX < 0)
 		_hastaX = 0;
 	else if (_hastaX > _tamanioMaxCuadros.x)
 		_hastaX = _tamanioMaxCuadros.x;
 
-	_desdeY = posicionCuadro.y - 3;
+	_desdeY = posicionCuadro.y - 9;
 	if (_desdeY < 0)
 		_desdeY = 0;
 	else if (_desdeY > _tamanioMaxCuadros.y)
 		_desdeY = _tamanioMaxCuadros.y;
 
-	_hastaY = posicionCuadro.y + 5;
+	_hastaY = posicionCuadro.y + 10;
 	if (_hastaY < 0)
 		_hastaY = 0;
 	else if (_hastaY > _tamanioMaxCuadros.y)

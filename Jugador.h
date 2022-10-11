@@ -34,7 +34,7 @@ public:
     void actualizarAtaque(const float& DT);
     void actualizarAnimacion(const float& DT);
     void actualizar(const float& DT);
-    void renderizar(sf::RenderTarget& target, const bool mostrar_hitbox = false);
+    void renderizar(sf::RenderTarget& target, sf::Shader* sombra = NULL, const bool mostrar_hitbox = false);
 };
 
 #endif // JUGADOR_H

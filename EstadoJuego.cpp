@@ -58,6 +58,14 @@ void EstadoJuego::iniciarMenuPausa()
     _menuPausa->agregarBoton("SALIR", gui::p2pY(46.3f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(10.4f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "SALIR");
 }
 
+void EstadoJuego::iniciarSombras()
+{
+    if (_sombra.loadFromFile("sombras.vert", "sombras.frag"))
+    {
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUEDEN CARGAR LAS SOMBRAS." << std::endl;
+    }
+}
+
 void EstadoJuego::iniciarJugadores()
 {
     _jugador = new Jugador(0, 0, _texturas["PLANTILLA_JUGADOR"]);
@@ -198,7 +206,7 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
     // TODO SE RENDERIZA A TRAVES DEL LIENZO
     _renderTextura.setView(_vistaCam); // con la vista seteada
     _tileMap->renderizar(_renderTextura, _jugador->getCuadroActual(static_cast<int>(_datosEstado->tamanioCuadro)));
-    _jugador->renderizar(_renderTextura);
+    _jugador->renderizar(_renderTextura, &_sombra);
     _tileMap->renderizacionDiferida(_renderTextura);
 
     _renderTextura.setView(_renderTextura.getDefaultView()); // vista por default

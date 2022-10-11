@@ -230,9 +230,12 @@ void Jugador::actualizar(const float& DT)
     _hitbox->actualizar();
 }
 
-void Jugador::renderizar(sf::RenderTarget& target, const bool mostrar_hitbox)
+void Jugador::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const bool mostrar_hitbox)
 {
-    target.draw(_sprite);
+    if(sombra)
+        target.draw(_sprite, sombra);
+    else
+        target.draw(_sprite);
 
     if(mostrar_hitbox)
         _hitbox->renderizar(target);

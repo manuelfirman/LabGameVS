@@ -16,6 +16,7 @@ class GUIJugador;
 class sf::View;
 class sf::Font;
 class sf::RenderTexture;
+class sf::Shader;
 
 class EstadoJuego : public EstadoBase
 {
@@ -33,7 +34,7 @@ private: // Atributos
 
     TileMap* _tileMap;
 
-
+    sf::Shader _sombra;
 
 
 private: // Metodos
@@ -43,6 +44,7 @@ private: // Metodos
     void iniciarKeybinds();
     void iniciarTexturas();
     void iniciarMenuPausa();
+    void iniciarSombras();
     void iniciarJugadores();
     void iniciarGUIJugador();
     void iniciarTileMap();

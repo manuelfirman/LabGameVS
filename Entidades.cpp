@@ -118,18 +118,3 @@ void Entidades::mover(const float dir_x, const float dir_y, const float& DT)
     }
         _movimiento->mover(dir_x, dir_y, DT); // setea velocidad
 }
-
-
-/// --------------------- ACTUALIZACIONES --------------------------
-void Entidades::actualizar(const float& DT)
-{
-
-
-}
-
-/// --------------------- RENDERIZAR --------------------------
-void Entidades::renderizar(sf::RenderTarget& target, const bool mostrar_hitbox)
-{
-
-
-}

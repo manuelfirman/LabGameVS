@@ -158,5 +158,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="sombras.frag">
+      <Filter>Archivos de recursos</Filter>
+    </None>
+    <None Include="sombras.vert">
+      <Filter>Archivos de recursos</Filter>
+    </None>
   </ItemGroup>
 </Project>
