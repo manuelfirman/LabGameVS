@@ -9,12 +9,12 @@ Tile::Tile()
 
 Tile::Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision, short tipo)
 {
-	_tile.setSize(sf::Vector2f(tamanioCuadroF, tamanioCuadroF));
-	_tile.setFillColor(sf::Color::White);
-	_tile.setOutlineThickness(1.f);
-	_tile.setOutlineColor(sf::Color::Black);
+	//_tile.setSize(sf::Vector2f(tamanioCuadroF, tamanioCuadroF));
+	//_tile.setFillColor(sf::Color::White);
+	//_tile.setOutlineThickness(1.f);
+	//_tile.setOutlineColor(sf::Color::Black);
 	_tile.setPosition(static_cast<float>(cuadro_x) * tamanioCuadroF, static_cast<float>(cuadro_y) * tamanioCuadroF);
-	_tile.setTexture(&textura);
+	_tile.setTexture(textura);
 	_tile.setTextureRect(rect_textura);
 
 	_colision = colision;

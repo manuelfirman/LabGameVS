@@ -8,7 +8,7 @@ class Tile
 	private:
 
 	protected:
-		sf::RectangleShape _tile;
+		sf::Sprite _tile;
 		bool _colision;
 		short _tipoTile;
 
