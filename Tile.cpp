@@ -64,7 +64,18 @@ void Tile::actualizar()
 {
 }
 
-void Tile::renderizar(sf::RenderTarget& target)
+void Tile::renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador, sf::Shader* sombra)
 {
-	target.draw(_tile);
+	if (sombra)
+	{
+		sombra->setUniform("tieneTextura", true);
+		sombra->setUniform("luz", posicionJugador);
+
+		target.draw(_tile, sombra);
+	}
+	else
+	{
+		target.draw(_tile);
+	}
+	
 }

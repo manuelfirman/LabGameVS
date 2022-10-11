@@ -61,6 +61,15 @@ const sf::Vector2f& Entidades::getPosicionSprite() const
     return _sprite.getPosition();
 }
 
+const sf::Vector2f Entidades::getCentro() const
+{
+    if(_hitbox)
+        return _hitbox->getPosicion() + sf::Vector2f(_hitbox->getLimites().width / 2.f , _hitbox->getLimites().height / 2.f);
+
+    return _sprite.getPosition() + sf::Vector2f(_sprite.getGlobalBounds().width / 2.f, _sprite.getGlobalBounds().height / 2.f);
+    
+}
+
 const sf::Vector2i Entidades::getCuadroActual(const int tamanioCuadro) const
 {
     if(_hitbox)

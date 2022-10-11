@@ -233,7 +233,11 @@ void Jugador::actualizar(const float& DT)
 void Jugador::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const bool mostrar_hitbox)
 {
     if(sombra)
+    {
+        sombra->setUniform("tieneTextura", true);
+        sombra->setUniform("luz", getCentro());
         target.draw(_sprite, sombra);
+    }
     else
         target.draw(_sprite);
 

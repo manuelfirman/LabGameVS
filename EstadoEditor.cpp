@@ -299,7 +299,7 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
 
     // render tile map con la vista seteada
     target->setView(_vista);
-    _tileMap->renderizar(*target, posMouseCuadro, true);
+    _tileMap->renderizar(*target, posMouseCuadro);
     _tileMap->renderizacionDiferida(*target);
   
     // render botones con vista por default

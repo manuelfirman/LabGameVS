@@ -372,7 +372,7 @@ void TileMap::actualizar()
 
 }
 
-void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro, const bool mostrar_hitbox) // se puede enviar cualquier posicion (player, vista, etc)
+void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro, sf::Vector2f posicionJugador, sf::Shader* sombra, const bool mostrar_hitbox) // se puede enviar cualquier posicion (player, vista, etc)
 {
 	// TILES
 	_capa = 0;
@@ -415,7 +415,10 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 				}
 				else
 				{
-					_mapa[x][y][_capa][C]->renderizar(target);
+					if(sombra)
+						_mapa[x][y][_capa][C]->renderizar(target, posicionJugador, sombra); // TODO: agregar parametros
+					else
+						_mapa[x][y][_capa][C]->renderizar(target);
 				}
 
 				// Colision con tiles
@@ -432,11 +435,14 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCu
 	}
 }
 
-void TileMap::renderizacionDiferida(sf::RenderTarget& target)
+void TileMap::renderizacionDiferida(sf::RenderTarget& target, const sf::Vector2f posicionJugador, sf::Shader* sombra)
 {
 	while (!_pilaRenderDiferida.empty())
 	{
-		_pilaRenderDiferida.top()->renderizar(target); // renderiza y lo saca de la pila
+		if(sombra)
+			_pilaRenderDiferida.top()->renderizar(target, posicionJugador, sombra); // renderiza y lo saca de la pila
+		else
+			_pilaRenderDiferida.top()->renderizar(target);
 		_pilaRenderDiferida.pop();
 	}
 }

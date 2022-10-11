@@ -40,6 +40,7 @@ public:
 
     // Getters
     virtual const sf::Vector2f& getPosicionSprite() const;
+    virtual const sf::Vector2f getCentro() const;
     virtual const sf::Vector2i getCuadroActual(const int tamanioCuadro) const;
     virtual const sf::FloatRect getLimites() const;
     virtual const sf::FloatRect getLimitesPosSiguiente(const float& DT) const;

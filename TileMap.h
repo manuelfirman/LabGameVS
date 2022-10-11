@@ -52,8 +52,8 @@ class TileMap
 		
 		// Actualizar - Renderizar
 		void actualizar();
-		void renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro, const bool mostrar_hitbox = false);
-		void renderizacionDiferida(sf::RenderTarget& target);
+		void renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro, sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL, const bool mostrar_hitbox = false);
+		void renderizacionDiferida(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);
 
 };
 

@@ -19,9 +19,10 @@ void main()
 	// Distancia (longitud del vector)
 	float longVector = clamp(length(luzAFrag) * 2, 0, 1);
 
-	
+	// pixel en la textura
 	vec4 pixel = texture2D(textura, gl_TexCoord[0].xy);
 
+	// multiplicando por el color y la luz
 	if(tieneTextura == true)
 	{
 		gl_FragColor = gl_Color * pixel * (clamp(ambiente + vec4(1-longVector, 1-longVector, 1-longVector, 1), 0, 1));
