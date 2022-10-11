@@ -197,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="frag_sombras.frag" />
     <None Include="vert_sombras.vert" />
   </ItemGroup>

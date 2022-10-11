@@ -11,6 +11,9 @@ class Gui;
 class MenuPausa;
 class TileMap;
 
+class sf::RectangleShape;
+
+
 class EstadoEditor : public EstadoBase
 {
     private: // Atributos
@@ -32,6 +35,7 @@ class EstadoEditor : public EstadoBase
         bool _colision;
         short _tipo;
         int _capa;
+        bool _bloqueoTile;
 
     private: // Metodos
         void iniciarVariables();

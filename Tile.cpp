@@ -60,6 +60,7 @@ const std::string Tile::getTileString() const
 	return ss.str();
 }
 
+
 void Tile::actualizar()
 {
 }

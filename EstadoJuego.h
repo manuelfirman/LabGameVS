@@ -22,6 +22,8 @@ class EstadoJuego : public EstadoBase
 {
 private: // Atributos
     sf::View _vistaCam;
+    sf::Vector2i _vistaPosicionCuadros;
+
     // Para no renderizar todo de una vez en ventana (Dividirla en fragmentos)
     sf::RenderTexture _renderTextura; // Lienzo
     sf::Sprite _renderSprite; // Contenedor de lienzos

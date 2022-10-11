@@ -22,9 +22,6 @@ void EstadoJuego::iniciarFuentes()
     if (!_fuenteJuego.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
         std::cout << "ERROR:CargarFuente_MenuPrincipal" << std::endl;
     }
-    /*if (!_fuenteBoton.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
-        std::cout << "ERROR:CargarFuente_MenuPrincipal_Botones" << std::endl;
-    }*/
 }
 
 void EstadoJuego::iniciarKeybinds()
@@ -45,8 +42,6 @@ void EstadoJuego::iniciarKeybinds()
 
 void EstadoJuego::iniciarTexturas()
 {
-    //sf::Texture aux;
-
     if (!_texturas["PLANTILLA_JUGADOR"].loadFromFile("recursos/img/personaje/1.png")) {
         std::cout << "ERROR: EstadoJuego_iniciarTexturas_CargaTexturaPersonaje" << std::endl;
     }
@@ -78,10 +73,12 @@ void EstadoJuego::iniciarGUIJugador()
 
 void EstadoJuego::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 32, 32, "recursos/img/mapa/terrenos/terreno_01.png");
+    //_tileMap = new TileMap(_datosEstado->tamanioCuadro, 32, 32, "recursos/img/mapa/terrenos/terreno_01.png");
 
     // cargando mapa desde archivo
-    _tileMap->cargarDesdeArchivo("text.slmp");
+    //_tileMap->cargarDesdeArchivo("text.slmp");
+
+    _tileMap = new TileMap("text.slmp");
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
@@ -118,17 +115,66 @@ void EstadoJuego::actualizarVistaCam(const float& DT)
 
     // Jugador centrado + movimiento de mouse
     _vistaCam.setCenter(
-        std::floor(_jugador->getPosicionSprite().x + (static_cast<float>(posMouseVentana.x)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width / 2) / 5.f)),
-        std::floor(_jugador->getPosicionSprite().y + (static_cast<float>(posMouseVentana.y)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height / 2) / 5.f))); // floor para estabilizar el float en pixels 
+        std::floor(_jugador->getPosicionSprite().x + (static_cast<float>(posMouseVentana.x)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width / 2) / 10.f)),
+        std::floor(_jugador->getPosicionSprite().y + (static_cast<float>(posMouseVentana.y)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height / 2) / 10.f))); // floor para estabilizar el float en pixels 
+
+        std::cout << _tileMap->getTamanioMax().x << " " << _vistaCam.getSize().x << "\n";
+
+    if (_vistaCam.getSize().x >= _tileMap->getTamanioMaxCuadros().x) {
+
+        if (_vistaCam.getCenter().x - _vistaCam.getSize().x / 2.f < 0.f) {                    // Limite izquierdo
+            _vistaCam.setCenter(0.f + _vistaCam.getSize().x / 2.f, _vistaCam.getCenter().y);
+        }
+        else if (_vistaCam.getCenter().x + _vistaCam.getSize().x / 2.f > 4000.f) {
+            _vistaCam.setCenter(4000.f - _vistaCam.getSize().x / 2.f, _vistaCam.getCenter().y);
+        }
+
+    }
+
+    if (_vistaCam.getSize().y >= _tileMap->getTamanioMaxCuadros().y) {
+        if (_vistaCam.getCenter().y + _vistaCam.getSize().y / 2.f > 4000.f) {
+            _vistaCam.setCenter(_vistaCam.getCenter().x, 4000.f - _vistaCam.getSize().y / 2.f);
+        }
+        else if (_vistaCam.getCenter().y - _vistaCam.getSize().y / 2.f < 0.f) {
+            _vistaCam.setCenter(_vistaCam.getCenter().x, 0.f + _vistaCam.getSize().y / 2.f);
+        }
+    }
+    //if (_tileMap->getTamanioMax().x >= _vistaCam.getSize().x)
+    //{
+    //    if (_vistaCam.getCenter().x - _vistaCam.getSize().x / 2.f < 0.f)
+    //    {
+    //        _vistaCam.setCenter(0.f + _vistaCam.getSize().x / 2.f, _vistaCam.getCenter().y);
+    //    }
+    //    else if (_vistaCam.getCenter().x + _vistaCam.getSize().x / 2.f > _tileMap->getTamanioMax().x)
+    //    {
+    //        _vistaCam.setCenter(_tileMap->getTamanioMax().x - _vistaCam.getSize().x / 2.f, _vistaCam.getCenter().y);
+    //    }
+    //}
+
+    //if (_tileMap->getTamanioMax().y >= _vistaCam.getSize().y)
+    //{
+    //    if (_vistaCam.getCenter().y - _vistaCam.getSize().y / 2.f < 0.f)
+    //    {
+    //        _vistaCam.setCenter(_vistaCam.getCenter().x, 0.f + _vistaCam.getSize().y / 2.f);
+    //    }
+    //    else if (_vistaCam.getCenter().y + _vistaCam.getSize().y / 2.f > _tileMap->getTamanioMax().y)
+    //    {
+    //        _vistaCam.setCenter(_vistaCam.getCenter().x, _tileMap->getTamanioMax().y - _vistaCam.getSize().y / 2.f);
+    //    }
+    //}
+
+
+    _vistaPosicionCuadros.x = static_cast<int>(_vistaCam.getCenter().x) / static_cast<int>(_datosEstado->tamanioCuadro);
+    _vistaPosicionCuadros.y = static_cast<int>(_vistaCam.getCenter().y) / static_cast<int>(_datosEstado->tamanioCuadro);
 }
 
 void EstadoJuego::actualizarInput(const float& DT)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("CLOSE")))  && getPpsTeclas())
     {
-        if (!_pausa) pausarEstado();
-        else reanudarEstado();
-        //(_pausa) ? pausarEstado() : reanudarEstado();
+        (!_pausa)
+            ? pausarEstado()
+            : reanudarEstado();
     }
 
 }
@@ -137,13 +183,10 @@ void EstadoJuego::actualizarInputJugador(const float& DT)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_IZQUIERDA")))) {
         _jugador->mover(-1.f, 0.f, DT);
-        _jugador->perderHP(1);
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_DERECHA")))) {
-
         _jugador->mover(1.f, 0.f, DT);
-        _jugador->ganarHP(1);
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_ARRIBA"))))
@@ -202,26 +245,28 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
     if (!target)
         target = _ventana;
 
-    _renderTextura.clear(); // limpia el frame anterior
+    _renderTextura.clear();
 
     // TODO SE RENDERIZA A TRAVES DEL LIENZO
-    _renderTextura.setView(_vistaCam); // con la vista seteada
+        // Mapa
+    _renderTextura.setView(_vistaCam); // set vista
+    //_tileMap->renderizar(_renderTextura, _vistaPosicionCuadros, _jugador->getCentro(), &_sombra, false);
     _tileMap->renderizar(_renderTextura, _jugador->getCuadroActual(static_cast<int>(_datosEstado->tamanioCuadro)), _jugador->getCentro(), &_sombra);
+        // Jugador
     _jugador->renderizar(_renderTextura, &_sombra);
+        // Render Lienzo
     _tileMap->renderizacionDiferida(_renderTextura);
-
+        //GUI
     _renderTextura.setView(_renderTextura.getDefaultView()); // vista por default
     _GUIJugador->renderizar(_renderTextura);
 
     if (_pausa) { 
-        //_renderTextura.setView(_renderTextura.getDefaultView()); // vista por default
         _menuPausa->renderizar(_renderTextura);
     }
 
-    _renderTextura.display(); // actualiza el contenido
+    _renderTextura.display();
     
-    //_renderSprite.setTexture(_renderTextura.getTexture());
-    // RENDERIZADO FINAL (la ventana dibuja el sprite del lienzo, que contiene el renderizado de lo demas)
-    target->draw(_renderSprite);
+    // RENDERIZADO FINAL 
+    target->draw(_renderSprite); //(la ventana dibuja el sprite del lienzo, que contiene el renderizado de lo demas)
 
 }

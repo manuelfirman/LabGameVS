@@ -379,14 +379,12 @@ void gui::SelectorTexturas::actualizar(const sf::Vector2i& posMouseVentana, cons
 
     if (!_esconder) 
     {
+        _activo = false;
+        
         if(_limites.getGlobalBounds().contains(static_cast<sf::Vector2f>(posMouseVentana)))
-            _activo = true;
-        else
-            _activo = false;
-
-
-        if (_activo)
         {
+            _activo = true;
+        
             _posMouseCuadro.x = (posMouseVentana.x - static_cast<int>(_limites.getPosition().x)) / static_cast<int>(_tamanioCuadro);
             _posMouseCuadro.y = (posMouseVentana.y - static_cast<int>(_limites.getPosition().y)) / static_cast<int>(_tamanioCuadro);
             _selector.setPosition(_limites.getPosition().x + _posMouseCuadro.x * _tamanioCuadro, _limites.getPosition().y + _posMouseCuadro.y * _tamanioCuadro);

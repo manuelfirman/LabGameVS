@@ -35,11 +35,15 @@ class TileMap
 
 	public:
 		TileMap(float tamanioCuadro, int ancho, int alto, std::string archivo_textura);
+		TileMap(const std::string archivo_textura);
 		virtual ~TileMap();
 
 		// Getters
 		const sf::Texture* getTexturaTile() const;
 		const int getTilesPorCuadro(const int x,const int y,const int capa) const;
+		const sf::Vector2f& getTamanioMax() const;
+		const sf::Vector2i& getTamanioMaxCuadros() const;
+		const bool tileVacio(const int x, const int y, const int z) const;
 
 		// Metodos
 		void agregarTile(const int x, const int y, const int z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo);
@@ -52,7 +56,7 @@ class TileMap
 		
 		// Actualizar - Renderizar
 		void actualizar();
-		void renderizar(sf::RenderTarget& target, const sf::Vector2i posicionCuadro, sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL, const bool mostrar_hitbox = false);
+		void renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionCuadro, sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL, const bool mostrar_hitbox = false);
 		void renderizacionDiferida(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);
 
 };

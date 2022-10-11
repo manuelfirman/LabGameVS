@@ -164,5 +164,6 @@
     <None Include="vert_sombras.vert">
       <Filter>Archivos de recursos</Filter>
     </None>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

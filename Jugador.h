@@ -10,7 +10,6 @@ class Jugador : public Entidades
 private: // Atributos
     bool _atacando;
 
-
 private: // Metodos
     void iniciarVariables();
     void iniciarComponentes();
@@ -30,10 +29,12 @@ public:
     void ganarExperiencia(const int experiencia);
     void perdeExperiencia(const int experiencia);
 
-
+    // Actualizar
     void actualizarAtaque(const float& DT);
     void actualizarAnimacion(const float& DT);
     void actualizar(const float& DT);
+    
+    // Renderizar
     void renderizar(sf::RenderTarget& target, sf::Shader* sombra = NULL, const bool mostrar_hitbox = false);
 };
 

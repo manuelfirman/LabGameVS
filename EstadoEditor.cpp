@@ -9,6 +9,7 @@ void EstadoEditor::iniciarVariables()
     _colision = false;
     _tipo = tipo_tile::SUELO;
     _capa = 0;
+    _bloqueoTile = false;
 
     _velocidadCamara = 100.f;
 }
@@ -166,7 +167,15 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
         {
             if (!_selectorTexturas->getActivo()) // Si no esta activo, agrega tile
             {
-                _tileMap->agregarTile(posMouseCuadro.x, posMouseCuadro.y, 0, _rectTextura, _colision, _tipo);
+                if (_bloqueoTile)
+                {
+                    _tileMap->tileVacio(posMouseCuadro.x, posMouseCuadro.y, 0);
+                }
+                else
+                {
+
+                    _tileMap->agregarTile(posMouseCuadro.x, posMouseCuadro.y, 0, _rectTextura, _colision, _tipo);
+                }
             }
             else
             {
@@ -199,6 +208,11 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
         if (_tipo > 0)
             --_tipo;
     }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("BLOQUEAR_TILE"))) && getPpsTeclas())
+    {
+        _bloqueoTile = !_bloqueoTile;
+    }
 }
 
 void EstadoEditor::actualizarBotones()
@@ -226,7 +240,8 @@ void EstadoEditor::actualizarGUI(const float& DT)
         << _rectTextura.left << " " << _rectTextura.top << "\n"
         << "Colision: " << _colision << "\n" 
         << "Tipo: " << _tipo << "\n"
-        << "Tiles: " << _tileMap->getTilesPorCuadro(posMouseCuadro.x, posMouseCuadro.y, _capa);
+        << "Tiles: " << _tileMap->getTilesPorCuadro(posMouseCuadro.x, posMouseCuadro.y, _capa) << "\n"
+        << "Bloqueo: " << _bloqueoTile;
 
     _textoCursor.setString(ss.str());
 }

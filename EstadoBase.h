@@ -7,6 +7,7 @@ class OpcionesGraficas;
 class Jugador;
 class EstadoBase;
 
+class sf::RenderWindow;
 
 class DatosEstado
 {
