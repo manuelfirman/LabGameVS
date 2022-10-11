@@ -158,10 +158,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="sombras.frag">
+    <None Include="frag_sombras.frag">
       <Filter>Archivos de recursos</Filter>
     </None>
-    <None Include="sombras.vert">
+    <None Include="vert_sombras.vert">
       <Filter>Archivos de recursos</Filter>
     </None>
   </ItemGroup>

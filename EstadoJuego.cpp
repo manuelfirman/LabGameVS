@@ -60,7 +60,7 @@ void EstadoJuego::iniciarMenuPausa()
 
 void EstadoJuego::iniciarSombras()
 {
-    if (_sombra.loadFromFile("sombras.vert", "sombras.frag"))
+    if (!_sombra.loadFromFile("vert_sombras.vert", "frag_sombras.frag"))
     {
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUEDEN CARGAR LAS SOMBRAS." << std::endl;
     }
@@ -94,6 +94,7 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarFuentes();
     this->iniciarTexturas();
     this->iniciarMenuPausa();
+    this->iniciarSombras();
 
     this->iniciarTileMap();
     this->iniciarJugadores();

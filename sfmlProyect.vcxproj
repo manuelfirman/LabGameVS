@@ -197,8 +197,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
-    <None Include="sombras.frag" />
-    <None Include="sombras.vert" />
+    <None Include="frag_sombras.frag" />
+    <None Include="vert_sombras.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
