@@ -124,8 +124,8 @@ const bool TileMap::tileVacio(const int x, const int y, const int z) const
 {
 	if(x >= 0 && x <= _tamanioMaxMundo.x && y >= 0 && y <= _tamanioMaxMundo.y && z >= 0 && z <= _Capas)
 		return _mapa[x][z][z].empty();
-	
-	throw("ERROR::TILEMAP::tileVacio()::FUERA DE LOS LIMITES DEL TILE");
+
+	return false;
 }
 
 void TileMap::agregarTile(const int x, const int y, const int z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo)
