@@ -124,6 +124,6 @@ void Entidades::mover(const float dir_x, const float dir_y, const float& DT)
 {
     if (this->_movimiento) {
         // Recibe direcciones (x y)
-    }
         _movimiento->mover(dir_x, dir_y, DT); // setea velocidad
+    }
 }

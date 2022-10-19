@@ -8,7 +8,6 @@
 #include "Espada.h"
 #include "Arco.h"
 
-
 class EstadoBase;
 class MenuPausa;
 class Jugador;
@@ -29,13 +28,13 @@ private: // Atributos
     // Para no renderizar todo de una vez en ventana (Dividirla en fragmentos)
     sf::RenderTexture _renderTextura; // Lienzo
     sf::Sprite _renderSprite; // Contenedor de lienzos
-
+    // Menu pausa
     MenuPausa* _menuPausa;
     sf::Font _fuenteJuego;
-
+    // Jugador
     Jugador* _jugador;
     GUIJugador* _GUIJugador;
-
+    // Mapa
     TileMap* _tileMap;
 
     sf::Shader _sombra;

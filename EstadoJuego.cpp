@@ -7,8 +7,6 @@ void EstadoJuego::renderizadoDiferido()
 
     _renderSprite.setTexture(_renderTextura.getTexture());
     _renderSprite.setTextureRect(sf::IntRect(0, 0, _datosEstado->opcionesGraficas->_resolucion.width, _datosEstado->opcionesGraficas->_resolucion.height));
-    Espada espada;
-    Arco arco;
 
 }
 /// --------------------- INICIALIZACIONES --------------------------
@@ -82,6 +80,7 @@ void EstadoJuego::iniciarTileMap()
 
     _tileMap = new TileMap("text.slmp");
 }
+
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
@@ -227,7 +226,7 @@ void EstadoJuego::actualizar(const float& DT)
 
         actualizarTileMap(DT);
 
-        _jugador->actualizar(DT);
+        _jugador->actualizar(DT, posMouseVista);
 
         _GUIJugador->actualizar(DT);
 

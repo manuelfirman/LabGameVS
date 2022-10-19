@@ -8,7 +8,7 @@ void Jugador::iniciarVariables()
 
 void Jugador::iniciarComponentes()
 {
-
+    
 }
 
 
@@ -16,6 +16,7 @@ void Jugador::iniciarComponentes()
 Jugador::Jugador(float x, float y, sf::Texture& textura)
 {
     this->iniciarVariables();
+    this->iniciarComponentes();
 
     setPosicion(x, y);                                  // Posicion
 
@@ -41,13 +42,14 @@ Jugador::Jugador(float x, float y, sf::Texture& textura)
 
 Jugador::~Jugador()
 {
-    //dtor
+    
 }
 
 Atributos* Jugador::getAtributos()
 {
     return _atributos;
 }
+
 
 void Jugador::ganarHP(const int hp)
 {
@@ -78,7 +80,8 @@ void Jugador::actualizarAtaque(const float& DT)
        
 }
 
-void Jugador::actualizarAnimacion(const float& DT)
+
+void Jugador::actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista)
 {
    // PELADO
     if (_atacando)
@@ -92,14 +95,19 @@ void Jugador::actualizarAnimacion(const float& DT)
             _sprite.setOrigin(_sprite.getGlobalBounds().width, 0.f);
         }
         
-        
+       
+
         if (_animacion->play("ATAQUE_X", DT, true))
-            _atacando = false;
+        {
+             _atacando = false;
+        }
     }
 
 
-   if (_movimiento->getEstadoMov(QUIETO))
+   if (_movimiento->getEstadoMov(QUIETO)) 
+   {
         _animacion->play("QUIETO", DT);
+   }
    else if (_movimiento->getEstadoMov(MOV_DERECHA))
    {
 
@@ -114,13 +122,17 @@ void Jugador::actualizarAnimacion(const float& DT)
         _animacion->play("CAMINAR_X", DT, _movimiento->getVelocidad().x, _movimiento->getVelocidadMax());
    }
    else if (_movimiento->getEstadoMov(MOV_ABAJO))
+   {
         _animacion->play("CAMINAR_ABAJO", DT, _movimiento->getVelocidad().y, _movimiento->getVelocidadMax());
+   }
    else if (_movimiento->getEstadoMov(MOV_ARRIBA))
+   {
         _animacion->play("CAMINAR_ARRIBA", DT, _movimiento->getVelocidad().y, _movimiento->getVelocidadMax());
+   }
     
 }
 
-void Jugador::actualizar(const float& DT)
+void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 {
     //_atributos->actualizar();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
@@ -132,9 +144,12 @@ void Jugador::actualizar(const float& DT)
 
     actualizarAtaque(DT);
 
-    actualizarAnimacion(DT);
+    actualizarAnimacion(DT, posMouseVista);
 
     _hitbox->actualizar();
+
+    _espada.actualizar(posMouseVista, getCentro());
+
 }
 
 void Jugador::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const bool mostrar_hitbox)
@@ -144,9 +159,14 @@ void Jugador::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const boo
         sombra->setUniform("tieneTextura", true);
         sombra->setUniform("luz", getCentro());
         target.draw(_sprite, sombra);
+
+        sombra->setUniform("tieneTextura", true);
+        sombra->setUniform("luz", getCentro());
+        _espada.renderizar(target);
     }
-    else
+    else // si no hay sombra
         target.draw(_sprite);
+        _espada.renderizar(target);
 
     if(mostrar_hitbox)
         _hitbox->renderizar(target);

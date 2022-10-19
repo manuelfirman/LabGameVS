@@ -3,7 +3,8 @@
 
 ArmaMelee::ArmaMelee()
 {
-	std::cout << "Test arma melee" << std::endl;
+	//std::cout << "Test arma melee" << std::endl;
+
 }
 
 ArmaMelee::~ArmaMelee()
