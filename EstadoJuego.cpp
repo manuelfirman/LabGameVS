@@ -7,7 +7,9 @@ void EstadoJuego::renderizadoDiferido()
 
     _renderSprite.setTexture(_renderTextura.getTexture());
     _renderSprite.setTextureRect(sf::IntRect(0, 0, _datosEstado->opcionesGraficas->_resolucion.width, _datosEstado->opcionesGraficas->_resolucion.height));
-    
+    Espada espada;
+    Arco arco;
+
 }
 /// --------------------- INICIALIZACIONES --------------------------
 void EstadoJuego::iniciarVistaCam()
@@ -118,7 +120,7 @@ void EstadoJuego::actualizarVistaCam(const float& DT)
         std::floor(_jugador->getPosicionSprite().x + (static_cast<float>(posMouseVentana.x)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width / 2) / 10.f)),
         std::floor(_jugador->getPosicionSprite().y + (static_cast<float>(posMouseVentana.y)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height / 2) / 10.f))); // floor para estabilizar el float en pixels 
 
-        std::cout << _tileMap->getTamanioMax().x << " " << _vistaCam.getSize().x << "\n";
+    /*    std::cout << _tileMap->getTamanioMax().x << " " << _vistaCam.getSize().x << "\n";*/
 
     if (_vistaCam.getSize().x >= _tileMap->getTamanioMaxCuadros().x) {
 

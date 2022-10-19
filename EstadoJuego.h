@@ -5,6 +5,8 @@
 #include "Jugador.h"
 #include "GUIJugador.h"
 #include "TileMap.h"
+#include "Espada.h"
+#include "Arco.h"
 
 
 class EstadoBase;

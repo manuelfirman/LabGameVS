@@ -151,7 +151,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animacion.cpp" />
+    <ClCompile Include="Arco.cpp" />
+    <ClCompile Include="ArmaMelee.cpp" />
+    <ClCompile Include="ArmaRango.cpp" />
     <ClCompile Include="Atributos.cpp" />
+    <ClCompile Include="Espada.cpp" />
     <ClCompile Include="Gui.cpp" />
     <ClCompile Include="Entidades.cpp" />
     <ClCompile Include="EstadoBase.cpp" />
@@ -177,7 +181,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animacion.h" />
+    <ClInclude Include="Arco.h" />
+    <ClInclude Include="ArmaMelee.h" />
+    <ClInclude Include="ArmaRango.h" />
     <ClInclude Include="Atributos.h" />
+    <ClInclude Include="Espada.h" />
     <ClInclude Include="Gui.h" />
     <ClInclude Include="Entidades.h" />
     <ClInclude Include="EstadoBase.h" />
