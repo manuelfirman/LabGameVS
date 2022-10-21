@@ -3,9 +3,6 @@
 #include "Tile.h"
 #include "Entidades.h"
 
-class Tile;
-class Entidades;
-
 class TileMap
 {
 	private:

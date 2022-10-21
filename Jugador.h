@@ -3,17 +3,17 @@
 
 #include "Entidades.h"
 #include "Espada.h"
-
-class Entidades;
-class Espada;
+#include "Orbe.h"
+#include "Proyectil.h"
 
 
 class Jugador : public Entidades
 {
 private: // Atributos
     bool _atacando;
-    Espada _espada;
-
+    //Orbe _espada;
+    std::vector<Proyectil> _skill;
+    sf::Texture _texturaSkill;
 
 
 private: // Metodos
@@ -36,7 +36,7 @@ public:
     void perdeExperiencia(const int experiencia);
 
     // Actualizar
-    void actualizarAtaque(const float& DT);
+    void actualizarAtaque(const float& DT, sf::Vector2f posMouseVista);
     void actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista);
     void actualizar(const float& DT, sf::Vector2f& posMouseVista);
     

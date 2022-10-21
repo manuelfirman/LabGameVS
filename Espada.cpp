@@ -7,13 +7,13 @@ Espada::Espada()
 	//std::cout << "Test espada" << std::endl;
 	// 
 	// TODO: cargar la textura a traves de un puntero para no estar cargandola todo el tiempo
-	if (!_texturaArma.loadFromFile("recursos/img/items/sword2.png"))
+	if (!_texturaArma.loadFromFile("recursos/img/items/02.png"))
 		std::cout << "ERROR::ARMAMELEE::NO SE PUDO CARGAR LA TEXTURA" << std::endl;
 
 
 	_spriteArma.setTexture(_texturaArma);
 	_spriteArma.setScale(0.5, 0.5);
-	_spriteArma.setOrigin(_spriteArma.getGlobalBounds().width / 2.f, _spriteArma.getGlobalBounds().height / 2);
+	_spriteArma.setOrigin(_spriteArma.getGlobalBounds().width, _spriteArma.getGlobalBounds().height * 2.f);
 	
 }
 
@@ -30,9 +30,9 @@ void Espada::actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f ce
 	float dY = posMouseVista.y - _spriteArma.getPosition().y;
 
 	const float pi = 3.14159265;
-	float deg = atan2(dY,dX) * 100 / pi;
+	float deg = atan2(dY,dX) * 180 / pi;
 
-	_spriteArma.setRotation(deg * 45);
+	_spriteArma.setRotation(deg + 90.f);
 
 
 }

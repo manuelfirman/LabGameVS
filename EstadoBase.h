@@ -3,11 +3,8 @@
 #include "OpcionesGraficas.h"
 #include "Jugador.h"
 
-class OpcionesGraficas;
-class Jugador;
 class EstadoBase;
 
-class sf::RenderWindow;
 
 class DatosEstado
 {

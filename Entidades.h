@@ -6,11 +6,6 @@
 #include "Animacion.h"
 #include "Atributos.h"
 
-class Hitbox;
-class Movimiento;
-class Animacion;
-class Atributos;
-
 
 class Entidades
 {

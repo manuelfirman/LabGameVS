@@ -102,7 +102,7 @@
     <ClCompile Include="Items.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="Arco.cpp">
+    <ClCompile Include="Orbe.cpp">
       <Filter>Items</Filter>
     </ClCompile>
     <ClCompile Include="ArmaMelee.cpp">
@@ -115,6 +115,9 @@
       <Filter>Items</Filter>
     </ClCompile>
     <ClCompile Include="Proyectil.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Animacion2.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -188,10 +191,13 @@
     <ClInclude Include="Espada.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="Arco.h">
+    <ClInclude Include="Orbe.h">
       <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="Proyectil.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Animacion2.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

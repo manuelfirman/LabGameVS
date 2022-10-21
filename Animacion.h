@@ -116,6 +116,8 @@ public:
     const bool& play(const std::string key, const float& DT, const bool prioridad = false);
     const bool& play(const std::string key, const float& DT, const float& modificador, const float& modificador_max, const bool prioridad = false);
 
+    void test(const std::string key, const float& DT);
+
 };
 
 #endif // ANIMACION_H

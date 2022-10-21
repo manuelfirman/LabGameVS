@@ -8,7 +8,8 @@ void Jugador::iniciarVariables()
 
 void Jugador::iniciarComponentes()
 {
-    
+    if (!_texturaSkill.loadFromFile("recursos/img/skills/fireball_blue.png"))
+        std::cout << "ERROR::JUGADOR::NO SE PUDO CARGAR TEXTURA DE SKILL" << std::endl;
 }
 
 
@@ -71,9 +72,10 @@ void Jugador::perdeExperiencia(const int experiencia)
     _atributos->perderExperiencia(experiencia);
 }
 
-void Jugador::actualizarAtaque(const float& DT)
+void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+        _skill.push_back(Proyectil(_texturaSkill, 10.f, 3.f, 300.f, posMouseVista, getCentro()));
         _atacando = true;
     }
 
@@ -95,10 +97,10 @@ void Jugador::actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista)
             _sprite.setOrigin(_sprite.getGlobalBounds().width, 0.f);
         }
         
-       
 
         if (_animacion->play("ATAQUE_X", DT, true))
         {
+            
              _atacando = false;
         }
     }
@@ -134,6 +136,7 @@ void Jugador::actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista)
 
 void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 {
+
     //_atributos->actualizar();
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
         _atributos->ganarExperiencia(20);
@@ -142,13 +145,20 @@ void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 
     _movimiento->actualizar(DT);
 
-    actualizarAtaque(DT);
+    actualizarAtaque(DT, posMouseVista);
 
     actualizarAnimacion(DT, posMouseVista);
 
     _hitbox->actualizar();
 
-    _espada.actualizar(posMouseVista, getCentro());
+    //_espada.actualizar(posMouseVista, getCentro());
+    for (size_t i = 0; i < _skill.size(); i++)
+    {
+        if (_skill[i].getRealizando())
+        {
+            _skill[i].actualizar(DT);
+        }
+    }
 
 }
 
@@ -160,14 +170,35 @@ void Jugador::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const boo
         sombra->setUniform("luz", getCentro());
         target.draw(_sprite, sombra);
 
-        sombra->setUniform("tieneTextura", true);
-        sombra->setUniform("luz", getCentro());
-        _espada.renderizar(target);
+        //sombra->setUniform("tieneTextura", true);
+        //sombra->setUniform("luz", getCentro());
+        //_espada.renderizar(target);
     }
     else // si no hay sombra
         target.draw(_sprite);
-        _espada.renderizar(target);
+        //_espada.renderizar(target);
 
     if(mostrar_hitbox)
         _hitbox->renderizar(target);
+
+    for (size_t i = 0; i < _skill.size(); i++)
+    {
+        Proyectil skill = _skill[i];
+
+        if (!skill.getRealizando() || skill.eliminar())
+        {
+            _skill.erase(_skill.begin() + i);
+        }
+    }
+
+    for (size_t i = 0; i < _skill.size(); i++)
+    {
+        if (!_skill[i].eliminar())
+        {
+            if (_skill[i].getRealizando())
+            {
+                _skill[i].renderizar(target);
+            }
+        }
+    }
 }

@@ -121,3 +121,9 @@ const bool& Animacion::play(const std::string key, const float& DT, const float&
 
     return _animaciones[key]->isDone();
 }
+
+void Animacion::test(const std::string key, const float& DT)
+{
+    _animaciones[key]->play(DT);
+}
+

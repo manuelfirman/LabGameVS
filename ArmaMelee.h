@@ -2,10 +2,8 @@
 #define ARMAMELEE_H
 
 #include "Items.h"
-#include "Movimiento.h"
 
 class Item;
-class Movimiento;
 
 class ArmaMelee : public Items
 {

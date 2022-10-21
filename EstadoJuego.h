@@ -6,7 +6,7 @@
 #include "GUIJugador.h"
 #include "TileMap.h"
 #include "Espada.h"
-#include "Arco.h"
+#include "Orbe.h"
 
 class EstadoBase;
 class MenuPausa;
