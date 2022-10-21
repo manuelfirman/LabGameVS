@@ -7,17 +7,8 @@
 #include "TileMap.h"
 #include "Espada.h"
 #include "Orbe.h"
-
-class EstadoBase;
-class MenuPausa;
-class Jugador;
-class TileMap;
-class GUIJugador;
-
-class sf::View;
-class sf::Font;
-class sf::RenderTexture;
-class sf::Shader;
+#include "Enemigos.h"
+#include "SpawnerEnemigos.h"
 
 class EstadoJuego : public EstadoBase
 {
@@ -36,6 +27,9 @@ private: // Atributos
     GUIJugador* _GUIJugador;
     // Mapa
     TileMap* _tileMap;
+    //Enemigos
+    Enemigos* _enemigo;
+
 
     sf::Shader _sombra;
 

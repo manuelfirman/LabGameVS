@@ -29,8 +29,8 @@ void Espada::actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f ce
 	float dX = posMouseVista.x - _spriteArma.getPosition().x;
 	float dY = posMouseVista.y - _spriteArma.getPosition().y;
 
-	const float pi = 3.14159265;
-	float deg = atan2(dY,dX) * 180 / pi;
+	const float pi = 3.14159265f;
+	float deg = atan2(dY,dX) * 180.f / pi;
 
 	_spriteArma.setRotation(deg + 90.f);
 

@@ -97,6 +97,8 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarTileMap();
     this->iniciarJugadores();
     this->iniciarGUIJugador();
+
+    _enemigo = new Enemigos(200.f, 30.f, _texturas["PLANTILLA_JUGADOR"]);
 }
 
 EstadoJuego::~EstadoJuego()
@@ -105,6 +107,8 @@ EstadoJuego::~EstadoJuego()
     delete _GUIJugador;
     delete _menuPausa;
     delete _tileMap;
+
+    delete _enemigo;
 }
 
 /// --------------------- ACTUALIZACIONES --------------------------
@@ -210,6 +214,7 @@ void EstadoJuego::actualizarTileMap(const float& DT)
 {
     _tileMap->actualizar();
     _tileMap->checkColision(_jugador, DT);
+    _tileMap->checkColision(_enemigo, DT);
 }
 
 void EstadoJuego::actualizar(const float& DT)
@@ -229,6 +234,9 @@ void EstadoJuego::actualizar(const float& DT)
         _jugador->actualizar(DT, posMouseVista);
 
         _GUIJugador->actualizar(DT);
+
+        _enemigo->actualizar(DT, posMouseVista);
+        _enemigo->mover(1.f, 0.f, DT);
 
     }
     else // actualizar con pausa
@@ -255,6 +263,8 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
     _tileMap->renderizar(_renderTextura, _jugador->getCuadroActual(static_cast<int>(_datosEstado->tamanioCuadro)), _jugador->getCentro(), &_sombra);
         // Jugador
     _jugador->renderizar(_renderTextura, &_sombra);
+        // Enemigo
+    _enemigo->renderizar(_renderTextura, &_sombra, false);
         // Render Lienzo
     _tileMap->renderizacionDiferida(_renderTextura);
         //GUI

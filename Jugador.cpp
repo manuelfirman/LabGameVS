@@ -34,7 +34,7 @@ Jugador::Jugador(float x, float y, sf::Texture& textura)
     //_animacion->agregarAnimacion("CAMINAR_X", 3.f, 1, 11, 8, 11, 64, 64);       // Caminar izquierda
 
      // ANIMACIONES ATAQUE
-    _animacion->agregarAnimacion("ATAQUE_ARRIBA", 10.f, 1, 12, 5, 12, 64, 64);
+    _animacion->agregarAnimacion("ATAQUE_MAGICO", 5.f, 0, 5, 6, 5, 64, 64);
     _animacion->agregarAnimacion("ATAQUE_ABAJO", 10.f, 1, 14, 5, 14, 64, 64);
     _animacion->agregarAnimacion("ATAQUE_X", 10.f, 1, 13, 5, 13, 64, 64);
 
@@ -75,10 +75,9 @@ void Jugador::perdeExperiencia(const int experiencia)
 void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-        _skill.push_back(Proyectil(_texturaSkill, 10.f, 3.f, 300.f, posMouseVista, getCentro()));
+        _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
         _atacando = true;
     }
-
        
 }
 
@@ -100,8 +99,7 @@ void Jugador::actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista)
 
         if (_animacion->play("ATAQUE_X", DT, true))
         {
-            
-             _atacando = false;
+            _atacando = false;
         }
     }
 

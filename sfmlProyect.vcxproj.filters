@@ -37,6 +37,9 @@
     <Filter Include="Items">
       <UniqueIdentifier>{ebc663cf-541b-4eab-9a69-317cced77ec8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Items\Armas">
+      <UniqueIdentifier>{d257074e-ae88-49b6-a790-def8bf3c24c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -102,22 +105,28 @@
     <ClCompile Include="Items.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="Orbe.cpp">
-      <Filter>Items</Filter>
+    <ClCompile Include="Animacion2.cpp">
+      <Filter>Componentes</Filter>
     </ClCompile>
     <ClCompile Include="ArmaMelee.cpp">
-      <Filter>Items</Filter>
+      <Filter>Items\Armas</Filter>
     </ClCompile>
     <ClCompile Include="ArmaRango.cpp">
-      <Filter>Items</Filter>
+      <Filter>Items\Armas</Filter>
     </ClCompile>
     <ClCompile Include="Espada.cpp">
-      <Filter>Items</Filter>
+      <Filter>Items\Armas</Filter>
+    </ClCompile>
+    <ClCompile Include="Orbe.cpp">
+      <Filter>Items\Armas</Filter>
     </ClCompile>
     <ClCompile Include="Proyectil.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Items\Armas</Filter>
     </ClCompile>
-    <ClCompile Include="Animacion2.cpp">
+    <ClCompile Include="Enemigos.cpp">
+      <Filter>Entidades</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnerEnemigos.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -182,22 +191,28 @@
     <ClInclude Include="Items.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="ArmaRango.h">
-      <Filter>Items</Filter>
+    <ClInclude Include="Animacion2.h">
+      <Filter>Componentes</Filter>
     </ClInclude>
     <ClInclude Include="ArmaMelee.h">
-      <Filter>Items</Filter>
+      <Filter>Items\Armas</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmaRango.h">
+      <Filter>Items\Armas</Filter>
     </ClInclude>
     <ClInclude Include="Espada.h">
-      <Filter>Items</Filter>
+      <Filter>Items\Armas</Filter>
     </ClInclude>
     <ClInclude Include="Orbe.h">
-      <Filter>Items</Filter>
+      <Filter>Items\Armas</Filter>
     </ClInclude>
     <ClInclude Include="Proyectil.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Items\Armas</Filter>
     </ClInclude>
-    <ClInclude Include="Animacion2.h">
+    <ClInclude Include="Enemigos.h">
+      <Filter>Entidades</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnerEnemigos.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
