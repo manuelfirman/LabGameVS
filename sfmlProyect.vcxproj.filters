@@ -40,6 +40,15 @@
     <Filter Include="Items\Armas">
       <UniqueIdentifier>{d257074e-ae88-49b6-a790-def8bf3c24c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Estados\Editor">
+      <UniqueIdentifier>{1c3e9637-c3a1-43d2-8047-bad24eb1c5b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entidades\Player">
+      <UniqueIdentifier>{d7bcd04e-c587-46fd-8639-a8657608c296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entidades\Enemigos">
+      <UniqueIdentifier>{e19a508a-17be-41d1-aebe-25619180ed19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -54,13 +63,7 @@
     <ClCompile Include="EstadoMenuPrincipal.cpp">
       <Filter>Estados</Filter>
     </ClCompile>
-    <ClCompile Include="EstadoEditor.cpp">
-      <Filter>Estados</Filter>
-    </ClCompile>
     <ClCompile Include="Entidades.cpp">
-      <Filter>Entidades</Filter>
-    </ClCompile>
-    <ClCompile Include="Jugador.cpp">
       <Filter>Entidades</Filter>
     </ClCompile>
     <ClCompile Include="Animacion.cpp">
@@ -123,11 +126,23 @@
     <ClCompile Include="Proyectil.cpp">
       <Filter>Items\Armas</Filter>
     </ClCompile>
+    <ClCompile Include="EstadoEditor.cpp">
+      <Filter>Estados\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Jugador.cpp">
+      <Filter>Entidades\Player</Filter>
+    </ClCompile>
     <ClCompile Include="Enemigos.cpp">
-      <Filter>Entidades</Filter>
+      <Filter>Entidades\Enemigos</Filter>
     </ClCompile>
     <ClCompile Include="SpawnerEnemigos.cpp">
-      <Filter>Archivos de origen</Filter>
+      <Filter>Tile</Filter>
+    </ClCompile>
+    <ClCompile Include="Modo_Editor.cpp">
+      <Filter>Estados\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor_Mapa.cpp">
+      <Filter>Estados\Editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,13 +155,7 @@
     <ClInclude Include="EstadoMenuPrincipal.h">
       <Filter>Estados</Filter>
     </ClInclude>
-    <ClInclude Include="EstadoEditor.h">
-      <Filter>Estados</Filter>
-    </ClInclude>
     <ClInclude Include="Entidades.h">
-      <Filter>Entidades</Filter>
-    </ClInclude>
-    <ClInclude Include="Jugador.h">
       <Filter>Entidades</Filter>
     </ClInclude>
     <ClInclude Include="Animacion.h">
@@ -209,11 +218,23 @@
     <ClInclude Include="Proyectil.h">
       <Filter>Items\Armas</Filter>
     </ClInclude>
+    <ClInclude Include="EstadoEditor.h">
+      <Filter>Estados\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Jugador.h">
+      <Filter>Entidades\Player</Filter>
+    </ClInclude>
     <ClInclude Include="Enemigos.h">
-      <Filter>Entidades</Filter>
+      <Filter>Entidades\Enemigos</Filter>
     </ClInclude>
     <ClInclude Include="SpawnerEnemigos.h">
-      <Filter>Archivos de encabezado</Filter>
+      <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="Modo_Editor.h">
+      <Filter>Estados\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_Mapa.h">
+      <Filter>Estados\Editor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

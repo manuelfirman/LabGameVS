@@ -53,16 +53,16 @@ const bool EstadoBase::getPpsTeclas()
 
 void EstadoBase::actualizarPosicionMouse(sf::View* vista)
 {
-    posMousePantalla = sf::Mouse::getPosition();
-    posMouseVentana = sf::Mouse::getPosition(*_ventana);
+    _posMousePantalla = sf::Mouse::getPosition();
+    _posMouseVentana = sf::Mouse::getPosition(*_ventana);
 
     if(vista)
         _ventana->setView(*vista);
     
-    posMouseVista = _ventana->mapPixelToCoords(sf::Mouse::getPosition(*_ventana));
+    _posMouseVista = _ventana->mapPixelToCoords(sf::Mouse::getPosition(*_ventana));
     
     // Posiciona en cuadricula (por eso casteo estatico de unsigned)
-    posMouseCuadro = sf::Vector2i(static_cast<int>(posMouseVista.x) / static_cast<int>(_tamanioCuadro), static_cast<int>(posMouseVista.y) / static_cast<int>(_tamanioCuadro));
+    _posMouseCuadro = sf::Vector2i(static_cast<int>(_posMouseVista.x) / static_cast<int>(_tamanioCuadro), static_cast<int>(_posMouseVista.y) / static_cast<int>(_tamanioCuadro));
 
     _ventana->setView(_ventana->getDefaultView());
 }

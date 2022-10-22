@@ -1,17 +1,28 @@
 #include "stdafx.h" // precompilado
 #include "EstadoEditor.h"
 
+void EstadoEditor::iniciarModos()
+{
+    _vModo.push_back(new Editor_Mapa(_datosEstado, &_datosEditor, _tileMap));
+}
+
 /// --------------------- INICIALIZACIONES --------------------------
 void EstadoEditor::iniciarVariables()
 {
-    _rectTextura = sf::IntRect(0, 0, static_cast<int>(_datosEstado->tamanioCuadro), static_cast<int>(_datosEstado->tamanioCuadro));
+    _velocidadCamara = 600.f;
+}
 
-    _colision = false;
-    _tipo = tipo_tile::SUELO;
-    _capa = 0;
-    _bloqueoTile = false;
-
-    _velocidadCamara = 100.f;
+void EstadoEditor::iniciarDatosEditor()
+{
+    _datosEditor.vista = &_vista;
+    _datosEditor.keybinds = &_keybinds;
+    _datosEditor.fuente = &_fuente;
+    _datosEditor.posMouseVista = &_posMouseVista;
+    _datosEditor.posMousePantalla = &_posMousePantalla;
+    _datosEditor.posMouseVentana = &_posMouseVentana;
+    _datosEditor.posMouseCuadro = &_posMouseCuadro;
+    _datosEditor.ppsTeclas = &_ppsTeclas;
+    _datosEditor.ppsTeclasMax = &_ppsTeclasMax;
 }
 
 void EstadoEditor::iniciarVista()
@@ -49,15 +60,6 @@ void EstadoEditor::iniciarFuentes()
     }
 }
 
-void EstadoEditor::iniciarTexto()
-{
-    /// VER POSICION MOUSE AL LADO DE LA FLECHA (QUITAR DESPUES)
-    _textoCursor.setFont(_fuente);
-    _textoCursor.setFillColor(sf::Color::White);
-    _textoCursor.setCharacterSize(12);
-    _textoCursor.setPosition(posMouseVista.x, posMouseVista.y - 50);
-
-}
 
 void EstadoEditor::iniciarMenuPausa()
 {
@@ -77,19 +79,7 @@ void EstadoEditor::iniciarBotones()
 
 void EstadoEditor::iniciarGUI()
 {
-    _barraLateral.setSize(sf::Vector2f(80.f ,static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height)));
-    _barraLateral.setFillColor(sf::Color(50, 50, 50, 100));
-    _barraLateral.setOutlineColor(sf::Color(200, 200, 200, 150));
-    _barraLateral.setOutlineThickness(1.f);
 
-    _rectSelector.setSize(sf::Vector2f(_datosEstado->tamanioCuadro, _datosEstado->tamanioCuadro));
-    _rectSelector.setFillColor(sf::Color(255, 255, 255, 150));
-    _rectSelector.setOutlineThickness(1.f);
-    _rectSelector.setOutlineColor(sf::Color::Green);
-    _rectSelector.setTexture(_tileMap->getTexturaTile());
-    _rectSelector.setTextureRect(_rectTextura);
-
-    _selectorTexturas = new gui::SelectorTexturas(20.f, 20.f, 1024.f, 1024.f, _datosEstado->tamanioCuadro, _tileMap->getTexturaTile(), _fuente, "TS");
 }
 
 void EstadoEditor::iniciarTileMap()
@@ -101,16 +91,20 @@ void EstadoEditor::iniciarTileMap()
 EstadoEditor::EstadoEditor(DatosEstado* datos_estado)
     : EstadoBase(datos_estado)
 {
+    this->iniciarDatosEditor();
+
     this->iniciarVariables();
     this->iniciarVista();
     this->iniciarKeybinds();
     this->iniciarFondo();
     this->iniciarFuentes();
-    this->iniciarTexto();
+
     this->iniciarMenuPausa();
     this->iniciarBotones();
     this->iniciarTileMap();
     this->iniciarGUI();
+    
+    this->iniciarModos();
 
 }
 
@@ -123,7 +117,11 @@ EstadoEditor::~EstadoEditor()
 
     delete _menuPausa;
     delete _tileMap;
-    delete _selectorTexturas;
+
+    for (size_t i = 0; i < _vModo.size(); i++)
+    {
+        delete _vModo[i];
+    }
 }
 
 
@@ -158,92 +156,19 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
     {
         _vista.move(-_velocidadCamara * DT, 0.f);
     }
-
-
-    // agregando un tile cuando clickeo
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && getPpsTeclas())
-    {
-        if (!_barraLateral.getGlobalBounds().contains(sf::Vector2f(posMouseVentana)))
-        {
-            if (!_selectorTexturas->getActivo()) // Si no esta activo, agrega tile
-            {
-                if (_bloqueoTile)
-                {
-                    _tileMap->tileVacio(posMouseCuadro.x, posMouseCuadro.y, 0);
-                }
-                else
-                {
-
-                    _tileMap->agregarTile(posMouseCuadro.x, posMouseCuadro.y, 0, _rectTextura, _colision, _tipo);
-                }
-            }
-            else
-            {
-                _rectTextura = _selectorTexturas->getRectTextura();
-            }
-        }
-    }
-    else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && getPpsTeclas())
-    {
-        if (!_barraLateral.getGlobalBounds().contains(sf::Vector2f(posMouseVentana)))
-        {
-            if (!_selectorTexturas->getActivo()) // Si esta activo, remueve tile
-            {
-                _tileMap->removerTile(posMouseCuadro.x, posMouseCuadro.y, 0);
-            }
-        }
-    }
-
-    // Colision
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("COLISION"))) && getPpsTeclas())
-    {
-        _colision = !_colision;
-    }// Tipo
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("INCREMENTAR_TIPO"))) && getPpsTeclas())
-    {
-        ++_tipo; // TODO: validar que no se pase
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("DISMINUIR_TIPO"))) && getPpsTeclas())
-    {
-        if (_tipo > 0)
-            --_tipo;
-    }
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("BLOQUEAR_TILE"))) && getPpsTeclas())
-    {
-        _bloqueoTile = !_bloqueoTile;
-    }
 }
 
 void EstadoEditor::actualizarBotones()
 {
     for (auto& botones : _boton) {
-        botones.second->actualizar(posMouseVentana);
+        botones.second->actualizar(_posMouseVentana);
     }
 
 }
 
 void EstadoEditor::actualizarGUI(const float& DT)
 {
-    _selectorTexturas->actualizar(posMouseVentana, DT);
-    if (!_selectorTexturas->getActivo())
-    {
-        _rectSelector.setTextureRect(_rectTextura);
-        _rectSelector.setPosition(posMouseCuadro.x * _datosEstado->tamanioCuadro, posMouseCuadro.y * _datosEstado->tamanioCuadro);
-    }
-
-
-    _textoCursor.setPosition(posMouseVista.x, posMouseVista.y - 50);
-    std::stringstream ss;
-    ss << posMouseVista.x << " " << posMouseVista.y << "\n"
-        << posMouseCuadro.x << " " << posMouseCuadro.y << "\n"
-        << _rectTextura.left << " " << _rectTextura.top << "\n"
-        << "Colision: " << _colision << "\n" 
-        << "Tipo: " << _tipo << "\n"
-        << "Tiles: " << _tileMap->getTilesPorCuadro(posMouseCuadro.x, posMouseCuadro.y, _capa) << "\n"
-        << "Bloqueo: " << _bloqueoTile;
-
-    _textoCursor.setString(ss.str());
+    
 }
 
 void EstadoEditor::actualizarBotonesMenuPausa()
@@ -258,6 +183,11 @@ void EstadoEditor::actualizarBotonesMenuPausa()
         finEstado();
 }
 
+void EstadoEditor::actualizarModos(const float& DT)
+{
+    _vModo[mod_editor::MAPA]->actualizar(DT);
+}
+
 // ACTUALIZAR ESTADO EDITOR
 void EstadoEditor::actualizar(const float& DT)
 {
@@ -270,10 +200,11 @@ void EstadoEditor::actualizar(const float& DT)
         actualizarGUI(DT);
         actualizarBotones();
         actualizarInputEditor(DT);
+        actualizarModos(DT);
     }
     else // pausa
     {
-        _menuPausa->actualizar(posMouseVentana);
+        _menuPausa->actualizar(_posMouseVentana);
         actualizarBotonesMenuPausa();
     }
 
@@ -290,21 +221,12 @@ void EstadoEditor::renderBotones(sf::RenderTarget& target)
 
 void EstadoEditor::renderizarGUI(sf::RenderTarget& target)
 {
-    if (!_selectorTexturas->getActivo())
-    {
-        // dibujar tilea partir de textura con vista seteada
-        target.setView(_vista);
-        target.draw(_rectSelector);
-    }
+   
+}
 
-    // render selector de texturas y barra lateral con vista por default
-    target.setView(_ventana->getDefaultView());
-    _selectorTexturas->renderizar(target);
-    target.draw(_barraLateral);
-    
-    // dibujar texto mouse con vista seteada
-    target.setView(_vista);
-    target.draw(_textoCursor);
+void EstadoEditor::renderizarModos(sf::RenderTarget& target)
+{
+    _vModo[mod_editor::MAPA]->renderizar(target);
 }
 
 void EstadoEditor::renderizar(sf::RenderTarget* target)
@@ -314,16 +236,16 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
 
     // render tile map con la vista seteada
     target->setView(_vista);
-    _tileMap->renderizar(*target, posMouseCuadro);
+    _tileMap->renderizar(*target, _posMouseCuadro);
     _tileMap->renderizacionDiferida(*target);
   
     // render botones con vista por default
     target->setView(_ventana->getDefaultView());
     renderBotones(*target);
 
-
     renderizarGUI(*target); // vista dentro del metodo
 
+    renderizarModos(*target);
 
     if (_pausa)
     {
@@ -332,5 +254,5 @@ void EstadoEditor::renderizar(sf::RenderTarget* target)
         _menuPausa->renderizar(*target);
     }
 
-    target->draw(_textoCursor);
+    
 }

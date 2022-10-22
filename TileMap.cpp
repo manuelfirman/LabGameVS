@@ -404,7 +404,7 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 	}
 }
 
-void TileMap::actualizar()
+void TileMap::actualizar(Entidades* entidad, const float& DT)
 {
 
 }
@@ -414,25 +414,25 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionC
 	// TILES
 	_capa = 0;
 
-	_desdeX = posicionCuadro.x - 15;
+	_desdeX = posicionCuadro.x - 30;
 	if (_desdeX < 0)
 		_desdeX = 0;
 	else if (_desdeX > _tamanioMaxCuadros.x)
 		_desdeX = _tamanioMaxCuadros.x;
 
-	_hastaX = posicionCuadro.x + 15;
+	_hastaX = posicionCuadro.x + 30;
 	if (_hastaX < 0)
 		_hastaX = 0;
 	else if (_hastaX > _tamanioMaxCuadros.x)
 		_hastaX = _tamanioMaxCuadros.x;
 
-	_desdeY = posicionCuadro.y - 9;
+	_desdeY = posicionCuadro.y - 15;
 	if (_desdeY < 0)
 		_desdeY = 0;
 	else if (_desdeY > _tamanioMaxCuadros.y)
 		_desdeY = _tamanioMaxCuadros.y;
 
-	_hastaY = posicionCuadro.y + 10;
+	_hastaY = posicionCuadro.y + 15;
 	if (_hastaY < 0)
 		_hastaY = 0;
 	else if (_hastaY > _tamanioMaxCuadros.y)
@@ -445,6 +445,8 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionC
 		{
 			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{	
+				_mapa[x][y][_capa][C]->actualizar();
+				
 				// Orden de renderizado
 				if (_mapa[x][y][_capa][C]->getTipoTile() == tipo_tile::TOP)
 				{
@@ -453,7 +455,7 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionC
 				else
 				{
 					if(sombra)
-						_mapa[x][y][_capa][C]->renderizar(target, posicionJugador, sombra); // TODO: agregar parametros
+						_mapa[x][y][_capa][C]->renderizar(target, posicionJugador, sombra);
 					else
 						_mapa[x][y][_capa][C]->renderizar(target);
 				}

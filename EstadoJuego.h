@@ -28,8 +28,7 @@ private: // Atributos
     // Mapa
     TileMap* _tileMap;
     //Enemigos
-    Enemigos* _enemigo;
-
+    std::vector<Enemigos*> _enemigos;
 
     sf::Shader _sombra;
 

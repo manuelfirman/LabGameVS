@@ -47,12 +47,12 @@ protected: // Atributos
     // Control de ingresos de teclado por segundo
     float _ppsTeclas;
     float _ppsTeclasMax;
-
+    
     // Posiciones Mouse
-    sf::Vector2i posMousePantalla;
-    sf::Vector2i posMouseVentana;
-    sf::Vector2f posMouseVista;
-    sf::Vector2i posMouseCuadro;
+    sf::Vector2i _posMousePantalla;
+    sf::Vector2i _posMouseVentana;
+    sf::Vector2f _posMouseVista;
+    sf::Vector2i _posMouseCuadro;
 
 protected: // Metodos
     virtual void iniciarKeybinds() = 0;

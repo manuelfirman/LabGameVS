@@ -136,7 +136,7 @@ void EstadoOpciones::actualizarGUI(const float& DT)
 {
     // BOTONES --------------------------------------
     for (auto& botones : _boton) { 
-        botones.second->actualizar(posMouseVentana);
+        botones.second->actualizar(_posMouseVentana);
     }
 
     if (_boton["VOLVER"]->getClick())
@@ -157,7 +157,7 @@ void EstadoOpciones::actualizarGUI(const float& DT)
     // LISTAS DESPLEGABLES --------------------------
     for (auto& listas : _listasDesplegables)
     {
-        listas.second->actualizar(posMouseVentana, DT);
+        listas.second->actualizar(_posMouseVentana, DT);
     }
 }
 

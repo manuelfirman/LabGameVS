@@ -50,7 +50,7 @@ public:
     virtual void mover(const float x, const float y, const float& DT);
 
     virtual void actualizar(const float& DT, sf::Vector2f& posMouseVista) = 0;
-    virtual void renderizar(sf::RenderTarget& target, sf::Shader* sombra, const bool mostrar_hitbox = false) = 0;
+    virtual void renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf::Vector2f posLuz = sf::Vector2f(), const bool mostrar_hitbox = false) = 0;
 };
 
 #endif // ENTIDADES_H

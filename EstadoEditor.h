@@ -5,45 +5,41 @@
 #include "Gui.h"
 #include "MenuPausa.h"
 #include "TileMap.h"
+#include "Modo_Editor.h"
+#include "Editor_Mapa.h"
 
-class EstadoBase;
-class Gui;
-class MenuPausa;
-class TileMap;
 
-class sf::RectangleShape;
+enum mod_editor{ MAPA = 0, ENEMIGOS };
 
 
 class EstadoEditor : public EstadoBase
 {
     private: // Atributos
+        DatosEditor _datosEditor;
+        
         sf::View _vista;
+        float _velocidadCamara;
 
         sf::Font _fuente;
-        sf::Text _textoCursor;
         MenuPausa* _menuPausa;
+
         std::map<std::string, gui::Boton*> _boton;
 
         TileMap* _tileMap;
 
-        sf::RectangleShape _barraLateral;
-        sf::IntRect _rectTextura;
-        sf::RectangleShape _rectSelector;
-        gui::SelectorTexturas* _selectorTexturas;
-
-        float _velocidadCamara;
-        bool _colision;
-        short _tipo;
-        int _capa;
-        bool _bloqueoTile;
+        std::vector<Modo_Editor*> _vModo;
 
     private: // Metodos
+        void iniciarModos();
+
+
         void iniciarVariables();
+        void iniciarDatosEditor();
         void iniciarVista();
         void iniciarKeybinds();
         void iniciarFondo();
         void iniciarFuentes();
-        void iniciarTexto();
+
         void iniciarMenuPausa();
         void iniciarBotones();
         void iniciarTileMap();
@@ -58,10 +54,12 @@ class EstadoEditor : public EstadoBase
         void actualizarBotones();
         void actualizarGUI(const float& DT);
         void actualizarBotonesMenuPausa();
+        void actualizarModos(const float& DT);
         void actualizar(const float& DT);
 
         void renderBotones(sf::RenderTarget& target);
         void renderizarGUI(sf::RenderTarget& target);
+        void renderizarModos(sf::RenderTarget& target);
         void renderizar(sf::RenderTarget* target = NULL);
 };
 

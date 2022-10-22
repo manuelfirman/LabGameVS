@@ -63,6 +63,7 @@ const std::string Tile::getTileString() const
 
 void Tile::actualizar()
 {
+	//_tile.setColor(sf::Color::Red);
 }
 
 void Tile::renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador, sf::Shader* sombra)

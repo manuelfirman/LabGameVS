@@ -160,16 +160,16 @@ void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 
 }
 
-void Jugador::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const bool mostrar_hitbox)
+void Jugador::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf::Vector2f posLuz, const bool mostrar_hitbox)
 {
     if(sombra)
     {
         sombra->setUniform("tieneTextura", true);
-        sombra->setUniform("luz", getCentro());
+        sombra->setUniform("luz", posLuz);
         target.draw(_sprite, sombra);
 
         //sombra->setUniform("tieneTextura", true);
-        //sombra->setUniform("luz", getCentro());
+        //sombra->setUniform("luz", posLuz);
         //_espada.renderizar(target);
     }
     else // si no hay sombra

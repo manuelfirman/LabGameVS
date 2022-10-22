@@ -43,7 +43,10 @@ void EstadoJuego::iniciarKeybinds()
 void EstadoJuego::iniciarTexturas()
 {
     if (!_texturas["PLANTILLA_JUGADOR"].loadFromFile("recursos/img/personaje/1.png")) {
-        std::cout << "ERROR: EstadoJuego_iniciarTexturas_CargaTexturaPersonaje" << std::endl;
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR TEXTURA DE JUGADOR" << std::endl;
+    }
+    if (!_texturas["ENEMIGO_1"].loadFromFile("recursos/img/enemigos/demon.png")) {
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR TEXTURA DE ENEMIGO 1" << std::endl;
     }
 }
 
@@ -98,7 +101,14 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarJugadores();
     this->iniciarGUIJugador();
 
-    _enemigo = new Enemigos(200.f, 30.f, _texturas["PLANTILLA_JUGADOR"]);
+
+    _enemigos.push_back(new Enemigos(200.f, 250.f, _texturas["ENEMIGO_1"]));
+    _enemigos.push_back(new Enemigos(250.f, 200.f, _texturas["ENEMIGO_1"]));
+    _enemigos.push_back(new Enemigos(300.f, 200.f, _texturas["ENEMIGO_1"]));
+    _enemigos.push_back(new Enemigos(200.f, 300.f, _texturas["ENEMIGO_1"]));
+    _enemigos.push_back(new Enemigos(200.f, 500.f, _texturas["ENEMIGO_1"]));
+
+
 }
 
 EstadoJuego::~EstadoJuego()
@@ -108,7 +118,10 @@ EstadoJuego::~EstadoJuego()
     delete _menuPausa;
     delete _tileMap;
 
-    delete _enemigo;
+    for (size_t i = 0; i < _enemigos.size(); i++)
+    {
+        delete _enemigos[i];
+    }
 }
 
 /// --------------------- ACTUALIZACIONES --------------------------
@@ -120,8 +133,8 @@ void EstadoJuego::actualizarVistaCam(const float& DT)
 
     // Jugador centrado + movimiento de mouse
     _vistaCam.setCenter(
-        std::floor(_jugador->getPosicionSprite().x + (static_cast<float>(posMouseVentana.x)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width / 2) / 10.f)),
-        std::floor(_jugador->getPosicionSprite().y + (static_cast<float>(posMouseVentana.y)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height / 2) / 10.f))); // floor para estabilizar el float en pixels 
+        std::floor(_jugador->getPosicionSprite().x + (static_cast<float>(_posMouseVentana.x)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width / 2) / 10.f)),
+        std::floor(_jugador->getPosicionSprite().y + (static_cast<float>(_posMouseVentana.y)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height / 2) / 10.f))); // floor para estabilizar el float en pixels 
 
         //std::cout << _tileMap->getTamanioMax().x << " " << _vistaCam.getSize().x << "\n";
 
@@ -212,9 +225,12 @@ void EstadoJuego::actualizarBotonesPausa()
 
 void EstadoJuego::actualizarTileMap(const float& DT)
 {
-    _tileMap->actualizar();
-    _tileMap->checkColision(_jugador, DT);
-    _tileMap->checkColision(_enemigo, DT);
+    _tileMap->actualizar(_jugador, DT);
+    //_tileMap->checkColision(_jugador, DT);
+    for (auto* i : _enemigos)
+    {
+        _tileMap->actualizar(i, DT);
+    }
 }
 
 void EstadoJuego::actualizar(const float& DT)
@@ -231,17 +247,19 @@ void EstadoJuego::actualizar(const float& DT)
 
         actualizarTileMap(DT);
 
-        _jugador->actualizar(DT, posMouseVista);
+        _jugador->actualizar(DT, _posMouseVista);
 
         _GUIJugador->actualizar(DT);
 
-        _enemigo->actualizar(DT, posMouseVista);
-        _enemigo->mover(1.f, 0.f, DT);
+        for (auto* i : _enemigos)
+        {
+            i->actualizar(DT, _posMouseVista);
+        }
 
     }
     else // actualizar con pausa
     {
-        _menuPausa->actualizar(posMouseVentana);
+        _menuPausa->actualizar(_posMouseVentana);
         actualizarBotonesPausa();
     }
 
@@ -261,10 +279,14 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
     _renderTextura.setView(_vistaCam); // set vista
     //_tileMap->renderizar(_renderTextura, _vistaPosicionCuadros, _jugador->getCentro(), &_sombra, false);
     _tileMap->renderizar(_renderTextura, _jugador->getCuadroActual(static_cast<int>(_datosEstado->tamanioCuadro)), _jugador->getCentro(), &_sombra);
+        // Enemigos
+    for (auto* i : _enemigos)
+    {
+        i->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), false);
+    }
         // Jugador
-    _jugador->renderizar(_renderTextura, &_sombra);
-        // Enemigo
-    _enemigo->renderizar(_renderTextura, &_sombra, false);
+    _jugador->renderizar(_renderTextura, &_sombra, _jugador->getCentro());
+
         // Render Lienzo
     _tileMap->renderizacionDiferida(_renderTextura);
         //GUI

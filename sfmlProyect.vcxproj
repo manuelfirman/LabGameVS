@@ -152,7 +152,9 @@
   <ItemGroup>
     <ClCompile Include="Animacion.cpp" />
     <ClCompile Include="Animacion2.cpp" />
+    <ClCompile Include="Editor_Mapa.cpp" />
     <ClCompile Include="Enemigos.cpp" />
+    <ClCompile Include="Modo_Editor.cpp" />
     <ClCompile Include="Orbe.cpp" />
     <ClCompile Include="ArmaMelee.cpp" />
     <ClCompile Include="ArmaRango.cpp" />
@@ -186,7 +188,9 @@
   <ItemGroup>
     <ClInclude Include="Animacion.h" />
     <ClInclude Include="Animacion2.h" />
+    <ClInclude Include="Editor_Mapa.h" />
     <ClInclude Include="Enemigos.h" />
+    <ClInclude Include="Modo_Editor.h" />
     <ClInclude Include="Orbe.h" />
     <ClInclude Include="ArmaMelee.h" />
     <ClInclude Include="ArmaRango.h" />

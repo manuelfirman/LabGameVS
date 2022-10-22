@@ -3,16 +3,17 @@
 
 void Enemigos::iniciarVariables()
 {
+  
 }
 
 
 void Enemigos::iniciarAnimaciones()
 {
     // key - Velocidad animacion - inicioX - inicioY - framesX - framesY
-    _animacion->agregarAnimacion("QUIETO", 10.f, 1, 10, 1, 10, 64, 64);         // Quieto
-    _animacion->agregarAnimacion("CAMINAR_ABAJO", 3.f, 1, 10, 8, 10, 64, 64);   // Caminar abajo
-    _animacion->agregarAnimacion("CAMINAR_ARRIBA", 3.f, 1, 8, 8, 8, 64, 64);    // Caminar arriba
-    _animacion->agregarAnimacion("CAMINAR_X", 3.f, 1, 9, 8, 9, 64, 64);         // Caminar derecha
+    _animacion->agregarAnimacion("QUIETO", 6.f, 0, 0, 2, 0, 64, 64);         // Quieto
+    _animacion->agregarAnimacion("CAMINAR_ABAJO", 6.f, 0, 0, 3, 0, 64, 64);   // Caminar abajo
+    _animacion->agregarAnimacion("CAMINAR_ARRIBA", 6.f, 0, 1, 3, 1, 64, 64);    // Caminar arriba
+    _animacion->agregarAnimacion("CAMINAR_X", 6.f, 0, 2, 3, 2, 64, 64);         // Caminar derecha
     //_animacion->agregarAnimacion("CAMINAR_X", 3.f, 1, 11, 8, 11, 64, 64);       // Caminar izquierda
 
      // ANIMACIONES ATAQUE
@@ -22,10 +23,11 @@ void Enemigos::iniciarAnimaciones()
 }
 
 Enemigos::Enemigos(float x, float y, sf::Texture& textura)
+   /* : _spawner(spawner)*/
 {
     this->iniciarVariables();
 
-    crearHitbox(_sprite, 18.f, 17.f, 28.f, 44.f);       // Hitbox
+    crearHitbox(_sprite, 18.f, 7.f, 28.f, 40.f);       // Hitbox
     crearComponenteMovimiento(150.f, 1700.f, 1000.f);   // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
     setPosicion(x, y);                                  // Posicion
@@ -78,12 +80,12 @@ void Enemigos::actualizar(const float& DT, sf::Vector2f& posMouseVista)
     _hitbox->actualizar();
 }
 
-void Enemigos::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const bool mostrar_hitbox)
+void Enemigos::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf::Vector2f posLuz, const bool mostrar_hitbox)
 {
     if (sombra)
     {
         sombra->setUniform("tieneTextura", true);
-        sombra->setUniform("luz", getCentro());
+        sombra->setUniform("luz", posLuz);
         target.draw(_sprite, sombra);
     }
     else // si no hay sombra

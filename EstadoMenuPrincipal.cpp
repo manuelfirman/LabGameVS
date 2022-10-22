@@ -104,7 +104,7 @@ void EstadoMenuPrincipal::actualizarInput(const float& DT)
 void EstadoMenuPrincipal::actualizarBotones()
 {
     for (auto& botones : _boton) {
-        botones.second->actualizar(posMouseVentana);
+        botones.second->actualizar(_posMouseVentana);
     }
 
     if (_boton["ESTADO_JUEGO"]->getClick() && getPpsTeclas())

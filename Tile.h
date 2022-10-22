@@ -1,7 +1,7 @@
 #ifndef TILE_H
 #define TILE_H
 
-enum tipo_tile{ SUELO = 0, PARED, TOP };
+enum tipo_tile{ SUELO = 0, PARED, TOP, SPAWNERENEMIGO };
 
 class Tile
 {
@@ -25,9 +25,8 @@ class Tile
 		const bool interseccion(const sf::FloatRect limites) const;
 		const std::string getTileString() const;
 
-		void actualizar();
-		void renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);
-		
+		virtual void actualizar();
+		virtual void renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);
 };
 
 #endif // TILE

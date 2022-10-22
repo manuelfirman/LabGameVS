@@ -41,7 +41,7 @@ public:
     void actualizar(const float& DT, sf::Vector2f& posMouseVista);
     
     // Renderizar
-    void renderizar(sf::RenderTarget& target, sf::Shader* sombra = NULL, const bool mostrar_hitbox = false);
+    void renderizar(sf::RenderTarget& target, sf::Shader* sombra = NULL, const sf::Vector2f posLuz = sf::Vector2f(), const bool mostrar_hitbox = false);
 };
 
 #endif // JUGADOR_H
