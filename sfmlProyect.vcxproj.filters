@@ -144,6 +144,15 @@
     <ClCompile Include="Editor_Mapa.cpp">
       <Filter>Estados\Editor</Filter>
     </ClCompile>
+    <ClCompile Include="Editor_SpawnerEnemigos.cpp">
+      <Filter>Estados\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="Demon.cpp">
+      <Filter>Entidades\Enemigos</Filter>
+    </ClCompile>
+    <ClCompile Include="TileNormal.cpp">
+      <Filter>Tile</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstadoBase.h">
@@ -235,6 +244,15 @@
     </ClInclude>
     <ClInclude Include="Editor_Mapa.h">
       <Filter>Estados\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor_SpawnerEnemigos.h">
+      <Filter>Estados\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="Demon.h">
+      <Filter>Entidades\Enemigos</Filter>
+    </ClInclude>
+    <ClInclude Include="TileNormal.h">
+      <Filter>Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

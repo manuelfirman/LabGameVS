@@ -10,16 +10,16 @@ class Enemigos : public Entidades
 		//SpawnerEnemigos& _spawner;
 
 	private:
-		void iniciarVariables();
-		void iniciarAnimaciones();
+		virtual void iniciarVariables();
+		virtual void iniciarAnimaciones();
 
 	public:
-		Enemigos(float x, float y, sf::Texture& textura);
+		Enemigos();
 		virtual ~Enemigos();
 
-		void actualizarAnimacion(const float& DT);
-		void actualizar(const float& DT, sf::Vector2f& posMouseVista);
-		void renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf::Vector2f posLuz, const bool mostrar_hitbox);
+		virtual void actualizarAnimacion(const float& DT) = 0;
+		virtual void actualizar(const float& DT, sf::Vector2f& posMouseVista) = 0;
+		virtual void renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf::Vector2f posLuz, const bool mostrar_hitbox) = 0;
 };
 
-#endif
+#endif  

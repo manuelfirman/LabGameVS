@@ -102,13 +102,6 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarGUIJugador();
 
 
-    _enemigos.push_back(new Enemigos(200.f, 250.f, _texturas["ENEMIGO_1"]));
-    _enemigos.push_back(new Enemigos(250.f, 200.f, _texturas["ENEMIGO_1"]));
-    _enemigos.push_back(new Enemigos(300.f, 200.f, _texturas["ENEMIGO_1"]));
-    _enemigos.push_back(new Enemigos(200.f, 300.f, _texturas["ENEMIGO_1"]));
-    _enemigos.push_back(new Enemigos(200.f, 500.f, _texturas["ENEMIGO_1"]));
-
-
 }
 
 EstadoJuego::~EstadoJuego()
@@ -225,12 +218,24 @@ void EstadoJuego::actualizarBotonesPausa()
 
 void EstadoJuego::actualizarTileMap(const float& DT)
 {
-    _tileMap->actualizar(_jugador, DT);
-    //_tileMap->checkColision(_jugador, DT);
+    _tileMap->actualizarLimitesMapa(_jugador, DT);
+    _tileMap->checkColision(_jugador, DT);
+    _tileMap->actualizarTiles(_jugador, DT, _enemigos, _texturas);
+
+
     for (auto* i : _enemigos)
     {
-        _tileMap->actualizar(i, DT);
+        _tileMap->actualizarLimitesMapa(i, DT);
+        _tileMap->checkColision(i, DT);
     }
+}
+
+void EstadoJuego::actualizarJugador(const float& DT)
+{
+}
+
+void EstadoJuego::actualizarEnemigos(const float& DT)
+{
 }
 
 void EstadoJuego::actualizar(const float& DT)

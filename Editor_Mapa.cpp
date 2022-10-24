@@ -56,11 +56,14 @@ void Editor_Mapa::actualizarInput(const float& DT)
     {
         if (!_barraLateral.getGlobalBounds().contains(sf::Vector2f(*_datosEditor->posMouseVentana)))
         {
-            if (!_selectorTexturas->getActivo()) // Si no esta activo, agrega tile
+            if (!_selectorTexturas->getActivo()) // Selector inactivo
             {
-                if (_bloqueoTile)
+                if (_bloqueoTile) // bloqueo tile
                 {
-                    _tileMap->tileVacio(_datosEditor->posMouseCuadro->x, _datosEditor->posMouseCuadro->y, 0);
+                    if(_tileMap->tileVacio(_datosEditor->posMouseCuadro->x, _datosEditor->posMouseCuadro->y, 0)) // tile vacio
+                    {
+                        _tileMap->agregarTile(_datosEditor->posMouseCuadro->x, _datosEditor->posMouseCuadro->y, 0, _rectTextura, _colision, _tipo);
+                    }
                 }
                 else
                 {
@@ -133,6 +136,7 @@ void Editor_Mapa::actualizarGUI(const float& DT)
 void Editor_Mapa::actualizar(const float& DT)
 {
     this->actualizarGUI(DT);
+    this->actualizarInput(DT);
 }
 
 

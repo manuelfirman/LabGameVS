@@ -7,7 +7,7 @@ Tile::Tile()
 	_tipoTile = 0;
 }
 
-Tile::Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision, short tipo)
+Tile::Tile(int tipo, int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, const bool colision)
 {
 	//_tile.setSize(sf::Vector2f(tamanioCuadroF, tamanioCuadroF));
 	//_tile.setFillColor(sf::Color::White);
@@ -49,35 +49,4 @@ const sf::FloatRect Tile::getLimites() const
 const bool Tile::interseccion(const sf::FloatRect limites) const
 {
 	return _tile.getGlobalBounds().intersects(limites);
-}
-
-const std::string Tile::getTileString() const
-{
-	std::stringstream ss;
-
-	ss << _tile.getTextureRect().left << " " << _tile.getTextureRect().top << " " << _colision << " " << _tipoTile;
-
-	return ss.str();
-}
-
-
-void Tile::actualizar()
-{
-	//_tile.setColor(sf::Color::Red);
-}
-
-void Tile::renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador, sf::Shader* sombra)
-{
-	if (sombra)
-	{
-		sombra->setUniform("tieneTextura", true);
-		sombra->setUniform("luz", posicionJugador);
-
-		target.draw(_tile, sombra);
-	}
-	else
-	{
-		target.draw(_tile);
-	}
-	
 }

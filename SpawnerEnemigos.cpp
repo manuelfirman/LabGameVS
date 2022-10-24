@@ -4,9 +4,10 @@
 
 
 SpawnerEnemigos::SpawnerEnemigos(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura,
-	float tamanio_cuadro, int tipo_enemigo, int cantidad_enemigos, int tiempo_spawn, float distancia_max)
-	: Tile(cuadro_x, cuadro_y, tamanioCuadroF, textura, rect_textura, false, tipo_tile::SPAWNERENEMIGO)
+	int tipo_enemigo, int cantidad_enemigos, int tiempo_spawn, float distancia_max)
+	: Tile(tipo_tile::SPAWNERENEMIGO, cuadro_x, cuadro_y, tamanioCuadroF, textura, rect_textura, false)
 {
+	_spawneado = false;
 	_tipoEnemigo = tipo_enemigo;
 	_cantidadEnemigos = cantidad_enemigos;
 	_tiempoSpawn = tiempo_spawn;
@@ -15,6 +16,25 @@ SpawnerEnemigos::SpawnerEnemigos(int cuadro_x, int cuadro_y, float tamanioCuadro
 
 SpawnerEnemigos::~SpawnerEnemigos()
 {
+}
+
+void SpawnerEnemigos::setSpawn(const bool spawneado)
+{
+	_spawneado = spawneado;
+}
+
+const bool& SpawnerEnemigos::getSpawn()
+{
+	return _spawneado;
+}
+
+const std::string SpawnerEnemigos::getTileString() const
+{
+	std::stringstream ss;
+	// x, y, z, tipo, rect x, rect y, tipo enemigo, cantidad, tiempo spawn, distancia max
+	ss << _tipoTile << " " << _tile.getTextureRect().left << " " << _tile.getTextureRect().top << " " << _tipoEnemigo << " " << _cantidadEnemigos << " " << _tiempoSpawn << " " << _distanciaMax;
+
+	return ss.str();
 }
 
 void SpawnerEnemigos::actualizar()

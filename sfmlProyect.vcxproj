@@ -152,7 +152,9 @@
   <ItemGroup>
     <ClCompile Include="Animacion.cpp" />
     <ClCompile Include="Animacion2.cpp" />
+    <ClCompile Include="Demon.cpp" />
     <ClCompile Include="Editor_Mapa.cpp" />
+    <ClCompile Include="Editor_SpawnerEnemigos.cpp" />
     <ClCompile Include="Enemigos.cpp" />
     <ClCompile Include="Modo_Editor.cpp" />
     <ClCompile Include="Orbe.cpp" />
@@ -184,11 +186,14 @@
     </ClCompile>
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="TileNormal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animacion.h" />
     <ClInclude Include="Animacion2.h" />
+    <ClInclude Include="Demon.h" />
     <ClInclude Include="Editor_Mapa.h" />
+    <ClInclude Include="Editor_SpawnerEnemigos.h" />
     <ClInclude Include="Enemigos.h" />
     <ClInclude Include="Modo_Editor.h" />
     <ClInclude Include="Orbe.h" />
@@ -216,6 +221,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="TileNormal.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

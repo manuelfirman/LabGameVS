@@ -10,23 +10,23 @@ class Tile
 	protected:
 		sf::Sprite _tile;
 		bool _colision;
-		short _tipoTile;
+		int _tipoTile;
 
 	public:
 		Tile();
-		Tile(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, bool colision = false, short tipo = tipo_tile::SUELO);
+		Tile(int tipo, int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, const bool colision = false);
 		~Tile();
 
 		// Getters
-		const short& getTipoTile() const;
-		const bool& getColision() const;
-		const sf::Vector2f& getPosicionTile() const;
-		const sf::FloatRect getLimites() const;
-		const bool interseccion(const sf::FloatRect limites) const;
-		const std::string getTileString() const;
+		virtual const short& getTipoTile() const;
+		virtual const bool& getColision() const;
+		virtual const sf::Vector2f& getPosicionTile() const;
+		virtual const sf::FloatRect getLimites() const;
+		virtual const bool interseccion(const sf::FloatRect limites) const;
 
-		virtual void actualizar();
-		virtual void renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);
+		virtual const std::string getTileString() const = 0;
+		virtual void actualizar() = 0;
+		virtual void renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL) = 0;
 };
 
 #endif // TILE

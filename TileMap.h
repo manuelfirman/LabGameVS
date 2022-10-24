@@ -1,7 +1,12 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
+
 #include "Tile.h"
+#include "TileNormal.h"
+#include "SpawnerEnemigos.h"
 #include "Entidades.h"
+#include "Demon.h"
+
 
 class TileMap
 {
@@ -44,16 +49,20 @@ class TileMap
 
 		// Metodos
 		void agregarTile(const int x, const int y, const int z, const sf::IntRect& rect_textura, const bool& colision, const short& tipo);
-		void removerTile(const int x, const int y, const int z);
+		void agregarTile(const int x, const int y, const int z, const sf::IntRect& rect_textura, const int tipo_enemigo, const int cantidad_enemigos, const int tiempo_spawn, const int distancia_max);
+		void removerTile(const int x, const int y, const int z, const int tipo = -1);
 		void checkColision(Entidades* entidad, const float& DT);
+		const bool verificarTipoTile(const int x, const int y, const int z, const int tipo) const;
 
 		//Archivos
 		void guardarEnArchivo(const std::string nombre_archivo);
 		void cargarDesdeArchivo(const std::string nombre_archivo);
-		
+
 		// Actualizar - Renderizar
-		void actualizar(Entidades* entidad, const float& DT);
-		void renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionCuadro, sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL, const bool mostrar_hitbox = false);
+		void actualizarLimitesMapa(Entidades* entidad, const float& DT);
+		void actualizarTiles(Entidades* entidad, const float& DT, std::vector<Enemigos*>& enemigos, std::map<std::string, sf::Texture>& texturas);
+
+		void renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionCuadro, sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL, const bool mostrar_hitbox = true);
 		void renderizacionDiferida(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);
 
 };

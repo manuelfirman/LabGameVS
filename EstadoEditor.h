@@ -5,8 +5,8 @@
 #include "Gui.h"
 #include "MenuPausa.h"
 #include "TileMap.h"
-#include "Modo_Editor.h"
 #include "Editor_Mapa.h"
+#include "Editor_SpawnerEnemigos.h"
 
 
 enum mod_editor{ MAPA = 0, ENEMIGOS };
@@ -28,6 +28,7 @@ class EstadoEditor : public EstadoBase
         TileMap* _tileMap;
 
         std::vector<Modo_Editor*> _vModo;
+        unsigned _modoEditor;
 
     private: // Metodos
         void iniciarModos();

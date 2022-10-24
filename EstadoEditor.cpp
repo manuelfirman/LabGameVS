@@ -4,6 +4,9 @@
 void EstadoEditor::iniciarModos()
 {
     _vModo.push_back(new Editor_Mapa(_datosEstado, &_datosEditor, _tileMap));
+    _vModo.push_back(new Editor_SpawnerEnemigos(_datosEstado, &_datosEditor, _tileMap));
+
+    _modoEditor = mod_editor::MAPA;
 }
 
 /// --------------------- INICIALIZACIONES --------------------------
@@ -56,7 +59,7 @@ void EstadoEditor::iniciarFondo()
 void EstadoEditor::iniciarFuentes()
 {
     if (!_fuente.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
-        std::cout << "ERROR:CargarFuente_EditorEstado_Botones" << std::endl;
+        std::cout << "ERROR::ESTADOEDITOR::NO SE PUDO CARGAR LA FUENTE" << std::endl;
     }
 }
 
@@ -134,11 +137,12 @@ void EstadoEditor::actualizarInput(const float& DT)
         else reanudarEstado();
         //(_pausa) ? pausarEstado() : reanudarEstado();
     }
+
 }
 
 void EstadoEditor::actualizarInputEditor(const float& DT)
 {
-    // Mover vista
+    // MOVER CAMARA
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_ARRIBA")))) //TODO: agregar ppsTeclas
     {
         _vista.move(0.f, -_velocidadCamara * DT);
@@ -155,6 +159,31 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_CAM_IZQUIERDA"))))
     {
         _vista.move(-_velocidadCamara * DT, 0.f);
+    }
+
+
+    // CAMBIAR MODO DE EDITOR
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MODO_ARRIBA"))) && getPpsTeclas())
+    {
+        if (_modoEditor < _vModo.size() -1)
+        {
+            _modoEditor++;
+        }
+        else
+        {
+            std::cout << "ESTADOEDITOR::ESTAS EN EL MODO MAXIMO ("<< _modoEditor << ")" << std::endl;
+        }
+    }
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MODO_ABAJO"))) && getPpsTeclas())
+    {
+        if (_modoEditor > 0)
+        {
+            _modoEditor--;
+        }
+        else
+        {
+            std::cout << "ESTADOEDITOR::ESTAS EN EL MODO 0 (MAPA)" << std::endl;
+        }
     }
 }
 
@@ -185,7 +214,7 @@ void EstadoEditor::actualizarBotonesMenuPausa()
 
 void EstadoEditor::actualizarModos(const float& DT)
 {
-    _vModo[mod_editor::MAPA]->actualizar(DT);
+    _vModo[_modoEditor]->actualizar(DT);
 }
 
 // ACTUALIZAR ESTADO EDITOR
@@ -226,7 +255,7 @@ void EstadoEditor::renderizarGUI(sf::RenderTarget& target)
 
 void EstadoEditor::renderizarModos(sf::RenderTarget& target)
 {
-    _vModo[mod_editor::MAPA]->renderizar(target);
+    _vModo[_modoEditor]->renderizar(target);
 }
 
 void EstadoEditor::renderizar(sf::RenderTarget* target)
