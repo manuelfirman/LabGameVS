@@ -47,6 +47,7 @@ Jugador::~Jugador()
     
 }
 
+
 Atributos* Jugador::getAtributos()
 {
     return _atributos;
@@ -84,7 +85,6 @@ void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
         _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
         _atacando = true;
     }
-       
 }
 
 
@@ -142,8 +142,8 @@ void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 {
 
     //_atributos->actualizar();
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-        _atributos->ganarExperiencia(20);
+    //if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+    //    _atributos->ganarExperiencia(20);
 
     //std::cout << _atributos->debug() << "\n";
 

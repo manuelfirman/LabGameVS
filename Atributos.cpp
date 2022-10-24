@@ -81,6 +81,11 @@ void Atributos::ganarExperiencia(const int experiencia)
 	actualizarNivel();
 }
 
+const bool Atributos::estaVivo() const
+{
+	if (_hp > 0) return true;
+	else return false;
+}
 
 void Atributos::actualizarEstadisticas(const bool reset)
 {

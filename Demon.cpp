@@ -17,7 +17,6 @@ void Demon::iniciarAnimaciones()
     //_animacion->agregarAnimacion("CAMINAR_X", 3.f, 1, 11, 8, 11, 64, 64);       // Caminar izquierda
 
      // ANIMACIONES ATAQUE
-
     _animacion->agregarAnimacion("ATAQUE_ABAJO", 10.f, 1, 14, 5, 14, 64, 64);
     _animacion->agregarAnimacion("ATAQUE_X", 10.f, 1, 13, 5, 13, 64, 64);
 }
@@ -26,9 +25,10 @@ Demon::Demon(float x, float y, sf::Texture& textura)
 {
     this->iniciarVariables();
 
-    crearHitbox(_sprite, 18.f, 7.f, 28.f, 40.f);       // Hitbox
+    crearHitbox(_sprite, 18.f, 7.f, 28.f, 40.f);        // Hitbox
     crearComponenteMovimiento(150.f, 1700.f, 1000.f);   // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
+    crearComponenteAtributos(1);                        // Atributos
     setPosicion(x, y);                                  // Posicion
     this->iniciarAnimaciones();                         // Animaciones
 }
@@ -36,6 +36,7 @@ Demon::Demon(float x, float y, sf::Texture& textura)
 Demon::~Demon()
 {
 }
+
 
 void Demon::actualizarAnimacion(const float& DT)
 {

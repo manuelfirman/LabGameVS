@@ -131,6 +131,6 @@ void Entidades::mover(const float dir_x, const float dir_y, const float& DT)
 const float Entidades::getDistancia(const Entidades& entidad) const
 {
     // (x2 - x1)^2 + (y2 - y1)^2
-    std::cout << sqrt(pow((getCentro().x - entidad.getCentro().x), 2) + pow((getCentro().y - entidad.getCentro().y), 2)) << std::endl;
+    //std::cout << sqrt(pow((getCentro().x - entidad.getCentro().x), 2) + pow((getCentro().y - entidad.getCentro().y), 2)) << std::endl;s
     return sqrt(pow((getCentro().x - entidad.getCentro().x), 2) + pow((getCentro().y - entidad.getCentro().y), 2));
 }

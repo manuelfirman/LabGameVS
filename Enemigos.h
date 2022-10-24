@@ -8,6 +8,7 @@ class Enemigos : public Entidades
 {
 	private:
 		//SpawnerEnemigos& _spawner;
+		int _experiencia;
 
 	private:
 		virtual void iniciarVariables();
@@ -16,6 +17,12 @@ class Enemigos : public Entidades
 	public:
 		Enemigos();
 		virtual ~Enemigos();
+
+
+		virtual const bool estaVivo() const;
+		virtual void perderVida(const int hp);
+		const int& getExperiencia() const;
+		virtual const Atributos* getAtributos() const;
 
 		virtual void actualizarAnimacion(const float& DT) = 0;
 		virtual void actualizar(const float& DT, sf::Vector2f& posMouseVista) = 0;

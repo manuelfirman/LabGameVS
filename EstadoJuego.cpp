@@ -20,7 +20,7 @@ void EstadoJuego::iniciarVistaCam()
 void EstadoJuego::iniciarFuentes()
 {
     if (!_fuenteJuego.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
-        std::cout << "ERROR:CargarFuente_MenuPrincipal" << std::endl;
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR LA FUENTE" << std::endl;
     }
 }
 
@@ -228,37 +228,49 @@ void EstadoJuego::actualizarTileMap(const float& DT)
     _tileMap->actualizarLimitesMapa(_jugador, DT);
     _tileMap->checkColision(_jugador, DT);
     _tileMap->actualizarTiles(_jugador, DT, *_managerEnemigos);
-
-
-    for (auto* i : _enemigos)
-    {
-        _tileMap->actualizarLimitesMapa(i, DT);
-        _tileMap->checkColision(i, DT);
-    }
 }
 
 void EstadoJuego::actualizarJugador(const float& DT)
 {
 }
 
-void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const float& DT)
+void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const float& DT)
 {
 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         if (enemigo->getLimites().contains(_posMouseVista) && enemigo->getDistancia(*_jugador) < 80.f)
         {
-            std::cout << "Toca arma" << std::endl;
+            enemigo->perderVida(_jugador->getArma()->getDmgMax());
+
+
+            std::cout << enemigo->getAtributos()->_hp << std::endl;
         }
     }
 }
 
 void EstadoJuego::actualizarEnemigos(const float& DT)
 {
-    for (auto* i : _enemigos)
+    int indice = 0;
+    for (auto* enemigo : _enemigos)
     {
-        i->actualizar(DT, _posMouseVista);
-        actualizarAtaques(i, DT);
+        enemigo->actualizar(DT, _posMouseVista);
+
+        _tileMap->actualizarLimitesMapa(enemigo, DT); // limites exteriores
+        _tileMap->checkColision(enemigo, DT); // Colisiones mapa
+
+        actualizarAtaques(enemigo, indice, DT); // daño
+
+        // TODO: buscar otra forma
+        if (!enemigo->estaVivo())
+        {
+            _jugador->ganarExperiencia(enemigo->getExperiencia());
+            _enemigos.erase(_enemigos.begin() + indice);
+            --indice;
+        }
+
+
+        ++indice;
     }
 }
 
@@ -306,9 +318,9 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
     //_tileMap->renderizar(_renderTextura, _vistaPosicionCuadros, _jugador->getCentro(), &_sombra, false);
     _tileMap->renderizar(_renderTextura, _jugador->getCuadroActual(static_cast<int>(_datosEstado->tamanioCuadro)), _jugador->getCentro(), &_sombra);
         // Enemigos
-    for (auto* i : _enemigos)
+    for (auto* enemigo : _enemigos)
     {
-        i->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), false);
+        enemigo->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), false);
     }
         // Jugador
     _jugador->renderizar(_renderTextura, &_sombra, _jugador->getCentro());

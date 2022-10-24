@@ -5,6 +5,7 @@ class Atributos
 {
 	private: // revisar si hacer atributos privados con setter o si no vale la pena en este caso
 		// Estadisticas
+	public:
 		int _hp;
 		int _hpMax;
 		int _dmgMin;
@@ -14,7 +15,6 @@ class Atributos
 		int _suerte;
 
 
-	public:
 		// Atributos
 		int _vitalidad; // checkear su usar int / unsigned para atributos y sistema de leveo
 		int _fuerza;
@@ -29,10 +29,10 @@ class Atributos
 		int _puntosAtributo;
 
 
-
+	public:
 		// Metodos
 		Atributos(int nivel);
-		virtual ~Atributos();
+		virtual ~Atributos(); 
 
 
 		// getters
@@ -49,15 +49,13 @@ class Atributos
 		void perderExperiencia(const int exeriencia);
 		void ganarExperiencia(const int experiencia);
 
+		const bool estaVivo() const;
+
 		void actualizarEstadisticas(const bool reset);
-
-
 		void actualizarNivel();
-
 		void actualizar();
 
 		std::string debug() const;
-
 };
 
 #endif
