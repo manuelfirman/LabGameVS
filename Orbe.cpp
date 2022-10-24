@@ -1,14 +1,10 @@
 #include "stdafx.h"
 #include "Orbe.h"
 
-Orbe::Orbe()
+Orbe::Orbe(unsigned valor, std::string ruta_textura)
+	: ArmaRango(valor, ruta_textura)
 {
 	std::cout << "Test arco" << std::endl;
-
-	// TODO: cargar la textura a traves de un puntero para no estar cargandola todo el tiempo
-	if (!_texturaArma.loadFromFile("recursos/img/items/07.png"))
-		std::cout << "ERROR::ARMAMELEE::NO SE PUDO CARGAR LA TEXTURA" << std::endl;
-
 
 	_spriteArma.setTexture(_texturaArma);
 	_spriteArma.setScale(0.5, 0.5);

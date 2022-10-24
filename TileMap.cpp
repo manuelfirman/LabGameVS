@@ -438,7 +438,7 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 	}
 }
 
-void TileMap::actualizarTiles(Entidades* entidad, const float& DT, std::vector<Enemigos*>& enemigos, std::map<std::string, sf::Texture>& texturas)
+void TileMap::actualizarTiles(Entidades* entidad, const float& DT, ManagerEnemigos& manager_enemigos)
 {
 	_capa = 0;
 
@@ -481,7 +481,7 @@ void TileMap::actualizarTiles(Entidades* entidad, const float& DT, std::vector<E
 					{
 						if(!spawner->getSpawn())
 						{
-							enemigos.push_back(new Demon(x * _tamanioCuadroF, y * _tamanioCuadroF, texturas["ENEMIGO_1"]));
+							manager_enemigos.crearEnemigo(DEMON, x * _tamanioCuadroF, y * _tamanioCuadroF);
 							spawner->setSpawn(true);
 						}
 					}

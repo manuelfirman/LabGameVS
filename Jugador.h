@@ -11,7 +11,7 @@ class Jugador : public Entidades
 {
 private: // Atributos
     bool _atacando;
-    //Orbe _espada;
+    Espada* _espada;
     std::vector<Proyectil> _skill;
     sf::Texture _texturaSkill;
 
@@ -26,7 +26,7 @@ public:
     ~Jugador();
 
     Atributos* getAtributos();
-
+    const Armas* getArma() const;
 
     // Setters
     void ganarHP(const int hp);

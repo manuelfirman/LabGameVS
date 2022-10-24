@@ -4,6 +4,7 @@
 void Jugador::iniciarVariables()
 {
     _atacando = false;
+    _espada = new Espada(20, "recursos/img/items/sword2.png");
 }
 
 void Jugador::iniciarComponentes()
@@ -49,6 +50,11 @@ Jugador::~Jugador()
 Atributos* Jugador::getAtributos()
 {
     return _atributos;
+}
+
+const Armas* Jugador::getArma() const
+{
+    return _espada;
 }
 
 
@@ -149,7 +155,7 @@ void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 
     _hitbox->actualizar();
 
-    //_espada.actualizar(posMouseVista, getCentro());
+    _espada->actualizar(posMouseVista, getCentro());
     for (size_t i = 0; i < _skill.size(); i++)
     {
         if (_skill[i].getRealizando())
@@ -168,13 +174,13 @@ void Jugador::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf:
         sombra->setUniform("luz", posLuz);
         target.draw(_sprite, sombra);
 
-        //sombra->setUniform("tieneTextura", true);
-        //sombra->setUniform("luz", posLuz);
-        //_espada.renderizar(target);
+        sombra->setUniform("tieneTextura", true);
+        sombra->setUniform("luz", posLuz);
+        _espada->renderizar(target);
     }
     else // si no hay sombra
         target.draw(_sprite);
-        //_espada.renderizar(target);
+        _espada->renderizar(target);
 
     if(mostrar_hitbox)
         _hitbox->renderizar(target);

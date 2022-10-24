@@ -11,6 +11,7 @@
 #include "Espada.h"
 #include "Orbe.h"
 
+#include "ManagerEnemigos.h"
 #include "SpawnerEnemigos.h"
 #include "Demon.h"
 
@@ -38,9 +39,8 @@ private: // Atributos
     sf::Shader _sombra;
 
     //Enemigos
+    ManagerEnemigos* _managerEnemigos;
     std::vector<Enemigos*> _enemigos;
-
-
 
 
 private: // Metodos
@@ -53,6 +53,7 @@ private: // Metodos
     void iniciarSombras();
     void iniciarJugadores();
     void iniciarGUIJugador();
+    void iniciarManagerEnemigos();
     void iniciarTileMap();
 
 public:
@@ -67,7 +68,7 @@ public:
 
     void actualizarJugador(const float& DT);
     void actualizarEnemigos(const float& DT);
-
+    void actualizarAtaques(Enemigos* enemigo, const float& DT);
     void actualizarTileMap(const float& DT);
 
     void actualizar(const float& DT);

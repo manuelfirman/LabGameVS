@@ -1,9 +1,6 @@
 #ifndef PROYECTIL_H
 #define PROYECTIL_H
 
-
-
-
 class Proyectil
 {
 	private:

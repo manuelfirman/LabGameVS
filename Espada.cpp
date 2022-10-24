@@ -2,7 +2,8 @@
 #include "Espada.h"
 
 
-Espada::Espada()
+Espada::Espada(unsigned valor, std::string ruta_textura)
+	: ArmaMelee(valor, ruta_textura)
 {
 	//std::cout << "Test espada" << std::endl;
 	// 

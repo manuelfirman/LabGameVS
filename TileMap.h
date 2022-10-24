@@ -3,6 +3,8 @@
 
 #include "Tile.h"
 #include "TileNormal.h"
+
+#include "ManagerEnemigos.h"
 #include "SpawnerEnemigos.h"
 #include "Entidades.h"
 #include "Demon.h"
@@ -60,7 +62,7 @@ class TileMap
 
 		// Actualizar - Renderizar
 		void actualizarLimitesMapa(Entidades* entidad, const float& DT);
-		void actualizarTiles(Entidades* entidad, const float& DT, std::vector<Enemigos*>& enemigos, std::map<std::string, sf::Texture>& texturas);
+		void actualizarTiles(Entidades* entidad, const float& DT, ManagerEnemigos& manager_enemigos);
 
 		void renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionCuadro, sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL, const bool mostrar_hitbox = true);
 		void renderizacionDiferida(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);

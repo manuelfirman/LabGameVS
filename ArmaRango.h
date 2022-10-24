@@ -1,25 +1,17 @@
 #ifndef ARMARANGO_H
 #define ARMARANGO_H
 
-#include "Items.h"
+#include "Armas.h"
 
-class Items;
 
-class ArmaRango : public Items
+class ArmaRango : public Armas
 {
 	private:
 
 	protected:
-		sf::Texture _texturaArma;
-		sf::IntRect _rectTexturaArma;
-		sf::Sprite _spriteArma;
-
-		int dmgMin;
-		int dmgMax;
-
 
 	public:
-		ArmaRango();
+		ArmaRango(unsigned valor, std::string ruta_textura);
 		virtual ~ArmaRango();
 
 		virtual void actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f centro) = 0;

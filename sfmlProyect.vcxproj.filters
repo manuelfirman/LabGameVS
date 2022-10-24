@@ -49,18 +49,15 @@
     <Filter Include="Entidades\Enemigos">
       <UniqueIdentifier>{e19a508a-17be-41d1-aebe-25619180ed19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Estados\Juego">
+      <UniqueIdentifier>{a1cd909d-9516-4123-8185-9159548b74a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="EstadoBase.cpp">
-      <Filter>Estados</Filter>
-    </ClCompile>
-    <ClCompile Include="EstadoJuego.cpp">
-      <Filter>Estados</Filter>
-    </ClCompile>
-    <ClCompile Include="EstadoMenuPrincipal.cpp">
       <Filter>Estados</Filter>
     </ClCompile>
     <ClCompile Include="Entidades.cpp">
@@ -80,9 +77,6 @@
     </ClCompile>
     <ClCompile Include="MenuPausa.cpp">
       <Filter>GUI</Filter>
-    </ClCompile>
-    <ClCompile Include="EstadoOpciones.cpp">
-      <Filter>Estados</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>Map</Filter>
@@ -153,15 +147,24 @@
     <ClCompile Include="TileNormal.cpp">
       <Filter>Tile</Filter>
     </ClCompile>
+    <ClCompile Include="EstadoJuego.cpp">
+      <Filter>Estados\Juego</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoMenuPrincipal.cpp">
+      <Filter>Estados\Juego</Filter>
+    </ClCompile>
+    <ClCompile Include="EstadoOpciones.cpp">
+      <Filter>Estados\Juego</Filter>
+    </ClCompile>
+    <ClCompile Include="ManagerEnemigos.cpp">
+      <Filter>Entidades\Enemigos</Filter>
+    </ClCompile>
+    <ClCompile Include="Armas.cpp">
+      <Filter>Items\Armas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstadoBase.h">
-      <Filter>Estados</Filter>
-    </ClInclude>
-    <ClInclude Include="EstadoJuego.h">
-      <Filter>Estados</Filter>
-    </ClInclude>
-    <ClInclude Include="EstadoMenuPrincipal.h">
       <Filter>Estados</Filter>
     </ClInclude>
     <ClInclude Include="Entidades.h">
@@ -181,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="MenuPausa.h">
       <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="EstadoOpciones.h">
-      <Filter>Estados</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>Map</Filter>
@@ -253,6 +253,21 @@
     </ClInclude>
     <ClInclude Include="TileNormal.h">
       <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoJuego.h">
+      <Filter>Estados\Juego</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoMenuPrincipal.h">
+      <Filter>Estados\Juego</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoOpciones.h">
+      <Filter>Estados\Juego</Filter>
+    </ClInclude>
+    <ClInclude Include="ManagerEnemigos.h">
+      <Filter>Entidades\Enemigos</Filter>
+    </ClInclude>
+    <ClInclude Include="Armas.h">
+      <Filter>Items\Armas</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

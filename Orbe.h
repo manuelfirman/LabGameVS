@@ -9,7 +9,7 @@ class Orbe : public ArmaRango
 	private:
 
 	public:
-		Orbe();
+		Orbe(unsigned valor, std::string ruta_textura);
 		~Orbe();
 
 		void actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f centro);

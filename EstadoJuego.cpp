@@ -74,6 +74,11 @@ void EstadoJuego::iniciarGUIJugador()
     _GUIJugador = new GUIJugador(_jugador, _datosEstado->opcionesGraficas->_resolucion);
 }
 
+void EstadoJuego::iniciarManagerEnemigos()
+{
+    _managerEnemigos = new ManagerEnemigos(_enemigos, _texturas);
+}
+
 void EstadoJuego::iniciarTileMap()
 {
     //_tileMap = new TileMap(_datosEstado->tamanioCuadro, 32, 32, "recursos/img/mapa/terrenos/terreno_01.png");
@@ -97,9 +102,10 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarMenuPausa();
     this->iniciarSombras();
 
-    this->iniciarTileMap();
     this->iniciarJugadores();
     this->iniciarGUIJugador();
+    this->iniciarManagerEnemigos();
+    this->iniciarTileMap();
 
 
 }
@@ -109,6 +115,7 @@ EstadoJuego::~EstadoJuego()
     delete _jugador;
     delete _GUIJugador;
     delete _menuPausa;
+    delete _managerEnemigos;
     delete _tileMap;
 
     for (size_t i = 0; i < _enemigos.size(); i++)
@@ -220,7 +227,7 @@ void EstadoJuego::actualizarTileMap(const float& DT)
 {
     _tileMap->actualizarLimitesMapa(_jugador, DT);
     _tileMap->checkColision(_jugador, DT);
-    _tileMap->actualizarTiles(_jugador, DT, _enemigos, _texturas);
+    _tileMap->actualizarTiles(_jugador, DT, *_managerEnemigos);
 
 
     for (auto* i : _enemigos)
@@ -234,9 +241,27 @@ void EstadoJuego::actualizarJugador(const float& DT)
 {
 }
 
+void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const float& DT)
+{
+
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+    {
+        if (enemigo->getLimites().contains(_posMouseVista) && enemigo->getDistancia(*_jugador) < 80.f)
+        {
+            std::cout << "Toca arma" << std::endl;
+        }
+    }
+}
+
 void EstadoJuego::actualizarEnemigos(const float& DT)
 {
+    for (auto* i : _enemigos)
+    {
+        i->actualizar(DT, _posMouseVista);
+        actualizarAtaques(i, DT);
+    }
 }
+
 
 void EstadoJuego::actualizar(const float& DT)
 {
@@ -256,11 +281,7 @@ void EstadoJuego::actualizar(const float& DT)
 
         _GUIJugador->actualizar(DT);
 
-        for (auto* i : _enemigos)
-        {
-            i->actualizar(DT, _posMouseVista);
-        }
-
+        actualizarEnemigos(DT);
     }
     else // actualizar con pausa
     {

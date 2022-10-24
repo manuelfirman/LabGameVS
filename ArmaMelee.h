@@ -1,25 +1,17 @@
 #ifndef ARMAMELEE_H
 #define ARMAMELEE_H
 
-#include "Items.h"
+#include "Armas.h"
 
-class Item;
 
-class ArmaMelee : public Items
+class ArmaMelee : public Armas
 {
 	private:
 
 	protected:
-		sf::Texture _texturaArma;
-		sf::IntRect _rectTexturaArma;
-		sf::Sprite _spriteArma;
-
-		int dmgMin;
-		int dmgMax;
-
 
 	public:
-		ArmaMelee();
+		ArmaMelee(unsigned valor, std::string ruta_textura);
 		virtual ~ArmaMelee();
 
 		virtual void actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f centro) = 0;

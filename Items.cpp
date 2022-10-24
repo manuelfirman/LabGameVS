@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "Items.h"
 
-Items::Items()
+Items::Items(unsigned valor)
 {
-	std::cout << "Test items" << std::endl;
+	_tipo = tipo_item::BASE;
+	_valor = valor;
 }
 
 Items::~Items()
