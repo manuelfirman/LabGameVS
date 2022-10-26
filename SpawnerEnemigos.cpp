@@ -13,6 +13,7 @@ SpawnerEnemigos::SpawnerEnemigos(int cuadro_x, int cuadro_y, float tamanioCuadro
 	_distanciaMax = distancia_max;
 	_timerSpawn.restart();
 	_tiempoSpawn = tiempo_spawn;
+	_contadorEnemigos = 0;
 }
 
 SpawnerEnemigos::~SpawnerEnemigos()
@@ -37,6 +38,16 @@ const bool& SpawnerEnemigos::getSpawn()
 	return _spawneado;
 }
 
+const int& SpawnerEnemigos::getContadorEnemigos() const
+{
+	return _contadorEnemigos;
+}
+
+const int& SpawnerEnemigos::getCantidadMaxEnemigos() const
+{
+	return _cantidadEnemigos;
+}
+
 const std::string SpawnerEnemigos::getTileString() const
 {
 	std::stringstream ss;
@@ -45,6 +56,25 @@ const std::string SpawnerEnemigos::getTileString() const
 
 	return ss.str();
 }
+
+void SpawnerEnemigos::contEnemigosMasMas()
+{
+	if(_contadorEnemigos < _cantidadEnemigos)
+		++_contadorEnemigos;
+
+	else
+		_contadorEnemigos = _cantidadEnemigos;
+}
+
+void SpawnerEnemigos::contEnemigosMenosMenos()
+{
+	if (_contadorEnemigos > 0)
+		--_contadorEnemigos;
+
+	else
+		_contadorEnemigos = 0;
+}
+
 
 void SpawnerEnemigos::actualizar()
 {

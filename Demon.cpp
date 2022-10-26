@@ -28,7 +28,7 @@ void Demon::iniciarGUI()
     _barraHP.setPosition(_sprite.getPosition());
 }
 
-Demon::Demon(float x, float y, sf::Texture& textura)
+Demon::Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner) : Enemigos(tile_spawner)
 {
     this->iniciarVariables();
 

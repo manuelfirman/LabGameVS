@@ -7,16 +7,20 @@
 class Enemigos : public Entidades
 {
 	private:
-		//SpawnerEnemigos& _spawner;
 		int _experiencia;
+	protected:
+		SpawnerEnemigos& _spawner;
+
 
 	private:
 		virtual void iniciarVariables();
 		virtual void iniciarAnimaciones();
 
 	public:
-		Enemigos();
+		Enemigos(SpawnerEnemigos& tile_spawner);
 		virtual ~Enemigos();
+
+		SpawnerEnemigos& getTileSpawner();
 
 		const int& getExperiencia() const;
 		virtual void generarAtributos(const int nivel);

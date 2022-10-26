@@ -15,6 +15,7 @@ class SpawnerEnemigos : public Tile
 
 		sf::Clock _timerSpawn;
 		sf::Int32 _tiempoSpawn;
+		int _contadorEnemigos;
 
 
 	public:
@@ -25,8 +26,12 @@ class SpawnerEnemigos : public Tile
 		void setSpawn(const bool spawneado);
 		const bool& getSpawn();
 		const bool puedeSpawnear();
-
+		const int& getContadorEnemigos() const;
+		const int& getCantidadMaxEnemigos() const;
 		virtual const std::string getTileString() const;
+		
+		void contEnemigosMasMas();
+		void contEnemigosMenosMenos();
 
 		void actualizar();
 		void renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador, sf::Shader* sombra);

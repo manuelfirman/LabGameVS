@@ -17,7 +17,8 @@ class ManagerEnemigos
 		~ManagerEnemigos();
 
 
-		void crearEnemigo(const int tipo_enemigo, const int posX, const int posY);
+		void crearEnemigo(const int tipo_enemigo, const int posX, const int posY, SpawnerEnemigos& tile_spawner);
+		void eliminarEnemigo(const int indice);
 
 		void actualizar(const float& DT);
 		void renderizar(sf::RenderTarget& target);

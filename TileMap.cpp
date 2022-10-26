@@ -266,16 +266,16 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 
 		limpiar();
 
-		_mapa.resize(_tamanioMaxCuadros.x, std::vector< std::vector< std::vector<Tile*> > >());
+		_mapa.resize(_tamanioMaxCuadros.x, std::vector< std::vector< std::vector<Tile*> > >());	 // redimensiono con x
 		for (int x = 0; x < _tamanioMaxCuadros.x; x++)
 		{
 			for (int y = 0; y < _tamanioMaxCuadros.y; y++)
 			{
-				_mapa[x].resize(_tamanioMaxCuadros.y, std::vector< std::vector<Tile*> >());
+				_mapa[x].resize(_tamanioMaxCuadros.y, std::vector< std::vector<Tile*> >()); // redimensiono con y
 
 				for (int z = 0; z < _Capas; z++)
 				{
-					_mapa[x][y].resize(_Capas, std::vector<Tile*>());
+					_mapa[x][y].resize(_Capas, std::vector<Tile*>());				// redimensiono con z
 				}
 			}
 		}
@@ -303,11 +303,6 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 				_mapa[x][y][z].push_back(new TileNormal(tipo, x, y, _tamanioCuadroF, _texturaTile, sf::IntRect(trX, trY, _tamanioCuadroI, _tamanioCuadroI), colision));
 			}
 		}
-		 //Carga todos los tiles
-		/*while (archivoIn >> x >> y >> z >> trX >> trY >> colision)
-		{
-			_mapa[x][y][z].push_back(new Tile(tipo, x, y, _tamanioCuadroF, _texturaTile, sf::IntRect(trX, trY, _tamanioCuadroI, _tamanioCuadroI), colision));
-		}*/
 	}
 	else
 	{
@@ -320,18 +315,16 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 void TileMap::actualizarLimitesMapa(Entidades* entidad, const float& DT)
 {
 	// LIMITES MAPA
-			// Laterales
+		// Laterales
 	if (entidad->getPosicionSprite().x < 0.f)
 	{
-		//entidad->detenerX();
 		entidad->setPosicion(0.f, entidad->getPosicionSprite().y);
 	}
 	else if (entidad->getPosicionSprite().x + entidad->getLimites().width > _tamanioMaxMundo.x)
 	{
-		//entidad->detenerX();
 		entidad->setPosicion(_tamanioMaxMundo.x - entidad->getLimites().width, entidad->getPosicionSprite().y);
 	}
-	// Superior / Inferior
+		// Superior / Inferior
 	if (entidad->getPosicionSprite().y < 0.f)
 	{
 		entidad->detenerY();
@@ -486,12 +479,15 @@ void TileMap::actualizarTiles(Entidades* entidad, const float& DT, ManagerEnemig
 					{
 						if(!spawner->getSpawn())
 						{
-							manager_enemigos.crearEnemigo(DEMON, x * _tamanioCuadroF, y * _tamanioCuadroF);
-							spawner->setSpawn(true);
+							if (spawner->getContadorEnemigos() < spawner->getCantidadMaxEnemigos())
+							{
+								std::cout << "Spawneo enemigo" << std::endl;
+								manager_enemigos.crearEnemigo(DEMON, x * _tamanioCuadroF, y * _tamanioCuadroF, *spawner);
+								spawner->setSpawn(true);
+							}
 						}
 					}
 				}
-
 			}
 		}
 	}
@@ -565,6 +561,7 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionC
 					}
 				}
 
+				// Tiles Spawners de enemigos
 				if (_mapa[x][y][_capa][C]->getTipoTile() == tipo_tile::SPAWNERENEMIGO)
 				{
 					_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
@@ -580,9 +577,11 @@ void TileMap::renderizacionDiferida(sf::RenderTarget& target, const sf::Vector2f
 	while (!_pilaRenderDiferida.empty())
 	{
 		if(sombra)
-			_pilaRenderDiferida.top()->renderizar(target, posicionJugador, sombra); // renderiza y lo saca de la pila
+			_pilaRenderDiferida.top()->renderizar(target, posicionJugador, sombra); // renderiza el top de la pila con sombra
 		else
-			_pilaRenderDiferida.top()->renderizar(target);
-		_pilaRenderDiferida.pop();
+			_pilaRenderDiferida.top()->renderizar(target); // renderiza el top de la pila sin sombra
+			
+		
+		_pilaRenderDiferida.pop();	// saco de la pila
 	}
 }

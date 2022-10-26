@@ -12,7 +12,7 @@ void Enemigos::iniciarAnimaciones()
 
 }
 
-Enemigos::Enemigos()
+Enemigos::Enemigos(SpawnerEnemigos& tile_spawner) : _spawner(tile_spawner)
 {
 	this->iniciarVariables();
 	this->iniciarAnimaciones();
@@ -22,6 +22,11 @@ Enemigos::~Enemigos()
 {
 }
 
+SpawnerEnemigos& Enemigos::getTileSpawner()
+{
+	return _spawner;
+}
+
 void Enemigos::generarAtributos(const int nivel)
 {
 	_experiencia = nivel * 7;
@@ -29,6 +34,7 @@ void Enemigos::generarAtributos(const int nivel)
 	// hp
 	// etc
 }
+
 
 const int& Enemigos::getExperiencia() const
 {

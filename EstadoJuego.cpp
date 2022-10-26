@@ -267,7 +267,7 @@ void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const f
 
 void EstadoJuego::actualizarEnemigos(const float& DT)
 {
-    int indice = 0; 
+    int indice = 0;
     for (auto* enemigo : _enemigos)
     {
         enemigo->actualizar(DT, _posMouseVista);
@@ -277,14 +277,12 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
 
         actualizarAtaques(enemigo, indice, DT); // daño
 
-        // TODO: buscar otra forma
+        // TODO: buscar otra forma / consultar si no es peligrosa para la memoria
         if (!enemigo->estaVivo())
         {
             _jugador->ganarExperiencia(enemigo->getExperiencia());
             _popUps->agregarPopUp(tipo_popUp::POP_EXPERIENCIA, _jugador->getCentro().x, _jugador->getCentro().y, "+", static_cast<int>(enemigo->getExperiencia()), "exp");
-
-            delete _enemigos[indice];
-            _enemigos.erase(_enemigos.begin() + indice);
+            _managerEnemigos->eliminarEnemigo(indice);
             --indice;
         }
         

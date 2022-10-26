@@ -13,7 +13,7 @@ class Demon : public Enemigos
 		void iniciarGUI();
 
 	public:
-		Demon(float x, float y, sf::Texture& textura);
+		Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner);
 		virtual ~Demon();
 
 		void actualizarAnimacion(const float& DT);
