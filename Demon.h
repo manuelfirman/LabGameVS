@@ -2,12 +2,14 @@
 #define DEMON_H
 
 #include "Enemigos.h"
+#include "IA.h"
+
 
 class Demon : public Enemigos
 {
 	private:
 		sf::RectangleShape _barraHP;
-		//IA* _inteligenciaArtificial;
+		IA* _inteligenciaArtificial;
 
 	private:
 		void iniciarVariables();
@@ -16,7 +18,7 @@ class Demon : public Enemigos
 		void iniciarGUI();
 
 	public:
-		Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner);
+		Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner, Entidades& jugador);
 		virtual ~Demon();
 
 		void actualizarIA(const float DT);

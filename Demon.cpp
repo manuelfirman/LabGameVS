@@ -14,6 +14,8 @@ void Demon::iniciarIA()
 
 void Demon::iniciarAnimaciones()
 {
+    //_sprite.setOrigin(_sprite.getGlobalBounds().width / 2.f, _sprite.getGlobalBounds().height / 2.f);
+
     // key - Velocidad animacion - inicioX - inicioY - framesX - framesY
     _animacion->agregarAnimacion("QUIETO", 6.f, 0, 0, 2, 0, 64, 64);         // Quieto
     _animacion->agregarAnimacion("CAMINAR_ABAJO", 6.f, 0, 0, 3, 0, 64, 64);   // Caminar abajo
@@ -30,29 +32,32 @@ void Demon::iniciarGUI()
 {
     _barraHP.setSize(sf::Vector2f(80.f, 5.f));
     _barraHP.setFillColor(sf::Color::Red);
-    _barraHP.setPosition(_sprite.getPosition());
+    _barraHP.setPosition(_sprite.getPosition().x - _barraHP.getSize().x / 1.3f, _sprite.getPosition().y);
 }
 
-Demon::Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner) : Enemigos(tile_spawner)
+Demon::Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner, Entidades& jugador) : Enemigos(tile_spawner)
 {
     this->iniciarVariables();
 
-    crearHitbox(_sprite, 18.f, 7.f, 28.f, 40.f);        // Hitbox
+    crearHitbox(_sprite, -38.f, 9.f, 28.f, 40.f);        // Hitbox
     crearComponenteMovimiento(150.f, 1700.f, 1000.f);   // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
     crearComponenteAtributos(1);                        // Atributos
     setPosicion(x, y);                                  // Posicion
     this->iniciarAnimaciones();                         // Animaciones
     this->iniciarGUI();                                 // GUI
+
+    _inteligenciaArtificial = new IA(jugador, *this);
 }
 
 Demon::~Demon()
 {
+    delete _inteligenciaArtificial;
 }
 
 void Demon::actualizarIA(const float DT)
 {
-    // _inteligenciaArtificial->perseguir();
+     _inteligenciaArtificial->seguir(DT);
     // _inteligenciaArtificial->atacar();
     // _inteligenciaArtificial->
 }
@@ -66,14 +71,14 @@ void Demon::actualizarAnimacion(const float& DT)
     else if (_movimiento->getEstadoMov(MOV_DERECHA))
     {
 
-        _sprite.setOrigin(_sprite.getGlobalBounds().width, 0.f);
-        _sprite.setScale(-1.f, 1.f);
+        _sprite.setOrigin((_sprite.getGlobalBounds().width / 2.f) + (_hitbox->getLimites().width / 2.f), 0.f);
+        _sprite.setScale(1.f, 1.f);
         _animacion->play("CAMINAR_X", DT, _movimiento->getVelocidad().x, _movimiento->getVelocidadMax());
     }
     else if (_movimiento->getEstadoMov(MOV_IZQUIERDA))
     {
         _sprite.setOrigin(0.f, 0.f);
-        _sprite.setScale(1.f, 1.f);
+        _sprite.setScale(-1.f, 1.f);
         _animacion->play("CAMINAR_X", DT, _movimiento->getVelocidad().x, _movimiento->getVelocidadMax());
     }
     else if (_movimiento->getEstadoMov(MOV_ABAJO))
@@ -94,9 +99,9 @@ void Demon::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 
     _barraHP.setFillColor(sf::Color::Red);
     _barraHP.setSize(sf::Vector2f(80.f * (static_cast<float>(_atributos->_hp) / _atributos->_hpMax), 5.f));
-    _barraHP.setPosition(_sprite.getPosition());
+    _barraHP.setPosition(_sprite.getPosition().x - _barraHP.getSize().x / 1.3f, _sprite.getPosition().y);
 
-    //actualizarIA(DT);
+    actualizarIA(DT);
 
     actualizarAnimacion(DT);
 

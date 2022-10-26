@@ -11,9 +11,10 @@ class ManagerEnemigos
 	private:
 		std::vector<Enemigos*>& _enemigos;
 		std::map<std::string, sf::Texture>& _texturas;
-		
+		Entidades& _jugador;
+
 	public:
-		ManagerEnemigos(std::vector<Enemigos*>& enemigos, std::map<std::string, sf::Texture>& texturas);
+		ManagerEnemigos(std::vector<Enemigos*>& enemigos, std::map<std::string, sf::Texture>& texturas, Entidades& jugador);
 		~ManagerEnemigos();
 
 

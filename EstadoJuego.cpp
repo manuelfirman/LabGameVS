@@ -76,7 +76,7 @@ void EstadoJuego::iniciarGUIJugador()
 
 void EstadoJuego::iniciarManagerEnemigos()
 {
-    _managerEnemigos = new ManagerEnemigos(_enemigos, _texturas);
+    _managerEnemigos = new ManagerEnemigos(_enemigos, _texturas, *_jugador);
 }
 
 void EstadoJuego::iniciarTileMap()
@@ -339,7 +339,7 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
         // Enemigos
     for (auto* enemigo : _enemigos)
     {
-        enemigo->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), false);
+        enemigo->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), true);
     }
         // Jugador
     _jugador->renderizar(_renderTextura, &_sombra, _jugador->getCentro());

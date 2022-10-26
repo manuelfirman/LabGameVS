@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "ManagerEnemigos.h"
 
-ManagerEnemigos::ManagerEnemigos(std::vector<Enemigos*>& enemigos, std::map<std::string, sf::Texture>& texturas)
-	: _enemigos(enemigos), _texturas(texturas)
+ManagerEnemigos::ManagerEnemigos(std::vector<Enemigos*>& enemigos, std::map<std::string, sf::Texture>& texturas, Entidades& jugador)
+	: _enemigos(enemigos), _texturas(texturas), _jugador(jugador)
 {
 
 }
@@ -16,7 +16,7 @@ void ManagerEnemigos::crearEnemigo(const int tipo_enemigo, const int posX, const
 	switch (tipo_enemigo)
 	{
 		case tipo_enemigo::DEMON:
-			_enemigos.push_back(new Demon(posX, posY, _texturas["ENEMIGO_1"], tile_spawner));
+			_enemigos.push_back(new Demon(posX, posY, _texturas["ENEMIGO_1"], tile_spawner, _jugador));
 			tile_spawner.contEnemigosMasMas(); // ++_contadorEnemigos;
 			break;
 		case tipo_enemigo::GOBLIN:
