@@ -15,8 +15,8 @@ class TileNormal : public Tile
 				
 		const std::string getTileString() const;
 
-		virtual void actualizar();
-		virtual void renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);
+		void actualizar();
+		void renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL);
 };
 
 #endif

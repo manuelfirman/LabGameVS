@@ -6,10 +6,11 @@
 class Demon : public Enemigos
 {
 	private:
-
+		sf::RectangleShape _barraHP;
 	private:
 		void iniciarVariables();
 		void iniciarAnimaciones();
+		void iniciarGUI();
 
 	public:
 		Demon(float x, float y, sf::Texture& textura);

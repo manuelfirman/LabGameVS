@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Orbe.h"
 
-Orbe::Orbe(unsigned valor, std::string ruta_textura)
-	: ArmaRango(valor, ruta_textura)
+Orbe::Orbe(int nivel, unsigned valor, std::string ruta_textura)
+	: ArmaRango(nivel, valor, ruta_textura)
 {
 	std::cout << "Test arco" << std::endl;
 

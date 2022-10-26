@@ -2,8 +2,8 @@
 #include "Espada.h"
 
 
-Espada::Espada(unsigned valor, std::string ruta_textura)
-	: ArmaMelee(valor, ruta_textura)
+Espada::Espada(int nivel, unsigned valor, std::string ruta_textura)
+	: ArmaMelee(nivel, valor, ruta_textura)
 {
 	//std::cout << "Test espada" << std::endl;
 	// 
@@ -13,7 +13,7 @@ Espada::Espada(unsigned valor, std::string ruta_textura)
 
 
 	_spriteArma.setTexture(_texturaArma);
-	_spriteArma.setScale(0.2, 0.2);
+	_spriteArma.setScale(0.2f, 0.2f);
 	_spriteArma.setOrigin(_spriteArma.getGlobalBounds().width, _spriteArma.getGlobalBounds().height * 2.f);
 }
 

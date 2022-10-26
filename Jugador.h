@@ -26,7 +26,7 @@ public:
     ~Jugador();
 
     Atributos* getAtributos();
-    const Armas* getArma() const;
+    Armas* getArma() const;
 
     // Setters
     void ganarHP(const int hp);
@@ -36,7 +36,7 @@ public:
     void perdeExperiencia(const int experiencia);
 
     // Actualizar
-    void actualizarAtaque(const float& DT, sf::Vector2f posMouseVista);
+    //void actualizarAtaque(const float& DT, sf::Vector2f posMouseVista);
     void actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista);
     void actualizar(const float& DT, sf::Vector2f& posMouseVista);
     

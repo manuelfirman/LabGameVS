@@ -15,7 +15,7 @@ class Espada : public ArmaMelee
 
 
 	public:
-		Espada(unsigned valor, std::string ruta_textura);
+		Espada(int nivel, unsigned valor, std::string ruta_textura);
 		~Espada();
 
 		void actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f centro);

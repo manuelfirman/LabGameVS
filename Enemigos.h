@@ -18,10 +18,11 @@ class Enemigos : public Entidades
 		Enemigos();
 		virtual ~Enemigos();
 
+		const int& getExperiencia() const;
+		virtual void generarAtributos(const int nivel);
 
 		virtual const bool estaVivo() const;
 		virtual void perderVida(const int hp);
-		const int& getExperiencia() const;
 		virtual const Atributos* getAtributos() const;
 
 		virtual void actualizarAnimacion(const float& DT) = 0;

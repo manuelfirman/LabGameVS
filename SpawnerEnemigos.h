@@ -11,17 +11,20 @@ class SpawnerEnemigos : public Tile
 		sf::Vector2i _posicionCuadro;
 		int _tipoEnemigo;
 		int _cantidadEnemigos;
-		int _tiempoSpawn;
 		float _distanciaMax;
+
+		sf::Clock _timerSpawn;
+		sf::Int32 _tiempoSpawn;
 
 
 	public:
 		SpawnerEnemigos(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura,
-			int tipo_enemigo, int cantidad_enemigos, int tiempo_spawn, float distancia_max);
+			int tipo_enemigo, int cantidad_enemigos, sf::Int32 tiempo_spawn, float distancia_max);
 		virtual ~SpawnerEnemigos();
 
 		void setSpawn(const bool spawneado);
 		const bool& getSpawn();
+		const bool puedeSpawnear();
 
 		virtual const std::string getTileString() const;
 

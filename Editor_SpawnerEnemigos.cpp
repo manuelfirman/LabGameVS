@@ -45,7 +45,7 @@ void Editor_SpawnerEnemigos::actualizarInput(const float& DT)
     {
         if (!_barraLateral.getGlobalBounds().contains(sf::Vector2f(*_datosEditor->posMouseVentana)))
         {
-            _tileMap->agregarTile(_datosEditor->posMouseCuadro->x, _datosEditor->posMouseCuadro->y,0, _rectTextura, _tipoEnemigo, _cantidadEnemigos, _tiempoSpawn, _distanciaMax);
+            _tileMap->agregarTile(_datosEditor->posMouseCuadro->x, _datosEditor->posMouseCuadro->y,0, _rectTextura, _tipoEnemigo, _cantidadEnemigos, _tiempoSpawn, static_cast<int>(_distanciaMax));
         }
     }
     else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && getPpsTeclas()) // quitar

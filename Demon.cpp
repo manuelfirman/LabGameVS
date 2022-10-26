@@ -21,6 +21,13 @@ void Demon::iniciarAnimaciones()
     _animacion->agregarAnimacion("ATAQUE_X", 10.f, 1, 13, 5, 13, 64, 64);
 }
 
+void Demon::iniciarGUI()
+{
+    _barraHP.setSize(sf::Vector2f(80.f, 5.f));
+    _barraHP.setFillColor(sf::Color::Red);
+    _barraHP.setPosition(_sprite.getPosition());
+}
+
 Demon::Demon(float x, float y, sf::Texture& textura)
 {
     this->iniciarVariables();
@@ -31,6 +38,7 @@ Demon::Demon(float x, float y, sf::Texture& textura)
     crearComponenteAtributos(1);                        // Atributos
     setPosicion(x, y);                                  // Posicion
     this->iniciarAnimaciones();                         // Animaciones
+    this->iniciarGUI();                                 // GUI
 }
 
 Demon::~Demon()
@@ -73,6 +81,10 @@ void Demon::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 {
     _movimiento->actualizar(DT);
 
+    _barraHP.setFillColor(sf::Color::Red);
+    _barraHP.setSize(sf::Vector2f(80.f * (static_cast<float>(_atributos->_hp) / _atributos->_hpMax), 5.f));
+    _barraHP.setPosition(_sprite.getPosition());
+
     //actualizarAtaque(DT, posMouseVista);
 
     actualizarAnimacion(DT);
@@ -91,7 +103,9 @@ void Demon::renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf::V
     else // si no hay sombra
         target.draw(_sprite);
 
+    target.draw(_barraHP);
 
     if (mostrar_hitbox)
         _hitbox->renderizar(target);
+
 }

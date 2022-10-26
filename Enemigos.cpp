@@ -22,6 +22,19 @@ Enemigos::~Enemigos()
 {
 }
 
+void Enemigos::generarAtributos(const int nivel)
+{
+	_experiencia = nivel * 7;
+	// dmg min y max
+	// hp
+	// etc
+}
+
+const int& Enemigos::getExperiencia() const
+{
+	return _experiencia;
+}
+
 const bool Enemigos::estaVivo() const
 {
 	if (_atributos)
@@ -40,10 +53,6 @@ void Enemigos::perderVida(const int hp)
 	}
 }
 
-const int& Enemigos::getExperiencia() const
-{
-	return _experiencia;
-}
 
 const Atributos* Enemigos::getAtributos() const
 {

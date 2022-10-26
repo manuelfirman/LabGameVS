@@ -4,7 +4,7 @@
 void Jugador::iniciarVariables()
 {
     _atacando = false;
-    _espada = new Espada(20, "recursos/img/items/sword2.png");
+    _espada = new Espada(1 ,20, "recursos/img/items/sword2.png");
 }
 
 void Jugador::iniciarComponentes()
@@ -53,7 +53,7 @@ Atributos* Jugador::getAtributos()
     return _atributos;
 }
 
-const Armas* Jugador::getArma() const
+Armas* Jugador::getArma() const
 {
     return _espada;
 }
@@ -79,13 +79,13 @@ void Jugador::perdeExperiencia(const int experiencia)
     _atributos->perderExperiencia(experiencia);
 }
 
-void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
-{
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-        _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
-        _atacando = true;
-    }
-}
+//void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
+//{
+//    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+//        _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
+//        _atacando = true;
+//    }
+//}
 
 
 void Jugador::actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista)
@@ -149,7 +149,7 @@ void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 
     _movimiento->actualizar(DT);
 
-    actualizarAtaque(DT, posMouseVista);
+    //actualizarAtaque(DT, posMouseVista);
 
     actualizarAnimacion(DT, posMouseVista);
 

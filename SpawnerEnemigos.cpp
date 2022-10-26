@@ -4,14 +4,15 @@
 
 
 SpawnerEnemigos::SpawnerEnemigos(int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura,
-	int tipo_enemigo, int cantidad_enemigos, int tiempo_spawn, float distancia_max)
+	int tipo_enemigo, int cantidad_enemigos, sf::Int32 tiempo_spawn, float distancia_max)
 	: Tile(tipo_tile::SPAWNERENEMIGO, cuadro_x, cuadro_y, tamanioCuadroF, textura, rect_textura, false)
 {
 	_spawneado = false;
 	_tipoEnemigo = tipo_enemigo;
 	_cantidadEnemigos = cantidad_enemigos;
-	_tiempoSpawn = tiempo_spawn;
 	_distanciaMax = distancia_max;
+	_timerSpawn.restart();
+	_tiempoSpawn = tiempo_spawn;
 }
 
 SpawnerEnemigos::~SpawnerEnemigos()
@@ -21,6 +22,14 @@ SpawnerEnemigos::~SpawnerEnemigos()
 void SpawnerEnemigos::setSpawn(const bool spawneado)
 {
 	_spawneado = spawneado;
+	_timerSpawn.restart(); // reseteo el timer
+}
+
+const bool SpawnerEnemigos::puedeSpawnear()
+{
+	if (_timerSpawn.getElapsedTime().asSeconds() >= _tiempoSpawn) return true;
+	
+	return false;
 }
 
 const bool& SpawnerEnemigos::getSpawn()
@@ -39,6 +48,8 @@ const std::string SpawnerEnemigos::getTileString() const
 
 void SpawnerEnemigos::actualizar()
 {
+	if (puedeSpawnear())
+		_spawneado = false;
 }
 
 void SpawnerEnemigos::renderizar(sf::RenderTarget& target, const sf::Vector2f posicionJugador = sf::Vector2f(), sf::Shader* sombra = NULL)

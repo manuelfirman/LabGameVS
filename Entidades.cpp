@@ -52,6 +52,7 @@ void Entidades::crearComponenteAtributos(const int nivel)
     _atributos = new Atributos(nivel);
 }
 
+
 // GETTERS
 const sf::Vector2f& Entidades::getPosicionSprite() const
 {

@@ -8,21 +8,18 @@
 class DatosEditor
 {
 public:
-    DatosEditor() {};
-
     sf::Font* fuente;
-    // Control de ingresos de teclado por segundo
     float* ppsTeclas;
     float* ppsTeclasMax;
-    // vista cam
     sf::View* vista;
-    // keybinds
     std::map<std::string, int>* keybinds;
-    // Posiciones Mouse
     sf::Vector2i* posMousePantalla;
     sf::Vector2i* posMouseVentana;
     sf::Vector2f* posMouseVista;
     sf::Vector2i* posMouseCuadro;
+    
+    DatosEditor(){};
+
 };
 
 class Modo_Editor

@@ -43,7 +43,7 @@ public:
     // Setters
     virtual void setPosicion(const float x, const float y);
 
-    /// Funciones (Overriders)
+    /// Metodos
     virtual void detenerXY();
     virtual void detenerX();
     virtual void detenerY();

@@ -8,12 +8,13 @@ class Items
 	private:
 
 	protected:
+		int _nivel;
 		int _tipo;
 		unsigned _valor;
 
 
 	public:
-		Items(unsigned valor);
+		Items(int nivel, unsigned valor);
 		virtual ~Items();
 };
 

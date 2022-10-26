@@ -89,6 +89,11 @@ void EstadoJuego::iniciarTileMap()
     _tileMap = new TileMap("text.slmp");
 }
 
+void EstadoJuego::iniciarPopUps()
+{
+    _popUps = new TextoInfo("recursos/fuentes/kenpixel_square.ttf");
+}
+
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
@@ -106,6 +111,7 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarGUIJugador();
     this->iniciarManagerEnemigos();
     this->iniciarTileMap();
+    this->iniciarPopUps();
 
 
 }
@@ -117,6 +123,7 @@ EstadoJuego::~EstadoJuego()
     delete _menuPausa;
     delete _managerEnemigos;
     delete _tileMap;
+    delete _popUps;
 
     for (size_t i = 0; i < _enemigos.size(); i++)
     {
@@ -237,21 +244,30 @@ void EstadoJuego::actualizarJugador(const float& DT)
 void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const float& DT)
 {
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))                             // input ataque
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))                                // input ataque
     {
-        if (enemigo->getLimites().contains(_posMouseVista) && enemigo->getDistancia(*_jugador) < 80.f)
+        if (enemigo->getLimites().contains(_posMouseVista))                         // aim mouse
         {
-            enemigo->perderVida(_jugador->getArma()->getDmgMax());
+            if (enemigo->getDistancia(*_jugador) < _jugador->getArma()->getRango()) // esta en rango?
+            {  
+                if (_jugador->getArma()->getTimerAtaque())                          // puede atacar?
+                {
+                    int dmg = static_cast<int>(_jugador->getArma()->getDMG());
+                    enemigo->perderVida(dmg);
+                    _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
 
+                    //std::cout << enemigo->getAtributos()->_hp << std::endl;
 
-            std::cout << enemigo->getAtributos()->_hp << std::endl;
+                }
+            }
         }
     }
 }
 
 void EstadoJuego::actualizarEnemigos(const float& DT)
 {
-    int indice = 0;
+    int indice = 0; 
     for (auto* enemigo : _enemigos)
     {
         enemigo->actualizar(DT, _posMouseVista);
@@ -265,10 +281,13 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
         if (!enemigo->estaVivo())
         {
             _jugador->ganarExperiencia(enemigo->getExperiencia());
+            _popUps->agregarPopUp(tipo_popUp::POP_EXPERIENCIA, _jugador->getCentro().x, _jugador->getCentro().y, "+", static_cast<int>(enemigo->getExperiencia()), "exp");
+
+            delete _enemigos[indice];
             _enemigos.erase(_enemigos.begin() + indice);
             --indice;
         }
-
+        
 
         ++indice;
     }
@@ -294,6 +313,8 @@ void EstadoJuego::actualizar(const float& DT)
         _GUIJugador->actualizar(DT);
 
         actualizarEnemigos(DT);
+
+        _popUps->actualizar(DT);
     }
     else // actualizar con pausa
     {
@@ -327,9 +348,14 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
 
         // Render Lienzo
     _tileMap->renderizacionDiferida(_renderTextura);
+
+        // Pop Ups
+    _popUps->renderizar(_renderTextura);
+
         //GUI
     _renderTextura.setView(_renderTextura.getDefaultView()); // vista por default
     _GUIJugador->renderizar(_renderTextura);
+
 
     if (_pausa) { 
         _menuPausa->renderizar(_renderTextura);

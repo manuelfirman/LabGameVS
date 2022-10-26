@@ -162,6 +162,9 @@
     <ClCompile Include="Armas.cpp">
       <Filter>Items\Armas</Filter>
     </ClCompile>
+    <ClCompile Include="TextoInfo.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstadoBase.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="Armas.h">
       <Filter>Items\Armas</Filter>
+    </ClInclude>
+    <ClInclude Include="TextoInfo.h">
+      <Filter>GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

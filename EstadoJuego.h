@@ -15,6 +15,8 @@
 #include "SpawnerEnemigos.h"
 #include "Demon.h"
 
+#include "TextoInfo.h"
+
 
 class EstadoJuego : public EstadoBase
 {
@@ -42,6 +44,8 @@ private: // Atributos
     ManagerEnemigos* _managerEnemigos;
     std::vector<Enemigos*> _enemigos;
 
+    TextoInfo* _popUps;
+
 
 private: // Metodos
     void renderizadoDiferido();
@@ -55,6 +59,7 @@ private: // Metodos
     void iniciarGUIJugador();
     void iniciarManagerEnemigos();
     void iniciarTileMap();
+    void iniciarPopUps();
 
 public:
     EstadoJuego(DatosEstado* datos_estado);

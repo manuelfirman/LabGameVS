@@ -473,8 +473,13 @@ void TileMap::actualizarTiles(Entidades* entidad, const float& DT, ManagerEnemig
 		{
 			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{
+				// actualizo tile
+				_mapa[x][y][_capa][C]->actualizar();
+				
+				
 				if (_mapa[x][y][_capa][C]->getTipoTile() == tipo_tile::SPAWNERENEMIGO)
 				{
+					// casteo dinamico (_mapa es clase Tile, necesito puntero al subobjeto)
 					SpawnerEnemigos* spawner = dynamic_cast<SpawnerEnemigos*>(_mapa[x][y][_capa][C]);
 					
 					if(spawner)

@@ -11,7 +11,7 @@ class ArmaMelee : public Armas
 	protected:
 
 	public:
-		ArmaMelee(unsigned valor, std::string ruta_textura);
+		ArmaMelee(int nivel, unsigned valor, std::string ruta_textura);
 		virtual ~ArmaMelee();
 
 		virtual void actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f centro) = 0;

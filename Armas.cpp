@@ -3,13 +3,16 @@
 
 void Armas::iniciarVariables()
 {
-	_rango = 10;
-	_dmgMin = 0;
-	_dmgMax = 1;
+	_rango = 50;
+	_dmgMin = 1;
+	_dmgMax = 3;
+
+	_timerAtaque.restart();
+	_timerAtaqueMax = 500;
 }
 
-Armas::Armas(unsigned valor, std::string ruta_textura)
-	: Items(valor)
+Armas::Armas(int nivel, unsigned valor, std::string ruta_textura)
+	: Items(nivel, valor)
 {
 	this->iniciarVariables();
 	if (!_texturaArma.loadFromFile(ruta_textura))
@@ -29,7 +32,25 @@ const int& Armas::getDmgMax() const
 	return _dmgMax;
 }
 
+const int Armas::getDMG() const
+{
+	//return rand() % (_dmgMax - _dmgMin) + _dmgMin;
+	return _dmgMin + rand() % (_dmgMax-_dmgMin+1);
+}
+
 const unsigned& Armas::getRango() const
 {
 	return _rango;
+}
+
+const bool Armas::getTimerAtaque()
+{
+	//std::cout << _timerAtaque.getElapsedTime().asMicroseconds() << std::endl;
+	if (_timerAtaque.getElapsedTime().asMilliseconds() >= _timerAtaqueMax)
+	{
+		_timerAtaque.restart();
+		return true;
+	}
+
+	return false;
 }

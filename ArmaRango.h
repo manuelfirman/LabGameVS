@@ -11,7 +11,7 @@ class ArmaRango : public Armas
 	protected:
 
 	public:
-		ArmaRango(unsigned valor, std::string ruta_textura);
+		ArmaRango(int nivel, unsigned valor, std::string ruta_textura);
 		virtual ~ArmaRango();
 
 		virtual void actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f centro) = 0;
