@@ -6,6 +6,11 @@ void Demon::iniciarVariables()
 
 }
 
+void Demon::iniciarIA()
+{
+    // _inteligenciaArtificial->AgregarOpcion();
+    // 
+}
 
 void Demon::iniciarAnimaciones()
 {
@@ -45,6 +50,12 @@ Demon::~Demon()
 {
 }
 
+void Demon::actualizarIA(const float DT)
+{
+    // _inteligenciaArtificial->perseguir();
+    // _inteligenciaArtificial->atacar();
+    // _inteligenciaArtificial->
+}
 
 void Demon::actualizarAnimacion(const float& DT)
 {
@@ -85,7 +96,7 @@ void Demon::actualizar(const float& DT, sf::Vector2f& posMouseVista)
     _barraHP.setSize(sf::Vector2f(80.f * (static_cast<float>(_atributos->_hp) / _atributos->_hpMax), 5.f));
     _barraHP.setPosition(_sprite.getPosition());
 
-    //actualizarAtaque(DT, posMouseVista);
+    //actualizarIA(DT);
 
     actualizarAnimacion(DT);
 

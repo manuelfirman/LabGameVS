@@ -23,6 +23,7 @@ class SpawnerEnemigos : public Tile
 			int tipo_enemigo, int cantidad_enemigos, sf::Int32 tiempo_spawn, float distancia_max);
 		virtual ~SpawnerEnemigos();
 
+		void resetTimer();
 		void setSpawn(const bool spawneado);
 		const bool& getSpawn();
 		const bool puedeSpawnear();

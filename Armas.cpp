@@ -8,7 +8,7 @@ void Armas::iniciarVariables()
 	_dmgMax = 3;
 
 	_timerAtaque.restart();
-	_timerAtaqueMax = 500;
+	_timerAtaqueMax = 400;
 }
 
 Armas::Armas(int nivel, unsigned valor, std::string ruta_textura)

@@ -1,8 +1,8 @@
 #ifndef ORBE_H
 #define ORBE_H
+
 #include "ArmaRango.h"
 
-class ArmaRango;
 
 class Orbe : public ArmaRango
 {

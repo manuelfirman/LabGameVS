@@ -20,10 +20,14 @@ SpawnerEnemigos::~SpawnerEnemigos()
 {
 }
 
+void SpawnerEnemigos::resetTimer()
+{
+}
+
 void SpawnerEnemigos::setSpawn(const bool spawneado)
 {
 	_spawneado = spawneado;
-	_timerSpawn.restart(); // reseteo el timer
+	_timerSpawn.restart().asSeconds(); // reseteo el timer
 }
 
 const bool SpawnerEnemigos::puedeSpawnear()

@@ -87,7 +87,7 @@ void EstadoEditor::iniciarGUI()
 
 void EstadoEditor::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 32, 32, "recursos/img/mapa/terrenos/terreno_01.png");
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 100, 100, "recursos/img/mapa/terrenos/terreno_01.png");
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------

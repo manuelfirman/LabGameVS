@@ -34,7 +34,7 @@ void Editor_Mapa::iniciarGUI()
     _rectSelector.setTexture(_tileMap->getTexturaTile());
     _rectSelector.setTextureRect(_rectTextura);
     // Inicializa selector de texturas
-    _selectorTexturas = new gui::SelectorTexturas(20.f, 20.f, 1024.f, 1024.f, _datosEstado->tamanioCuadro, _tileMap->getTexturaTile(), *_datosEditor->fuente, "TS");
+    _selectorTexturas = new gui::SelectorTexturas(20.f, 20.f, 512.f, 1024.f, _datosEstado->tamanioCuadro, _tileMap->getTexturaTile(), *_datosEditor->fuente, "TS");
 }
 
 Editor_Mapa::Editor_Mapa(DatosEstado* datos_estado, DatosEditor* datos_editor, TileMap* tile_map)
@@ -95,7 +95,8 @@ void Editor_Mapa::actualizarInput(const float& DT)
     }// Tipo
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_datosEditor->keybinds->at("INCREMENTAR_TIPO"))) && getPpsTeclas())
     {
-        ++_tipo; // TODO: validar que no se pase
+        if(_tipo < 4)
+            ++_tipo;
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_datosEditor->keybinds->at("DISMINUIR_TIPO"))) && getPpsTeclas())
     {
@@ -122,12 +123,12 @@ void Editor_Mapa::actualizarGUI(const float& DT)
 
     _textoCursor.setPosition(_datosEditor->posMouseVista->x, _datosEditor->posMouseVista->y - 50);
     std::stringstream ss;
-    ss << _datosEditor->posMouseVista->x << " " << _datosEditor->posMouseVista->y << "\n"
-        << _datosEditor->posMouseCuadro->x << " " << _datosEditor->posMouseCuadro->y << "\n"
-        << _rectTextura.left << " " << _rectTextura.top << "\n"
+    ss << "Pos Vista: " << _datosEditor->posMouseVista->x << " " << _datosEditor->posMouseVista->y << "\n"
+        << "Pos Cuadro: " << _datosEditor->posMouseCuadro->x << " " << _datosEditor->posMouseCuadro->y << "\n"
+        << "Rect px: " << _rectTextura.left << " " << _rectTextura.top << "\n"
         << "Colision: " << _colision << "\n"
-        << "Tipo: " << _tipo << "\n"
-        << "Tiles: " << _tileMap->getTilesPorCuadro(_datosEditor->posMouseCuadro->x, _datosEditor->posMouseCuadro->y, _capa) << "\n"
+        << "Tipo Tile: " << _tipo << "\n"
+        << "Cant Tiles: " << _tileMap->getTilesPorCuadro(_datosEditor->posMouseCuadro->x, _datosEditor->posMouseCuadro->y, _capa) << "\n"
         << "Bloqueo: " << _bloqueoTile;
 
     _textoCursor.setString(ss.str());

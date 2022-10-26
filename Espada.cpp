@@ -5,9 +5,6 @@
 Espada::Espada(int nivel, unsigned valor, std::string ruta_textura)
 	: ArmaMelee(nivel, valor, ruta_textura)
 {
-	//std::cout << "Test espada" << std::endl;
-	// 
-	// TODO: cargar la textura a traves de un puntero para no estar cargandola todo el tiempo
 	if (!_texturaArma.loadFromFile(ruta_textura))
 		std::cout << "ERROR::ARMAMELEE::NO SE PUDO CARGAR LA TEXTURA" << std::endl;
 
@@ -32,8 +29,25 @@ void Espada::actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f ce
 	const float pi = 3.14159265f;
 	float deg = atan2(dY,dX) * 180.f / pi;
 
-	//_spriteArma.setRotation(deg + 90.f);
-	_spriteArma.setRotation(deg);
+	//_spriteArma.setRotation(deg + 90.f); // 01.png
+	
+	//_spriteArma.setRotation(deg); // sword2.png
+
+	//if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
+	//{
+
+	//}
+
+
+
+	if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
+	{
+		_spriteArma.rotate(15.f);
+	}
+	else
+	{
+		_spriteArma.setRotation(deg);
+	}
 }
 
 void Espada::renderizar(sf::RenderTarget& target, sf::Shader* sombra)

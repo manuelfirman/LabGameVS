@@ -165,6 +165,9 @@
     <ClCompile Include="TextoInfo.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="IA.cpp">
+      <Filter>Componentes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstadoBase.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="TextoInfo.h">
       <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="IA.h">
+      <Filter>Componentes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

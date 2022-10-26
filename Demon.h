@@ -7,14 +7,19 @@ class Demon : public Enemigos
 {
 	private:
 		sf::RectangleShape _barraHP;
+		//IA* _inteligenciaArtificial;
+
 	private:
 		void iniciarVariables();
+		void iniciarIA();
 		void iniciarAnimaciones();
 		void iniciarGUI();
 
 	public:
 		Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner);
 		virtual ~Demon();
+
+		void actualizarIA(const float DT);
 
 		void actualizarAnimacion(const float& DT);
 		void actualizar(const float& DT, sf::Vector2f& posMouseVista);

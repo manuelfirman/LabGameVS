@@ -5,14 +5,9 @@
 #include "Animacion.h"
 
 
-class ArmaMelee;
-class Animacion;
-
 class Espada : public ArmaMelee
 {
 	private:
-		
-
 
 	public:
 		Espada(int nivel, unsigned valor, std::string ruta_textura);
