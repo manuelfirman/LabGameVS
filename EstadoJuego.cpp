@@ -220,8 +220,6 @@ void EstadoJuego::actualizarInputJugador(const float& DT)
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_ABAJO"))))
         _jugador->mover(0.f, 1.f, DT);
 
-   
-
 }
 
 void EstadoJuego::actualizarBotonesPausa()
@@ -245,39 +243,51 @@ void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const f
 {
 
     //if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))                             // input ataque
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))                                // input ataque
-    {
         if (enemigo->getLimites().contains(_posMouseVista))                         // aim mouse
         {
             if (enemigo->getDistancia(*_jugador) < _jugador->getArma()->getRango()) // esta en rango?
             {  
                 if (_jugador->getArma()->getTimerAtaque())                          // puede atacar?
                 {
-                    int dmg = static_cast<int>(_jugador->getArma()->getDMG());
-                    enemigo->perderVida(dmg);
-                    _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
+                    if (enemigo->getAtaqueTerminado())
+                    {
+                        int dmg = static_cast<int>(_jugador->getArma()->getDMG());
+                        enemigo->perderVida(dmg);
+                        enemigo->resetTimerAtaque();
+                        _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
 
-                    //std::cout << enemigo->getAtributos()->_hp << std::endl;
+                        //std::cout << enemigo->getAtributos()->_hp << std::endl;
+                    }
 
                 }
             }
         }
-    }
 }
 
 void EstadoJuego::actualizarEnemigos(const float& DT)
 {
-    int indice = 0;
-    for (auto* enemigo : _enemigos)
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left))      // input ataque
     {
+        _jugador->setInicioAtaque(true); // inicia ataque
+    }
+
+
+    int indice = 0;
+    
+    for (auto* enemigo : _enemigos)
+    {    
         enemigo->actualizar(DT, _posMouseVista);
 
         _tileMap->actualizarLimitesMapa(enemigo, DT); // limites exteriores
         _tileMap->checkColision(enemigo, DT); // Colisiones mapa
 
-        actualizarAtaques(enemigo, indice, DT); // daño
+        if (_jugador->getIniciaAtaque())
+        {
+            actualizarAtaques(enemigo, indice, DT); // daño
+        }
 
-        // TODO: buscar otra forma / consultar si no es peligrosa para la memoria
+
+        // TODO: buscar otra forma / consultar si no es peligrosa para la memoria 
         if (!enemigo->estaVivo())
         {
             _jugador->ganarExperiencia(enemigo->getExperiencia());
@@ -289,6 +299,8 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
 
         ++indice;
     }
+
+    _jugador->setInicioAtaque(false); // reset inicia ataque
 }
 
 
@@ -342,7 +354,7 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
         enemigo->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), true);
     }
         // Jugador
-    _jugador->renderizar(_renderTextura, &_sombra, _jugador->getCentro());
+    _jugador->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), true);
 
         // Render Lienzo
     _tileMap->renderizacionDiferida(_renderTextura);

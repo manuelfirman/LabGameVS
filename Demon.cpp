@@ -14,14 +14,11 @@ void Demon::iniciarIA()
 
 void Demon::iniciarAnimaciones()
 {
-    //_sprite.setOrigin(_sprite.getGlobalBounds().width / 2.f, _sprite.getGlobalBounds().height / 2.f);
-
     // key - Velocidad animacion - inicioX - inicioY - framesX - framesY
     _animacion->agregarAnimacion("QUIETO", 6.f, 0, 0, 2, 0, 64, 64);         // Quieto
     _animacion->agregarAnimacion("CAMINAR_ABAJO", 6.f, 0, 0, 3, 0, 64, 64);   // Caminar abajo
     _animacion->agregarAnimacion("CAMINAR_ARRIBA", 6.f, 0, 1, 3, 1, 64, 64);    // Caminar arriba
     _animacion->agregarAnimacion("CAMINAR_X", 6.f, 0, 2, 3, 2, 64, 64);         // Caminar derecha
-    //_animacion->agregarAnimacion("CAMINAR_X", 3.f, 1, 11, 8, 11, 64, 64);       // Caminar izquierda
 
      // ANIMACIONES ATAQUE
     _animacion->agregarAnimacion("ATAQUE_ABAJO", 10.f, 1, 14, 5, 14, 64, 64);
@@ -40,7 +37,7 @@ Demon::Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawn
     this->iniciarVariables();
 
     crearHitbox(_sprite, -38.f, 9.f, 28.f, 40.f);        // Hitbox
-    crearComponenteMovimiento(150.f, 1700.f, 1000.f);   // Movimiento
+    crearComponenteMovimiento(80.f, 1700.f, 1000.f);   // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
     crearComponenteAtributos(1);                        // Atributos
     setPosicion(x, y);                                  // Posicion
@@ -70,7 +67,6 @@ void Demon::actualizarAnimacion(const float& DT)
     }
     else if (_movimiento->getEstadoMov(MOV_DERECHA))
     {
-
         _sprite.setOrigin((_sprite.getGlobalBounds().width / 2.f) + (_hitbox->getLimites().width / 2.f), 0.f);
         _sprite.setScale(1.f, 1.f);
         _animacion->play("CAMINAR_X", DT, _movimiento->getVelocidad().x, _movimiento->getVelocidadMax());
@@ -90,6 +86,15 @@ void Demon::actualizarAnimacion(const float& DT)
         _animacion->play("CAMINAR_ARRIBA", DT, _movimiento->getVelocidad().y, _movimiento->getVelocidadMax());
     }
 
+
+    if (_timerAtaque.getElapsedTime().asMilliseconds() <= _timerAtaqueMax)
+    {
+        _sprite.setColor(sf::Color::Green);
+    }
+    else
+    {
+        _sprite.setColor(sf::Color::Red);
+    }
 }
 
 

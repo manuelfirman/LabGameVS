@@ -7,20 +7,23 @@
 class Enemigos : public Entidades
 {
 	private:
-		int _experiencia;
-	protected:
-		SpawnerEnemigos& _spawner;
-
-
-	private:
 		virtual void iniciarVariables();
 		virtual void iniciarAnimaciones();
+
+	protected:
+		SpawnerEnemigos& _spawner;
+		sf::Clock _timerAtaque;
+		sf::Int32 _timerAtaqueMax;
+		int _experiencia;
 
 	public:
 		Enemigos(SpawnerEnemigos& tile_spawner);
 		virtual ~Enemigos();
 
 		SpawnerEnemigos& getTileSpawner();
+
+		void resetTimerAtaque();
+		const bool& getAtaqueTerminado() const;
 
 		const int& getExperiencia() const;
 		virtual void generarAtributos(const int nivel);

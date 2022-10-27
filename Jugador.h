@@ -10,6 +10,7 @@
 class Jugador : public Entidades
 {
 private: // Atributos
+    bool _iniciaAtaque;
     bool _atacando;
     Espada* _espada;
     std::vector<Proyectil> _skill;
@@ -27,8 +28,11 @@ public:
 
     Atributos* getAtributos();
     Armas* getArma() const;
+    const bool& getIniciaAtaque();
 
     // Setters
+    void setInicioAtaque(const bool inicio_ataque);
+
     void ganarHP(const int hp);
     void perderHP(const int hp);
 

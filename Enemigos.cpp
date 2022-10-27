@@ -4,6 +4,7 @@
 void Enemigos::iniciarVariables()
 {
 	_experiencia = 5;
+	_timerAtaqueMax = 1000.f;
 }
 
 
@@ -25,6 +26,18 @@ Enemigos::~Enemigos()
 SpawnerEnemigos& Enemigos::getTileSpawner()
 {
 	return _spawner;
+}
+
+void Enemigos::resetTimerAtaque()
+{
+	_timerAtaque.restart();
+}
+
+const bool& Enemigos::getAtaqueTerminado() const
+{
+	if (_timerAtaque.getElapsedTime().asMilliseconds() >= _timerAtaqueMax) return true;
+	
+	else return false;
 }
 
 void Enemigos::generarAtributos(const int nivel)

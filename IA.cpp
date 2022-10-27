@@ -24,17 +24,4 @@ void IA::seguir(const float& DT)
 	{
 		_entidad.mover(movimiento.x, movimiento.y, DT);
 	}
-
-	//sf::Vector2f movimiento;
-	//movimiento.x = _jugador.getPosicionSprite().x - _entidad.getPosicionSprite().x;
-	//movimiento.y = _jugador.getPosicionSprite().y - _entidad.getPosicionSprite().y;
-
-	//float longitud = sqrt(pow(movimiento.x, 2) + pow(movimiento.y, 2)); // mov_x^2 + mov_y^ (entre el jugador y la entidad)
-
-	//movimiento /= longitud;
-
-	//if (_jugador.getPosicionSprite().x != _entidad.getPosicionSprite().x)
-	//{
-	//	_entidad.mover(movimiento.x, movimiento.y, DT);
-	//}
 }

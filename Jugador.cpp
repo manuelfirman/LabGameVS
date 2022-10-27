@@ -58,6 +58,16 @@ Armas* Jugador::getArma() const
     return _espada;
 }
 
+const bool& Jugador::getIniciaAtaque()
+{
+    return _iniciaAtaque;
+}
+
+
+void Jugador::setInicioAtaque(const bool inicio_ataque)
+{
+    _iniciaAtaque = inicio_ataque;
+}
 
 void Jugador::ganarHP(const int hp)
 {
@@ -86,6 +96,7 @@ void Jugador::perdeExperiencia(const int experiencia)
 //        _atacando = true;
 //    }
 //}
+
 
 
 void Jugador::actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista)
