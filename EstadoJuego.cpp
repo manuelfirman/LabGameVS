@@ -45,8 +45,14 @@ void EstadoJuego::iniciarTexturas()
     if (!_texturas["PLANTILLA_JUGADOR"].loadFromFile("recursos/img/personaje/1.png")) {
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR TEXTURA DE JUGADOR" << std::endl;
     }
-    if (!_texturas["ENEMIGO_1"].loadFromFile("recursos/img/enemigos/demon.png")) {
-        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR TEXTURA DE ENEMIGO 1" << std::endl;
+    if (!_texturas["DEMON"].loadFromFile("recursos/img/enemigos/demons/demon_rojo.png")) {
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR TEXTURA DE ENEMIGO DEMON" << std::endl;
+    }
+    if (!_texturas["BAT"].loadFromFile("recursos/img/enemigos/bat.png")) {
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR TEXTURA DE ENEMIGO BAT" << std::endl;
+    }
+    if (!_texturas["SLIME"].loadFromFile("recursos/img/enemigos/slime.png")) {
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR TEXTURA DE ENEMIGO BAT" << std::endl;
     }
 }
 
@@ -249,11 +255,11 @@ void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const f
             {  
                 if (_jugador->getArma()->getTimerAtaque())                          // puede atacar?
                 {
-                    if (enemigo->getAtaqueTerminado())
+                    if (enemigo->getDmgTerminado())
                     {
                         int dmg = static_cast<int>(_jugador->getArma()->getDMG());
                         enemigo->perderVida(dmg);
-                        enemigo->resetTimerAtaque();
+                        enemigo->resetTimerDmg();
                         _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
 
                         //std::cout << enemigo->getAtributos()->_hp << std::endl;
@@ -286,6 +292,17 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
             actualizarAtaques(enemigo, indice, DT); // daño
         }
 
+        if (_jugador->getDistancia(*enemigo) < enemigo->getRango())
+        {
+            if (enemigo->getAtaqueTerminado())
+            {
+                int dmg = static_cast<int>(enemigo->getAtributos()->_dmgMax);
+                _jugador->perderHP(dmg);
+                enemigo->resetTimerAtaque();
+                _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, _jugador->getCentro().x, _jugador->getCentro().y, "-", dmg, "hp");
+                std::cout << "Daño" << std::endl;
+            }
+        }
 
         // TODO: buscar otra forma / consultar si no es peligrosa para la memoria 
         if (!enemigo->estaVivo())

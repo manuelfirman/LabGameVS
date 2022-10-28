@@ -30,6 +30,7 @@ class SpawnerEnemigos : public Tile
 		const int& getContadorEnemigos() const;
 		const int& getCantidadMaxEnemigos() const;
 		virtual const std::string getTileString() const;
+		const int& getTipoEnemigo();
 		
 		void contEnemigosMasMas();
 		void contEnemigosMenosMenos();

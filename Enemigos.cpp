@@ -4,7 +4,9 @@
 void Enemigos::iniciarVariables()
 {
 	_experiencia = 5;
+	_timerDmgMax = 1000.f;
 	_timerAtaqueMax = 1000.f;
+	_rango = 20.f;
 }
 
 
@@ -28,6 +30,11 @@ SpawnerEnemigos& Enemigos::getTileSpawner()
 	return _spawner;
 }
 
+const unsigned& Enemigos::getRango() const
+{
+	return _rango;
+}
+
 void Enemigos::resetTimerAtaque()
 {
 	_timerAtaque.restart();
@@ -36,6 +43,18 @@ void Enemigos::resetTimerAtaque()
 const bool& Enemigos::getAtaqueTerminado() const
 {
 	if (_timerAtaque.getElapsedTime().asMilliseconds() >= _timerAtaqueMax) return true;
+
+	else return false;
+}
+
+void Enemigos::resetTimerDmg()
+{
+	_timerDmg.restart();
+}
+
+const bool& Enemigos::getDmgTerminado() const
+{
+	if (_timerDmg.getElapsedTime().asMilliseconds() >= _timerDmgMax) return true;
 	
 	else return false;
 }

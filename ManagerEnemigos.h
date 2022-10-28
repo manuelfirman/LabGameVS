@@ -3,8 +3,10 @@
 
 #include "SpawnerEnemigos.h"
 #include "Demon.h"
+#include "Bat.h"
+#include "Slime.h"
 
-enum tipo_enemigo { DEMON = 0, GOBLIN };
+enum tipo_enemigo { SLIME = 0, BAT, DEMON };
 
 class ManagerEnemigos
 {

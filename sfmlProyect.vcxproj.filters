@@ -168,6 +168,12 @@
     <ClCompile Include="IA.cpp">
       <Filter>Componentes</Filter>
     </ClCompile>
+    <ClCompile Include="Bat.cpp">
+      <Filter>Entidades\Enemigos</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Entidades\Enemigos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstadoBase.h">
@@ -280,6 +286,12 @@
     </ClInclude>
     <ClInclude Include="IA.h">
       <Filter>Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="Bat.h">
+      <Filter>Entidades\Enemigos</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Entidades\Enemigos</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

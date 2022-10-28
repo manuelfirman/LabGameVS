@@ -19,10 +19,6 @@ void Demon::iniciarAnimaciones()
     _animacion->agregarAnimacion("CAMINAR_ABAJO", 6.f, 0, 0, 3, 0, 64, 64);   // Caminar abajo
     _animacion->agregarAnimacion("CAMINAR_ARRIBA", 6.f, 0, 1, 3, 1, 64, 64);    // Caminar arriba
     _animacion->agregarAnimacion("CAMINAR_X", 6.f, 0, 2, 3, 2, 64, 64);         // Caminar derecha
-
-     // ANIMACIONES ATAQUE
-    _animacion->agregarAnimacion("ATAQUE_ABAJO", 10.f, 1, 14, 5, 14, 64, 64);
-    _animacion->agregarAnimacion("ATAQUE_X", 10.f, 1, 13, 5, 13, 64, 64);
 }
 
 void Demon::iniciarGUI()
@@ -87,7 +83,7 @@ void Demon::actualizarAnimacion(const float& DT)
     }
 
 
-    if (_timerAtaque.getElapsedTime().asMilliseconds() <= _timerAtaqueMax)
+    if (_timerDmg.getElapsedTime().asMilliseconds() <= _timerDmgMax)
     {
         _sprite.setColor(sf::Color::Green);
     }

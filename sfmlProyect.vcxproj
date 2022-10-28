@@ -153,6 +153,7 @@
     <ClCompile Include="Animacion.cpp" />
     <ClCompile Include="Animacion2.cpp" />
     <ClCompile Include="Armas.cpp" />
+    <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Demon.cpp" />
     <ClCompile Include="Editor_Mapa.cpp" />
     <ClCompile Include="Editor_SpawnerEnemigos.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Movimiento.cpp" />
     <ClCompile Include="OpcionesGraficas.cpp" />
     <ClCompile Include="Proyectil.cpp" />
+    <ClCompile Include="Slime.cpp" />
     <ClCompile Include="SpawnerEnemigos.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -196,6 +198,7 @@
     <ClInclude Include="Animacion.h" />
     <ClInclude Include="Animacion2.h" />
     <ClInclude Include="Armas.h" />
+    <ClInclude Include="Bat.h" />
     <ClInclude Include="Demon.h" />
     <ClInclude Include="Editor_Mapa.h" />
     <ClInclude Include="Editor_SpawnerEnemigos.h" />
@@ -224,6 +227,7 @@
     <ClInclude Include="Movimiento.h" />
     <ClInclude Include="OpcionesGraficas.h" />
     <ClInclude Include="Proyectil.h" />
+    <ClInclude Include="Slime.h" />
     <ClInclude Include="SpawnerEnemigos.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextoInfo.h" />

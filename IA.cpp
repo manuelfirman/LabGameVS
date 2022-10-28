@@ -25,3 +25,5 @@ void IA::seguir(const float& DT)
 		_entidad.mover(movimiento.x, movimiento.y, DT);
 	}
 }
+
+

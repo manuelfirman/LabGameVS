@@ -16,10 +16,16 @@ void ManagerEnemigos::crearEnemigo(const int tipo_enemigo, const int posX, const
 	switch (tipo_enemigo)
 	{
 		case tipo_enemigo::DEMON:
-			_enemigos.push_back(new Demon(posX, posY, _texturas["ENEMIGO_1"], tile_spawner, _jugador));
+			_enemigos.push_back(new Demon(posX, posY, _texturas["DEMON"], tile_spawner, _jugador));
 			tile_spawner.contEnemigosMasMas(); // ++_contadorEnemigos;
 			break;
-		case tipo_enemigo::GOBLIN:
+		case tipo_enemigo::BAT:
+			_enemigos.push_back(new Bat(posX, posY, _texturas["BAT"], tile_spawner, _jugador));	
+			tile_spawner.contEnemigosMasMas(); // ++_contadorEnemigos;
+			break;
+		case tipo_enemigo::SLIME:
+			_enemigos.push_back(new Slime(posX, posY, _texturas["SLIME"], tile_spawner, _jugador));	
+			tile_spawner.contEnemigosMasMas(); // ++_contadorEnemigos;
 			break;
 		default:
 			std::cout << "ERROR::MANAGERENEMIGOS::NO EXISTE ESE TIPO DE ENEMIGO" << std::endl;

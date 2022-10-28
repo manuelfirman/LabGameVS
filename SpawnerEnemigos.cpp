@@ -61,6 +61,11 @@ const std::string SpawnerEnemigos::getTileString() const
 	return ss.str();
 }
 
+const int& SpawnerEnemigos::getTipoEnemigo()
+{
+	return _tipoEnemigo;
+}
+
 void SpawnerEnemigos::contEnemigosMasMas()
 {
 	if(_contadorEnemigos < _cantidadEnemigos)

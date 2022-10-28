@@ -12,9 +12,12 @@ class Enemigos : public Entidades
 
 	protected:
 		SpawnerEnemigos& _spawner;
+		sf::Clock _timerDmg;
+		sf::Int32 _timerDmgMax;
 		sf::Clock _timerAtaque;
 		sf::Int32 _timerAtaqueMax;
 		int _experiencia;
+		unsigned _rango;
 
 	public:
 		Enemigos(SpawnerEnemigos& tile_spawner);
@@ -22,8 +25,15 @@ class Enemigos : public Entidades
 
 		SpawnerEnemigos& getTileSpawner();
 
+		const unsigned& getRango() const;
+
+		
+
 		void resetTimerAtaque();
 		const bool& getAtaqueTerminado() const;
+
+		void resetTimerDmg();
+		const bool& getDmgTerminado() const;
 
 		const int& getExperiencia() const;
 		virtual void generarAtributos(const int nivel);

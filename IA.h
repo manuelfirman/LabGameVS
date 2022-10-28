@@ -15,7 +15,7 @@ class IA
 		~IA();
 
 		void seguir(const float& DT);
-		void actualizar();
+	
 };
 
 #endif // !IA_H

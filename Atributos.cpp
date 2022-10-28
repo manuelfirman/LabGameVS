@@ -118,6 +118,7 @@ void Atributos::actualizarNivel()
 
 void Atributos::actualizar()
 {
+	actualizarEstadisticas(false);
 	actualizarNivel();
 }
 

@@ -12,6 +12,7 @@ class Jugador : public Entidades
 private: // Atributos
     bool _iniciaAtaque;
     bool _atacando;
+    bool _tiraskill;
     Espada* _espada;
     std::vector<Proyectil> _skill;
     sf::Texture _texturaSkill;
@@ -40,7 +41,7 @@ public:
     void perdeExperiencia(const int experiencia);
 
     // Actualizar
-    //void actualizarAtaque(const float& DT, sf::Vector2f posMouseVista);
+    void actualizarAtaque(const float& DT, sf::Vector2f posMouseVista);
     void actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista);
     void actualizar(const float& DT, sf::Vector2f& posMouseVista);
     

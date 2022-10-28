@@ -26,7 +26,7 @@ class Demon : public Enemigos
 		void actualizarAnimacion(const float& DT);
 		void actualizar(const float& DT, sf::Vector2f& posMouseVista);
 
-		void renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf::Vector2f posLuz, const bool mostrar_hitbox);;
+		void renderizar(sf::RenderTarget& target, sf::Shader* sombra, const sf::Vector2f posLuz, const bool mostrar_hitbox);
 };
 
 #endif

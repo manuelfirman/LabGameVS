@@ -38,18 +38,18 @@ void EstadoMenuPrincipal::iniciarGUI()
 {
     const sf::VideoMode& modo_video = _datosEstado->opcionesGraficas->_resolucion;
 
-    if (!_texturaFondoMenu.loadFromFile("recursos/img/fondos/fondo_menu.jpg"))
+    if (!_texturaFondoMenu.loadFromFile("recursos/img/fondos/dark_background.png"))
         std::cout << "ERROR:iniciarFondo_EstadoMenuPrincipal_CargarTexturaMenu" << std::endl;
 
     _fondoMenu.setSize(sf::Vector2f(static_cast<float>(modo_video.width), static_cast<float>(modo_video.height)));
     _fondoMenu.setTexture(&_texturaFondoMenu);
 
     //float posX = _ventana->getSize().x / 2.f - 100;
-    sf::Color colorInactivo = sf::Color(70, 70, 70, 50);
-    sf::Color colorActivo = sf::Color(250, 250, 250, 0);
-    sf::Color colorHover = sf::Color(20, 20, 20, 0);
-    sf::Color colorTextoInactivo = sf::Color(30, 30, 30, 220);
-    sf::Color colorTextoHover = sf::Color(150, 150, 150, 255);
+    sf::Color colorInactivo = sf::Color(250, 250, 250, 0);
+    sf::Color colorActivo = sf::Color(20, 20, 20, 0);
+    sf::Color colorHover = sf::Color(70, 70, 70, 50);
+    sf::Color colorTextoInactivo = sf::Color(150, 150, 150, 255);
+    sf::Color colorTextoHover = sf::Color(180, 180, 180, 255);
     sf::Color colorTextoActivo = sf::Color(20, 20, 20, 220);
 
     _boton["ESTADO_JUEGO"] = new gui::Boton(gui::p2pX(15.6f, modo_video), gui::p2pY(37.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "NUEVO JUEGO", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
@@ -108,7 +108,7 @@ void EstadoMenuPrincipal::actualizarBotones()
     }
 
     if (_boton["ESTADO_JUEGO"]->getClick() && getPpsTeclas())
-        _estado->push(new EstadoJuego(_datosEstado)); // pasa 3 punteros
+        _estado->push(new EstadoJuego(_datosEstado));
 
     if (_boton["ESTADO_OPCIONES"]->getClick() && getPpsTeclas())
         _estado->push(new EstadoOpciones(_datosEstado));

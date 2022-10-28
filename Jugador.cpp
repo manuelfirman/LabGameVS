@@ -4,6 +4,7 @@
 void Jugador::iniciarVariables()
 {
     _atacando = false;
+    _tiraskill = false;
     _espada = new Espada(1 ,20, "recursos/img/items/sword2.png");
 }
 
@@ -89,13 +90,13 @@ void Jugador::perdeExperiencia(const int experiencia)
     _atributos->perderExperiencia(experiencia);
 }
 
-//void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
-//{
-//    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-//        _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
-//        _atacando = true;
-//    }
-//}
+void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
+{
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+        _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
+        _tiraskill = true;
+    }
+}
 
 
 
@@ -151,22 +152,20 @@ void Jugador::actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista)
 
 void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 {
-
-    //_atributos->actualizar();
-    //if(sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-    //    _atributos->ganarExperiencia(20);
-
     //std::cout << _atributos->debug() << "\n";
 
     _movimiento->actualizar(DT);
 
-    //actualizarAtaque(DT, posMouseVista);
+    actualizarAtaque(DT, posMouseVista);
 
     actualizarAnimacion(DT, posMouseVista);
 
     _hitbox->actualizar();
 
+    _atributos->actualizar();
+
     _espada->actualizar(posMouseVista, getCentro());
+
     for (size_t i = 0; i < _skill.size(); i++)
     {
         if (_skill[i].getRealizando())

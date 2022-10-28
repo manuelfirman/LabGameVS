@@ -12,7 +12,7 @@ void EstadoEditor::iniciarModos()
 /// --------------------- INICIALIZACIONES --------------------------
 void EstadoEditor::iniciarVariables()
 {
-    _velocidadCamara = 600.f;
+    _velocidadCamara = 100.f;
 }
 
 void EstadoEditor::iniciarDatosEditor()
@@ -87,7 +87,7 @@ void EstadoEditor::iniciarGUI()
 
 void EstadoEditor::iniciarTileMap()
 {
-    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 100, 100, "recursos/img/mapa/terrenos/terreno_01.png");
+    _tileMap = new TileMap(_datosEstado->tamanioCuadro, 100, 100, "recursos/img/mapa/terrenos.png");
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
@@ -138,6 +138,7 @@ void EstadoEditor::actualizarInput(const float& DT)
         //(_pausa) ? pausarEstado() : reanudarEstado();
     }
 
+
 }
 
 void EstadoEditor::actualizarInputEditor(const float& DT)
@@ -161,6 +162,14 @@ void EstadoEditor::actualizarInputEditor(const float& DT)
         _vista.move(-_velocidadCamara * DT, 0.f);
     }
 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::RControl))
+    {
+        _velocidadCamara = 700.f;
+    }
+    else
+    {
+        _velocidadCamara = 100.f;
+    }
 
     // CAMBIAR MODO DE EDITOR
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MODO_ARRIBA"))) && getPpsTeclas())

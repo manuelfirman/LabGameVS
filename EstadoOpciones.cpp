@@ -42,7 +42,7 @@ void EstadoOpciones::iniciarGUI()
 {
     const sf::VideoMode& modo_video = _datosEstado->opcionesGraficas->_resolucion;
 
-    if (!_texturaFondoOpciones.loadFromFile("recursos/img/fondos/fondo_menu.jpg"))
+    if (!_texturaFondoOpciones.loadFromFile("recursos/img/fondos/dark_background.png"))
         std::cout << "ERROR:iniciarFondo_EstadoMenuPrincipal_CargarTexturaMenu" << std::endl;
 
     _fondoOpciones.setSize(sf::Vector2f(static_cast<float>(modo_video.width), static_cast<float>(modo_video.height)));
@@ -76,7 +76,7 @@ void EstadoOpciones::iniciarGUI()
     _textoOpciones.setPosition(sf::Vector2f(gui::p2pX(5.2f, modo_video), gui::p2pY(9.2f, modo_video)));
     _textoOpciones.setCharacterSize(gui::calcTamCaracter(modo_video));
     _textoOpciones.setFillColor(sf::Color(255, 255, 255, 200));
-    _textoOpciones.setString("Resolucion \nFullscreen \nVsync \nAntialiasing");
+    _textoOpciones.setString("AJUSTES DE PANTALLA");
 
 }
 

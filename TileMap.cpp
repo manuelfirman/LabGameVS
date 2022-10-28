@@ -482,7 +482,7 @@ void TileMap::actualizarTiles(Entidades* entidad, const float& DT, ManagerEnemig
 							if (spawner->getContadorEnemigos() < spawner->getCantidadMaxEnemigos())
 							{
 								std::cout << "Spawneo enemigo" << std::endl;
-								manager_enemigos.crearEnemigo(DEMON, x * _tamanioCuadroF, y * _tamanioCuadroF, *spawner);
+								manager_enemigos.crearEnemigo(spawner->getTipoEnemigo(), x * _tamanioCuadroF, y * _tamanioCuadroF, *spawner);
 								//spawner->resetTimer();
 								spawner->setSpawn(true);
 							}
