@@ -52,9 +52,9 @@ void Game::iniciarTeclas()
     }
 
     // DEBUG TECLAS SOPORTADAS (ELIMINAR LUEGO)
-    for (auto i : _teclasSoportadas) {
-        std::cout << i.first << " " << i.second << "\n";
-    }
+    //for (auto i : _teclasSoportadas) {
+    //    std::cout << i.first << " " << i.second << "\n";
+    //}
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------

@@ -558,7 +558,7 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionC
 					if (_mapa[x][y][_capa][C]->getColision())
 					{
 						_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
-						target.draw(_cajaColisiones);
+						//target.draw(_cajaColisiones);
 					}
 				}
 
@@ -566,7 +566,7 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionC
 				if (_mapa[x][y][_capa][C]->getTipoTile() == tipo_tile::SPAWNERENEMIGO)
 				{
 					_cajaColisiones.setPosition(_mapa[x][y][_capa][C]->getPosicionTile());
-					target.draw(_cajaColisiones);
+					//target.draw(_cajaColisiones);
 				}
 			}
 		}

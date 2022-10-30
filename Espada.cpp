@@ -30,28 +30,28 @@ void Espada::actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f ce
 	float deg = atan2(dY,dX) * 180.f / pi;
 
 	// Con vector normalizado
-	if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
-	{
-		float longitud = std::sqrt(pow(dX, 2) + pow(dY, 2));
-		sf::Vector2f vectNorm((dX / longitud), (dY / longitud));
+	//if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
+	//{
+	//	float longitud = std::sqrt(pow(dX, 2) + pow(dY, 2));
+	//	sf::Vector2f vectNorm((dX / longitud), (dY / longitud));
 
 
-		_spriteArma.setPosition(centro.x + vectNorm.x * 13.f, centro.y + vectNorm.y * 13.f);
-	}
-	else
-	{
-		_spriteArma.setRotation(deg);
-	}
+	//	_spriteArma.setPosition(centro.x + vectNorm.x * 13.f, centro.y + vectNorm.y * 13.f);
+	//}
+	//else
+	//{
+	//	_spriteArma.setRotation(deg);
+	//}
 
 	// Con rotacion
-	/*if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
+	if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
 	{
 		_spriteArma.rotate(15.f);
 	}
 	else
 	{
 		_spriteArma.setRotation(deg);
-	}*/
+	}
 }
 
 void Espada::renderizar(sf::RenderTarget& target, sf::Shader* sombra)

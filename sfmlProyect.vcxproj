@@ -153,6 +153,7 @@
     <ClCompile Include="Animacion.cpp" />
     <ClCompile Include="Animacion2.cpp" />
     <ClCompile Include="Armas.cpp" />
+    <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Bat.cpp" />
     <ClCompile Include="Demon.cpp" />
     <ClCompile Include="Editor_Mapa.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Animacion.h" />
     <ClInclude Include="Animacion2.h" />
     <ClInclude Include="Armas.h" />
+    <ClInclude Include="Audio.h" />
     <ClInclude Include="Bat.h" />
     <ClInclude Include="Demon.h" />
     <ClInclude Include="Editor_Mapa.h" />

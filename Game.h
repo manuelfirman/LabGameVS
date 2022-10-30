@@ -9,6 +9,7 @@ private: // Atributos
 	OpcionesGraficas _opcionesGraficas;
 	DatosEstado _datosEstado;
 	sf::RenderWindow* _ventana; // memoria dinamica
+
 	sf::Event sfEvento;
 
 	sf::Clock relojDt;

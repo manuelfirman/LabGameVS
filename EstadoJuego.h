@@ -16,6 +16,7 @@
 #include "Demon.h"
 
 #include "TextoInfo.h"
+#include "Audio.h"
 
 
 class EstadoJuego : public EstadoBase
@@ -46,6 +47,7 @@ private: // Atributos
 
     TextoInfo* _popUps;
 
+    Audio _audio;
 
 private: // Metodos
     void renderizadoDiferido();

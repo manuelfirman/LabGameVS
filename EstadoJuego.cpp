@@ -212,13 +212,11 @@ void EstadoJuego::actualizarInput(const float& DT)
 
 void EstadoJuego::actualizarInputJugador(const float& DT)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_IZQUIERDA")))) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_IZQUIERDA"))))
         _jugador->mover(-1.f, 0.f, DT);
-    }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_DERECHA")))) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_DERECHA"))))
         _jugador->mover(1.f, 0.f, DT);
-    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_ARRIBA"))))
         _jugador->mover(0.f, -1.f, DT);
@@ -261,8 +259,8 @@ void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const f
                         enemigo->perderVida(dmg);
                         enemigo->resetTimerDmg();
                         _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
-
-                        //std::cout << enemigo->getAtributos()->_hp << std::endl;
+                        _audio.playJ("HIT_ESPADA");
+                        _audio.playE("DMG_ENEMIGO");
                     }
 
                 }
@@ -300,7 +298,7 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
                 _jugador->perderHP(dmg);
                 enemigo->resetTimerAtaque();
                 _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, _jugador->getCentro().x, _jugador->getCentro().y, "-", dmg, "hp");
-                std::cout << "Daño" << std::endl;
+                _audio.playJ("DMG_JUGADOR");
             }
         }
 
@@ -310,6 +308,7 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
             _jugador->ganarExperiencia(enemigo->getExperiencia());
             _popUps->agregarPopUp(tipo_popUp::POP_EXPERIENCIA, _jugador->getCentro().x, _jugador->getCentro().y, "+", static_cast<int>(enemigo->getExperiencia()), "exp");
             _managerEnemigos->eliminarEnemigo(indice);
+            
             --indice;
         }
         
@@ -368,10 +367,10 @@ void EstadoJuego::renderizar(sf::RenderTarget* target)
         // Enemigos
     for (auto* enemigo : _enemigos)
     {
-        enemigo->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), true);
+        enemigo->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), false);
     }
         // Jugador
-    _jugador->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), true);
+    _jugador->renderizar(_renderTextura, &_sombra, _jugador->getCentro(), false);
 
         // Render Lienzo
     _tileMap->renderizacionDiferida(_renderTextura);
