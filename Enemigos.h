@@ -10,17 +10,16 @@ class Enemigos : public Entidades
 	private:
 		virtual void iniciarVariables();
 		virtual void iniciarAnimaciones();
-		virtual void iniciarSonidos();
 
 	protected:
 		SpawnerEnemigos& _spawner;
-		Sonido _sonido;
 		sf::Clock _timerDmg;
 		sf::Int32 _timerDmgMax;
 		sf::Clock _timerAtaque;
 		sf::Int32 _timerAtaqueMax;
 		int _experiencia;
 		unsigned _rango;
+
 
 	public:
 		Enemigos(SpawnerEnemigos& tile_spawner);

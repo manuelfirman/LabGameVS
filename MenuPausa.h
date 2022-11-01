@@ -2,8 +2,7 @@
 #define MENUPAUSA_H
 
 #include "Gui.h"
-
-class Gui;
+#include "Audio.h"
 
 class MenuPausa
 {
@@ -14,8 +13,6 @@ class MenuPausa
 		sf::Text _textoPausa;
 
 		std::map<std::string, gui::Boton*> _botones;
-
-	
 	
 	public:
 		MenuPausa(sf::VideoMode& modo_video, sf::Font& fuente);

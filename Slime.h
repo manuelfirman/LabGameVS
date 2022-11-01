@@ -16,10 +16,9 @@ private:
 	void iniciarIA();
 	void iniciarAnimaciones();
 	void iniciarGUI();
-	void iniciarSonidos();
 
 public:
-	Slime(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner, Entidades& jugador);
+	Slime(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, SpawnerEnemigos& tile_spawner, Entidades& jugador);
 	virtual ~Slime();
 
 	void actualizarIA(const float DT);

@@ -1,43 +1,36 @@
 #include "stdafx.h"
 #include "Audio.h"
 
-Audio::Audio()
+Audio::Audio(const std::string ruta_musica, std::map<std::string, sf::SoundBuffer>& buffers_sonido) : _bufferSonido(buffers_sonido)
 {
-	if(!_musicaJuego.openFromFile("recursos/sonido/bloody_sword.ogg"))
-		std::cout << "ERROR::AUDIO::NOSE PUDO CARGAR MUSICA: 'recursos/sonido/bloody_sword.ogg'." << std::endl;
+	if(!_musica.openFromFile(ruta_musica))
+		std::cout << "ERROR::AUDIO::NOSE PUDO CARGAR MUSICA: " << ruta_musica << std::endl;
 	
-	
+	_musica.setLoop(true);
+	_musica.setVolume(50);
 
-	//if(!_bufferSonido.loadFromFile("recursos/sonido/hurt_enemigo.wav"))
-	//	std::cout << "ERROR::AUDIO::NOSE PUDO CARGAR AUDIO: 'recursos/sonido/hurt_enemigo.wav'." << std::endl;
-
-	//_sonido["DMG_ENEMIGO"].setBuffer(_bufferSonido);
-
-
+	_sonido.setVolume(50);
 }
 
 Audio::~Audio()
 {
+
 }
-
-
 
 void Audio::playMusica()
 {
-	_musicaJuego.play();
+	_musica.play();
 }
 
-void Audio::playE(const std::string nombre_sonido)
+void Audio::stopMusica()
 {
-	_sonidoEnemigo.resetBuffer();
-	_sonidoEnemigo.setBuffer(_bufferSonido[nombre_sonido]);
-	_sonidoEnemigo.play();
+	_musica.stop();
 }
 
-void Audio::playJ(const std::string nombre_sonido)
+void Audio::playSonido(const std::string nombre_sonido)
 {
-	_sonidoJugador.resetBuffer();
-	_sonidoJugador.setBuffer(_bufferSonido[nombre_sonido]);
-	_sonidoJugador.play();
+	_sonido.resetBuffer();
+	_sonido.setBuffer(_bufferSonido[nombre_sonido]);
+	_sonido.play();
 }
 

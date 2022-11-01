@@ -7,6 +7,7 @@ void Entidades::iniciarVariables()
     _animacion = NULL;
     _hitbox = NULL;
     _atributos = NULL;
+    _sonido = NULL;
 }
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
@@ -22,6 +23,7 @@ Entidades::~Entidades()
     delete _animacion;
     delete _hitbox;
     delete _atributos;
+    delete _sonido;
 }
 
 
@@ -52,6 +54,10 @@ void Entidades::crearComponenteAtributos(const int nivel)
     _atributos = new Atributos(nivel);
 }
 
+void Entidades::crearComponenteSonidos(std::map<std::string, sf::SoundBuffer>& sonidos, std::string prefijo)
+{
+    _sonido = new Sonido(sonidos, prefijo);
+}
 
 // GETTERS
 const sf::Vector2f& Entidades::getPosicionSprite() const
@@ -133,5 +139,5 @@ const float Entidades::getDistancia(const Entidades& entidad) const
 {
     // (x2 - x1)^2 + (y2 - y1)^2
     //std::cout << sqrt(pow((getCentro().x - entidad.getCentro().x), 2) + pow((getCentro().y - entidad.getCentro().y), 2)) << std::endl;s
-    return sqrt(pow((getCentro().x - entidad.getCentro().x), 2) + pow((getCentro().y - entidad.getCentro().y), 2));
+    return static_cast<float>(sqrt(pow((getCentro().x - entidad.getCentro().x), 2) + pow((getCentro().y - entidad.getCentro().y), 2)));
 }

@@ -27,14 +27,7 @@ void Slime::iniciarGUI()
     _barraHP.setPosition(_sprite.getPosition().x - _barraHP.getSize().x / 1.3f, _sprite.getPosition().y);
 }
 
-void Slime::iniciarSonidos()
-{
-    _sonido.agregarSonido("ATACAR", "recursos/sonido/enemigos/slime_attack.wav");
-    _sonido.agregarSonido("RECIBIR_DMG", "recursos/sonido/enemigos/slime_dmg.wav");
-    _sonido.agregarSonido("MORIR", "recursos/sonido/enemigos/slime_die.wav");
-}
-
-Slime::Slime(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner, Entidades& jugador) : Enemigos(tile_spawner)
+Slime::Slime(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, SpawnerEnemigos& tile_spawner, Entidades& jugador) : Enemigos(tile_spawner)
 {
     this->iniciarVariables();
 
@@ -42,10 +35,10 @@ Slime::Slime(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawn
     crearComponenteMovimiento(80.f, 1700.f, 1000.f);   // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
     crearComponenteAtributos(1);                        // Atributos
+    crearComponenteSonidos(sonidos, "SLIME");                   // Sonidos
     setPosicion(x, y);                                  // Posicion
     this->iniciarAnimaciones();                         // Animaciones
     this->iniciarGUI();                                 // GUI
-    this->iniciarSonidos();
     _inteligenciaArtificial = new IA(jugador, *this);
 }
 

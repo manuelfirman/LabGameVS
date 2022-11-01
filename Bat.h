@@ -16,10 +16,9 @@ private:
 	void iniciarIA();
 	void iniciarAnimaciones();
 	void iniciarGUI();
-	void iniciarSonidos();
 
 public:
-	Bat(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner, Entidades& jugador);
+	Bat(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, SpawnerEnemigos& tile_spawner, Entidades& jugador);
 	virtual ~Bat();
 
 	void actualizarIA(const float DT);

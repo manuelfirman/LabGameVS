@@ -5,6 +5,7 @@
 #include "Movimiento.h"
 #include "Animacion.h"
 #include "Atributos.h"
+#include "Sonido.h"
 
 
 class Entidades
@@ -20,7 +21,7 @@ protected: // Atributos
     Hitbox* _hitbox;
     Atributos* _atributos;
 
-
+    Sonido* _sonido;
 public:
     Entidades();
     virtual ~Entidades();
@@ -32,6 +33,7 @@ public:
     void crearComponenteMovimiento(float velocidadMaxima, float aceleracion, float desaceleracion);
     void crearComponenteAnimacion(sf::Texture& textura);
     void crearComponenteAtributos(const int nivel);
+    void crearComponenteSonidos(std::map<std::string, sf::SoundBuffer>& sonidos, std::string prefijo);
 
     // Getters
     virtual const sf::Vector2f& getPosicionSprite() const;

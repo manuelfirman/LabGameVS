@@ -3,13 +3,18 @@
 class Sonido
 {
 	private:
-		std::map<std::string, sf::SoundBuffer> _buffer;
+
+		std::string _prefijo;
+
+		std::map<std::string, sf::SoundBuffer>& _buffer;
 		sf::Sound _sonido;
+
+
 		
 	public:
-		Sonido();
+		Sonido(std::map<std::string, sf::SoundBuffer>& sonidos, std::string prefijo);
 		~Sonido();
-		void agregarSonido(std::string nombre_sonido, std::string ruta_sonido);
+
 		void play(std::string nombre_sonido);
 };
 

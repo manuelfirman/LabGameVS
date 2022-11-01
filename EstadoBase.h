@@ -1,7 +1,7 @@
 #ifndef ESTADOBASE_H
 #define ESTADOBASE_H
 #include "OpcionesGraficas.h"
-#include "Jugador.h"
+#include "Audio.h"
 
 class EstadoBase;
 
@@ -35,15 +35,18 @@ protected: // Atributos
     std::stack<EstadoBase*>* _estado; // Pila de punteros que apuntan a pila de punteros EstadoBase (Para no hacer una copia)
     sf::RenderWindow* _ventana;
     DatosEstado* _datosEstado;
+
     std::map<std::string, int>* _teclasSoportadas;
     std::map<std::string, int> _keybinds;
     std::map<std::string, sf::Texture> _texturas;
-    std::map<std::string, sf::SoundBuffer> _sonidos;
+    std::map<std::string, sf::SoundBuffer> _bufferSonidos;
+        
         
     float _tamanioCuadro;
 
     bool _salir;
     bool _pausa;
+    bool _clickBoton;
 
     // Control de ingresos de teclado por segundo
     float _ppsTeclas;

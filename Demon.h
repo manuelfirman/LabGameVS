@@ -18,7 +18,7 @@ class Demon : public Enemigos
 		void iniciarGUI();
 
 	public:
-		Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner, Entidades& jugador);
+		Demon(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, SpawnerEnemigos& tile_spawner, Entidades& jugador);
 		virtual ~Demon();
 
 		void actualizarIA(const float DT);

@@ -18,7 +18,18 @@ public:
     sf::Vector2f* posMouseVista;
     sf::Vector2i* posMouseCuadro;
     
-    DatosEditor(){};
+    DatosEditor()
+    {
+        fuente = NULL;
+        ppsTeclas = NULL;
+        ppsTeclasMax = NULL;
+        vista = NULL;
+        keybinds = NULL;
+        posMousePantalla = NULL;
+        posMouseVentana = NULL;
+        posMouseVista = NULL;
+        posMouseCuadro = NULL;
+    };
 
 };
 

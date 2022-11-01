@@ -15,11 +15,6 @@ void Enemigos::iniciarAnimaciones()
 
 }
 
-void Enemigos::iniciarSonidos()
-{
-
-}
-
 Enemigos::Enemigos(SpawnerEnemigos& tile_spawner) : _spawner(tile_spawner)
 {
 	this->iniciarVariables();
@@ -112,5 +107,5 @@ const Atributos* Enemigos::getAtributos() const
 
 Sonido& Enemigos::getSonido()
 {
-	return _sonido;
+	return *_sonido;
 }

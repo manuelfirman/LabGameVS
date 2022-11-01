@@ -56,6 +56,48 @@ void EstadoJuego::iniciarTexturas()
     }
 }
 
+void EstadoJuego::iniciarSonidos()
+{
+    if(!_bufferSonidos["BAT_ATACAR"].loadFromFile("recursos/sonido/enemigos/bat_attack.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/bat_attack.wav" << std::endl;
+    if(!_bufferSonidos["BAT_DMG"].loadFromFile("recursos/sonido/enemigos/bat_dmg.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/bat_dmg.wav" << std::endl;
+    if(!_bufferSonidos["BAT_MORIR"].loadFromFile("recursos/sonido/enemigos/bat_die.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/bat_die.wav" << std::endl;
+    if(!_bufferSonidos["BAT_MOV"].loadFromFile("recursos/sonido/enemigos/bat_die.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/bat_mov.wav" << std::endl;
+
+    if(!_bufferSonidos["SLIME_ATACAR"].loadFromFile("recursos/sonido/enemigos/slime_attack.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/slime_attack.wav" << std::endl;
+    if(!_bufferSonidos["SLIME_DMG"].loadFromFile("recursos/sonido/enemigos/slime_dmg.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/slime_dmg.wav" << std::endl;
+    if(!_bufferSonidos["SLIME_MORIR"].loadFromFile("recursos/sonido/enemigos/slime_die.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/slime_die.wav" << std::endl;
+    if(!_bufferSonidos["SLIME_MOV"].loadFromFile("recursos/sonido/enemigos/slime_die.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/slime_mov.wav" << std::endl;
+
+    if(!_bufferSonidos["DEMON_ATACAR"].loadFromFile("recursos/sonido/enemigos/slime_attack.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/demon_attack.wav" << std::endl;
+    if(!_bufferSonidos["DEMON_DMG"].loadFromFile("recursos/sonido/enemigos/slime_dmg.wav"))
+        std::cout << "ERDEMONESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/demon_dmg.wav" << std::endl;
+    if(!_bufferSonidos["DEMON_MORIR"].loadFromFile("recursos/sonido/enemigos/slime_die.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/demon_die.wav" << std::endl;
+    if(!_bufferSonidos["DEMON_MOV"].loadFromFile("recursos/sonido/enemigos/slime_die.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/demon_mov.wav" << std::endl;
+
+    if (!_bufferSonidos["BOTON_CLICK"].loadFromFile("recursos/sonido/efectos/boton_click.wav"))
+        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_click.wav" << std::endl;
+    if (!_bufferSonidos["BOTON_ATRAS"].loadFromFile("recursos/sonido/efectos/boton_atras.wav"))
+        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_atras.wav" << std::endl;
+}
+
+void EstadoJuego::iniciarAudio()
+{
+    this->iniciarSonidos();
+    _audio = new Audio("recursos/sonido/musica/musica_juego.ogg", _bufferSonidos);
+    
+}
+
 void EstadoJuego::iniciarMenuPausa()
 {
     _menuPausa = new MenuPausa(_datosEstado->opcionesGraficas->_resolucion, _fuenteJuego);
@@ -82,7 +124,7 @@ void EstadoJuego::iniciarGUIJugador()
 
 void EstadoJuego::iniciarManagerEnemigos()
 {
-    _managerEnemigos = new ManagerEnemigos(_enemigos, _texturas, *_jugador);
+    _managerEnemigos = new ManagerEnemigos(_enemigos, _texturas, _bufferSonidos, *_jugador);
 }
 
 void EstadoJuego::iniciarTileMap()
@@ -110,6 +152,7 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarKeybinds();
     this->iniciarFuentes();
     this->iniciarTexturas();
+    this->iniciarAudio();
     this->iniciarMenuPausa();
     this->iniciarSombras();
 
@@ -120,8 +163,7 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarPopUps();
 
 
-
-    _audio.playMusica();
+    _audio->playMusica();
 }
 
 EstadoJuego::~EstadoJuego()
@@ -132,11 +174,13 @@ EstadoJuego::~EstadoJuego()
     delete _managerEnemigos;
     delete _tileMap;
     delete _popUps;
+    delete _audio;
 
-    for (size_t i = 0; i < _enemigos.size(); i++)
+    for (size_t i = 0; i < _enemigos.size(); i++) // delete enemigos
     {
         delete _enemigos[i];
     }
+
 }
 
 /// --------------------- ACTUALIZACIONES --------------------------
@@ -205,6 +249,7 @@ void EstadoJuego::actualizarInput(const float& DT)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("CLOSE")))  && getPpsTeclas())
     {
+        _audio->playSonido("BOTON_CLICK");
         (!_pausa)
             ? pausarEstado()
             : reanudarEstado();
@@ -230,8 +275,10 @@ void EstadoJuego::actualizarInputJugador(const float& DT)
 
 void EstadoJuego::actualizarBotonesPausa()
 {
-    if(_menuPausa->getClick("SALIR"))
+    if (_menuPausa->getClick("SALIR"))
+    {
         finEstado();
+    }
 }
 
 void EstadoJuego::actualizarTileMap(const float& DT)
@@ -261,8 +308,8 @@ void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const f
                         enemigo->perderVida(dmg);
                         enemigo->resetTimerDmg();
                         _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
-                        _audio.playJ("HIT_ESPADA");
-                        enemigo->getSonido().play("RECIBIR_DMG");
+
+                        enemigo->getSonido().play("DMG");
                     }
 
                 }

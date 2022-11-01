@@ -3,20 +3,18 @@
 class Audio
 {
 	private:
-		sf::Music _musicaJuego;
-		sf::Sound _sonidoJugador;
-		sf::Sound _sonidoEnemigo;
-		std::map<std::string, sf::SoundBuffer> _bufferSonido;
-		std::map<std::string, sf::Sound> _musica;
+		sf::Music _musica;
+		sf::Sound _sonido;
+		std::map<std::string, sf::SoundBuffer>& _bufferSonido;
+		
 
 	public:
-		Audio();
+		Audio(const std::string ruta_musica, std::map<std::string, sf::SoundBuffer>& buffers_sonido);
 		~Audio();
 
 		void playMusica();
-		void playE(const std::string nombre_sonido);
-		void playJ(const std::string nombre_sonido);
-
+		void stopMusica();
+		void playSonido(const std::string nombre_sonido);
 };
 
 #endif

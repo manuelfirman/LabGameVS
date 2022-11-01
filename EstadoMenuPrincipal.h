@@ -11,10 +11,14 @@ class EstadoMenuPrincipal : public EstadoBase
 private: // Atributos
     sf::Texture _texturaFondoMenu;
     sf::RectangleShape _fondoMenu;
+    sf::Text _tituloMenu;
+    sf::Text _subtituloMenu;
     sf::Font _fuenteMenu;
     sf::Font _fuenteBoton;
-
+    bool _resetMenu;
     std::map<std::string, gui::Boton*> _boton;
+
+    Audio* _audio;
 
 private: // Metodos
     void iniciarVariables();
@@ -22,6 +26,8 @@ private: // Metodos
     void iniciarFuentes();
     void iniciarGUI();
     void resetGUI();
+    void iniciarSonidos();
+    void iniciarAudio();
 
 public:
     EstadoMenuPrincipal(DatosEstado* datos_estado);

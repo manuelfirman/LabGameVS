@@ -27,6 +27,7 @@ Jugador::Jugador(float x, float y, sf::Texture& textura)
     crearComponenteMovimiento(150.f, 1700.f, 1000.f);   // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
     crearComponenteAtributos(0);                        // Atributos
+    //crearComponenteSonidos();
 
     // key - Velocidad animacion - inicioX - inicioY - framesX - framesY
     _animacion->agregarAnimacion("QUIETO", 10.f, 1, 10, 1, 10, 64, 64);         // Quieto
@@ -39,7 +40,6 @@ Jugador::Jugador(float x, float y, sf::Texture& textura)
     _animacion->agregarAnimacion("ATAQUE_MAGICO", 5.f, 0, 5, 6, 5, 64, 64);
     _animacion->agregarAnimacion("ATAQUE_ABAJO", 10.f, 1, 14, 5, 14, 64, 64);
     _animacion->agregarAnimacion("ATAQUE_X", 10.f, 1, 13, 5, 13, 64, 64);
-
 
 }
 

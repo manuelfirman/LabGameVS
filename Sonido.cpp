@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Sonido.h"
 
-Sonido::Sonido()
+Sonido::Sonido(std::map<std::string, sf::SoundBuffer>& sonidos, std::string prefijo) : _buffer(sonidos)
 {
-
+	_prefijo = prefijo;
 }
 
 Sonido::~Sonido()
@@ -11,15 +11,13 @@ Sonido::~Sonido()
 
 }
 
-void Sonido::agregarSonido(std::string nombre_sonido, std::string ruta_sonido)
+void Sonido::play(std::string tipo_sonido)
 {
-	_buffer[nombre_sonido].loadFromFile(ruta_sonido);
-}
+	std::string NombreSonido = _prefijo + "_" + tipo_sonido;
 
+	//std::cout<<"debug sonido: " << NombreSonido << std::endl;
 
-void Sonido::play(std::string nombre_sonido)
-{
 	_sonido.resetBuffer();
-	_sonido.setBuffer(_buffer[nombre_sonido]);
+	_sonido.setBuffer(_buffer[NombreSonido]);
 	_sonido.play();
 }

@@ -55,12 +55,12 @@ gui::Boton::Boton(float posX, float posY, float ancho, float alto, std::string t
     _boton.setOutlineThickness(1.f);
     _boton.setOutlineColor(colorExteriorInactivo);
 
-    _texto.setPosition(
-        _boton.getPosition().x + (_boton.getGlobalBounds().width / 2.f) - _texto.getGlobalBounds().width / 2.f, _boton.getPosition().y);
+    //_texto.setPosition(
+    //    _boton.getPosition().x + (_boton.getGlobalBounds().width / 2.f) - _texto.getGlobalBounds().width / 2.f, _boton.getPosition().y + (_boton.getGlobalBounds().height / 2.f) - _texto.getGlobalBounds().height);
     
-   /* _texto.setPosition(
+    _texto.setPosition(
         _boton.getPosition().x + (_boton.getGlobalBounds().width / 2.f) - _texto.getGlobalBounds().width / 2.f,
-        _boton.getPosition().y + (_boton.getGlobalBounds().height / 2.f) - _texto.getGlobalBounds().height);*/
+        _boton.getPosition().y + (_boton.getGlobalBounds().height / 2.f) - _texto.getGlobalBounds().height);
 }
 
 gui::Boton::~Boton()

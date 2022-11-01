@@ -16,7 +16,6 @@
 #include "Demon.h"
 
 #include "TextoInfo.h"
-#include "Audio.h"
 
 
 class EstadoJuego : public EstadoBase
@@ -45,9 +44,10 @@ private: // Atributos
     ManagerEnemigos* _managerEnemigos;
     std::vector<Enemigos*> _enemigos;
 
+    // Texto
     TextoInfo* _popUps;
 
-    Audio _audio;
+    Audio* _audio;
 
 private: // Metodos
     void renderizadoDiferido();
@@ -55,6 +55,8 @@ private: // Metodos
     void iniciarFuentes();
     void iniciarKeybinds();
     void iniciarTexturas();
+    void iniciarSonidos();
+    void iniciarAudio();
     void iniciarMenuPausa();
     void iniciarSombras();
     void iniciarJugadores();

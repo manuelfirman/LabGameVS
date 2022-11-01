@@ -23,10 +23,13 @@ void EstadoOpciones::iniciarKeybinds()
     archivo.close();
 }
 
-//void EstadoOpciones::iniciarFondo()
-//{
+void EstadoOpciones::iniciarAudio()
+{
+    if (!_bufferSonidos["BOTON_CLICK"].loadFromFile("recursos/sonido/efectos/boton_click.wav"))
+        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_click.wav" << std::endl;
 
-//}
+    _audio = new Audio("recursos/sonido/musica/musica_menu.wav", _bufferSonidos);
+}
 
 void EstadoOpciones::iniciarFuentes()
 {
@@ -43,7 +46,7 @@ void EstadoOpciones::iniciarGUI()
     const sf::VideoMode& modo_video = _datosEstado->opcionesGraficas->_resolucion;
 
     if (!_texturaFondoOpciones.loadFromFile("recursos/img/fondos/dark_background.png"))
-        std::cout << "ERROR:iniciarFondo_EstadoMenuPrincipal_CargarTexturaMenu" << std::endl;
+        std::cout << "ERROR::ESTADOOPCIONES::NO SE PUDO CARGAR EL FONDO: 'recursos/img/fondos/dark_background.png'" << std::endl;
 
     _fondoOpciones.setSize(sf::Vector2f(static_cast<float>(modo_video.width), static_cast<float>(modo_video.height)));
     _fondoOpciones.setTexture(&_texturaFondoOpciones);
@@ -106,6 +109,7 @@ EstadoOpciones::EstadoOpciones(DatosEstado* datos_estado)
     iniciarFuentes();
     iniciarKeybinds();
     iniciarGUI();
+    iniciarAudio();
 }
 
 EstadoOpciones::~EstadoOpciones()
@@ -120,7 +124,7 @@ EstadoOpciones::~EstadoOpciones()
         delete listas->second;
     }
 
-
+    delete _audio;
 }
 
 
@@ -140,11 +144,14 @@ void EstadoOpciones::actualizarGUI(const float& DT)
     }
 
     if (_boton["VOLVER"]->getClick())
+    {
         finEstado();
+    }
     
     if (_boton["APLICAR"]->getClick())
     {
-    
+        _audio->playSonido("BOTON_CLICK");
+
         _datosEstado->opcionesGraficas->_resolucion = _modoVideo[_listasDesplegables["RESOLUCION"]->getIDelementoAtivo()];
 
         _ventana->create(_datosEstado->opcionesGraficas->_resolucion, _datosEstado->opcionesGraficas->_titulo, sf::Style::Default);

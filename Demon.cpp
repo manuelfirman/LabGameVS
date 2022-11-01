@@ -28,14 +28,15 @@ void Demon::iniciarGUI()
     _barraHP.setPosition(_sprite.getPosition().x - _barraHP.getSize().x / 1.3f, _sprite.getPosition().y);
 }
 
-Demon::Demon(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner, Entidades& jugador) : Enemigos(tile_spawner)
+Demon::Demon(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, SpawnerEnemigos& tile_spawner, Entidades& jugador) : Enemigos(tile_spawner)
 {
     this->iniciarVariables();
 
-    crearHitbox(_sprite, -38.f, 9.f, 28.f, 40.f);        // Hitbox
-    crearComponenteMovimiento(80.f, 1700.f, 1000.f);   // Movimiento
+    crearHitbox(_sprite, -38.f, 9.f, 28.f, 40.f);       // Hitbox
+    crearComponenteMovimiento(80.f, 1700.f, 1000.f);    // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
     crearComponenteAtributos(1);                        // Atributos
+    crearComponenteSonidos(sonidos, "DEMON");           // Sonidos
     setPosicion(x, y);                                  // Posicion
     this->iniciarAnimaciones();                         // Animaciones
     this->iniciarGUI();                                 // GUI
