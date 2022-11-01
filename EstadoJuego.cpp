@@ -120,6 +120,8 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado)
     this->iniciarPopUps();
 
 
+
+    _audio.playMusica();
 }
 
 EstadoJuego::~EstadoJuego()
@@ -141,13 +143,13 @@ EstadoJuego::~EstadoJuego()
 
 void EstadoJuego::actualizarVistaCam(const float& DT)
 {
-    // Jugador centrado
-    //_vistaCam.setCenter(std::floor(_jugador->getPosicionSprite().x), std::floor(_jugador->getPosicionSprite().y)); // floor para estabilizar el float en pixels 
+     //Jugador centrado
+    _vistaCam.setCenter(std::floor(_jugador->getPosicionSprite().x), std::floor(_jugador->getPosicionSprite().y)); // floor para estabilizar el float en pixels 
 
     // Jugador centrado + movimiento de mouse
-    _vistaCam.setCenter(
+    /*_vistaCam.setCenter(
         std::floor(_jugador->getPosicionSprite().x + (static_cast<float>(_posMouseVentana.x)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.width / 2) / 10.f)),
-        std::floor(_jugador->getPosicionSprite().y + (static_cast<float>(_posMouseVentana.y)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height / 2) / 10.f))); // floor para estabilizar el float en pixels 
+        std::floor(_jugador->getPosicionSprite().y + (static_cast<float>(_posMouseVentana.y)) - (static_cast<float>(_datosEstado->opcionesGraficas->_resolucion.height / 2) / 10.f)));*/ // floor para estabilizar el float en pixels 
 
         //std::cout << _tileMap->getTamanioMax().x << " " << _vistaCam.getSize().x << "\n";
 
@@ -260,7 +262,7 @@ void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const f
                         enemigo->resetTimerDmg();
                         _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
                         _audio.playJ("HIT_ESPADA");
-                        _audio.playE("DMG_ENEMIGO");
+                        enemigo->getSonido().play("RECIBIR_DMG");
                     }
 
                 }
@@ -298,17 +300,17 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
                 _jugador->perderHP(dmg);
                 enemigo->resetTimerAtaque();
                 _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, _jugador->getCentro().x, _jugador->getCentro().y, "-", dmg, "hp");
-                _audio.playJ("DMG_JUGADOR");
+                enemigo->getSonido().play("ATACAR");
             }
         }
 
         // TODO: buscar otra forma / consultar si no es peligrosa para la memoria 
         if (!enemigo->estaVivo())
         {
+            enemigo->getSonido().play("MORIR");
             _jugador->ganarExperiencia(enemigo->getExperiencia());
             _popUps->agregarPopUp(tipo_popUp::POP_EXPERIENCIA, _jugador->getCentro().x, _jugador->getCentro().y, "+", static_cast<int>(enemigo->getExperiencia()), "exp");
             _managerEnemigos->eliminarEnemigo(indice);
-            
             --indice;
         }
         

@@ -38,6 +38,7 @@ protected: // Atributos
     std::map<std::string, int>* _teclasSoportadas;
     std::map<std::string, int> _keybinds;
     std::map<std::string, sf::Texture> _texturas;
+    std::map<std::string, sf::SoundBuffer> _sonidos;
         
     float _tamanioCuadro;
 

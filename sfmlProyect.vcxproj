@@ -185,6 +185,7 @@
     <ClCompile Include="OpcionesGraficas.cpp" />
     <ClCompile Include="Proyectil.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Sonido.cpp" />
     <ClCompile Include="SpawnerEnemigos.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -230,6 +231,7 @@
     <ClInclude Include="OpcionesGraficas.h" />
     <ClInclude Include="Proyectil.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="Sonido.h" />
     <ClInclude Include="SpawnerEnemigos.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TextoInfo.h" />

@@ -28,17 +28,25 @@ void Bat::iniciarGUI()
     _barraHP.setPosition(_sprite.getPosition().x - _barraHP.getSize().x / 1.3f, _sprite.getPosition().y);
 }
 
+void Bat::iniciarSonidos()
+{
+    _sonido.agregarSonido("ATACAR", "recursos/sonido/enemigos/bat_attack.wav");
+    _sonido.agregarSonido("RECIBIR_DMG", "recursos/sonido/enemigos/bat_dmg.wav");
+    _sonido.agregarSonido("MORIR", "recursos/sonido/enemigos/bat_die.wav");
+}
+
 Bat::Bat(float x, float y, sf::Texture& textura, SpawnerEnemigos& tile_spawner, Entidades& jugador) : Enemigos(tile_spawner)
 {
     this->iniciarVariables();
 
     crearHitbox(_sprite, -25.f, 0.f, 32.f, 32.f);        // Hitbox
-    crearComponenteMovimiento(80.f, 1700.f, 1000.f);   // Movimiento
+    crearComponenteMovimiento(80.f, 1700.f, 1000.f);    // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
     crearComponenteAtributos(1);                        // Atributos
     setPosicion(x, y);                                  // Posicion
     this->iniciarAnimaciones();                         // Animaciones
     this->iniciarGUI();                                 // GUI
+    this->iniciarSonidos();
 
     _inteligenciaArtificial = new IA(jugador, *this);
 }

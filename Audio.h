@@ -3,6 +3,7 @@
 class Audio
 {
 	private:
+		sf::Music _musicaJuego;
 		sf::Sound _sonidoJugador;
 		sf::Sound _sonidoEnemigo;
 		std::map<std::string, sf::SoundBuffer> _bufferSonido;
@@ -12,6 +13,7 @@ class Audio
 		Audio();
 		~Audio();
 
+		void playMusica();
 		void playE(const std::string nombre_sonido);
 		void playJ(const std::string nombre_sonido);
 

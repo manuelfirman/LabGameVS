@@ -38,11 +38,11 @@ void EstadoMenuPrincipal::iniciarGUI()
 {
     const sf::VideoMode& modo_video = _datosEstado->opcionesGraficas->_resolucion;
 
-    if (!_texturaFondoMenu.loadFromFile("recursos/img/fondos/dark_background.png"))
-        std::cout << "ERROR:iniciarFondo_EstadoMenuPrincipal_CargarTexturaMenu" << std::endl;
+    if(!_texturas["FONDO_MENU"].loadFromFile("recursos/img/fondos/dark_background.png"))
+        std::cout << "ERROR::MENUPRINCIPAL::NO SE PUDO CARGAR EL FONDO: 'recursos/img/fondos/dark_background.png'" << std::endl;
 
     _fondoMenu.setSize(sf::Vector2f(static_cast<float>(modo_video.width), static_cast<float>(modo_video.height)));
-    _fondoMenu.setTexture(&_texturaFondoMenu);
+    _fondoMenu.setTexture(&_texturas["FONDO_MENU"]);
 
     //float posX = _ventana->getSize().x / 2.f - 100;
     sf::Color colorInactivo = sf::Color(250, 250, 250, 0);

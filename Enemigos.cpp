@@ -15,6 +15,11 @@ void Enemigos::iniciarAnimaciones()
 
 }
 
+void Enemigos::iniciarSonidos()
+{
+
+}
+
 Enemigos::Enemigos(SpawnerEnemigos& tile_spawner) : _spawner(tile_spawner)
 {
 	this->iniciarVariables();
@@ -103,4 +108,9 @@ const Atributos* Enemigos::getAtributos() const
 		std::cout << "ERROR::ENEMIGOS::NO SE PUDO INICIALIZAR EL COMPONENTE DE ATRIBUTOS" << std::endl;
 		return nullptr;
 	}
+}
+
+Sonido& Enemigos::getSonido()
+{
+	return _sonido;
 }

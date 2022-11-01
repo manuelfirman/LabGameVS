@@ -3,15 +3,18 @@
 
 #include "Entidades.h"
 #include "SpawnerEnemigos.h"
+#include "Sonido.h"
 
 class Enemigos : public Entidades
 {
 	private:
 		virtual void iniciarVariables();
 		virtual void iniciarAnimaciones();
+		virtual void iniciarSonidos();
 
 	protected:
 		SpawnerEnemigos& _spawner;
+		Sonido _sonido;
 		sf::Clock _timerDmg;
 		sf::Int32 _timerDmgMax;
 		sf::Clock _timerAtaque;
@@ -27,7 +30,6 @@ class Enemigos : public Entidades
 
 		const unsigned& getRango() const;
 
-		
 
 		void resetTimerAtaque();
 		const bool& getAtaqueTerminado() const;
@@ -41,6 +43,7 @@ class Enemigos : public Entidades
 		virtual const bool estaVivo() const;
 		virtual void perderVida(const int hp);
 		virtual const Atributos* getAtributos() const;
+		virtual Sonido& getSonido();
 
 		virtual void actualizarAnimacion(const float& DT) = 0;
 		virtual void actualizar(const float& DT, sf::Vector2f& posMouseVista) = 0;
