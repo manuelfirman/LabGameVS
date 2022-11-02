@@ -54,6 +54,11 @@ void Entidades::crearComponenteAtributos(const int nivel)
     _atributos = new Atributos(nivel);
 }
 
+void Entidades::crearComponenteAtributos(int nivel, int experiencia, int hp, int vitalidad, int fuerza, int agilidad, int destreza, int inteligencia)
+{
+    _atributos = new Atributos(nivel, experiencia, hp, vitalidad, fuerza, agilidad, destreza, inteligencia);
+}
+
 void Entidades::crearComponenteSonidos(std::map<std::string, sf::SoundBuffer>& sonidos, std::string prefijo)
 {
     _sonido = new Sonido(sonidos, prefijo);

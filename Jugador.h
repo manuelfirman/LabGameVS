@@ -12,6 +12,8 @@ class Jugador : public Entidades
 private: // Atributos
     bool _iniciaAtaque;
     bool _atacando;
+    bool _iniciaTwist;
+    bool _twisteando;
     bool _tiraskill;
     Espada* _espada;
     std::vector<Proyectil> _skill;
@@ -24,15 +26,17 @@ private: // Metodos
 
 
 public:
-    Jugador(float x, float y, sf::Texture& textura);
+    Jugador(float x, float y, sf::Texture& textura, bool cargar = false, Atributos atributos = NULL);
     ~Jugador();
 
     Atributos* getAtributos();
     Armas* getArma() const;
     const bool& getIniciaAtaque();
+    const bool& getInicioTwist();
 
     // Setters
     void setInicioAtaque(const bool inicio_ataque);
+    void setInicioTwist(const bool inicio_twist);
 
     void ganarHP(const int hp);
     void perderHP(const int hp);

@@ -19,6 +19,45 @@ Espada::~Espada()
 
 }
 
+void Espada::animacionAtaque(const sf::Vector2f& posMouseVista, const sf::Vector2f centro, const bool twistear)
+{
+	_spriteArma.setPosition(centro);
+	float dX = posMouseVista.x - _spriteArma.getPosition().x;
+	float dY = posMouseVista.y - _spriteArma.getPosition().y;
+
+	const float pi = 3.14159265f;
+	float deg = atan2(dY, dX) * 180.f / pi;
+
+	if (twistear)
+	{
+
+		if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
+		{
+			_spriteArma.rotate(15.f);
+		}
+		else
+		{
+			_spriteArma.setRotation(deg);
+		}
+	}
+	else
+	{
+		//Con vector normalizado
+		if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
+		{
+			float longitud = std::sqrt(pow(dX, 2) + pow(dY, 2));
+			sf::Vector2f vectNorm((dX / longitud), (dY / longitud));
+
+
+			_spriteArma.setPosition(centro.x + vectNorm.x * 13.f, centro.y + vectNorm.y * 13.f);
+		}
+		else
+		{
+			_spriteArma.setRotation(deg);
+		}
+	}
+}
+
 void Espada::actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f centro)
 {
 	// ARMA QUE SIGUE LA POSICION DEL MOUSE
@@ -28,30 +67,21 @@ void Espada::actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f ce
 
 	const float pi = 3.14159265f;
 	float deg = atan2(dY,dX) * 180.f / pi;
-
-	// Con vector normalizado
-	//if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
-	//{
-	//	float longitud = std::sqrt(pow(dX, 2) + pow(dY, 2));
-	//	sf::Vector2f vectNorm((dX / longitud), (dY / longitud));
-
-
-	//	_spriteArma.setPosition(centro.x + vectNorm.x * 13.f, centro.y + vectNorm.y * 13.f);
-	//}
-	//else
-	//{
-	//	_spriteArma.setRotation(deg);
-	//}
-
-	// Con rotacion
 	if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
 	{
-		_spriteArma.rotate(15.f);
+		float longitud = std::sqrt(pow(dX, 2) + pow(dY, 2));
+		sf::Vector2f vectNorm((dX / longitud), (dY / longitud));
+
+
+		_spriteArma.setPosition(centro.x + vectNorm.x * 13.f, centro.y + vectNorm.y * 13.f);
 	}
 	else
 	{
 		_spriteArma.setRotation(deg);
 	}
+	
+
+
 }
 
 void Espada::renderizar(sf::RenderTarget& target, sf::Shader* sombra)

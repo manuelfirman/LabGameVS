@@ -21,13 +21,9 @@ class EstadoOpciones : public EstadoBase
 
         std::map<std::string, gui::ListaDesplegable*> _listasDesplegables;
 
-        Audio* _audio;
-
-
     private: // Metodos
         void iniciarVariables();
         void iniciarKeybinds();
-        void iniciarAudio();
         void iniciarFuentes();
         void iniciarGUI();
         void resetGUI();

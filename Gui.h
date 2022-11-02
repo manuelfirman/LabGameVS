@@ -73,7 +73,7 @@ namespace gui
 
 
         public:
-            ListaDesplegable(float x, float y, float ancho, float alto, sf::Font& fuente, std::string lista[], int num_elementos, int index_defecto = 0);
+            ListaDesplegable(float x, float y, float ancho, float alto, sf::Font& fuente, unsigned tam_letra, std::string lista[], int num_elementos, int index_defecto = 0);
             ~ListaDesplegable();
 
             const int& getIDelementoAtivo() const;

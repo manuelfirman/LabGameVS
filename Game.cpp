@@ -15,11 +15,13 @@ void Game::iniciarOpcionesGraficas()
 
 void Game::iniciarDatosEstado()
 {
+    _datosEstado.tamanioCuadro = _tamanioCuadro;
     _datosEstado.ventana = _ventana;
     _datosEstado.opcionesGraficas = &_opcionesGraficas;
     _datosEstado.teclasSoportadas = &_teclasSoportadas;
     _datosEstado.estado = &_estado;
-    _datosEstado.tamanioCuadro = _tamanioCuadro;
+    _datosEstado.audio = _audio;
+    _datosEstado.bufferSonidos = &_bufferSonidos;
 }
 
 void Game::iniciarVentana()
@@ -57,6 +59,16 @@ void Game::iniciarTeclas()
     //}
 }
 
+void Game::iniciarAudio()
+{
+    if (!_bufferSonidos["BOTON_CLICK"].loadFromFile("recursos/sonido/efectos/boton_click.wav"))
+        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_click.wav" << std::endl;
+    if (!_bufferSonidos["BOTON_ATRAS"].loadFromFile("recursos/sonido/efectos/boton_atras.wav"))
+        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_atras.wav" << std::endl;
+
+    _audio = new Audio("recursos/sonido/musica/musica_menu.wav", _bufferSonidos);
+}
+
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 Game::Game()
 {
@@ -64,6 +76,7 @@ Game::Game()
     this->iniciarOpcionesGraficas();
     this->iniciarVentana();
     this->iniciarTeclas();
+    this->iniciarAudio();
     this->iniciarDatosEstado();
     this->iniciarEstados();
 }
@@ -71,6 +84,7 @@ Game::Game()
 Game::~Game()
 {
     delete _ventana;
+    delete _audio;
     while (!_estado.empty()) {   // al ser memoria dinamica
         delete _estado.top(); // 1) se elimina el contenido del puntero
         _estado.pop();       // 2) se elimina el puntero

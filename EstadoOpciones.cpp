@@ -23,21 +23,10 @@ void EstadoOpciones::iniciarKeybinds()
     archivo.close();
 }
 
-void EstadoOpciones::iniciarAudio()
-{
-    if (!_bufferSonidos["BOTON_CLICK"].loadFromFile("recursos/sonido/efectos/boton_click.wav"))
-        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_click.wav" << std::endl;
-
-    _audio = new Audio("recursos/sonido/musica/musica_menu.wav", _bufferSonidos);
-}
-
 void EstadoOpciones::iniciarFuentes()
 {
-    if (!_fuenteOpciones.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
+    if (!_fuenteOpciones.loadFromFile("recursos/fuentes/Dosis.ttf")) {
         std::cout << "ERROR:CargarFuente_MenuPrincipal" << std::endl;
-    }
-    if (!_fuenteBoton.loadFromFile("recursos/fuentes/Bungee-Regular.ttf")) {
-        std::cout << "ERROR:CargarFuente_MenuPrincipal_Botones" << std::endl;
     }
 }
 
@@ -56,14 +45,14 @@ void EstadoOpciones::iniciarGUI()
     sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
     sf::Color colorActivo = sf::Color(189, 236, 182, 155);
     sf::Color colorHover = sf::Color(208, 208, 208, 155);
-    sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
+    sf::Color colorTextoInactivo = sf::Color(255, 255, 255, 200);
     sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
     sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
   
 
-    _boton["VOLVER"] = new gui::Boton(gui::p2pX(5.2f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "VOLVER", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["VOLVER"] = new gui::Boton(gui::p2pX(5.2f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "VOLVER", gui::calcTamCaracter(modo_video), _fuenteOpciones, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["APLICAR"] = new gui::Boton(gui::p2pX(20.8f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "APLICAR", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["APLICAR"] = new gui::Boton(gui::p2pX(20.8f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "APLICAR", gui::calcTamCaracter(modo_video), _fuenteOpciones, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
 
     std::vector<std::string> modos_str;
@@ -72,12 +61,12 @@ void EstadoOpciones::iniciarGUI()
         modos_str.push_back(std::to_string(modos.width) + 'x' + std::to_string(modos.height));
     }
 
-    _listasDesplegables["RESOLUCION"] = new gui::ListaDesplegable(gui::p2pX(41.6f, modo_video), gui::p2pY(37.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), _fuenteBoton, modos_str.data(), int(modos_str.size()));
+    _listasDesplegables["RESOLUCION"] = new gui::ListaDesplegable(gui::p2pX(41.6f, modo_video), gui::p2pY(37.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), _fuenteOpciones, gui::calcTamCaracter(modo_video), modos_str.data(), int(modos_str.size()));
 
     // Texto
     _textoOpciones.setFont(_fuenteOpciones);
     _textoOpciones.setPosition(sf::Vector2f(gui::p2pX(5.2f, modo_video), gui::p2pY(9.2f, modo_video)));
-    _textoOpciones.setCharacterSize(gui::calcTamCaracter(modo_video));
+    _textoOpciones.setCharacterSize(gui::calcTamCaracter(modo_video, 50));
     _textoOpciones.setFillColor(sf::Color(255, 255, 255, 200));
     _textoOpciones.setString("AJUSTES DE PANTALLA");
 
@@ -109,7 +98,6 @@ EstadoOpciones::EstadoOpciones(DatosEstado* datos_estado)
     iniciarFuentes();
     iniciarKeybinds();
     iniciarGUI();
-    iniciarAudio();
 }
 
 EstadoOpciones::~EstadoOpciones()
@@ -123,8 +111,6 @@ EstadoOpciones::~EstadoOpciones()
     for (listas = _listasDesplegables.begin(); listas != _listasDesplegables.end(); ++listas) {
         delete listas->second;
     }
-
-    delete _audio;
 }
 
 
@@ -142,15 +128,10 @@ void EstadoOpciones::actualizarGUI(const float& DT)
     for (auto& botones : _boton) { 
         botones.second->actualizar(_posMouseVentana);
     }
-
-    if (_boton["VOLVER"]->getClick())
-    {
-        finEstado();
-    }
     
-    if (_boton["APLICAR"]->getClick())
+    if (_boton["APLICAR"]->getClick() && getPpsTeclas())
     {
-        _audio->playSonido("BOTON_CLICK");
+        _datosEstado->audio->playSonido("BOTON_CLICK");
 
         _datosEstado->opcionesGraficas->_resolucion = _modoVideo[_listasDesplegables["RESOLUCION"]->getIDelementoAtivo()];
 
@@ -158,7 +139,12 @@ void EstadoOpciones::actualizarGUI(const float& DT)
 
         this->resetGUI();
     }
-        
+
+    if (_boton["VOLVER"]->getClick() && getPpsTeclas())
+    {
+        _datosEstado->audio->playSonido("BOTON_ATRAS");
+        finEstado();
+    }
 
 
     // LISTAS DESPLEGABLES --------------------------
@@ -170,6 +156,7 @@ void EstadoOpciones::actualizarGUI(const float& DT)
 
 void EstadoOpciones::actualizar(const float& DT)
 {
+    actualizarPpsTeclas(DT);
     actualizarPosicionMouse();
     actualizarInput(DT);
     actualizarGUI(DT);

@@ -33,6 +33,7 @@ public:
     void crearComponenteMovimiento(float velocidadMaxima, float aceleracion, float desaceleracion);
     void crearComponenteAnimacion(sf::Texture& textura);
     void crearComponenteAtributos(const int nivel);
+    void crearComponenteAtributos(int nivel, int experiencia, int hp, int vitalidad, int fuerza, int agilidad, int destreza, int inteligencia);
     void crearComponenteSonidos(std::map<std::string, sf::SoundBuffer>& sonidos, std::string prefijo);
 
     // Getters

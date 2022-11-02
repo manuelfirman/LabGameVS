@@ -14,6 +14,8 @@ class DatosEstado
         OpcionesGraficas* opcionesGraficas;
         std::map<std::string, int>* teclasSoportadas;
         std::stack<EstadoBase*>* estado;
+        Audio* audio;
+        std::map<std::string, sf::SoundBuffer>* bufferSonidos;
 
         DatosEstado()
         {
@@ -22,6 +24,8 @@ class DatosEstado
             opcionesGraficas = NULL;
             teclasSoportadas = NULL;
             estado = NULL;
+            audio = NULL;
+            bufferSonidos = NULL;
         };
 };
 
@@ -39,14 +43,13 @@ protected: // Atributos
     std::map<std::string, int>* _teclasSoportadas;
     std::map<std::string, int> _keybinds;
     std::map<std::string, sf::Texture> _texturas;
-    std::map<std::string, sf::SoundBuffer> _bufferSonidos;
+    std::map<std::string, sf::SoundBuffer>* _bufferSonidos;
         
         
     float _tamanioCuadro;
 
     bool _salir;
     bool _pausa;
-    bool _clickBoton;
 
     // Control de ingresos de teclado por segundo
     float _ppsTeclas;

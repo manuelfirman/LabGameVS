@@ -177,14 +177,14 @@ void gui::Boton::renderizar(sf::RenderTarget& target)
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /// --------------------------------- CONSTRUCTOR/DESTRUCTOR ----------------------------------------
-gui::ListaDesplegable::ListaDesplegable(float x, float y, float ancho, float alto, sf::Font& fuente, std::string lista[], int num_elementos, int index_defecto)
+gui::ListaDesplegable::ListaDesplegable(float x, float y, float ancho, float alto, sf::Font& fuente, unsigned tam_letra, std::string lista[], int num_elementos, int index_defecto)
     : _fuenteLista(fuente), mostrarLista(false), _ppsTeclasMax(1.f), _ppsTeclas(0.f)
 {
     sf::Color colorInactivo = sf::Color(20, 20, 20, 150);
     sf::Color colorActivo = sf::Color(20, 20, 20, 50);
     sf::Color colorHover = sf::Color(70, 70, 70, 200);
     
-    sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
+    sf::Color colorTextoInactivo = sf::Color(255, 255, 255, 200);
     sf::Color colorTextoHover = sf::Color(255, 0, 0, 255);
     sf::Color colorTextoActivo = sf::Color(255, 0, 0, 200);
 
@@ -193,11 +193,11 @@ gui::ListaDesplegable::ListaDesplegable(float x, float y, float ancho, float alt
     sf::Color colorExteriorActivo = sf::Color(255, 255, 255, 250);
     //unsigned numElementos = sizeof(lista) / sizeof(std::string)
 
-    _elementoActivo = new gui::Boton(x, y, ancho, alto, lista[index_defecto], 12, _fuenteLista, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo, colorExteriorInactivo, colorExteriorHover, colorExteriorActivo);
+    _elementoActivo = new gui::Boton(x, y, ancho, alto, lista[index_defecto], tam_letra, _fuenteLista, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo, colorExteriorInactivo, colorExteriorHover, colorExteriorActivo);
 
     for (int i = 0; i < num_elementos; i++) {
         
-        _lista.push_back(new gui::Boton(x, y + ((i+1) * alto), ancho, alto, lista[i], 8, _fuenteLista, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo, colorExteriorInactivo, colorExteriorHover, colorExteriorActivo, i));
+        _lista.push_back(new gui::Boton(x, y + ((i+1) * alto), ancho, alto, lista[i], tam_letra, _fuenteLista, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo, colorExteriorInactivo, colorExteriorHover, colorExteriorActivo, i));
 
     }
 

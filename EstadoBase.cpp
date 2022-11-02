@@ -12,7 +12,6 @@ EstadoBase::EstadoBase(DatosEstado* datos_estado)
     _ppsTeclas = 0.f;
     _ppsTeclasMax = 10.f;
     _tamanioCuadro = datos_estado->tamanioCuadro;
-    _clickBoton = false;
 }
 
 EstadoBase::~EstadoBase()

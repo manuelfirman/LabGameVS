@@ -30,8 +30,6 @@ class EstadoEditor : public EstadoBase
         std::vector<Modo_Editor*> _vModo;
         unsigned _modoEditor;
 
-        Audio* _audio;
-
     private: // Metodos
         void iniciarModos();
 
@@ -42,7 +40,6 @@ class EstadoEditor : public EstadoBase
         void iniciarKeybinds();
         void iniciarFondo();
         void iniciarFuentes();
-        void iniciarAudio();
         void iniciarMenuPausa();
         void iniciarBotones();
         void iniciarTileMap();

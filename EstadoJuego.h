@@ -2,6 +2,7 @@
 #define ESTADOJUEGO_H
 
 #include "EstadoBase.h"
+#include "EstadoOpciones.h"
 #include "MenuPausa.h"
 
 #include "Jugador.h"
@@ -47,9 +48,16 @@ private: // Atributos
     // Texto
     TextoInfo* _popUps;
 
+    // Audio
     Audio* _audio;
+    std::map<std::string, sf::SoundBuffer> _bufferSonidosJ;
+
+    // 
+    bool _botonesPausa;
+    bool _resetVentana;
 
 private: // Metodos
+    void iniciarVariables();
     void renderizadoDiferido();
     void iniciarVistaCam();
     void iniciarFuentes();
@@ -61,14 +69,18 @@ private: // Metodos
     void iniciarSombras();
     void iniciarJugadores();
     void iniciarGUIJugador();
+    void resetGUIJugador();
     void iniciarManagerEnemigos();
     void iniciarTileMap();
     void iniciarPopUps();
 
 public:
     EstadoJuego(DatosEstado* datos_estado);
+    EstadoJuego(DatosEstado* datos_estado, const std::string ruta_slot);
     ~EstadoJuego();
 
+    const bool guardarPartida(const std::string ruta_slot);
+    const bool cargarPartida(const std::string ruta_slot);
 
     void actualizarVistaCam(const float& DT);
     void actualizarInput(const float& DT);
@@ -77,7 +89,7 @@ public:
 
     void actualizarJugador(const float& DT);
     void actualizarEnemigos(const float& DT);
-    void actualizarAtaques(Enemigos* enemigo, const int indice, const float& DT);
+    void actualizarAtaques(Enemigos* enemigo, const int indice, const bool basico, const float& DT);
     void actualizarTileMap(const float& DT);
 
     void actualizar(const float& DT);

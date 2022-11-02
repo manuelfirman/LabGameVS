@@ -4,9 +4,9 @@
 void Enemigos::iniciarVariables()
 {
 	_experiencia = 5;
-	_timerDmgMax = 1000.f;
-	_timerAtaqueMax = 1000.f;
-	_rango = 20.f;
+	_timerDmgMax = 1000;
+	_timerAtaqueMax = 1000;
+	_rango = 20;
 }
 
 

@@ -63,14 +63,6 @@ void EstadoEditor::iniciarFuentes()
     }
 }
 
-void EstadoEditor::iniciarAudio()
-{
-    if (!_bufferSonidos["BOTON_CLICK"].loadFromFile("recursos/sonido/efectos/boton_click.wav"))
-        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_click.wav" << std::endl;
-    if (!_bufferSonidos["BOTON_ATRAS"].loadFromFile("recursos/sonido/efectos/boton_atras.wav"))
-        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_atras.wav" << std::endl;
-    _audio = new Audio("recursos/sonido/musica/musica_menu.wav", _bufferSonidos);
-}
 
 void EstadoEditor::iniciarMenuPausa()
 {
@@ -109,7 +101,6 @@ EstadoEditor::EstadoEditor(DatosEstado* datos_estado)
     this->iniciarKeybinds();
     this->iniciarFondo();
     this->iniciarFuentes();
-    this->iniciarAudio();
 
     this->iniciarMenuPausa();
     this->iniciarBotones();
@@ -129,7 +120,6 @@ EstadoEditor::~EstadoEditor()
 
     delete _menuPausa;
     delete _tileMap;
-    delete _audio;
 
     for (size_t i = 0; i < _vModo.size(); i++)
     {
@@ -143,10 +133,17 @@ void EstadoEditor::actualizarInput(const float& DT)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("CLOSE"))) && getPpsTeclas())
     {
-        _audio->playSonido("BOTON_CLICK");
 
-        if (!_pausa) pausarEstado();
-        else reanudarEstado();
+        if (!_pausa)
+        {
+            _datosEstado->audio->playSonido("BOTON_CLICK");
+            pausarEstado();
+        }
+        else
+        {
+            _datosEstado->audio->playSonido("BOTON_ATRAS");
+            reanudarEstado();
+        }
     }
 
 }
@@ -223,18 +220,21 @@ void EstadoEditor::actualizarBotonesMenuPausa()
 {
     if (_menuPausa->getClick("CARGAR"))
     {
-        _audio->playSonido("BOTON_CLICK");
+        _datosEstado->audio->playSonido("BOTON_CLICK");
         _tileMap->cargarDesdeArchivo("text.slmp");
     }
 
     if (_menuPausa->getClick("GUARDAR"))
     {
-        _audio->playSonido("BOTON_CLICK");
+        _datosEstado->audio->playSonido("BOTON_CLICK");
         _tileMap->guardarEnArchivo("text.slmp");
     }
 
     if (_menuPausa->getClick("SALIR"))
+    {
+        _datosEstado->audio->playSonido("BOTON_ATRAS");
         finEstado();
+    }
 }
 
 void EstadoEditor::actualizarModos(const float& DT)

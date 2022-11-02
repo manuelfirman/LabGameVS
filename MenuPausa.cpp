@@ -40,17 +40,30 @@ const bool MenuPausa::getClick(const std::string key)
 	return _botones[key]->getClick();
 }
 
-void MenuPausa::agregarBoton(const std::string key, const float y, const float ancho, const float alto, const unsigned tamCaracter, const std::string texto)
+void MenuPausa::agregarBoton(const std::string key, const float y, const float ancho, const float alto, const unsigned tamCaracter, const std::string texto, const bool gris)
 {
 	float x = _contenedor.getPosition().x + _contenedor.getSize().x / 2.f - ancho / 2.f;
-	sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
-	sf::Color colorActivo = sf::Color(189, 236, 182, 155);
-	sf::Color colorHover = sf::Color(208, 208, 208, 155);
-	sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
-	sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
-	sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
 
-	_botones[key] = new gui::Boton(x, y, ancho, alto, texto, tamCaracter, _fuentePausa, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+	if (gris)
+	{
+		sf::Color colorInactivo = sf::Color(156, 156, 156, 155);
+		sf::Color colorActivo = sf::Color(189, 236, 182, 155);
+		sf::Color colorHover = sf::Color(208, 208, 208, 155);
+		sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
+		sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
+		sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);	
+		_botones[key] = new gui::Boton(x, y, ancho, alto, texto, tamCaracter, _fuentePausa, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+	}
+	else
+	{
+		sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
+		sf::Color colorActivo = sf::Color(189, 236, 182, 155);
+		sf::Color colorHover = sf::Color(208, 208, 208, 155);
+		sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
+		sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
+		sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
+		_botones[key] = new gui::Boton(x, y, ancho, alto, texto, tamCaracter, _fuentePausa, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+	}
 }
 
 /// --------------------------------- ACTUALIZAR ----------------------------------------

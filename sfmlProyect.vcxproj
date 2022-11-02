@@ -159,6 +159,7 @@
     <ClCompile Include="Editor_Mapa.cpp" />
     <ClCompile Include="Editor_SpawnerEnemigos.cpp" />
     <ClCompile Include="Enemigos.cpp" />
+    <ClCompile Include="EstadoCargarPartida.cpp" />
     <ClCompile Include="IA.cpp" />
     <ClCompile Include="ManagerEnemigos.cpp" />
     <ClCompile Include="Modo_Editor.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Editor_Mapa.h" />
     <ClInclude Include="Editor_SpawnerEnemigos.h" />
     <ClInclude Include="Enemigos.h" />
+    <ClInclude Include="EstadoCargarPartida.h" />
     <ClInclude Include="IA.h" />
     <ClInclude Include="ManagerEnemigos.h" />
     <ClInclude Include="Modo_Editor.h" />

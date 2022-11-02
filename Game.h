@@ -6,17 +6,19 @@
 
 class Game {
 private: // Atributos
+	std::stack<EstadoBase*> _estado;
 	OpcionesGraficas _opcionesGraficas;
-	DatosEstado _datosEstado;
+	std::map<std::string, int> _teclasSoportadas;
 	sf::RenderWindow* _ventana; // memoria dinamica
+	Audio* _audio;
+	std::map<std::string, sf::SoundBuffer> _bufferSonidos;
+	DatosEstado _datosEstado;
 
 	sf::Event sfEvento;
 
 	sf::Clock relojDt;
 	float _DT;
 
-	std::stack<EstadoBase*> _estado;
-	std::map<std::string, int> _teclasSoportadas;
 
 	float _tamanioCuadro;
 
@@ -25,6 +27,7 @@ private: // Metodos
 	void iniciarOpcionesGraficas();
 	void iniciarVentana();
 	void iniciarTeclas();
+	void iniciarAudio();
 	void iniciarDatosEstado();
 	void iniciarEstados();
 

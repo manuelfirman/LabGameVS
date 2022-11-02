@@ -21,7 +21,7 @@ class MenuPausa
 		std::map<std::string, gui::Boton*>& getBoton();
 
 		const bool getClick(const std::string key);
-		void agregarBoton(const std::string clave, const float y, const float ancho, const float alto, const unsigned tamCaracter, const std::string texto);
+		void agregarBoton(const std::string key, const float y, const float ancho, const float alto, const unsigned tamCaracter, const std::string texto, const bool gris = false);
 		void actualizar(const sf::Vector2i& posMouseVentana);
 		void renderizar(sf::RenderTarget& target);
 };

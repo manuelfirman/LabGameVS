@@ -4,6 +4,7 @@
 #include "EstadoJuego.h"
 #include "EstadoEditor.h"
 #include "EstadoOpciones.h"
+#include "EstadoCargarPartida.h"
 #include "Gui.h"
 
 class EstadoMenuPrincipal : public EstadoBase
@@ -18,7 +19,6 @@ private: // Atributos
     bool _resetMenu;
     std::map<std::string, gui::Boton*> _boton;
 
-    Audio* _audio;
 
 private: // Metodos
     void iniciarVariables();
@@ -26,8 +26,6 @@ private: // Metodos
     void iniciarFuentes();
     void iniciarGUI();
     void resetGUI();
-    void iniciarSonidos();
-    void iniciarAudio();
 
 public:
     EstadoMenuPrincipal(DatosEstado* datos_estado);

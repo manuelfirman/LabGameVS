@@ -180,6 +180,9 @@
     <ClCompile Include="Audio.cpp">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
+    <ClCompile Include="EstadoCargarPartida.cpp">
+      <Filter>Estados\Juego</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstadoBase.h">
@@ -304,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="Audio.h">
       <Filter>Archivos de recursos</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoCargarPartida.h">
+      <Filter>Estados\Juego</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

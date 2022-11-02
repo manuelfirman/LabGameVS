@@ -64,9 +64,7 @@ void EstadoMenuPrincipal::iniciarGUI()
     sf::Color colorTextoHover = sf::Color(180, 180, 180, 255);
     sf::Color colorTextoActivo = sf::Color(20, 20, 20, 220);
 
-    _boton["ESTADO_JUEGO"] = new gui::Boton(gui::p2pX(25.f, modo_video), gui::p2pY(45.f, modo_video), gui::p2pX(15.f, modo_video), gui::p2pY(4.5f, modo_video), "NUEVO JUEGO", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
-
-    _boton["ESTADO_CARGAR"] = new gui::Boton(gui::p2pX(25.f, modo_video), gui::p2pY(52.f, modo_video), gui::p2pX(15.f, modo_video), gui::p2pY(4.5f, modo_video), "CARGAR PARTIDA", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["ESTADO_JUGAR"] = new gui::Boton(gui::p2pX(25.f, modo_video), gui::p2pY(52.f, modo_video), gui::p2pX(15.f, modo_video), gui::p2pY(4.5f, modo_video), "JUGAR", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
     _boton["ESTADO_OPCIONES"] = new gui::Boton(gui::p2pX(25.f, modo_video), gui::p2pY(59.f, modo_video), gui::p2pX(15.f, modo_video), gui::p2pY(4.5f, modo_video), "OPCIONES", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
@@ -80,7 +78,6 @@ void EstadoMenuPrincipal::iniciarGUI()
 
 void EstadoMenuPrincipal::resetGUI()
 {
-    std::cout << "Debug reset gui - Menu Principal" << std::endl;
     auto it = _boton.begin();
     for (it = _boton.begin(); it != _boton.end(); ++it) {
         delete it->second;
@@ -88,22 +85,6 @@ void EstadoMenuPrincipal::resetGUI()
     _boton.clear();
     this->iniciarGUI();
 }
-
-void EstadoMenuPrincipal::iniciarSonidos()
-{
-    if(!_bufferSonidos["BOTON_CLICK"].loadFromFile("recursos/sonido/efectos/boton_click.wav"))
-        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_click.wav" << std::endl;
-    if(!_bufferSonidos["BOTON_ATRAS"].loadFromFile("recursos/sonido/efectos/boton_atras.wav"))
-        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_atras.wav" << std::endl;
-}
-
-void EstadoMenuPrincipal::iniciarAudio()
-{
-    this->iniciarSonidos();
-    
-    _audio = new Audio("recursos/sonido/musica/musica_menu.wav", _bufferSonidos);
-}
-
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
 EstadoMenuPrincipal::EstadoMenuPrincipal(DatosEstado* datos_estado)
@@ -114,15 +95,12 @@ EstadoMenuPrincipal::EstadoMenuPrincipal(DatosEstado* datos_estado)
     this->iniciarFuentes();
     this->iniciarGUI();
     this->resetGUI();
-    this->iniciarAudio();
 
-    _audio->playMusica();
+    _datosEstado->audio->playMusica();
 }
 
 EstadoMenuPrincipal::~EstadoMenuPrincipal()
 {
-    delete _audio;
-
     auto it = _boton.begin();
     for (it = _boton.begin(); it != _boton.end(); ++it) {
         delete it->second;
@@ -143,40 +121,35 @@ void EstadoMenuPrincipal::actualizarBotones()
         botones.second->actualizar(_posMouseVentana);
     }
 
-    if (_boton["ESTADO_JUEGO"]->getClick() && getPpsTeclas())
-    {
-        _audio->stopMusica();
-        _audio->playSonido("BOTON_CLICK");
-        _estado->push(new EstadoJuego(_datosEstado));
-    }
 
-    if (_boton["ESTADO_CARGAR"]->getClick() && getPpsTeclas())
+    if (_boton["ESTADO_JUGAR"]->getClick() && getPpsTeclas())
     {
-        _audio->playSonido("BOTON_CLICK");
-        //_estado->push(new EstadoCargarPartida(_datosEstado));
+        _datosEstado->audio->playSonido("BOTON_CLICK");
+        _estado->push(new EstadoCargarPartida(_datosEstado));
     }
 
     if (_boton["ESTADO_OPCIONES"]->getClick() && getPpsTeclas())
     {
         _resetMenu = true;
-        _audio->playSonido("BOTON_CLICK"); 
+        _datosEstado->audio->playSonido("BOTON_CLICK"); 
         _estado->push(new EstadoOpciones(_datosEstado));
     }
 
     if (_boton["ESTADO_EDITOR"]->getClick() && getPpsTeclas())
     {
-        _audio->playSonido("BOTON_CLICK");
+        _datosEstado->audio->playSonido("BOTON_CLICK");
         _estado->push(new EstadoEditor(_datosEstado));
     }
 
     if (_boton["ESTADO_TUTORIAL"]->getClick() && getPpsTeclas())
     {
-        _audio->playSonido("BOTON_CLICK");
+        _datosEstado->audio->playSonido("BOTON_CLICK");
         //_estado->push(new EstadoTutorial(_datosEstado));
     }
 
     if (_boton["ESTADO_SALIR"]->getClick() && getPpsTeclas())
     {
+        _datosEstado->audio->playSonido("BOTON_ATRAS");
         finEstado();
     }
 

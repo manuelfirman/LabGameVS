@@ -3,7 +3,10 @@
 /// --------------------- INICIALIZACIONES --------------------------
 void Jugador::iniciarVariables()
 {
+
     _atacando = false;
+
+
     _tiraskill = false;
     _espada = new Espada(1 ,20, "recursos/img/items/sword2.png");
 }
@@ -16,17 +19,24 @@ void Jugador::iniciarComponentes()
 
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-Jugador::Jugador(float x, float y, sf::Texture& textura)
+Jugador::Jugador(float x, float y, sf::Texture& textura, bool cargar, Atributos atributos)
 {
     this->iniciarVariables();
     this->iniciarComponentes();
 
     setPosicion(x, y);                                  // Posicion
-
     crearHitbox(_sprite, 18.f, 17.f, 28.f, 44.f);       // Hitbox
     crearComponenteMovimiento(150.f, 1700.f, 1000.f);   // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
-    crearComponenteAtributos(0);                        // Atributos
+    
+    if (cargar)
+    {
+        crearComponenteAtributos(atributos.getNivel(), atributos.getExp(), atributos.getHP(), atributos.getVitalidad(), atributos.getFuerza(), atributos.getAgilidad(), atributos.getDestreza(), atributos.getInteligencia());
+    }
+    else
+    {
+        crearComponenteAtributos(1);         // Atributos lvl 1
+    }
     //crearComponenteSonidos();
 
     // key - Velocidad animacion - inicioX - inicioY - framesX - framesY
@@ -64,10 +74,19 @@ const bool& Jugador::getIniciaAtaque()
     return _iniciaAtaque;
 }
 
+const bool& Jugador::getInicioTwist()
+{
+    return _iniciaTwist;
+}
 
 void Jugador::setInicioAtaque(const bool inicio_ataque)
 {
     _iniciaAtaque = inicio_ataque;
+}
+
+void Jugador::setInicioTwist(const bool inicio_twist)
+{
+    _iniciaTwist = inicio_twist;
 }
 
 void Jugador::ganarHP(const int hp)
@@ -92,7 +111,7 @@ void Jugador::perdeExperiencia(const int experiencia)
 
 void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
         _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
         _tiraskill = true;
     }
@@ -164,6 +183,7 @@ void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
 
     _atributos->actualizar();
 
+    _espada->animacionAtaque(posMouseVista, getCentro(), _iniciaTwist);
     _espada->actualizar(posMouseVista, getCentro());
 
     for (size_t i = 0; i < _skill.size(); i++)
