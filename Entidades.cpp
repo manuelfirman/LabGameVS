@@ -105,6 +105,11 @@ const sf::FloatRect Entidades::getLimitesPosSiguiente(const float& DT) const
     return sf::FloatRect(-1.f, -1.f, -1.f, -1.f); // para no retornar basura
 }
 
+const bool Entidades::getEnMovimiento() const
+{
+    return _movimiento->getEstadoMov(MOVIENDO);
+}
+
 // 
 void Entidades::setPosicion(const float x, const float y)
 {
@@ -138,6 +143,11 @@ void Entidades::mover(const float dir_x, const float dir_y, const float& DT)
         // Recibe direcciones (x y)
         _movimiento->mover(dir_x, dir_y, DT); // setea velocidad
     }
+}
+
+Sonido& Entidades::getSonido()
+{
+    return *_sonido;
 }
 
 const float Entidades::getDistancia(const Entidades& entidad) const

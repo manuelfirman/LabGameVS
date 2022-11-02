@@ -56,6 +56,10 @@ private: // Atributos
     bool _botonesPausa;
     bool _resetVentana;
 
+    sf::Clock _timerSonidoEnemigos;
+    sf::Clock _muerteEnemigo;
+    
+
 private: // Metodos
     void iniciarVariables();
     void renderizadoDiferido();
@@ -69,7 +73,6 @@ private: // Metodos
     void iniciarSombras();
     void iniciarJugadores();
     void iniciarGUIJugador();
-    void resetGUIJugador();
     void iniciarManagerEnemigos();
     void iniciarTileMap();
     void iniciarPopUps();
@@ -81,6 +84,9 @@ public:
 
     const bool guardarPartida(const std::string ruta_slot);
     const bool cargarPartida(const std::string ruta_slot);
+
+
+    const bool puedeSonar();
 
     void actualizarVistaCam(const float& DT);
     void actualizarInput(const float& DT);

@@ -42,7 +42,6 @@ class Enemigos : public Entidades
 		virtual const bool estaVivo() const;
 		virtual void perderVida(const int hp);
 		virtual const Atributos* getAtributos() const;
-		virtual Sonido& getSonido();
 
 		virtual void actualizarAnimacion(const float& DT) = 0;
 		virtual void actualizar(const float& DT, sf::Vector2f& posMouseVista) = 0;

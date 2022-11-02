@@ -26,7 +26,7 @@ private: // Metodos
 
 
 public:
-    Jugador(float x, float y, sf::Texture& textura, bool cargar = false, Atributos atributos = NULL);
+    Jugador(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, bool cargar = false, Atributos atributos = NULL);
     ~Jugador();
 
     Atributos* getAtributos();

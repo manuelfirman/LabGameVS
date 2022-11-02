@@ -3,6 +3,8 @@
 void EstadoJuego::iniciarVariables()
 {
     _botonesPausa = false;
+    _timerSonidoEnemigos.restart();
+    _muerteEnemigo.restart();
 }
 void EstadoJuego::renderizadoDiferido()
 {
@@ -62,37 +64,51 @@ void EstadoJuego::iniciarTexturas()
 
 void EstadoJuego::iniciarSonidos()
 {
+    // JUGADOR
+    if (!_bufferSonidosJ["JUGADOR_MOV"].loadFromFile("recursos/sonido/jugador/player_mov.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: 'recursos/sonido/jugador/player_mov.wav'" << std::endl;
+    if (!_bufferSonidosJ["JUGADOR_HIT"].loadFromFile("recursos/sonido/jugador/player_hit.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: 'recursos/sonido/jugador/player_hit.wav'" << std::endl;
+    if (!_bufferSonidosJ["JUGADOR_POTEO"].loadFromFile("recursos/sonido/jugador/player_poteo.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: 'recursos/sonido/jugador/player_poteo.wav'" << std::endl;
+    if (!_bufferSonidosJ["JUGADOR_MORIR"].loadFromFile("recursos/sonido/jugador/player_die.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: 'recursos/sonido/jugador/player_die.wav'" << std::endl;
+    if (!_bufferSonidosJ["JUGADOR_DMG"].loadFromFile("recursos/sonido/jugador/player_hurt1.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: 'recursos/sonido/jugador/player_hurt1.wav'" << std::endl;
+    if (!_bufferSonidosJ["JUGADOR_LEVELUP"].loadFromFile("recursos/sonido/jugador/player_levelup.wav"))
+        std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: 'recursos/sonido/jugador/player_levelup.wav'" << std::endl;
+
+    // BAT
     if(!_bufferSonidosJ["BAT_ATACAR"].loadFromFile("recursos/sonido/enemigos/bat_attack.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/bat_attack.wav" << std::endl;
     if(!_bufferSonidosJ["BAT_DMG"].loadFromFile("recursos/sonido/enemigos/bat_dmg.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/bat_dmg.wav" << std::endl;
     if(!_bufferSonidosJ["BAT_MORIR"].loadFromFile("recursos/sonido/enemigos/bat_die.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/bat_die.wav" << std::endl;
-    if(!_bufferSonidosJ["BAT_MOV"].loadFromFile("recursos/sonido/enemigos/bat_die.wav"))
+    if(!_bufferSonidosJ["BAT_MOV"].loadFromFile("recursos/sonido/enemigos/bat_mov.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/bat_mov.wav" << std::endl;
 
+    // SLIME
     if(!_bufferSonidosJ["SLIME_ATACAR"].loadFromFile("recursos/sonido/enemigos/slime_attack.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/slime_attack.wav" << std::endl;
     if(!_bufferSonidosJ["SLIME_DMG"].loadFromFile("recursos/sonido/enemigos/slime_dmg.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/slime_dmg.wav" << std::endl;
     if(!_bufferSonidosJ["SLIME_MORIR"].loadFromFile("recursos/sonido/enemigos/slime_die.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/slime_die.wav" << std::endl;
-    if(!_bufferSonidosJ["SLIME_MOV"].loadFromFile("recursos/sonido/enemigos/slime_die.wav"))
+    if(!_bufferSonidosJ["SLIME_MOV"].loadFromFile("recursos/sonido/enemigos/slime_mov.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/slime_mov.wav" << std::endl;
 
-    if(!_bufferSonidosJ["DEMON_ATACAR"].loadFromFile("recursos/sonido/enemigos/slime_attack.wav"))
+    // DEMON
+    if(!_bufferSonidosJ["DEMON_ATACAR"].loadFromFile("recursos/sonido/enemigos/demon_attack.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/demon_attack.wav" << std::endl;
-    if(!_bufferSonidosJ["DEMON_DMG"].loadFromFile("recursos/sonido/enemigos/slime_dmg.wav"))
+    if(!_bufferSonidosJ["DEMON_DMG"].loadFromFile("recursos/sonido/enemigos/demon_dmg.wav"))
         std::cout << "ERDEMONESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/demon_dmg.wav" << std::endl;
-    if(!_bufferSonidosJ["DEMON_MORIR"].loadFromFile("recursos/sonido/enemigos/slime_die.wav"))
+    if(!_bufferSonidosJ["DEMON_MORIR"].loadFromFile("recursos/sonido/enemigos/demon_die.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/demon_die.wav" << std::endl;
-    if(!_bufferSonidosJ["DEMON_MOV"].loadFromFile("recursos/sonido/enemigos/slime_die.wav"))
+    if(!_bufferSonidosJ["DEMON_MOV"].loadFromFile("recursos/sonido/enemigos/demon_mov.wav"))
         std::cout << "ERROR::ESTADOJUEGO::NO SE PUDO CARGAR SONIDO: recursos/sonido/enemigos/demon_mov.wav" << std::endl;
 
-    if (!_bufferSonidosJ["BOTON_CLICK"].loadFromFile("recursos/sonido/efectos/boton_click.wav"))
-        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_click.wav" << std::endl;
-    if (!_bufferSonidosJ["BOTON_ATRAS"].loadFromFile("recursos/sonido/efectos/boton_atras.wav"))
-        std::cout << "ERROR::ESTADOMENUPRINCIPAL::NO SE PUDO CARGAR SONIDO: recursos/sonidos/efectos/boton_atras.wav" << std::endl;
+
 }
 
 void EstadoJuego::iniciarAudio()
@@ -120,7 +136,7 @@ void EstadoJuego::iniciarSombras()
 
 void EstadoJuego::iniciarJugadores()
 {
-    _jugador = new Jugador(0, 0, _texturas["PLANTILLA_JUGADOR"]);
+    _jugador = new Jugador(0, 0, _texturas["PLANTILLA_JUGADOR"], _bufferSonidosJ);
 }
 
 void EstadoJuego::iniciarGUIJugador()
@@ -183,7 +199,6 @@ EstadoJuego::EstadoJuego(DatosEstado* datos_estado, const std::string ruta_slot)
     this->iniciarSombras();
 
     cargarPartida(ruta_slot);
-    //this->iniciarJugadores();
 
     this->iniciarGUIJugador();
     this->iniciarManagerEnemigos();
@@ -266,23 +281,27 @@ const bool EstadoJuego::cargarPartida(const std::string ruta_slot)
         int inteligencia;
         int puntosAtributo;
         
-        archivoIn >> activo >> posX >> posY >> nivel >> experiencia >> hp >> vitalidad >> fuerza >> agilidad >> destreza >> inteligencia >> puntosAtributo;
+        archivoIn >> activo;
+        if (activo)
+        {
+            archivoIn >> posX >> posY >> nivel >> experiencia >> hp >> vitalidad >> fuerza >> agilidad >> destreza >> inteligencia >> puntosAtributo;
 
-        aux.setNivel(nivel);
-        aux.setExperiencia(experiencia);
-        aux.setHP(hp);
-        aux.setVitalidad(vitalidad);
-        aux.setFuerza(fuerza);
-        aux.setAgilidad(agilidad);
-        aux.setDestreza(destreza);
-        aux.setInteligencia(inteligencia);
-        aux.setPuntosAtributo(puntosAtributo);
+            aux.setNivel(nivel);
+            aux.setExperiencia(experiencia);
+            aux.setHP(hp);
+            aux.setVitalidad(vitalidad);
+            aux.setFuerza(fuerza);
+            aux.setAgilidad(agilidad);
+            aux.setDestreza(destreza);
+            aux.setInteligencia(inteligencia);
+            aux.setPuntosAtributo(puntosAtributo);
 
 
-        _jugador = new Jugador(posX, posY, _texturas["PLANTILLA_JUGADOR"], true, aux);
+            _jugador = new Jugador(posX, posY, _texturas["PLANTILLA_JUGADOR"], _bufferSonidosJ, true, aux);
 
-        archivoIn.close();
-        return true;
+            archivoIn.close();
+            return true;
+        }
     }
     else
     {
@@ -291,6 +310,17 @@ const bool EstadoJuego::cargarPartida(const std::string ruta_slot)
 
     archivoIn.close();
     return true;
+}
+
+
+const bool EstadoJuego::puedeSonar()
+{
+    if (_timerSonidoEnemigos.getElapsedTime().asSeconds() >= 3)
+    {
+        _timerSonidoEnemigos.restart().asSeconds();
+        return true;
+    }
+    return false;
 }
 
 /// --------------------- ACTUALIZACIONES --------------------------
@@ -359,7 +389,7 @@ void EstadoJuego::actualizarInput(const float& DT)
 {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("CLOSE")))  && getPpsTeclas())
     {
-        _audio->playSonido("BOTON_CLICK");
+        _datosEstado->audio->playSonido("BOTON_CLICK");
         (!_pausa)
             ? pausarEstado()
             : reanudarEstado();
@@ -399,6 +429,7 @@ void EstadoJuego::actualizarBotonesPausa()
 
         if (_menuPausa->getClick("SLOT_1") && getPpsTeclas())
         {
+            _datosEstado->audio->playSonido("BOTON_CLICK");
             if(guardarPartida("config/cargar_slot1.ini"))
             {
                 _menuPausa->agregarBoton("GUARDADO", gui::p2pY(32.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "GUARDADO CORRECTAMENTE", true);
@@ -410,6 +441,7 @@ void EstadoJuego::actualizarBotonesPausa()
         }
         if (_menuPausa->getClick("SLOT_2") && getPpsTeclas())
         {
+            _datosEstado->audio->playSonido("BOTON_CLICK");
             if(guardarPartida("config/cargar_slot2.ini"))
             {
                 _menuPausa->agregarBoton("GUARDADO", gui::p2pY(42.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "GUARDADO CORRECTAMENTE", true);
@@ -421,6 +453,7 @@ void EstadoJuego::actualizarBotonesPausa()
         }
         if (_menuPausa->getClick("SLOT_3") && getPpsTeclas())
         {
+            _datosEstado->audio->playSonido("BOTON_CLICK");
             if(guardarPartida("config/cargar_slot3.ini"))
             {
                 _menuPausa->agregarBoton("GUARDADO", gui::p2pY(52.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "GUARDADO CORRECTAMENTE", true);
@@ -454,6 +487,11 @@ void EstadoJuego::actualizarTileMap(const float& DT)
 
 void EstadoJuego::actualizarJugador(const float& DT)
 {
+    if(_jugador->getEnMovimiento() && getPpsTeclas()) _jugador->getSonido().playSonidoMov();
+
+    _jugador->actualizar(DT, _posMouseVista);
+
+    _GUIJugador->actualizar(DT);
 }
 
 void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const bool basico, const float& DT)
@@ -473,7 +511,7 @@ void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const b
                         enemigo->perderVida(dmg);
                         enemigo->resetTimerDmg();
                         _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
-
+                        _jugador->getSonido().play("HIT");
                         enemigo->getSonido().play("DMG");
                     }
 
@@ -493,7 +531,7 @@ void EstadoJuego::actualizarAtaques(Enemigos* enemigo, const int indice, const b
                     enemigo->perderVida(dmg);
                     enemigo->resetTimerDmg();
                     _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, enemigo->getCentro().x, enemigo->getCentro().y, "-", dmg, "hp");
-
+                    _jugador->getSonido().play("HIT");
                     enemigo->getSonido().play("DMG");
                 }
 
@@ -520,6 +558,10 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
     for (auto* enemigo : _enemigos)
     {    
         enemigo->actualizar(DT, _posMouseVista);
+        if(enemigo->getEnMovimiento() && puedeSonar())
+        {
+            enemigo->getSonido().playSonidoMov();
+        }
 
         _tileMap->actualizarLimitesMapa(enemigo, DT); // limites exteriores
         _tileMap->checkColision(enemigo, DT); // Colisiones mapa
@@ -543,6 +585,7 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
                 enemigo->resetTimerAtaque();
                 _popUps->agregarPopUp(tipo_popUp::POP_NEGATIVO, _jugador->getCentro().x, _jugador->getCentro().y, "-", dmg, "hp");
                 enemigo->getSonido().play("ATACAR");
+                _jugador->getSonido().play("DMG");
             }
         }
 
@@ -579,9 +622,7 @@ void EstadoJuego::actualizar(const float& DT)
 
         actualizarTileMap(DT);
 
-        _jugador->actualizar(DT, _posMouseVista);
-
-        _GUIJugador->actualizar(DT);
+        actualizarJugador(DT);
 
         actualizarEnemigos(DT);
 

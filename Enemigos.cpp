@@ -104,8 +104,3 @@ const Atributos* Enemigos::getAtributos() const
 		return nullptr;
 	}
 }
-
-Sonido& Enemigos::getSonido()
-{
-	return *_sonido;
-}

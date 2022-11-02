@@ -42,7 +42,7 @@ public:
     virtual const sf::Vector2i getCuadroActual(const int tamanioCuadro) const;
     virtual const sf::FloatRect getLimites() const;
     virtual const sf::FloatRect getLimitesPosSiguiente(const float& DT) const;
-
+    virtual const bool getEnMovimiento() const;
     // Setters
     virtual void setPosicion(const float x, const float y);
 
@@ -51,7 +51,7 @@ public:
     virtual void detenerX();
     virtual void detenerY();
     virtual void mover(const float x, const float y, const float& DT);
-
+    virtual Sonido& getSonido();
     virtual const float getDistancia(const Entidades& entidad) const;
 
     virtual void actualizar(const float& DT, sf::Vector2f& posMouseVista) = 0;

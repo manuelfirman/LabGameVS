@@ -108,6 +108,20 @@ EstadoMenuPrincipal::~EstadoMenuPrincipal()
 }
 
 
+void EstadoMenuPrincipal::actualizarTitulo()
+{
+    if (_tituloMenu.getGlobalBounds().contains(_posMouseVentana.x, _posMouseVentana.y))
+    {
+        _tituloMenu.setFillColor(sf::Color(134, 115, 161, 200));
+        _subtituloMenu.setFillColor(sf::Color(96, 111, 140, 200));
+    }
+    else
+    {
+        _tituloMenu.setFillColor(sf::Color(255, 255, 255, 255));
+        _subtituloMenu.setFillColor(sf::Color(255, 255, 255, 255));
+    }
+}
+
 /// --------------------- ACTUALIZACIONES --------------------------
 void EstadoMenuPrincipal::actualizarInput(const float& DT)
 {
@@ -167,7 +181,7 @@ void EstadoMenuPrincipal::actualizar(const float& DT)
     actualizarPpsTeclas(DT);
     actualizarInput(DT);
     actualizarBotones();
-
+    actualizarTitulo();
 }
 
 

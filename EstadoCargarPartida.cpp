@@ -63,8 +63,8 @@ void EstadoCargarPartida::iniciarVariables()
     test_archivos.close();
 
 
-    _slot[1] = false;
-    _slot[2] = false;
+    //_slot[1] = false;
+    //_slot[2] = false;
 }
 
 void EstadoCargarPartida::iniciarKeybinds()
@@ -104,33 +104,38 @@ void EstadoCargarPartida::iniciarGUI()
 
 
     //float posX = _ventana->getSize().x / 2.f - 100;
-    sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
+    sf::Color colorInactivoVolver = sf::Color(36, 231, 17, 120);
+    sf::Color colorInactivo = sf::Color(208, 208, 208, 155);
     sf::Color colorActivo = sf::Color(189, 236, 182, 155);
-    sf::Color colorHover = sf::Color(208, 208, 208, 155);
-    sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 200);
+    sf::Color colorHover = sf::Color(208, 208, 208, 200);
+    sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 250);
     sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
     sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
 
-    _boton["SLOT_1"] = new gui::Boton(gui::p2pX(50.f, modo_video), gui::p2pY(25.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "SLOT 1", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
-    _boton["SLOT_2"] = new gui::Boton(gui::p2pX(50.f, modo_video), gui::p2pY(40.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "SLOT 2", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
-    _boton["SLOT_3"] = new gui::Boton(gui::p2pX(50.f, modo_video), gui::p2pY(55.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "SLOT 3", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["JUEGO_NUEVO"] = new gui::Boton(gui::p2pX(50.f, modo_video) - gui::p2pX(7.5f, modo_video), gui::p2pY(18.f, modo_video), gui::p2pX(15.f, modo_video), gui::p2pY(7.f, modo_video), "INICIAR JUEGO", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
-    _boton["VOLVER"] = new gui::Boton(gui::p2pX(5.2f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "VOLVER", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["SLOT_1"] = new gui::Boton(gui::p2pX(50.f, modo_video) - gui::p2pX(8.5f, modo_video), gui::p2pY(57.f, modo_video), gui::p2pX(17.f, modo_video), gui::p2pY(4.5f, modo_video), "SLOT 1", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["SLOT_2"] = new gui::Boton(gui::p2pX(50.f, modo_video) - gui::p2pX(8.5f, modo_video), gui::p2pY(69.f, modo_video), gui::p2pX(17.f, modo_video), gui::p2pY(4.5f, modo_video), "SLOT 2", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["SLOT_3"] = new gui::Boton(gui::p2pX(50.f, modo_video) - gui::p2pX(8.5f, modo_video), gui::p2pY(81.f, modo_video), gui::p2pX(17.f, modo_video), gui::p2pY(4.5f, modo_video), "SLOT 3", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+
+    _boton["VOLVER"] = new gui::Boton(gui::p2pX(5.5f, modo_video), gui::p2pY(85.f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "VOLVER", gui::calcTamCaracter(modo_video), _fuenteCargar, colorInactivoVolver, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
 
+    // Texto Nuevo Juego
+    _textoNuevoJuego.setFont(_fuenteCargar);
+    _textoNuevoJuego.setPosition(sf::Vector2f(gui::p2pX(50.f, modo_video) - _textoNuevoJuego.getGlobalBounds().width / 2.f, gui::p2pY(5.f, modo_video)));
+    _textoNuevoJuego.setCharacterSize(gui::calcTamCaracter(modo_video, 50));
+    _textoNuevoJuego.setFillColor(sf::Color(255, 255, 255, 200));
+    _textoNuevoJuego.setString("CREAR JUEGO NUEVO");
+    _textoNuevoJuego.setLetterSpacing(2);
 
-    std::vector<std::string> modos_str;
-    for (auto& modos : _modoVideo)
-    {
-        modos_str.push_back(std::to_string(modos.width) + 'x' + std::to_string(modos.height));
-    }
-
-    // Texto
+    // Texto Cargar
     _textoCargar.setFont(_fuenteCargar);
-    _textoCargar.setPosition(sf::Vector2f(gui::p2pX(5.2f, modo_video), gui::p2pY(9.2f, modo_video)));
+    _textoCargar.setPosition(sf::Vector2f(gui::p2pX(50.f, modo_video) - _textoCargar.getGlobalBounds().width / 2.f, gui::p2pY(45.f, modo_video)));
     _textoCargar.setCharacterSize(gui::calcTamCaracter(modo_video, 50));
     _textoCargar.setFillColor(sf::Color(255, 255, 255, 200));
     _textoCargar.setString("CARGAR PARTIDA");
+    _textoCargar.setLetterSpacing(3);
 }
 
 void EstadoCargarPartida::resetGUI()
@@ -174,6 +179,13 @@ void EstadoCargarPartida::actualizarGUI(const float& DT)
         botones.second->actualizar(_posMouseVentana);
     }
 
+    if (_boton["JUEGO_NUEVO"]->getClick() && getPpsTeclas())
+    {
+        _datosEstado->audio->playSonido("BOTON_CLICK");
+        _estado->push(new EstadoJuego(_datosEstado));
+    }
+
+
     if (_boton["SLOT_1"]->getClick() && getPpsTeclas())
     {
         _datosEstado->audio->playSonido("BOTON_CLICK");
@@ -194,7 +206,7 @@ void EstadoCargarPartida::actualizarGUI(const float& DT)
         if (_slot[1])
         {
             _datosEstado->audio->stopMusica();
-            _estado->push(new EstadoJuego(_datosEstado, "config/cargar_slot1.ini"));
+            _estado->push(new EstadoJuego(_datosEstado, "config/cargar_slot2.ini"));
             _resetMusica = true;
         }
         else
@@ -209,7 +221,7 @@ void EstadoCargarPartida::actualizarGUI(const float& DT)
         if (_slot[2])
         {
             _datosEstado->audio->stopMusica();
-            _estado->push(new EstadoJuego(_datosEstado, "config/cargar_slot1.ini"));
+            _estado->push(new EstadoJuego(_datosEstado, "config/cargar_slot3.ini"));
             _resetMusica = true;
         }
         else
@@ -262,4 +274,5 @@ void EstadoCargarPartida::renderizar(sf::RenderTarget* target)
     renderizarGUI(*target);
 
     target->draw(_textoCargar);
+    target->draw(_textoNuevoJuego);
 }

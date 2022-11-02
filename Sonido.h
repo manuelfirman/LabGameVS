@@ -8,6 +8,7 @@ class Sonido
 
 		std::map<std::string, sf::SoundBuffer>& _buffer;
 		sf::Sound _sonido;
+		sf::Sound _sonidoMov;
 
 
 		
@@ -16,6 +17,7 @@ class Sonido
 		~Sonido();
 
 		void play(std::string nombre_sonido);
+		void playSonidoMov();
 };
 
 #endif

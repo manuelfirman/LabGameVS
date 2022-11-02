@@ -5,8 +5,6 @@ void Jugador::iniciarVariables()
 {
 
     _atacando = false;
-
-
     _tiraskill = false;
     _espada = new Espada(1 ,20, "recursos/img/items/sword2.png");
 }
@@ -19,7 +17,7 @@ void Jugador::iniciarComponentes()
 
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-Jugador::Jugador(float x, float y, sf::Texture& textura, bool cargar, Atributos atributos)
+Jugador::Jugador(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, bool cargar, Atributos atributos)
 {
     this->iniciarVariables();
     this->iniciarComponentes();
@@ -28,6 +26,7 @@ Jugador::Jugador(float x, float y, sf::Texture& textura, bool cargar, Atributos 
     crearHitbox(_sprite, 18.f, 17.f, 28.f, 44.f);       // Hitbox
     crearComponenteMovimiento(150.f, 1700.f, 1000.f);   // Movimiento
     crearComponenteAnimacion(textura);                  // Animacion
+    crearComponenteSonidos(sonidos, "JUGADOR");
     
     if (cargar)
     {

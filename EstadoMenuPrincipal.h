@@ -34,7 +34,7 @@ public:
     void actualizarBotones();
     void renderBotones(sf::RenderTarget& target);
 
-
+    void actualizarTitulo();
     void actualizarInput(const float& DT);
     void actualizar(const float& DT);
     void renderizar(sf::RenderTarget* target = NULL);

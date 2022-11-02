@@ -141,7 +141,7 @@ void TileMap::agregarTile(const int x, const int y, const int z, const sf::IntRe
 {
 	if ((x < _tamanioMaxCuadros.x) && (x >= 0) && (y < _tamanioMaxCuadros.y) && (x >= 0) && (z <= _Capas) && (z >= 0))
 	{
-		_mapa[x][y][z].push_back(new SpawnerEnemigos(x, y, _tamanioCuadroF, _texturaTile, rect_textura, tipo_enemigo, cantidad_enemigos, tiempo_spawn, distancia_max));
+		_mapa[x][y][z].push_back(new SpawnerEnemigos(x, y, _tamanioCuadroF, _texturaTile, rect_textura, tipo_enemigo, cantidad_enemigos, tiempo_spawn, static_cast<float>(distancia_max)));
 	}
 }
 
@@ -295,7 +295,7 @@ void TileMap::cargarDesdeArchivo(const std::string nombre_archivo)
 
 				archivoIn >> trX >> trY >> tipoEnemigo >> cantEnemigos >> tiempoSpawn >> distanciaMax;
 
-				_mapa[x][y][z].push_back(new SpawnerEnemigos(x, y, _tamanioCuadroF, _texturaTile, sf::IntRect(trX, trY, _tamanioCuadroI, _tamanioCuadroI), tipoEnemigo, cantEnemigos, tiempoSpawn, distanciaMax));
+				_mapa[x][y][z].push_back(new SpawnerEnemigos(x, y, _tamanioCuadroF, _texturaTile, sf::IntRect(trX, trY, _tamanioCuadroI, _tamanioCuadroI), tipoEnemigo, cantEnemigos, tiempoSpawn, static_cast<float>(distanciaMax)));
 			}
 			else
 			{
@@ -482,7 +482,7 @@ void TileMap::actualizarTiles(Entidades* entidad, const float& DT, ManagerEnemig
 							if (spawner->getContadorEnemigos() < spawner->getCantidadMaxEnemigos())
 							{
 								std::cout << "Spawneo enemigo" << std::endl;
-								manager_enemigos.crearEnemigo(spawner->getTipoEnemigo(), x * _tamanioCuadroF, y * _tamanioCuadroF, *spawner);
+								manager_enemigos.crearEnemigo(spawner->getTipoEnemigo(), x * static_cast<int>(_tamanioCuadroF), y * static_cast<int>(_tamanioCuadroF), *spawner);
 								//spawner->resetTimer();
 								spawner->setSpawn(true);
 							}

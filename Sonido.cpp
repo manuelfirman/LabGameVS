@@ -21,3 +21,11 @@ void Sonido::play(std::string tipo_sonido)
 	_sonido.setBuffer(_buffer[NombreSonido]);
 	_sonido.play();
 }
+void Sonido::playSonidoMov()
+{
+	std::string NombreSonido = _prefijo + "_MOV";
+	_sonidoMov.resetBuffer();
+	_sonidoMov.setBuffer(_buffer[NombreSonido]);
+	_sonidoMov.play();
+}
+

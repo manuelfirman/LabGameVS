@@ -15,6 +15,7 @@ private: // Atributos
     sf::Font _fuenteCargar;
 
     sf::Text _textoCargar;
+    sf::Text _textoNuevoJuego;
     std::vector<sf::VideoMode> _modoVideo;
 
     std::map<std::string, gui::Boton*> _boton;

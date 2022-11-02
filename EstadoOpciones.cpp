@@ -42,15 +42,16 @@ void EstadoOpciones::iniciarGUI()
 
 
     //float posX = _ventana->getSize().x / 2.f - 100;
-    sf::Color colorInactivo = sf::Color(48, 132, 70, 155);
+    sf::Color colorInactivoVolver = sf::Color(36, 231, 17, 120);
+    sf::Color colorInactivo = sf::Color(208, 208, 208, 155);
     sf::Color colorActivo = sf::Color(189, 236, 182, 155);
-    sf::Color colorHover = sf::Color(208, 208, 208, 155);
-    sf::Color colorTextoInactivo = sf::Color(255, 255, 255, 200);
+    sf::Color colorHover = sf::Color(208, 208, 208, 200);
+    sf::Color colorTextoInactivo = sf::Color(0, 0, 0, 250);
     sf::Color colorTextoHover = sf::Color(0, 0, 0, 255);
     sf::Color colorTextoActivo = sf::Color(255, 255, 255, 200);
   
 
-    _boton["VOLVER"] = new gui::Boton(gui::p2pX(5.2f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "VOLVER", gui::calcTamCaracter(modo_video), _fuenteOpciones, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
+    _boton["VOLVER"] = new gui::Boton(gui::p2pX(5.2f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "VOLVER", gui::calcTamCaracter(modo_video), _fuenteOpciones, colorInactivoVolver, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
     _boton["APLICAR"] = new gui::Boton(gui::p2pX(20.8f, modo_video), gui::p2pY(83.3f, modo_video), gui::p2pX(10.4f, modo_video), gui::p2pY(4.5f, modo_video), "APLICAR", gui::calcTamCaracter(modo_video), _fuenteOpciones, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
 
