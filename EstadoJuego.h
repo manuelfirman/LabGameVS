@@ -3,6 +3,7 @@
 
 #include "EstadoBase.h"
 #include "EstadoOpciones.h"
+#include "EstadoTutorial.h"
 #include "MenuPausa.h"
 
 #include "Jugador.h"
@@ -56,6 +57,7 @@ private: // Atributos
     bool _botonesPausa;
     bool _resetVentana;
 
+    // Timers sonido
     sf::Clock _timerSonidoEnemigos;
     sf::Clock _muerteEnemigo;
     

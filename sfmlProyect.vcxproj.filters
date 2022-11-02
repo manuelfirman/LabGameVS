@@ -183,6 +183,9 @@
     <ClCompile Include="EstadoCargarPartida.cpp">
       <Filter>Estados\Juego</Filter>
     </ClCompile>
+    <ClCompile Include="EstadoTutorial.cpp">
+      <Filter>Estados\Juego</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EstadoBase.h">
@@ -309,6 +312,9 @@
       <Filter>Archivos de recursos</Filter>
     </ClInclude>
     <ClInclude Include="EstadoCargarPartida.h">
+      <Filter>Estados\Juego</Filter>
+    </ClInclude>
+    <ClInclude Include="EstadoTutorial.h">
       <Filter>Estados\Juego</Filter>
     </ClInclude>
   </ItemGroup>

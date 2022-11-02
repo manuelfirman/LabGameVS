@@ -122,7 +122,8 @@ void EstadoJuego::iniciarMenuPausa()
 {
     _menuPausa = new MenuPausa(_datosEstado->opcionesGraficas->_resolucion, _fuenteJuego);
     _menuPausa->agregarBoton("GUARDAR", gui::p2pY(20.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(13.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "GUARDAR PARTIDA");
-    _menuPausa->agregarBoton("VOLVER", gui::p2pY(60.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(13.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "VOLVER");
+    _menuPausa->agregarBoton("TUTORIAL", gui::p2pY(60.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(13.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "TUTORIAL");
+    _menuPausa->agregarBoton("VOLVER", gui::p2pY(70.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(13.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "VOLVER");
     _menuPausa->agregarBoton("SALIR", gui::p2pY(80.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(10.4f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(4.5f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion), "SALIR");
 }
 
@@ -463,6 +464,12 @@ void EstadoJuego::actualizarBotonesPausa()
                 _menuPausa->agregarBoton("SINGUARDAR", gui::p2pY(52.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "NO SE PUDO GUARDAR", true);
             }
         }
+    }
+
+    if (_menuPausa->getClick("TUTORIAL") && getPpsTeclas())
+    {
+        _datosEstado->audio->playSonido("BOTON_CLICK");
+        _estado->push(new EstadoTutorial(_datosEstado));
     }
 
     if (_menuPausa->getClick("VOLVER") && getPpsTeclas())

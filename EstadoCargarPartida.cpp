@@ -182,7 +182,9 @@ void EstadoCargarPartida::actualizarGUI(const float& DT)
     if (_boton["JUEGO_NUEVO"]->getClick() && getPpsTeclas())
     {
         _datosEstado->audio->playSonido("BOTON_CLICK");
+        _datosEstado->audio->stopMusica();
         _estado->push(new EstadoJuego(_datosEstado));
+        _resetMusica = true;
     }
 
 

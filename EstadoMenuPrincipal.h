@@ -5,6 +5,7 @@
 #include "EstadoEditor.h"
 #include "EstadoOpciones.h"
 #include "EstadoCargarPartida.h"
+#include "EstadoTutorial.h"
 #include "Gui.h"
 
 class EstadoMenuPrincipal : public EstadoBase

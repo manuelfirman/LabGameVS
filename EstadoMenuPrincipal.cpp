@@ -49,11 +49,13 @@ void EstadoMenuPrincipal::iniciarGUI()
     _tituloMenu.setCharacterSize(gui::calcTamCaracter(modo_video, 20));
     _tituloMenu.setString("LARASTER");
     _tituloMenu.setPosition(gui::p2pX(10.f, modo_video), gui::p2pX(5.f, modo_video));
+    _tituloMenu.setLetterSpacing(2);
 
     _subtituloMenu.setFont(_fuenteMenu);
-    _subtituloMenu.setCharacterSize(gui::calcTamCaracter(modo_video, 90));
+    _subtituloMenu.setCharacterSize(gui::calcTamCaracter(modo_video, 55));
     _subtituloMenu.setString("RPG");
-    _subtituloMenu.setPosition(gui::p2pX(51.f, modo_video), gui::p2pY(25.f, modo_video));
+    _subtituloMenu.setPosition(gui::p2pX(53.f, modo_video), gui::p2pY(26.f, modo_video));
+    _subtituloMenu.setLetterSpacing(2);
 
     // BOTONES
     //float posX = _ventana->getSize().x / 2.f - 100;
@@ -61,7 +63,7 @@ void EstadoMenuPrincipal::iniciarGUI()
     sf::Color colorActivo = sf::Color(20, 20, 20, 0);
     sf::Color colorHover = sf::Color(70, 70, 70, 50);
     sf::Color colorTextoInactivo = sf::Color(150, 150, 150, 255);
-    sf::Color colorTextoHover = sf::Color(180, 180, 180, 255);
+    sf::Color colorTextoHover = sf::Color(134, 115, 161, 200);
     sf::Color colorTextoActivo = sf::Color(20, 20, 20, 220);
 
     _boton["ESTADO_JUGAR"] = new gui::Boton(gui::p2pX(25.f, modo_video), gui::p2pY(52.f, modo_video), gui::p2pX(15.f, modo_video), gui::p2pY(4.5f, modo_video), "JUGAR", gui::calcTamCaracter(modo_video), _fuenteBoton, colorInactivo, colorHover, colorActivo, colorTextoInactivo, colorTextoHover, colorTextoActivo);
@@ -110,7 +112,7 @@ EstadoMenuPrincipal::~EstadoMenuPrincipal()
 
 void EstadoMenuPrincipal::actualizarTitulo()
 {
-    if (_tituloMenu.getGlobalBounds().contains(_posMouseVentana.x, _posMouseVentana.y))
+    if (_tituloMenu.getGlobalBounds().contains(static_cast<float>(_posMouseVentana.x), static_cast<float>(_posMouseVentana.y)))
     {
         _tituloMenu.setFillColor(sf::Color(134, 115, 161, 200));
         _subtituloMenu.setFillColor(sf::Color(96, 111, 140, 200));
@@ -158,7 +160,7 @@ void EstadoMenuPrincipal::actualizarBotones()
     if (_boton["ESTADO_TUTORIAL"]->getClick() && getPpsTeclas())
     {
         _datosEstado->audio->playSonido("BOTON_CLICK");
-        //_estado->push(new EstadoTutorial(_datosEstado));
+        _estado->push(new EstadoTutorial(_datosEstado));
     }
 
     if (_boton["ESTADO_SALIR"]->getClick() && getPpsTeclas())
