@@ -17,7 +17,7 @@ Proyectil::Proyectil(sf::Texture& textura, float dmg, float duracion, float velo
 	_spriteSkill.setOrigin(_spriteSkill.getGlobalBounds().width / 2.f, _spriteSkill.getGlobalBounds().height/ 2.f);
 	_spriteSkill.setTexture(textura);
 	_spriteSkill.setTextureRect(sf::IntRect(0, 384, 512, 384));
-	_spriteSkill.setScale(0.2, 0.2);
+	_spriteSkill.setScale(0.2f, 0.2f);
 
 }
 
@@ -63,4 +63,9 @@ bool Proyectil::eliminar()
 	}
 	
 	return true;
+}
+
+sf::Sprite& Proyectil::getSpriteSkill()
+{
+	return _spriteSkill;
 }

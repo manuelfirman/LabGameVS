@@ -17,7 +17,7 @@ void Jugador::iniciarComponentes()
 
 
 /// --------------------- CONSTRUCTOR / DESTRUCTOR ---------------------
-Jugador::Jugador(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, bool cargar, Atributos atributos)
+Jugador::Jugador(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, bool cargar, Atributos* atributos)
 {
     this->iniciarVariables();
     this->iniciarComponentes();
@@ -30,7 +30,7 @@ Jugador::Jugador(float x, float y, sf::Texture& textura, std::map<std::string, s
     
     if (cargar)
     {
-        crearComponenteAtributos(atributos.getNivel(), atributos.getExp(), atributos.getHP(), atributos.getVitalidad(), atributos.getFuerza(), atributos.getAgilidad(), atributos.getDestreza(), atributos.getInteligencia());
+        crearComponenteAtributos(atributos->getNivel(), atributos->getExp(), atributos->getHP(), atributos->getVitalidad(), atributos->getFuerza(), atributos->getAgilidad(), atributos->getDestreza(), atributos->getInteligencia());
     }
     else
     {
@@ -78,6 +78,11 @@ const bool& Jugador::getInicioTwist()
     return _iniciaTwist;
 }
 
+std::vector<Proyectil>& Jugador::getSkill()
+{
+    return _skill;
+}
+
 void Jugador::setInicioAtaque(const bool inicio_ataque)
 {
     _iniciaAtaque = inicio_ataque;
@@ -108,12 +113,10 @@ void Jugador::perdeExperiencia(const int experiencia)
     _atributos->perderExperiencia(experiencia);
 }
 
-void Jugador::actualizarAtaque(const float& DT, sf::Vector2f posMouseVista)
+void Jugador::actualizarSkill(const float& DT, sf::Vector2f posMouseVista)
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-        _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
-        _tiraskill = true;
-    }
+    _skill.push_back(Proyectil(_texturaSkill, 10.f, 2.f, 500.f, posMouseVista, getCentro()));
+    _tiraskill = true;
 }
 
 
@@ -173,8 +176,6 @@ void Jugador::actualizar(const float& DT, sf::Vector2f& posMouseVista)
     //std::cout << _atributos->debug() << "\n";
 
     _movimiento->actualizar(DT);
-
-    actualizarAtaque(DT, posMouseVista);
 
     actualizarAnimacion(DT, posMouseVista);
 

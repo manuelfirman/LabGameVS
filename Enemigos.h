@@ -29,12 +29,13 @@ class Enemigos : public Entidades
 
 		const unsigned& getRango() const;
 
+		const float getDistanciaSkill(const sf::Sprite& skill) const;
 
 		void resetTimerAtaque();
-		const bool& getAtaqueTerminado() const;
+		const bool getAtaqueTerminado() const;
 
 		void resetTimerDmg();
-		const bool& getDmgTerminado() const;
+		const bool getDmgTerminado() const;
 
 		const int& getExperiencia() const;
 		virtual void generarAtributos(const int nivel);

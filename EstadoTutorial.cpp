@@ -154,11 +154,13 @@ void EstadoTutorial::actualizarGUI(const float& DT)
 
     if (con == 0)
     {
+        _textoTutorial2.setFillColor(sf::Color(255, 255, 255, 200));
         tutorial2 = "MOVIMIENTOS:\n\n\nW->ARRIBA\t\tS->ABAJO\n\nA->IZQUIERDA\t\tD->DERECHA";
         _textoTutorial2.setString(tutorial2);
     }
     else if (con == 1)
     {
+        _textoTutorial2.setFillColor(sf::Color(255, 255, 255, 200));
         tutorial2 = "ATAQUES:\n\n\nCLICK IZQUIERDO -> ATAQUE BASICO\n\nQ -> SKILL";
         _textoTutorial2.setString(tutorial2);
     }

@@ -15,10 +15,10 @@ class Tile
 	public:
 		Tile();
 		Tile(int tipo, int cuadro_x, int cuadro_y, float tamanioCuadroF, sf::Texture& textura, const sf::IntRect& rect_textura, const bool colision = false);
-		~Tile();
+		virtual ~Tile();
 
 		// Getters
-		virtual const short& getTipoTile() const;
+		virtual const int& getTipoTile() const;
 		virtual const bool& getColision() const;
 		virtual const sf::Vector2f& getPosicionTile() const;
 		virtual const sf::FloatRect getLimites() const;

@@ -2,6 +2,7 @@
 #include "EstadoJuego.h"
 void EstadoJuego::iniciarVariables()
 {
+    _gameOver = false;
     _botonesPausa = false;
     _timerSonidoEnemigos.restart();
     _muerteEnemigo.restart();
@@ -298,7 +299,7 @@ const bool EstadoJuego::cargarPartida(const std::string ruta_slot)
             aux.setPuntosAtributo(puntosAtributo);
 
 
-            _jugador = new Jugador(posX, posY, _texturas["PLANTILLA_JUGADOR"], _bufferSonidosJ, true, aux);
+            _jugador = new Jugador(posX, posY, _texturas["PLANTILLA_JUGADOR"], _bufferSonidosJ, true, &aux);
 
             archivoIn.close();
             return true;
@@ -411,6 +412,9 @@ void EstadoJuego::actualizarInputJugador(const float& DT)
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("MOVER_ABAJO"))))
         _jugador->mover(0.f, 1.f, DT);
+        
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key(_keybinds.at("SKILL"))) && getPpsTeclas())
+        _jugador->actualizarSkill(DT, _posMouseVista);
 
 }
 
@@ -432,37 +436,27 @@ void EstadoJuego::actualizarBotonesPausa()
         {
             _datosEstado->audio->playSonido("BOTON_CLICK");
             if(guardarPartida("config/cargar_slot1.ini"))
-            {
                 _menuPausa->agregarBoton("GUARDADO", gui::p2pY(32.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "GUARDADO CORRECTAMENTE", true);
-            }
             else
-            {
                 _menuPausa->agregarBoton("SINGUARDAR", gui::p2pY(32.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "NO SE PUDO GUARDAR", true);
-            }
         }
+
         if (_menuPausa->getClick("SLOT_2") && getPpsTeclas())
         {
             _datosEstado->audio->playSonido("BOTON_CLICK");
             if(guardarPartida("config/cargar_slot2.ini"))
-            {
                 _menuPausa->agregarBoton("GUARDADO", gui::p2pY(42.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "GUARDADO CORRECTAMENTE", true);
-            }
-            else
-            {
+            else           
                 _menuPausa->agregarBoton("SINGUARDAR", gui::p2pY(42.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "NO SE PUDO GUARDAR", true);
-            }
         }
+
         if (_menuPausa->getClick("SLOT_3") && getPpsTeclas())
         {
             _datosEstado->audio->playSonido("BOTON_CLICK");
             if(guardarPartida("config/cargar_slot3.ini"))
-            {
                 _menuPausa->agregarBoton("GUARDADO", gui::p2pY(52.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "GUARDADO CORRECTAMENTE", true);
-            }
             else
-            {
                 _menuPausa->agregarBoton("SINGUARDAR", gui::p2pY(52.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pX(15.f, _datosEstado->opcionesGraficas->_resolucion), gui::p2pY(2.f, _datosEstado->opcionesGraficas->_resolucion), gui::calcTamCaracter(_datosEstado->opcionesGraficas->_resolucion, 160), "NO SE PUDO GUARDAR", true);
-            }
         }
     }
 
@@ -496,6 +490,13 @@ void EstadoJuego::actualizarJugador(const float& DT)
 {
     if(_jugador->getEnMovimiento() && getPpsTeclas()) _jugador->getSonido().playSonidoMov();
 
+    if (_jugador->getAtributos()->getHP() <= 0 && !_gameOver)
+    {
+        _jugador->getSonido().play("MORIR");
+        _estado->push(new GameOver(_datosEstado));
+        _gameOver = true;
+    }
+    
     _jugador->actualizar(DT, _posMouseVista);
 
     _GUIJugador->actualizar(DT);
@@ -617,6 +618,8 @@ void EstadoJuego::actualizarEnemigos(const float& DT)
 
 void EstadoJuego::actualizar(const float& DT)
 {
+    if(_gameOver) finEstado();
+    
     actualizarPosicionMouse(&_vistaCam);
     actualizarPpsTeclas(DT);
     actualizarInput(DT);

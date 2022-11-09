@@ -88,7 +88,7 @@ Game::~Game()
     while (!_estado.empty()) {   // al ser memoria dinamica
         delete _estado.top(); // 1) se elimina el contenido del puntero
         _estado.pop();       // 2) se elimina el puntero
-        std::cout << "debug destructor game" << std::endl;
+        //std::cout << "debug destructor game" << std::endl;
     }
 }
 

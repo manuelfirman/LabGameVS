@@ -5,13 +5,13 @@ void TileMap::limpiar()
 {
 	if (!_mapa.empty())
 	{
-		for (int x = 0; x < _mapa.size(); x++)
+		for (size_t x = 0; x < _mapa.size(); x++)
 		{
-			for (int y = 0; y < _mapa[x].size(); y++)
+			for (size_t y = 0; y < _mapa[x].size(); y++)
 			{
-				for (int z = 0; z < _mapa[x][y].size(); z++)
+				for (size_t z = 0; z < _mapa[x][y].size(); z++)
 				{
-					for(int C = 0; C < _mapa[x][y][z].size(); C++)
+					for(size_t C = 0; C < _mapa[x][y][z].size(); C++)
 					{
 						delete _mapa[x][y][z][C]; // borra el anterior
 						_mapa[x][y][z][C] = NULL; // habilita de nuevo
@@ -212,7 +212,7 @@ void TileMap::guardarEnArchivo(const std::string nombre_archivo)
 				{
 					if(!_mapa[x][y][z].empty()) // si no esta vacio
 					{
-						for (int C = 0; C < _mapa[x][y][z].size(); C++)
+						for (size_t C = 0; C < _mapa[x][y][z].size(); C++)
 						{
 							archivoOut << x << " " << y << " " << z << " " << _mapa[x][y][z][C]->getTileString() << " "; // NO GUARDAR EL ULTIMO ESPACIO
 
@@ -370,7 +370,7 @@ void TileMap::checkColision(Entidades* entidad, const float& DT)
 	{
 		for (int y = _desdeY; y < _hastaY; y++)
 		{
-			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
+			for (size_t C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{
 				_mapa[x][y][_capa][C]->actualizar();
 
@@ -464,7 +464,7 @@ void TileMap::actualizarTiles(Entidades* entidad, const float& DT, ManagerEnemig
 	{
 		for (int y = _desdeY; y < _hastaY; y++)
 		{
-			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
+			for (size_t C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{
 				// actualizo tile
 				_mapa[x][y][_capa][C]->actualizar();
@@ -481,7 +481,7 @@ void TileMap::actualizarTiles(Entidades* entidad, const float& DT, ManagerEnemig
 						{
 							if (spawner->getContadorEnemigos() < spawner->getCantidadMaxEnemigos())
 							{
-								std::cout << "Spawneo enemigo" << std::endl;
+								//std::cout << "Spawneo enemigo" << std::endl;
 								manager_enemigos.crearEnemigo(spawner->getTipoEnemigo(), x * static_cast<int>(_tamanioCuadroF), y * static_cast<int>(_tamanioCuadroF), *spawner);
 								//spawner->resetTimer();
 								spawner->setSpawn(true);
@@ -535,7 +535,7 @@ void TileMap::renderizar(sf::RenderTarget& target, const sf::Vector2i& posicionC
 	{
 		for (int y = _desdeY; y < _hastaY; y++)
 		{
-			for (int C = 0; C < _mapa[x][y][_capa].size(); C++)
+			for (size_t C = 0; C < _mapa[x][y][_capa].size(); C++)
 			{	
 				_mapa[x][y][_capa][C]->actualizar();
 				

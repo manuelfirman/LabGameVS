@@ -7,9 +7,9 @@ Audio::Audio(const std::string ruta_musica, std::map<std::string, sf::SoundBuffe
 		std::cout << "ERROR::AUDIO::NOSE PUDO CARGAR MUSICA: " << ruta_musica << std::endl;
 	
 	_musica.setLoop(true);
-	_musica.setVolume(50);
+	_musica.setVolume(20);
 
-	_sonido.setVolume(50);
+	_sonido.setVolume(20);
 }
 
 Audio::~Audio()

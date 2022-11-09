@@ -161,6 +161,7 @@
     <ClCompile Include="Enemigos.cpp" />
     <ClCompile Include="EstadoCargarPartida.cpp" />
     <ClCompile Include="EstadoTutorial.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="IA.cpp" />
     <ClCompile Include="ManagerEnemigos.cpp" />
     <ClCompile Include="Modo_Editor.cpp" />
@@ -210,6 +211,7 @@
     <ClInclude Include="Enemigos.h" />
     <ClInclude Include="EstadoCargarPartida.h" />
     <ClInclude Include="EstadoTutorial.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="IA.h" />
     <ClInclude Include="ManagerEnemigos.h" />
     <ClInclude Include="Modo_Editor.h" />

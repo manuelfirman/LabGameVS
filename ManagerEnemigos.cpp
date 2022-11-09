@@ -16,15 +16,15 @@ void ManagerEnemigos::crearEnemigo(const int tipo_enemigo, const int posX, const
 	switch (tipo_enemigo)
 	{
 		case tipo_enemigo::DEMON:
-			_enemigos.push_back(new Demon(posX, posY, _texturas["DEMON"], _sonidos,  tile_spawner, _jugador));
+			_enemigos.push_back(new Demon(static_cast<float>(posX), static_cast<float>(posY), _texturas["DEMON"], _sonidos,  tile_spawner, _jugador));
 			tile_spawner.contEnemigosMasMas(); // ++_contadorEnemigos;
 			break;
 		case tipo_enemigo::BAT:
-			_enemigos.push_back(new Bat(posX, posY, _texturas["BAT"], _sonidos, tile_spawner, _jugador));
+			_enemigos.push_back(new Bat(static_cast<float>(posX), static_cast<float>(posY), _texturas["BAT"], _sonidos, tile_spawner, _jugador));
 			tile_spawner.contEnemigosMasMas(); // ++_contadorEnemigos;
 			break;
 		case tipo_enemigo::SLIME:
-			_enemigos.push_back(new Slime(posX, posY, _texturas["SLIME"], _sonidos, tile_spawner, _jugador));
+			_enemigos.push_back(new Slime(static_cast<float>(posX), static_cast<float>(posY), _texturas["SLIME"], _sonidos, tile_spawner, _jugador));
 			tile_spawner.contEnemigosMasMas(); // ++_contadorEnemigos;
 			break;
 		default:

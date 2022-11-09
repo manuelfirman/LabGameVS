@@ -1,0 +1,165 @@
+﻿  Animacion.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Animacion2.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Armas.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Audio.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Bat.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Demon.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Editor_Mapa.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Editor_SpawnerEnemigos.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Enemigos.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  EstadoCargarPartida.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  EstadoTutorial.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  GameOver.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  IA.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  ManagerEnemigos.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Modo_Editor.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Orbe.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  ArmaMelee.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  ArmaRango.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Atributos.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Espada.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Compilando...
+  Gui.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Entidades.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  EstadoBase.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  EstadoEditor.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  EstadoJuego.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  EstadoMenuPrincipal.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  EstadoOpciones.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Game.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  GUIJugador.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Hitbox.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Items.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Jugador.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  main.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  MenuPausa.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Movimiento.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  OpcionesGraficas.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Proyectil.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Slime.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Sonido.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  SpawnerEnemigos.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Compilando...
+  stdafx.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  TextoInfo.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  Tile.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  TileMap.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+  TileNormal.cpp
+C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\stdafx.h(15,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SFML/Graphics.hpp': No such file or directory
+
+Resumen del rendimiento del proyecto:
+    15775 ms C:\Users\bezpa\Desktop\Proyecto Lab2\sfmlProyect\sfmlProyect\sfmlProyect.vcxproj   1 llamadas
+              15775 ms Build                                      1 llamadas
+
+Resumen del rendimiento de destino:
+        0 ms BeforeBuildGenerateSources                 1 llamadas
+        0 ms GetReferencedVCProjectsInfo                1 llamadas
+        0 ms BuildGenerateSourcesTraverse               1 llamadas
+        0 ms FindReferenceAssembliesForReferences       1 llamadas
+        0 ms PreBuildEvent                              1 llamadas
+        0 ms _SelectedFiles                             1 llamadas
+        0 ms SelectCustomBuild                          1 llamadas
+        0 ms ComputeCustomBuildOutput                   1 llamadas
+        0 ms ComputeCLInputPDBName                      1 llamadas
+        0 ms ResolveReferences                          1 llamadas
+        0 ms CopyFileToFolders                          1 llamadas
+        0 ms MakeDirsForMidl                            1 llamadas
+        0 ms ComputeMIDLGeneratedCompileInputs          1 llamadas
+        0 ms AfterMidl                                  1 llamadas
+        0 ms _Midl                                      1 llamadas
+        0 ms AfterBuildGenerateSources                  1 llamadas
+        0 ms AfterBuildGenerateSourcesEvent             1 llamadas
+        0 ms _BuildGenerateSourcesAction                1 llamadas
+        0 ms BuildGenerateSources                       1 llamadas
+        0 ms _Xsd                                       1 llamadas
+        0 ms AfterResolveReferences                     1 llamadas
+        0 ms ResolveAssemblyReferences                  1 llamadas
+        0 ms ExpandSDKReferences                        1 llamadas
+        0 ms SetTelemetryEnvironmentVariables           1 llamadas
+        0 ms _PrepareForBuild                           1 llamadas
+        0 ms _PrepareForReferenceResolution             1 llamadas
+        0 ms BeforeResolveReferences                    1 llamadas
+        0 ms _SplitProjectReferencesByFileExistence     1 llamadas
+        0 ms _AddOutputPathToGlobalPropertiesToRemove   1 llamadas
+        0 ms _GetProjectReferenceTargetFrameworkProperties   1 llamadas
+        0 ms PrepareProjectReferences                   1 llamadas
+        0 ms BuildCompileTraverse                       1 llamadas
+        0 ms ResolveProjectReferences                   1 llamadas
+        0 ms GetReferenceAssemblyPaths                  1 llamadas
+        0 ms AddExternalIncludDirectoriesToPaths        1 llamadas
+        0 ms SetBuildDefaultEnvironmentVariables        1 llamadas
+        0 ms GetResolvedWinMD                           1 llamadas
+        0 ms MakeDirsForCl                              1 llamadas
+        0 ms SetCABuildNativeEnvironmentVariables       1 llamadas
+        0 ms ComputeReferenceCLInput                    1 llamadas
+        0 ms ResolveSDKReferences                       1 llamadas
+        0 ms GetFrameworkPaths                          1 llamadas
+        0 ms BeforeClCompile                            1 llamadas
+        1 ms AssignProjectConfiguration                 1 llamadas
+        1 ms _CheckForInvalidConfigurationAndPlatform   1 llamadas
+        1 ms CustomBuild                                1 llamadas
+        1 ms SelectClCompile                            1 llamadas
+        2 ms InitializeBuildStatus                      1 llamadas
+        2 ms WarnCompileDuplicatedFilename              1 llamadas
+        2 ms _CheckWindowsSDKInstalled                  1 llamadas
+        2 ms PrepareForBuild                            1 llamadas
+        8 ms FixupCLCompileOptions                      1 llamadas
+    15753 ms ClCompile                                  1 llamadas
+
+Resumen del rendimiento de la tarea:
+        0 ms Message                                    2 llamadas
+        0 ms SetEnv                                     9 llamadas
+        0 ms AssignProjectConfiguration                 1 llamadas
+        0 ms MSBuild                                    1 llamadas
+        0 ms ReadLinesFromFile                          1 llamadas
+        0 ms Delete                                     1 llamadas
+        1 ms WriteLinesToFile                           1 llamadas
+        1 ms MakeDir                                    5 llamadas
+        1 ms GetOutOfDateItems                          3 llamadas
+        1 ms Touch                                      1 llamadas
+        1 ms CheckVCToolsetVersion                      1 llamadas
+    15750 ms CL                                         1 llamadas

@@ -26,13 +26,14 @@ private: // Metodos
 
 
 public:
-    Jugador(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, bool cargar = false, Atributos atributos = NULL);
+    Jugador(float x, float y, sf::Texture& textura, std::map<std::string, sf::SoundBuffer>& sonidos, bool cargar = false, Atributos* atributos = NULL);
     ~Jugador();
 
     Atributos* getAtributos();
     Armas* getArma() const;
     const bool& getIniciaAtaque();
     const bool& getInicioTwist();
+    std::vector<Proyectil>& getSkill();
 
     // Setters
     void setInicioAtaque(const bool inicio_ataque);
@@ -45,7 +46,7 @@ public:
     void perdeExperiencia(const int experiencia);
 
     // Actualizar
-    void actualizarAtaque(const float& DT, sf::Vector2f posMouseVista);
+    void actualizarSkill(const float& DT, sf::Vector2f posMouseVista);
     void actualizarAnimacion(const float& DT, sf::Vector2f& posMouseVista);
     void actualizar(const float& DT, sf::Vector2f& posMouseVista);
     

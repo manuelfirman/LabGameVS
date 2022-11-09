@@ -177,13 +177,16 @@
     <ClCompile Include="Sonido.cpp">
       <Filter>Componentes</Filter>
     </ClCompile>
-    <ClCompile Include="Audio.cpp">
-      <Filter>Archivos de recursos</Filter>
-    </ClCompile>
     <ClCompile Include="EstadoCargarPartida.cpp">
       <Filter>Estados\Juego</Filter>
     </ClCompile>
     <ClCompile Include="EstadoTutorial.cpp">
+      <Filter>Estados\Juego</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Componentes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
       <Filter>Estados\Juego</Filter>
     </ClCompile>
   </ItemGroup>
@@ -308,13 +311,16 @@
     <ClInclude Include="Sonido.h">
       <Filter>Componentes</Filter>
     </ClInclude>
-    <ClInclude Include="Audio.h">
-      <Filter>Archivos de recursos</Filter>
-    </ClInclude>
     <ClInclude Include="EstadoCargarPartida.h">
       <Filter>Estados\Juego</Filter>
     </ClInclude>
     <ClInclude Include="EstadoTutorial.h">
+      <Filter>Estados\Juego</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Componentes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
       <Filter>Estados\Juego</Filter>
     </ClInclude>
   </ItemGroup>

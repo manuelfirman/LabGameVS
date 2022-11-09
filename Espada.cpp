@@ -45,7 +45,7 @@ void Espada::animacionAtaque(const sf::Vector2f& posMouseVista, const sf::Vector
 		//Con vector normalizado
 		if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
 		{
-			float longitud = std::sqrt(pow(dX, 2) + pow(dY, 2));
+			float longitud = static_cast<float>(std::sqrt(pow(dX, 2) + pow(dY, 2)));
 			sf::Vector2f vectNorm((dX / longitud), (dY / longitud));
 
 
@@ -69,7 +69,7 @@ void Espada::actualizar(const sf::Vector2f& posMouseVista, const sf::Vector2f ce
 	float deg = atan2(dY,dX) * 180.f / pi;
 	if (_timerAtaque.getElapsedTime().asMilliseconds() < _timerAtaqueMax)
 	{
-		float longitud = std::sqrt(pow(dX, 2) + pow(dY, 2));
+		float longitud = static_cast<float>(std::sqrt(pow(dX, 2) + pow(dY, 2)));
 		sf::Vector2f vectNorm((dX / longitud), (dY / longitud));
 
 

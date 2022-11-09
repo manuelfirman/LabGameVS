@@ -26,7 +26,7 @@ Tile::~Tile()
 {
 }
 
-const short& Tile::getTipoTile() const
+const int& Tile::getTipoTile() const
 {
 	return _tipoTile;
 }

@@ -35,12 +35,17 @@ const unsigned& Enemigos::getRango() const
 	return _rango;
 }
 
+const float Enemigos::getDistanciaSkill(const sf::Sprite& skill) const
+{
+	return static_cast<float>(sqrt(pow((getCentro().x - skill.getPosition().x), 2) + pow((getCentro().y - skill.getPosition().y), 2)));
+}
+
 void Enemigos::resetTimerAtaque()
 {
 	_timerAtaque.restart();
 }
 
-const bool& Enemigos::getAtaqueTerminado() const
+const bool Enemigos::getAtaqueTerminado() const
 {
 	if (_timerAtaque.getElapsedTime().asMilliseconds() >= _timerAtaqueMax) return true;
 
@@ -52,7 +57,7 @@ void Enemigos::resetTimerDmg()
 	_timerDmg.restart();
 }
 
-const bool& Enemigos::getDmgTerminado() const
+const bool Enemigos::getDmgTerminado() const
 {
 	if (_timerDmg.getElapsedTime().asMilliseconds() >= _timerDmgMax) return true;
 	

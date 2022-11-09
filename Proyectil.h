@@ -23,6 +23,7 @@ class Proyectil
 
 		bool getRealizando();
 		bool eliminar();
+		sf::Sprite& getSpriteSkill();
 		void actualizar(const float& DT);
 		void renderizar(sf::RenderTarget& target);
 

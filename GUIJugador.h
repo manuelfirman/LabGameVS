@@ -4,9 +4,6 @@
 #include "Jugador.h"
 #include "Gui.h"
 
-class Jugador;
-class sf::RectangleShape;
-
 class GUIJugador
 {
 	private:

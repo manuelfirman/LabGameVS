@@ -15,8 +15,8 @@ void IA::seguir(const float& DT)
 	movimiento.x = _jugador.getPosicionSprite().x - _entidad.getPosicionSprite().x;
 	movimiento.y = _jugador.getPosicionSprite().y - _entidad.getPosicionSprite().y;
 
-	// TODO: setear aggro de los minions a traves de un condicional con la longitud
-	float longitud = sqrt(pow(movimiento.x, 2) + pow(movimiento.y, 2)); // mov_x^2 + mov_y^ (entre el jugador y la entidad)
+	// TODO: setear agro de los minions a traves de un condicional con la longitud
+	float longitud = static_cast<float>(sqrt(pow(movimiento.x, 2) + pow(movimiento.y, 2))); // mov_x^2 + mov_y^ (entre el jugador y la entidad)
 
 	movimiento /= longitud;
 
@@ -25,5 +25,3 @@ void IA::seguir(const float& DT)
 		_entidad.mover(movimiento.x, movimiento.y, DT);
 	}
 }
-
-
